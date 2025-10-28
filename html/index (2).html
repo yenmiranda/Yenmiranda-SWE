@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Full-Stack & Registration Form with Admin Page</title>
+    <link rel = "stylesheet" href = "style.css">
+</head>
+
+<body>
+
+    <div class = "container">
+        <h1>Study Buddy</h1>
+        <div class = "form-box active" id = "login-form">
+            <form action = "">
+                <h2>Login</h2>
+                <input type = "Sam ID" name = "Sam ID" placeholder = "Sam ID" required>
+                <input type = "password" name = "password" placeholder = "Password" required>
+                <button type = "submit" name = "login">Login</button>
+                <p>Register for an account! <a href = "#" onclick = "showForm('register-form')">Register</a></p>
+            </form>
+        </div>
+
+        <div class = "form-box" id = "register-form">
+            <form action = "">
+                <h2>Register</h2>
+                <input type = "Sam ID" name = "Sam ID" placeholder = "Sam ID" required>
+                <input type = "password" name = "password" placeholder = "Password" required>
+                <select name = "Role" requiered>
+                    <option value = "">--Select Role</option>
+                    <option value = "User" >User</option>
+                    <option value = "Admin" >Admin</option>
+                </select>
+                <button type = "submit" name = "register">Register</button>
+                <p>Login into account! <a href = "#" onclick = "showForm('login-form')">Login</a></p>
+            </form>
+        </div>
+    </div>
+    
+    <script src = "script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,403 @@
+* {
+    /* Asterisk (*) selects ALL elements on the page */
+    margin: 0;
+    /* Removes default spacing around elements */
+    
+    padding: 0;
+    /* Removes default inner spacing in elements */
+    
+    box-sizing: border-box;
+    /* Makes width/height calculations include padding and border */
+}
+
+:root {
+    /* :root stores variables we can reuse throughout CSS */
+    
+    --shsu-orange: #FF5100;
+    /* SHSU primary orange color */
+    
+    --shsu-white: #FFFFFF;
+    /* White color */
+    
+    --shsu-dark: #2C2C2C;
+    /* Dark gray for text */
+    
+    --shsu-light-gray: #F5F5F5;
+    /* Light gray for backgrounds */
+}
+
+body {
+    font-family: Arial, sans-serif;
+    /* Sets font for entire page, Arial with fallback to any sans-serif font */
+    
+    background-color: var(--shsu-white);
+    /* Page background is white, uses our variable */
+    
+    color: var(--shsu-dark);
+    /* Default text color is dark gray */
+    
+    line-height: 1.6;
+    /* Spacing between lines of text (1.6 times the font size) */
+    
+    min-height: 100vh;
+    /* Minimum height is 100% of viewport height (full screen) */
+    
+    display: flex;
+    /* Uses flexbox layout */
+    
+    flex-direction: column;
+    /* Stacks children vertically (header, main, footer) */
+}
+
+/* HEADER: Top banner styling */
+header {
+    background-color: var(--shsu-orange);
+    /* Orange background */
+    
+    color: var(--shsu-white);
+    /* White text */
+    
+    text-align: center;
+    /* Centers all text inside header */
+    
+    padding: 2rem 1rem;
+    /* Adds space inside header: 2rem top/bottom, 1rem left/right */
+    
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    /* Adds subtle shadow below header for depth */
+}
+
+header h1 {
+    font-size: 2.5rem;
+    /* Makes heading large: 2.5 times the base font size */
+    
+    margin-bottom: 0.5rem;
+    /* Space below the h1 */
+    
+    font-weight: bold;
+    /* Makes text thick/bold */
+}
+
+header p {
+    font-size: 1.1rem;
+    /* Slightly larger than normal text */
+    
+    font-weight: 300;
+    /* Lighter weight (thinner) text */
+}
+
+/* MAIN CONTENT: Central area styling */
+main {
+    flex: 1;
+    /* Takes up all available space between header and footer */
+    
+    max-width: 800px;
+    /* Limits width so content doesn't stretch too wide on large screens */
+    
+    width: 100%;
+    /* Takes full width up to max-width */
+    
+    margin: 2rem auto;
+    /* Centers main content: 2rem top/bottom, auto left/right centers it */
+    
+    padding: 0 1rem;
+    /* Adds padding on left/right sides for mobile spacing */
+}
+
+/* FOOTER: Bottom section styling */
+footer {
+    background-color: var(--shsu-dark);
+    /* Dark gray background */
+    
+    color: var(--shsu-white);
+    /* White text */
+    
+    text-align: center;
+    /* Centers text */
+    
+    padding: 1rem;
+    /* Space inside footer */
+    
+    margin-top: auto;
+    /* Pushes footer to bottom of page */
+}
+
+/* ROLE SELECTOR: Section where user chooses Tutee or Tutor */
+#role-selector {
+    background-color: var(--shsu-light-gray);
+    /* Light gray background */
+    
+    padding: 2rem;
+    /* Space inside the container */
+    
+    border-radius: 10px;
+    /* Rounds the corners */
+    
+    text-align: center;
+    /* Centers content inside */
+    
+    margin-bottom: 2rem;
+    /* Space below this section */
+}
+
+#role-selector h2 {
+    color: var(--shsu-orange);
+    /* Orange heading color */
+    
+    margin-bottom: 1.5rem;
+    /* Space below heading */
+    
+    font-size: 1.8rem;
+    /* Large heading size */
+}
+
+/* BUTTON CONTAINER: Holds buttons side by side */
+.button-container {
+    display: flex;
+    /* Uses flexbox for layout */
+    
+    gap: 1rem;
+    /* Space between buttons */
+    
+    justify-content: center;
+    /* Centers buttons horizontally */
+    
+    flex-wrap: wrap;
+    /* Buttons stack on small screens */
+}
+
+/* ROLE BUTTONS: Styling for Tutee and Tutor buttons */
+.role-btn {
+    background-color: var(--shsu-orange);
+    /* Orange background */
+    
+    color: var(--shsu-white);
+    /* White text */
+    
+    border: none;
+    /* Removes default button border */
+    
+    padding: 1rem 2rem;
+    /* Space inside button: 1rem top/bottom, 2rem left/right */
+    
+    font-size: 1.1rem;
+    /* Slightly larger text */
+    
+    font-weight: bold;
+    /* Bold text */
+    
+    border-radius: 5px;
+    /* Slightly rounded corners */
+    
+    cursor: pointer;
+    /* Shows hand cursor when hovering over button */
+    
+    transition: all 0.3s ease;
+    /* Smooth transition for hover effects (0.3 seconds) */
+    
+    min-width: 200px;
+    /* Minimum button width so they're not too small */
+}
+
+.role-btn:hover {
+    /* Styles applied when user hovers mouse over button */
+    
+    background-color: #CC4100;
+    /* Darker orange on hover */
+    
+    transform: translateY(-2px);
+    /* Moves button up 2 pixels for "lift" effect */
+    
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    /* Adds shadow when hovering for depth */
+}
+
+.role-btn:active {
+    /* Styles applied when button is being clicked */
+    
+    transform: translateY(0);
+    /* Returns button to original position */
+}
+
+/* TUTEE SECTION: Booking form container */
+#tutee-section {
+    background-color: var(--shsu-white);
+    /* White background */
+    
+    padding: 2rem;
+    /* Space inside container */
+    
+    border-radius: 10px;
+    /* Rounded corners */
+    
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    /* Subtle shadow for depth */
+}
+
+#tutee-section h2 {
+    color: var(--shsu-orange);
+    /* Orange heading */
+    
+    margin-bottom: 1.5rem;
+    /* Space below heading */
+    
+    font-size: 1.8rem;
+    /* Large heading size */
+    
+    text-align: center;
+    /* Centers the heading */
+}
+
+/* FORM: Booking form layout */
+#booking-form {
+    display: flex;
+    /* Uses flexbox layout */
+    
+    flex-direction: column;
+    /* Stacks form elements vertically */
+    
+    gap: 1.5rem;
+    /* Space between each form element */
+}
+
+/* LABELS: Text above each input field */
+label {
+    font-weight: bold;
+    /* Bold text */
+    
+    color: var(--shsu-dark);
+    /* Dark gray color */
+    
+    margin-bottom: 0.5rem;
+    /* Small space below label */
+    
+    display: block;
+    /* Makes label take full width */
+}
+
+/* DROPDOWNS: Select elements for tutor and day */
+select {
+    width: 100%;
+    /* Takes full width of container */
+    
+    padding: 0.75rem;
+    /* Space inside dropdown */
+    
+    font-size: 1rem;
+    /* Normal text size */
+    
+    border: 2px solid #DDD;
+    /* Light gray border */
+    
+    border-radius: 5px;
+    /* Rounded corners */
+    
+    background-color: var(--shsu-white);
+    /* White background */
+    
+    cursor: pointer;
+    /* Shows hand cursor */
+    
+    transition: border-color 0.3s ease;
+    /* Smooth transition for border color change */
+}
+
+select:focus {
+    /* Styles when user clicks into dropdown */
+    
+    outline: none;
+    /* Removes default browser outline */
+    
+    border-color: var(--shsu-orange);
+    /* Orange border when focused */
+}
+
+/* TIME INPUT: Time picker field */
+input[type="time"] {
+    width: 100%;
+    /* Takes full width */
+    
+    padding: 0.75rem;
+    /* Space inside input */
+    
+    font-size: 1rem;
+    /* Normal text size */
+    
+    border: 2px solid #DDD;
+    /* Light gray border */
+    
+    border-radius: 5px;
+    /* Rounded corners */
+    
+    background-color: var(--shsu-white);
+    /* White background */
+    
+    cursor: pointer;
+    /* Shows hand cursor */
+    
+    transition: border-color 0.3s ease;
+    /* Smooth transition for border color */
+}
+
+input[type="time"]:focus {
+    /* Styles when user clicks into time input */
+    
+    outline: none;
+    /* Removes default outline */
+    
+    border-color: var(--shsu-orange);
+    /* Orange border when focused */
+}
+
+/* SUBMIT BUTTON: Confirm appointment button */
+.submit-btn {
+    background-color: var(--shsu-orange);
+    /* Orange background */
+    
+    color: var(--shsu-white);
+    /* White text */
+    
+    border: none;
+    /* No border */
+    
+    padding: 1rem;
+    /* Space inside button */
+    
+    font-size: 1.1rem;
+    /* Slightly larger text */
+    
+    font-weight: bold;
+    /* Bold text */
+    
+    border-radius: 5px;
+    /* Rounded corners */
+    
+    cursor: pointer;
+    /* Hand cursor on hover */
+    
+    transition: all 0.3s ease;
+    /* Smooth transition for effects */
+    
+    margin-top: 1rem;
+    /* Extra space above button */
+}
+
+.submit-btn:hover {
+    /* Hover effect */
+    
+    background-color: #CC4100;
+    /* Darker orange */
+    
+    transform: translateY(-2px);
+    /* Lifts button up */
+    
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    /* Shadow for depth */
+}
+
+.submit-btn:active {
+    /* When button is clicked */
+    
+    transform: translateY(0);
+    /* Returns to normal position */
+}

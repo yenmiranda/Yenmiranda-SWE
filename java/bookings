@@ -1,0 +1,109 @@
+import java.util.*;
+
+/**
+ * BOOKINGS CLASS - DRAFT
+ *  Backend - Booking Module
+ */
+public class Bookings {
+    private int BookingNO;          // Booking identifier
+    private int DisplayHour;        // Displays hour 
+    private int DisplayMinute;      // Displays minutes 
+    
+    public enum Day { 
+        MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY 
+    }
+    private Day DaysBook;           // Monday to Sunday
+
+    // INTERNAL DATA STRUCTURES 
+    private List<BookingRecord> bookingRecords;
+    private boolean sessionActive;
+    
+    public Bookings() {
+        // Initialize internal data structures
+        this.bookingRecords = new ArrayList<>();
+        this.sessionActive = true;
+        this.BookingNO = 1000; // Starting booking number
+    }
+    
+    public void CreateTable() {
+        // TODO: Initialize booking data structure
+        // Creates a table for new users
+    }
+    
+    public void DisplayTable() {
+        // TODO: Format and display booking data
+        // Displays the table between the users
+    }
+    
+    public void UpdateTable() {
+        // TODO: Implement data refresh logic
+    }
+    
+    public void NotAvail() {
+        // TODO: Handle unavailable time slot logic
+        // Tutor cannot book an appointment and tutee cannot access
+    }
+    
+    public void LogOut() {
+        // TODO: Implement session cleanup
+        // End session
+    }
+    
+    public void ConfirmLogoutBook() {
+        // TODO: Add confirmation workflow
+        // User confirms logout
+    }
+    
+    public void EndSession() {
+        // TODO: Complete session termination
+        // Session is terminated
+    }
+    
+    public boolean validateBookingTime(int hour, int minute) {
+        // TODO: Implement time validation rules
+        // Business rules: operating hours, time slot intervals
+        return true;
+    }
+    
+    public boolean isSlotAvailable(Day day, int hour, int minute) {
+        // TODO: Implement availability checking logic
+        // Business rules: weekend availability, holiday rules, etc.
+        return true;
+    }
+    
+    public int createNewBooking(Day day, int hour, int minute) {
+        // TODO: Implement booking creation logic
+        // Business logic for creating new booking records
+        return -1; // Placeholder
+    }
+    
+    public String formatDisplayTime(int hour, int minute) {
+        // TODO: Implement time formatting logic
+        return ""; // Placeholder
+    }
+
+    public int getBookingNO() { return BookingNO; }
+    public void setBookingNO(int bookingNO) { BookingNO = bookingNO; }
+    
+    public int getDisplayHour() { return DisplayHour; }
+    public void setDisplayHour(int displayHour) { DisplayHour = displayHour; }
+    
+    public int getDisplayMinute() { return DisplayMinute; }
+    public void setDisplayMinute(int displayMinute) { DisplayMinute = displayMinute; }
+    
+    public Day getDaysBook() { return DaysBook; }
+    public void setDaysBook(Day daysBook) { DaysBook = daysBook; }
+    
+    public boolean isSessionActive() { return sessionActive; }
+
+    // INTERNAL DATA CLASS
+    private class BookingRecord {
+        // TODO: Define booking record structure
+        private int bookingNumber;
+        private Day day;
+        private int hour;
+        private int minute;
+        private String status;
+        
+    }
+}

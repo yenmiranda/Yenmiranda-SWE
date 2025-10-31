@@ -85,3 +85,71 @@ function setupDatePicker() {
 // Call the function when page loads
 setupDatePicker();
 // Runs the function immediately to set up date restrictions
+
+//SHOW CHECK AVAILABILITY BUTTON WHEN ALL FIELDS FILLED
+
+// FUNCTION: Check if all required fields are filled
+function checkFormComplete() {
+    // Get the current values of all three fields
+    const course = courseSelect.value;
+    // Gets selected course value (e.g., "COSC4319" or empty string "")
+    
+    const date = dateSelect.value;
+    // Gets selected date value (e.g., "2025-11-01" or empty string "")
+    
+    const time = timeSelect.value;
+    // Gets selected time value (e.g., "14:00-15:00" or empty string "")
+    
+    // Check if ALL three fields have values (not empty)
+    if (course && date && time) {
+        // All fields are filled
+        
+        checkAvailabilityBtn.style.display = 'block';
+        // Shows the Check Availability button by changing display from 'none' to 'block'
+        
+    } else {
+        // At least one field is empty
+        
+        checkAvailabilityBtn.style.display = 'none';
+        // Hides the Check Availability button
+        
+        availabilityResult.style.display = 'none';
+        // Hides any previous availability results
+        
+        continueBtn.style.display = 'none';
+        // Hides the Continue button
+    }
+}
+
+// FUNCTION: Reset availability check when form changes
+function resetAvailabilityCheck() {
+    // When user changes any field, hide previous results
+    // They need to click Check Availability again
+    
+    availabilityResult.style.display = 'none';
+    // Hides the availability result messages
+    
+    continueBtn.style.display = 'none';
+    // Hides the Continue button
+    
+    availableMessage.style.display = 'none';
+    // Hides the success message
+    
+    unavailableMessage.style.display = 'none';
+    // Hides the warning message
+    
+    // Then check if all fields are filled to show/hide Check Availability button
+    checkFormComplete();
+}
+
+// EVENT LISTENERS: Listen for changes to form fields
+// These run the resetAvailabilityCheck function whenever a field changes
+
+courseSelect.addEventListener('change', resetAvailabilityCheck);
+// When course dropdown changes, run resetAvailabilityCheck
+
+dateSelect.addEventListener('change', resetAvailabilityCheck);
+// When date picker changes, run resetAvailabilityCheck
+
+timeSelect.addEventListener('change', resetAvailabilityCheck);
+// When time dropdown changes, run resetAvailabilityCheck

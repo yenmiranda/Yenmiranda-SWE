@@ -86,6 +86,109 @@ function setupDatePicker() {
 setupDatePicker();
 // Runs the function immediately to set up date restrictions
 
+// ========================================
+// STEP 4.5: RESTRICT TIME SLOTS BASED ON CURRENT TIME
+// If user selects today's date, disable times that have already passed
+// ========================================
+
+// FUNCTION: Update available time slots based on selected date
+function updateAvailableTimeSlots() {
+    // Get the selected date
+    const selectedDate = dateSelect.value;
+    // Example: "2025-11-05"
+    
+    if (!selectedDate) return;
+    // If no date selected yet, do nothing
+    
+    // Get today's date in same format
+    const today = new Date();
+    const todayFormatted = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+    
+    // Check if selected date is today
+    if (selectedDate === todayFormatted) {
+        // Selected date is TODAY - need to disable past times
+        
+        const currentHour = today.getHours();
+        // Gets current hour in 24-hour format (0-23)
+        // Example: if it's 3:45 PM, currentHour = 15
+        
+        // Get all time slot options
+        const timeOptions = timeSelect.querySelectorAll('option');
+        // Gets all <option> elements in the time dropdown
+        
+        // Loop through each time option
+        timeOptions.forEach(option => {
+            if (option.value === '') {
+                // Skip the placeholder option ("-- Choose a Time Slot --")
+                return;
+            }
+            
+            // Extract the start hour from the time slot value
+            const timeValue = option.value;
+            // Example: "14:00-15:00"
+            
+            const startHour = parseInt(timeValue.split(':')[0]);
+            // Gets the start hour: 14
+            
+            // If this time slot has already passed, disable it
+            if (startHour <= currentHour) {
+                option.disabled = true;
+                // Makes this option unclickable and grayed out
+                
+                option.style.color = '#999';
+                // Makes text gray to show it's disabled
+                
+            } else {
+                // Time slot is in the future, enable it
+                option.disabled = false;
+                option.style.color = '';
+                // Restores normal color
+            }
+        });
+        
+        // If currently selected time is now disabled, clear the selection
+        const currentSelection = timeSelect.value;
+        if (currentSelection) {
+            const selectedStartHour = parseInt(currentSelection.split(':')[0]);
+            if (selectedStartHour <= currentHour) {
+                timeSelect.value = '';
+                // Clears the selection
+                
+                resetAvailabilityCheck();
+                // Resets the form
+            }
+        }
+        
+    } else {
+        // Selected date is in the FUTURE - enable all time slots
+        
+        const timeOptions = timeSelect.querySelectorAll('option');
+        
+        timeOptions.forEach(option => {
+            if (option.value === '') return;
+            // Skip placeholder
+            
+            option.disabled = false;
+            // Enables all options
+            
+            option.style.color = '';
+            // Normal color
+        });
+    }
+}
+
+// EVENT LISTENER: Update time slots when date changes
+dateSelect.addEventListener('change', function() {
+    updateAvailableTimeSlots();
+    // Runs whenever user selects a different date
+    
+    resetAvailabilityCheck();
+    // Also resets availability check
+});
+
+// Call on page load in case date is pre-filled
+updateAvailableTimeSlots();
+
 //SHOW CHECK AVAILABILITY BUTTON WHEN ALL FIELDS FILLED
 
 // FUNCTION: Check if all required fields are filled

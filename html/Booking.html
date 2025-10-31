@@ -84,7 +84,7 @@
                     
                     <input type="date" id="date-select" required>
                     <!-- Date picker input - shows calendar -->
-                    <!-- JavaScript will set min date to today and max to 2 weeks out -->
+                    <!-- JavaScript will set min date to today and restrict to weekdays -->
                 </div>
 
                 <!-- TIME SLOT SELECTION -->
@@ -94,40 +94,81 @@
                     <!-- Label for time dropdown -->
                     
                     <select id="time-select" required>
-                        <!-- Dropdown for hourly time slots -->
+                        <!-- Dropdown for hourly time slots in military time -->
                         
                         <option value="" disabled selected>-- Choose a Time Slot --</option>
                         <!-- Default placeholder -->
                         
-                        <option value="08:00-09:00">8:00 AM - 9:00 AM</option>
-                        <option value="09:00-10:00">9:00 AM - 10:00 AM</option>
-                        <option value="10:00-11:00">10:00 AM - 11:00 AM</option>
-                        <option value="11:00-12:00">11:00 AM - 12:00 PM</option>
-                        <option value="12:00-13:00">12:00 PM - 1:00 PM</option>
-                        <option value="13:00-14:00">1:00 PM - 2:00 PM</option>
-                        <option value="14:00-15:00">2:00 PM - 3:00 PM</option>
-                        <option value="15:00-16:00">3:00 PM - 4:00 PM</option>
-                        <option value="16:00-17:00">4:00 PM - 5:00 PM</option>
-                        <option value="17:00-18:00">5:00 PM - 6:00 PM</option>
-                        <!-- Hourly slots from 8am to 6pm -->
-                        <!-- Values use 24-hour format, display uses 12-hour format -->
+                        <!-- Military time format: 00:00 to 23:00 -->
+                        <option value="00:00-01:00">00:00 - 01:00 (12:00 AM - 1:00 AM)</option>
+                        <option value="01:00-02:00">01:00 - 02:00 (1:00 AM - 2:00 AM)</option>
+                        <option value="02:00-03:00">02:00 - 03:00 (2:00 AM - 3:00 AM)</option>
+                        <option value="03:00-04:00">03:00 - 04:00 (3:00 AM - 4:00 AM)</option>
+                        <option value="04:00-05:00">04:00 - 05:00 (4:00 AM - 5:00 AM)</option>
+                        <option value="05:00-06:00">05:00 - 06:00 (5:00 AM - 6:00 AM)</option>
+                        <option value="06:00-07:00">06:00 - 07:00 (6:00 AM - 7:00 AM)</option>
+                        <option value="07:00-08:00">07:00 - 08:00 (7:00 AM - 8:00 AM)</option>
+                        <option value="08:00-09:00">08:00 - 09:00 (8:00 AM - 9:00 AM)</option>
+                        <option value="09:00-10:00">09:00 - 10:00 (9:00 AM - 10:00 AM)</option>
+                        <option value="10:00-11:00">10:00 - 11:00 (10:00 AM - 11:00 AM)</option>
+                        <option value="11:00-12:00">11:00 - 12:00 (11:00 AM - 12:00 PM)</option>
+                        <option value="12:00-13:00">12:00 - 13:00 (12:00 PM - 1:00 PM)</option>
+                        <option value="13:00-14:00">13:00 - 14:00 (1:00 PM - 2:00 PM)</option>
+                        <option value="14:00-15:00">14:00 - 15:00 (2:00 PM - 3:00 PM)</option>
+                        <option value="15:00-16:00">15:00 - 16:00 (3:00 PM - 4:00 PM)</option>
+                        <option value="16:00-17:00">16:00 - 17:00 (4:00 PM - 5:00 PM)</option>
+                        <option value="17:00-18:00">17:00 - 18:00 (5:00 PM - 6:00 PM)</option>
+                        <option value="18:00-19:00">18:00 - 19:00 (6:00 PM - 7:00 PM)</option>
+                        <option value="19:00-20:00">19:00 - 20:00 (7:00 PM - 8:00 PM)</option>
+                        <option value="20:00-21:00">20:00 - 21:00 (8:00 PM - 9:00 PM)</option>
+                        <option value="21:00-22:00">21:00 - 22:00 (9:00 PM - 10:00 PM)</option>
+                        <option value="22:00-23:00">22:00 - 23:00 (10:00 PM - 11:00 PM)</option>
+                        <option value="23:00-00:00">23:00 - 00:00 (11:00 PM - 12:00 AM)</option>
+                        <!-- All 24 hours available -->
                     </select>
                 </div>
 
-                <!-- ADDITIONAL NOTES (OPTIONAL) -->
-                <div class="form-group">
+                <!-- AVAILABILITY CHECK RESULT: Shows after user selects all 3 fields -->
+                <div id="availability-result" style="display: none;">
+                    <!-- Hidden until all fields are filled -->
                     
-                    <label for="notes-input">Additional Notes (Optional):</label>
-                    <!-- Label for notes field -->
-                    
-                    <textarea id="notes-input" rows="3" placeholder="e.g., Specific topics you need help with..."></textarea>
-                    <!-- Multi-line text input for notes -->
-                    <!-- rows="3" makes it 3 lines tall -->
+                    <!-- SUCCESS MESSAGE: Shows when tutors are available -->
+                    <div id="available-message" class="availability-message success-message" style="display: none;">
+                        <div class="message-icon">✓</div>
+                        <!-- Checkmark icon -->
+                        
+                        <div class="message-content">
+                            <h3>Tutors Available!</h3>
+                            <p><span id="tutor-count"></span> tutor(s) available for your selected time.</p>
+                            <!-- Shows number of available tutors -->
+                        </div>
+                    </div>
+
+                    <!-- UNAVAILABLE MESSAGE: Shows when no tutors available -->
+                    <div id="unavailable-message" class="availability-message warning-message" style="display: none;">
+                        <div class="message-icon">⚠️</div>
+                        <!-- Warning icon -->
+                        
+                        <div class="message-content">
+                            <h3>No Tutors Available</h3>
+                            <p>No tutors available for <strong><span id="unavailable-time"></span></strong></p>
+                            <!-- Shows the time they selected -->
+                            
+                            <p class="suggestion-text">Try these nearby available times:</p>
+                            <!-- Suggestion text -->
+                            
+                            <div id="alternative-times" class="alternative-times-container">
+                                <!-- Alternative clickable time buttons will be inserted here by JavaScript -->
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
-                <!-- NEXT BUTTON: Proceeds to tutor selection page -->
-                <button type="submit" class="submit-btn">Find Available Tutors →</button>
-                <!-- Arrow indicates moving forward in process -->
+                <!-- CONTINUE BUTTON: Only shows when tutors are available -->
+                <button type="submit" class="submit-btn" id="continue-btn" style="display: none;">
+                    Continue to Choose Tutor →
+                </button>
+                <!-- Hidden until availability is confirmed -->
             </form>
 
         </div>

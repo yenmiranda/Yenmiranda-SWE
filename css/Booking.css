@@ -1,358 +1,356 @@
+/* BASIC RESET: Removes default browser styling */
 * {
-    /* Asterisk (*) selects ALL elements on the page */
     margin: 0;
-    /* Removes default spacing around elements */
-    
     padding: 0;
-    /* Removes default inner spacing in elements */
-    
     box-sizing: border-box;
-    /* Makes width/height calculations include padding and border */
 }
 
+/* COLOR PALETTE: SHSU colors plus complementary colors */
 :root {
-    /* :root stores variables we can reuse throughout CSS */
-    
     --shsu-orange: #FF5100;
-    /* SHSU primary orange color */
+    /* Primary SHSU orange */
+    
+    --shsu-orange-dark: #CC4100;
+    /* Darker orange for hover states */
     
     --shsu-white: #FFFFFF;
-    /* White color */
+    /* White */
     
-    --shsu-dark: #2C2C2C;
+    --shsu-gray-dark: #2C2C2C;
     /* Dark gray for text */
     
-    --shsu-light-gray: #F5F5F5;
+    --shsu-gray-medium: #6C6C6C;
+    /* Medium gray for secondary text */
+    
+    --shsu-gray-light: #F5F5F5;
     /* Light gray for backgrounds */
+    
+    --shsu-gray-border: #DDDDDD;
+    /* Border color */
+    
+    --success-green: #28A745;
+    /* Green for success messages */
+    
+    --success-bg: #D4EDDA;
+    /* Light green background */
 }
 
+/* BODY: Overall page setup */
 body {
-    font-family: Arial, sans-serif;
-    /* Sets font for entire page, Arial with fallback to any sans-serif font */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /* Modern, clean font */
     
-    background-color: var(--shsu-white);
-    /* Page background is white, uses our variable */
+    background: linear-gradient(135deg, #F5F5F5 0%, #E8E8E8 100%);
+    /* Subtle gradient background */
     
-    color: var(--shsu-dark);
-    /* Default text color is dark gray */
+    color: var(--shsu-gray-dark);
+    /* Default text color */
     
     line-height: 1.6;
-    /* Spacing between lines of text (1.6 times the font size) */
+    /* Spacing between lines */
     
     min-height: 100vh;
-    /* Minimum height is 100% of viewport height (full screen) */
+    /* Full screen height minimum */
     
     display: flex;
-    /* Uses flexbox layout */
-    
     flex-direction: column;
-    /* Stacks children vertically (header, main, footer) */
+    /* Stacks header, main, footer vertically */
 }
 
-/* HEADER: Top banner styling */
+/* HEADER: Top banner */
 header {
-    background-color: var(--shsu-orange);
-    /* Orange background */
+    background: linear-gradient(135deg, var(--shsu-orange) 0%, var(--shsu-orange-dark) 100%);
+    /* Orange gradient background */
     
     color: var(--shsu-white);
     /* White text */
     
     text-align: center;
-    /* Centers all text inside header */
+    /* Centers content */
     
-    padding: 2rem 1rem;
-    /* Adds space inside header: 2rem top/bottom, 1rem left/right */
+    padding: 2.5rem 1rem;
+    /* Space inside header */
     
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    /* Adds subtle shadow below header for depth */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* Shadow for depth */
 }
 
 header h1 {
-    font-size: 2.5rem;
-    /* Makes heading large: 2.5 times the base font size */
+    font-size: 2.8rem;
+    /* Large heading */
     
     margin-bottom: 0.5rem;
-    /* Space below the h1 */
+    /* Space below heading */
     
-    font-weight: bold;
-    /* Makes text thick/bold */
+    font-weight: 700;
+    /* Extra bold */
+    
+    letter-spacing: 1px;
+    /* Slight spacing between letters */
 }
 
 header p {
-    font-size: 1.1rem;
-    /* Slightly larger than normal text */
+    font-size: 1.2rem;
+    /* Subtitle size */
     
     font-weight: 300;
-    /* Lighter weight (thinner) text */
+    /* Light weight */
+    
+    opacity: 0.95;
+    /* Slightly transparent */
 }
 
-/* MAIN CONTENT: Central area styling */
+/* MAIN: Central content area */
 main {
     flex: 1;
-    /* Takes up all available space between header and footer */
+    /* Takes up available space */
     
-    max-width: 800px;
-    /* Limits width so content doesn't stretch too wide on large screens */
+    max-width: 700px;
+    /* Limits width for readability */
     
     width: 100%;
-    /* Takes full width up to max-width */
+    /* Full width up to max */
     
-    margin: 2rem auto;
-    /* Centers main content: 2rem top/bottom, auto left/right centers it */
+    margin: 3rem auto;
+    /* Centers content with top/bottom spacing */
     
-    padding: 0 1rem;
-    /* Adds padding on left/right sides for mobile spacing */
+    padding: 0 1.5rem;
+    /* Side padding for mobile */
 }
 
-/* FOOTER: Bottom section styling */
-footer {
-    background-color: var(--shsu-dark);
-    /* Dark gray background */
-    
-    color: var(--shsu-white);
-    /* White text */
-    
-    text-align: center;
-    /* Centers text */
-    
-    padding: 1rem;
-    /* Space inside footer */
-    
-    margin-top: auto;
-    /* Pushes footer to bottom of page */
-}
-
-/* ROLE SELECTOR: Section where user chooses Tutee or Tutor */
-#role-selector {
-    background-color: var(--shsu-light-gray);
-    /* Light gray background */
-    
-    padding: 2rem;
-    /* Space inside the container */
-    
-    border-radius: 10px;
-    /* Rounds the corners */
-    
-    text-align: center;
-    /* Centers content inside */
-    
-    margin-bottom: 2rem;
-    /* Space below this section */
-}
-
-#role-selector h2 {
-    color: var(--shsu-orange);
-    /* Orange heading color */
-    
-    margin-bottom: 1.5rem;
-    /* Space below heading */
-    
-    font-size: 1.8rem;
-    /* Large heading size */
-}
-
-/* BUTTON CONTAINER: Holds buttons side by side */
-.button-container {
-    display: flex;
-    /* Uses flexbox for layout */
-    
-    gap: 1rem;
-    /* Space between buttons */
-    
-    justify-content: center;
-    /* Centers buttons horizontally */
-    
-    flex-wrap: wrap;
-    /* Buttons stack on small screens */
-}
-
-/* ROLE BUTTONS: Styling for Tutee and Tutor buttons */
-.role-btn {
-    background-color: var(--shsu-orange);
-    /* Orange background */
-    
-    color: var(--shsu-white);
-    /* White text */
-    
-    border: none;
-    /* Removes default button border */
-    
-    padding: 1rem 2rem;
-    /* Space inside button: 1rem top/bottom, 2rem left/right */
-    
-    font-size: 1.1rem;
-    /* Slightly larger text */
-    
-    font-weight: bold;
-    /* Bold text */
-    
-    border-radius: 5px;
-    /* Slightly rounded corners */
-    
-    cursor: pointer;
-    /* Shows hand cursor when hovering over button */
-    
-    transition: all 0.3s ease;
-    /* Smooth transition for hover effects (0.3 seconds) */
-    
-    min-width: 200px;
-    /* Minimum button width so they're not too small */
-}
-
-.role-btn:hover {
-    /* Styles applied when user hovers mouse over button */
-    
-    background-color: #CC4100;
-    /* Darker orange on hover */
-    
-    transform: translateY(-2px);
-    /* Moves button up 2 pixels for "lift" effect */
-    
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    /* Adds shadow when hovering for depth */
-}
-
-.role-btn:active {
-    /* Styles applied when button is being clicked */
-    
-    transform: translateY(0);
-    /* Returns button to original position */
-}
-
-/* TUTEE SECTION: Booking form container */
-#tutee-section {
-    background-color: var(--shsu-white);
+/* BOOKING SECTION: Main form container */
+#booking-section {
+    background: var(--shsu-white);
     /* White background */
     
-    padding: 2rem;
+    padding: 2.5rem;
     /* Space inside container */
     
-    border-radius: 10px;
+    border-radius: 12px;
     /* Rounded corners */
     
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    /* Subtle shadow for depth */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    /* Shadow for card effect */
 }
 
-#tutee-section h2 {
+#booking-section h2 {
     color: var(--shsu-orange);
     /* Orange heading */
     
-    margin-bottom: 1.5rem;
+    margin-bottom: 0.5rem;
     /* Space below heading */
     
-    font-size: 1.8rem;
-    /* Large heading size */
+    font-size: 2rem;
+    /* Large size */
     
     text-align: center;
-    /* Centers the heading */
+    /* Centered */
+}
+
+/* INSTRUCTIONS: Helpful text below heading */
+.instructions {
+    text-align: center;
+    /* Centered text */
+    
+    color: var(--shsu-gray-medium);
+    /* Medium gray color */
+    
+    margin-bottom: 2rem;
+    /* Space below */
+    
+    font-size: 1rem;
+    /* Normal size */
 }
 
 /* FORM: Booking form layout */
 #booking-form {
     display: flex;
-    /* Uses flexbox layout */
-    
     flex-direction: column;
     /* Stacks form elements vertically */
     
     gap: 1.5rem;
-    /* Space between each form element */
+    /* Space between each form group */
 }
 
-/* LABELS: Text above each input field */
+/* FORM GROUP: Wraps each label and input pair */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    /* Stacks label above input */
+    
+    gap: 0.5rem;
+    /* Small gap between label and input */
+}
+
+/* LABELS: Text above inputs */
 label {
-    font-weight: bold;
-    /* Bold text */
+    font-weight: 600;
+    /* Semi-bold */
     
-    color: var(--shsu-dark);
-    /* Dark gray color */
+    color: var(--shsu-gray-dark);
+    /* Dark gray */
     
-    margin-bottom: 0.5rem;
-    /* Small space below label */
-    
-    display: block;
-    /* Makes label take full width */
+    font-size: 1rem;
+    /* Normal size */
 }
 
-/* DROPDOWNS: Select elements for tutor and day */
+/* DROPDOWNS: Select elements */
 select {
     width: 100%;
-    /* Takes full width of container */
+    /* Full width */
     
-    padding: 0.75rem;
-    /* Space inside dropdown */
+    padding: 0.9rem;
+    /* Space inside */
     
     font-size: 1rem;
     /* Normal text size */
     
-    border: 2px solid #DDD;
+    border: 2px solid var(--shsu-gray-border);
     /* Light gray border */
     
-    border-radius: 5px;
+    border-radius: 8px;
     /* Rounded corners */
     
     background-color: var(--shsu-white);
     /* White background */
     
-    cursor: pointer;
-    /* Shows hand cursor */
+    color: var(--shsu-gray-dark);
+    /* Dark text */
     
-    transition: border-color 0.3s ease;
-    /* Smooth transition for border color change */
+    cursor: pointer;
+    /* Hand cursor */
+    
+    transition: all 0.3s ease;
+    /* Smooth transitions */
+    
+    font-family: inherit;
+    /* Uses same font as page */
+}
+
+select:hover {
+    border-color: var(--shsu-orange);
+    /* Orange border on hover */
 }
 
 select:focus {
-    /* Styles when user clicks into dropdown */
-    
-    outline: none;
-    /* Removes default browser outline */
-    
-    border-color: var(--shsu-orange);
-    /* Orange border when focused */
-}
-
-/* TIME INPUT: Time picker field */
-input[type="time"] {
-    width: 100%;
-    /* Takes full width */
-    
-    padding: 0.75rem;
-    /* Space inside input */
-    
-    font-size: 1rem;
-    /* Normal text size */
-    
-    border: 2px solid #DDD;
-    /* Light gray border */
-    
-    border-radius: 5px;
-    /* Rounded corners */
-    
-    background-color: var(--shsu-white);
-    /* White background */
-    
-    cursor: pointer;
-    /* Shows hand cursor */
-    
-    transition: border-color 0.3s ease;
-    /* Smooth transition for border color */
-}
-
-input[type="time"]:focus {
-    /* Styles when user clicks into time input */
-    
     outline: none;
     /* Removes default outline */
     
     border-color: var(--shsu-orange);
-    /* Orange border when focused */
+    /* Orange border when clicked */
+    
+    box-shadow: 0 0 0 3px rgba(255, 81, 0, 0.1);
+    /* Subtle orange glow */
+}
+
+/* TEXT INPUT: For subject/topic field */
+input[type="text"] {
+    width: 100%;
+    /* Full width */
+    
+    padding: 0.9rem;
+    /* Space inside */
+    
+    font-size: 1rem;
+    /* Normal text size */
+    
+    border: 2px solid var(--shsu-gray-border);
+    /* Light gray border */
+    
+    border-radius: 8px;
+    /* Rounded corners */
+    
+    background-color: var(--shsu-white);
+    /* White background */
+    
+    color: var(--shsu-gray-dark);
+    /* Dark text */
+    
+    transition: all 0.3s ease;
+    /* Smooth transitions */
+    
+    font-family: inherit;
+    /* Uses same font as page */
+}
+
+input[type="text"]:hover {
+    border-color: var(--shsu-orange);
+    /* Orange border on hover */
+}
+
+input[type="text"]:focus {
+    outline: none;
+    /* Removes default outline */
+    
+    border-color: var(--shsu-orange);
+    /* Orange border when clicked */
+    
+    box-shadow: 0 0 0 3px rgba(255, 81, 0, 0.1);
+    /* Subtle orange glow */
+}
+
+/* TIME INPUT: Time picker */
+input[type="time"] {
+    width: 100%;
+    /* Full width */
+    
+    padding: 0.9rem;
+    /* Space inside */
+    
+    font-size: 1rem;
+    /* Normal text size */
+    
+    border: 2px solid var(--shsu-gray-border);
+    /* Light gray border */
+    
+    border-radius: 8px;
+    /* Rounded corners */
+    
+    background-color: var(--shsu-white);
+    /* White background */
+    
+    color: var(--shsu-gray-dark);
+    /* Dark text */
+    
+    cursor: pointer;
+    /* Hand cursor */
+    
+    transition: all 0.3s ease;
+    /* Smooth transitions */
+    
+    font-family: inherit;
+    /* Uses same font as page */
+}
+
+input[type="time"]:hover {
+    border-color: var(--shsu-orange);
+    /* Orange border on hover */
+}
+
+input[type="time"]:focus {
+    outline: none;
+    /* Removes default outline */
+    
+    border-color: var(--shsu-orange);
+    /* Orange border when clicked */
+    
+    box-shadow: 0 0 0 3px rgba(255, 81, 0, 0.1);
+    /* Subtle orange glow */
+}
+
+/* PLACEHOLDER TEXT: Gray text inside empty inputs */
+input::placeholder {
+    color: var(--shsu-gray-medium);
+    /* Medium gray */
+    
+    opacity: 0.7;
+    /* Slightly transparent */
 }
 
 /* SUBMIT BUTTON: Confirm appointment button */
 .submit-btn {
-    background-color: var(--shsu-orange);
-    /* Orange background */
+    background: linear-gradient(135deg, var(--shsu-orange) 0%, var(--shsu-orange-dark) 100%);
+    /* Orange gradient */
     
     color: var(--shsu-white);
     /* White text */
@@ -360,86 +358,114 @@ input[type="time"]:focus {
     border: none;
     /* No border */
     
-    padding: 1rem;
+    padding: 1.1rem;
     /* Space inside button */
     
     font-size: 1.1rem;
     /* Slightly larger text */
     
-    font-weight: bold;
-    /* Bold text */
-    
-    border-radius: 5px;
-    /* Rounded corners */
-    
-    cursor: pointer;
-    /* Hand cursor on hover */
-    
-    transition: all 0.3s ease;
-    /* Smooth transition for effects */
-    
-    margin-top: 1rem;
-    /* Extra space above button */
-}
-
-.submit-btn:hover {
-    /* Hover effect */
-    
-    background-color: #CC4100;
-    /* Darker orange */
-    
-    transform: translateY(-2px);
-    /* Lifts button up */
-    
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    /* Shadow for depth */
-}
-
-.submit-btn:active {
-    /* When button is clicked */
-    
-    transform: translateY(0);
-    /* Returns to normal position */
-}
-
-/* CONFIRMATION MESSAGE: Success message after booking */
-#confirmation-message {
-    background-color: #D4EDDA;
-    /* Light green background for success */
-    
-    border: 2px solid #28A745;
-    /* Green border */
+    font-weight: 700;
+    /* Bold */
     
     border-radius: 8px;
     /* Rounded corners */
     
-    padding: 1.5rem;
-    /* Space inside container */
+    cursor: pointer;
+    /* Hand cursor */
+    
+    transition: all 0.3s ease;
+    /* Smooth transitions */
+    
+    margin-top: 1rem;
+    /* Extra space above */
+    
+    text-transform: uppercase;
+    /* ALL CAPS */
+    
+    letter-spacing: 1px;
+    /* Space between letters */
+}
+
+.submit-btn:hover {
+    transform: translateY(-2px);
+    /* Lifts button up */
+    
+    box-shadow: 0 6px 12px rgba(255, 81, 0, 0.3);
+    /* Orange shadow */
+}
+
+.submit-btn:active {
+    transform: translateY(0);
+    /* Returns to normal position when clicked */
+}
+
+/* CONFIRMATION MESSAGE: Success message container */
+#confirmation-message {
+    background: var(--success-bg);
+    /* Light green background */
+    
+    border: 2px solid var(--success-green);
+    /* Green border */
+    
+    border-radius: 12px;
+    /* Rounded corners */
+    
+    padding: 2rem;
+    /* Space inside */
     
     margin-top: 2rem;
-    /* Space above message */
+    /* Space above */
     
     text-align: center;
     /* Centers content */
+    
+    animation: slideIn 0.5s ease;
+    /* Slide-in animation */
+}
+
+/* SUCCESS ICON: Checkmark */
+.success-icon {
+    font-size: 4rem;
+    /* Very large */
+    
+    color: var(--success-green);
+    /* Green color */
+    
+    margin-bottom: 1rem;
+    /* Space below */
+    
+    font-weight: bold;
+    /* Bold */
+}
+
+#confirmation-message h3 {
+    color: var(--success-green);
+    /* Green heading */
+    
+    font-size: 1.5rem;
+    /* Large size */
+    
+    margin-bottom: 1rem;
+    /* Space below */
 }
 
 #confirmation-message p {
-    color: #155724;
-    /* Dark green text */
+    color: var(--shsu-gray-dark);
+    /* Dark gray text */
     
-    font-size: 1.2rem;
-    /* Slightly larger text */
+    font-size: 1.1rem;
+    /* Slightly larger */
     
-    font-weight: bold;
-    /* Bold text */
+    margin-bottom: 1.5rem;
+    /* Space below */
     
-    margin-bottom: 1rem;
-    /* Space below text */
+    line-height: 1.8;
+    /* Extra line spacing for readability */
 }
 
-/* RESET BUTTON: Book another appointment button */
+/* RESET BUTTON: Book another appointment */
 .reset-btn {
-    background-color: var(--shsu-white);
+    background: var(--shsu-white);
     /* White background */
     
     color: var(--shsu-orange);
@@ -448,16 +474,16 @@ input[type="time"]:focus {
     border: 2px solid var(--shsu-orange);
     /* Orange border */
     
-    padding: 0.75rem 1.5rem;
-    /* Space inside button */
+    padding: 0.9rem 2rem;
+    /* Space inside */
     
     font-size: 1rem;
-    /* Normal text size */
+    /* Normal size */
     
-    font-weight: bold;
-    /* Bold text */
+    font-weight: 600;
+    /* Semi-bold */
     
-    border-radius: 5px;
+    border-radius: 8px;
     /* Rounded corners */
     
     cursor: pointer;
@@ -468,21 +494,76 @@ input[type="time"]:focus {
 }
 
 .reset-btn:hover {
-    /* Hover effect */
-    
-    background-color: var(--shsu-orange);
+    background: var(--shsu-orange);
     /* Orange background on hover */
     
     color: var(--shsu-white);
     /* White text on hover */
     
     transform: translateY(-2px);
-    /* Lifts button up */
+    /* Lifts button */
 }
 
 .reset-btn:active {
-    /* When clicked */
-    
     transform: translateY(0);
     /* Returns to normal */
+}
+
+/* FOOTER: Bottom section */
+footer {
+    background: var(--shsu-gray-dark);
+    /* Dark gray background */
+    
+    color: var(--shsu-white);
+    /* White text */
+    
+    text-align: center;
+    /* Centers text */
+    
+    padding: 1.5rem;
+    /* Space inside */
+    
+    margin-top: auto;
+    /* Pushes to bottom */
+}
+
+/* ANIMATION: Slide-in effect for confirmation message */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        /* Starts invisible */
+        
+        transform: translateY(-20px);
+        /* Starts 20px higher */
+    }
+    to {
+        opacity: 1;
+        /* Ends fully visible */
+        
+        transform: translateY(0);
+        /* Ends in normal position */
+    }
+}
+
+/* MOBILE RESPONSIVE: Adjustments for smaller screens */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2rem;
+        /* Smaller heading on mobile */
+    }
+    
+    header p {
+        font-size: 1rem;
+        /* Smaller subtitle */
+    }
+    
+    #booking-section {
+        padding: 1.5rem;
+        /* Less padding on mobile */
+    }
+    
+    main {
+        margin: 1.5rem auto;
+        /* Less margin on mobile */
+    }
 }

@@ -1,0 +1,942 @@
+/* BASIC RESET: Removes default browser styling */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* COLOR PALETTE: SHSU colors plus complementary colors */
+:root {
+    --shsu-orange: #FF5100;
+    /* Primary SHSU orange */
+    
+    --shsu-orange-dark: #CC4100;
+    /* Darker orange for hover states */
+    
+    --shsu-blue: #00008B;
+    /* Dark blue accent color */
+    
+    --shsu-white: #FFFFFF;
+    /* White */
+    
+    --shsu-gray-dark: #2C2C2C;
+    /* Dark gray for text */
+    
+    --shsu-gray-medium: #6C6C6C;
+    /* Medium gray for secondary text */
+    
+    --shsu-gray-light: #F5F5F5;
+    /* Light gray for backgrounds */
+    
+    --shsu-gray-border: #DDDDDD;
+    /* Border color */
+    
+    --success-green: #28A745;
+    /* Green for success messages */
+    
+    --success-bg: #D4EDDA;
+    /* Light green background */
+}
+
+/* BODY: Overall page setup */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /* Modern, clean font */
+    
+    background: linear-gradient(135deg, #F5F5F5 0%, #E8E8E8 100%);
+    /* Subtle gradient background */
+    
+    color: var(--shsu-gray-dark);
+    /* Default text color */
+    
+    line-height: 1.6;
+    /* Spacing between lines */
+    
+    min-height: 100vh;
+    /* Full screen height minimum */
+    
+    display: flex;
+    flex-direction: column;
+    /* Stacks header, main, footer vertically */
+}
+
+/* HEADER: Top banner */
+header {
+    background: linear-gradient(135deg, var(--shsu-orange) 0%, var(--shsu-orange-dark) 100%);
+    /* Orange gradient background */
+    
+    color: var(--shsu-white);
+    /* White text */
+    
+    text-align: center;
+    /* Centers content */
+    
+    padding: 2.5rem 1rem;
+    /* Space inside header */
+    
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* Shadow for depth */
+}
+
+header h1 {
+    font-size: 2.8rem;
+    /* Large heading */
+    
+    margin-bottom: 0.5rem;
+    /* Space below heading */
+    
+    font-weight: 700;
+    /* Extra bold */
+    
+    letter-spacing: 1px;
+    /* Slight spacing between letters */
+}
+
+header p {
+    font-size: 1.2rem;
+    /* Subtitle size */
+    
+    font-weight: 300;
+    /* Light weight */
+    
+    opacity: 0.95;
+    /* Slightly transparent */
+}
+
+/* MAIN: Central content area */
+main {
+    flex: 1;
+    /* Takes up available space */
+    
+    max-width: 900px;
+    /* Slightly wider than page 1 for tutor cards */
+    
+    width: 100%;
+    /* Full width up to max */
+    
+    margin: 3rem auto;
+    /* Centers content with top/bottom spacing */
+    
+    padding: 0 1.5rem;
+    /* Side padding for mobile */
+}
+
+/* STEP INDICATOR: Progress tracker showing current step */
+.step-indicator {
+    display: flex;
+    /* Uses flexbox for horizontal layout */
+    
+    align-items: center;
+    /* Vertically centers items */
+    
+    justify-content: center;
+    /* Horizontally centers items */
+    
+    margin-bottom: 2.5rem;
+    /* Space below indicator */
+    
+    gap: 1rem;
+    /* Space between steps */
+}
+
+/* STEP: Individual step in indicator */
+.step {
+    display: flex;
+    flex-direction: column;
+    /* Stacks number above label */
+    
+    align-items: center;
+    /* Centers content */
+    
+    gap: 0.5rem;
+    /* Space between number and label */
+}
+
+/* STEP NUMBER: Circular number badge */
+.step-number {
+    width: 45px;
+    height: 45px;
+    /* Makes a square */
+    
+    border-radius: 50%;
+    /* Makes it circular */
+    
+    background-color: var(--shsu-gray-border);
+    /* Light gray background for inactive steps */
+    
+    color: var(--shsu-gray-medium);
+    /* Gray text for inactive steps */
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Centers the number inside circle */
+    
+    font-size: 1.2rem;
+    /* Number size */
+    
+    font-weight: 700;
+    /* Bold */
+    
+    transition: all 0.3s ease;
+    /* Smooth transitions */
+}
+
+/* ACTIVE STEP NUMBER: Current step styling */
+.step.active .step-number {
+    background: linear-gradient(135deg, var(--shsu-orange) 0%, var(--shsu-orange-dark) 100%);
+    /* Orange gradient for active step */
+    
+    color: var(--shsu-white);
+    /* White text */
+    
+    box-shadow: 0 4px 8px rgba(255, 81, 0, 0.3);
+    /* Orange shadow */
+}
+
+/* COMPLETED STEP NUMBER: Completed step styling with checkmark */
+.step.completed .step-number {
+    background: var(--success-green);
+    /* Green background for completed step */
+    
+    color: var(--shsu-white);
+    /* White checkmark */
+    
+    box-shadow: 0 4px 8px rgba(40, 167, 69, 0.3);
+    /* Green shadow */
+}
+
+/* STEP LABEL: Text below number */
+.step-label {
+    font-size: 0.9rem;
+    /* Smaller text */
+    
+    color: var(--shsu-gray-medium);
+    /* Gray for inactive */
+    
+    font-weight: 500;
+    /* Medium weight */
+}
+
+/* ACTIVE STEP LABEL: Current step text */
+.step.active .step-label {
+    color: var(--shsu-orange);
+    /* Orange text for active */
+    
+    font-weight: 600;
+    /* Semi-bold */
+}
+
+/* COMPLETED STEP LABEL: Completed step text */
+.step.completed .step-label {
+    color: var(--success-green);
+    /* Green text for completed */
+    
+    font-weight: 600;
+    /* Semi-bold */
+}
+
+/* STEP DIVIDER: Line between steps */
+.step-divider {
+    width: 60px;
+    height: 2px;
+    /* Thin horizontal line */
+    
+    background-color: var(--shsu-gray-border);
+    /* Light gray line */
+}
+
+/* TUTOR SECTION: Main container */
+#tutor-section {
+    background: var(--shsu-white);
+    /* White background */
+    
+    padding: 2.5rem;
+    /* Space inside container */
+    
+    border-radius: 12px;
+    /* Rounded corners */
+    
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    /* Shadow for card effect */
+}
+
+/* BOOKING SUMMARY: Shows session details from Page 1 */
+.booking-summary {
+    background: var(--shsu-gray-light);
+    /* Light gray background */
+    
+    padding: 1.5rem;
+    /* Space inside */
+    
+    border-radius: 10px;
+    /* Rounded corners */
+    
+    margin-bottom: 2rem;
+    /* Space below */
+    
+    border: 2px solid var(--shsu-gray-border);
+    /* Border */
+}
+
+.booking-summary h3 {
+    color: var(--shsu-blue);
+    /* Blue heading */
+    
+    font-size: 1.3rem;
+    /* Heading size */
+    
+    margin-bottom: 1rem;
+    /* Space below heading */
+}
+
+.summary-content {
+    display: flex;
+    flex-direction: column;
+    /* Stacks items vertically */
+    
+    gap: 0.75rem;
+    /* Space between items */
+    
+    margin-bottom: 1rem;
+    /* Space below content */
+}
+
+.summary-item {
+    display: flex;
+    /* Flexbox for label and value */
+    
+    justify-content: space-between;
+    /* Label on left, value on right */
+    
+    align-items: center;
+    /* Vertically centers content */
+}
+
+.summary-label {
+    font-weight: 600;
+    /* Semi-bold */
+    
+    color: var(--shsu-gray-medium);
+    /* Gray text */
+}
+
+.summary-value {
+    font-weight: 600;
+    /* Semi-bold */
+    
+    color: var(--shsu-gray-dark);
+    /* Dark text */
+}
+
+/* BACK BUTTON: To return to Page 1 */
+.back-btn {
+    width: 100%;
+    /* Full width */
+    
+    padding: 0.8rem;
+    /* Space inside */
+    
+    background-color: var(--shsu-white);
+    /* White background */
+    
+    color: var(--shsu-blue);
+    /* Blue text */
+    
+    border: 2px solid var(--shsu-blue);
+    /* Blue border */
+    
+    border-radius: 8px;
+    /* Rounded corners */
+    
+    font-size: 1rem;
+    /* Normal text size */
+    
+    font-weight: 600;
+    /* Semi-bold */
+    
+    cursor: pointer;
+    /* Hand cursor */
+    
+    transition: all 0.3s ease;
+    /* Smooth transitions */
+    
+    font-family: inherit;
+    /* Uses same font as page */
+}
+
+.back-btn:hover {
+    background-color: var(--shsu-blue);
+    /* Blue background on hover */
+    
+    color: var(--shsu-white);
+    /* White text on hover */
+    
+    transform: translateY(-2px);
+    /* Lifts button up */
+    
+    box-shadow: 0 4px 8px rgba(0, 0, 139, 0.2);
+    /* Blue shadow */
+}
+
+.back-btn:active {
+    transform: translateY(0);
+    /* Returns to normal position when clicked */
+}
+
+/* TUTOR LIST HEADING */
+#tutor-section h2 {
+    color: var(--shsu-blue);
+    /* Blue heading */
+    
+    margin-bottom: 0.5rem;
+    /* Space below heading */
+    
+    font-size: 1.8rem;
+    /* Large size */
+    
+    text-align: center;
+    /* Centered */
+}
+
+/* TUTOR INSTRUCTIONS: Helper text */
+.tutor-instructions {
+    text-align: center;
+    /* Centered */
+    
+    color: var(--shsu-gray-medium);
+    /* Gray text */
+    
+    margin-bottom: 2rem;
+    /* Space below */
+    
+    font-size: 1rem;
+    /* Normal size */
+}
+
+/* TUTOR LIST: Container for tutor cards */
+.tutor-list {
+    display: grid;
+    /* Uses CSS Grid for layout */
+    
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    /* Creates responsive columns that are at least 250px wide */
+    
+    gap: 1.5rem;
+    /* Space between cards */
+    
+    margin-bottom: 2rem;
+    /* Space below list */
+}
+
+/* LOADING MESSAGE: Shows while tutors are loading */
+.loading-message {
+    grid-column: 1 / -1;
+    /* Spans all columns */
+    
+    text-align: center;
+    /* Centered text */
+    
+    padding: 3rem;
+    /* Space inside */
+    
+    color: var(--shsu-gray-medium);
+    /* Gray text */
+    
+    font-size: 1.1rem;
+    /* Slightly larger text */
+}
+
+/* TUTOR CARD: Individual tutor card */
+.tutor-card {
+    background: var(--shsu-white);
+    /* White background */
+    
+    border: 2px solid var(--shsu-gray-border);
+    /* Light border */
+    
+    border-radius: 10px;
+    /* Rounded corners */
+    
+    padding: 1.5rem;
+    /* Space inside */
+    
+    text-align: center;
+    /* Centered content */
+    
+    cursor: pointer;
+    /* Hand cursor to show it's clickable */
+    
+    transition: all 0.3s ease;
+    /* Smooth transitions */
+    
+    display: flex;
+    flex-direction: column;
+    /* Stacks content vertically */
+    
+    align-items: center;
+    /* Centers content horizontally */
+    
+    gap: 1rem;
+    /* Space between elements */
+}
+
+.tutor-card:hover {
+    border-color: var(--shsu-orange);
+    /* Orange border on hover */
+    
+    transform: translateY(-5px);
+    /* Lifts card up */
+    
+    box-shadow: 0 8px 16px rgba(255, 81, 0, 0.2);
+    /* Orange shadow */
+}
+
+.tutor-card.selected {
+    border-color: var(--shsu-orange);
+    /* Orange border when selected */
+    
+    border-width: 3px;
+    /* Thicker border */
+    
+    background: linear-gradient(135deg, rgba(255, 81, 0, 0.05) 0%, rgba(255, 81, 0, 0.1) 100%);
+    /* Light orange gradient background */
+    
+    box-shadow: 0 8px 16px rgba(255, 81, 0, 0.3);
+    /* Orange shadow */
+}
+
+/* TUTOR AVATAR: Circle with initial */
+.tutor-avatar {
+    width: 80px;
+    height: 80px;
+    /* Makes a square */
+    
+    border-radius: 50%;
+    /* Makes it circular */
+    
+    background: linear-gradient(135deg, var(--shsu-blue) 0%, var(--shsu-orange) 100%);
+    /* Blue to orange gradient */
+    
+    color: var(--shsu-white);
+    /* White text */
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Centers the initial */
+    
+    font-size: 2rem;
+    /* Large initial */
+    
+    font-weight: 700;
+    /* Bold */
+    
+    margin-bottom: 0.5rem;
+    /* Space below avatar */
+}
+
+/* TUTOR NAME: Name of the tutor */
+.tutor-name {
+    font-size: 1.2rem;
+    /* Slightly larger text */
+    
+    font-weight: 600;
+    /* Semi-bold */
+    
+    color: var(--shsu-gray-dark);
+    /* Dark text */
+}
+
+/* SELECT BUTTON: Button on each tutor card */
+.select-tutor-btn {
+    width: 100%;
+    /* Full width */
+    
+    padding: 0.7rem;
+    /* Space inside */
+    
+    background: linear-gradient(135deg, var(--shsu-orange) 0%, var(--shsu-orange-dark) 100%);
+    /* Orange gradient */
+    
+    color: var(--shsu-white);
+    /* White text */
+    
+    border: none;
+    /* No border */
+    
+    border-radius: 6px;
+    /* Rounded corners */
+    
+    font-size: 0.95rem;
+    /* Slightly smaller text */
+    
+    font-weight: 600;
+    /* Semi-bold */
+    
+    cursor: pointer;
+    /* Hand cursor */
+    
+    transition: all 0.3s ease;
+    /* Smooth transitions */
+    
+    font-family: inherit;
+    /* Uses same font as page */
+}
+
+.select-tutor-btn:hover {
+    transform: translateY(-2px);
+    /* Lifts button up */
+    
+    box-shadow: 0 4px 8px rgba(255, 81, 0, 0.3);
+    /* Orange shadow */
+}
+
+.select-tutor-btn:active {
+    transform: translateY(0);
+    /* Returns to normal position when clicked */
+}
+
+/* CONFIRMATION SECTION: Shows after tutor is selected */
+#confirmation-section {
+    margin-top: 2rem;
+    /* Space above */
+    
+    animation: fadeIn 0.4s ease;
+    /* Fade-in animation */
+}
+
+/* CONFIRMATION CARD: Container for confirmation message */
+.confirmation-card {
+    background: var(--success-bg);
+    /* Light green background */
+    
+    border: 2px solid var(--success-green);
+    /* Green border */
+    
+    border-radius: 10px;
+    /* Rounded corners */
+    
+    padding: 2rem;
+    /* Space inside */
+    
+    text-align: center;
+    /* Centered text */
+}
+
+/* CONFIRMATION ICON: Large checkmark */
+.confirmation-icon {
+    font-size: 3rem;
+    /* Large icon */
+    
+    color: var(--success-green);
+    /* Green color */
+    
+    margin-bottom: 1rem;
+    /* Space below */
+}
+
+.confirmation-card h3 {
+    color: var(--success-green);
+    /* Green heading */
+    
+    font-size: 1.5rem;
+    /* Large heading */
+    
+    margin-bottom: 1rem;
+    /* Space below */
+}
+
+/* CONFIRMATION DETAILS: Text content */
+.confirmation-details {
+    margin-bottom: 1.5rem;
+    /* Space below */
+}
+
+.confirmation-details p {
+    color: var(--shsu-gray-dark);
+    /* Dark text */
+    
+    font-size: 1.1rem;
+    /* Slightly larger text */
+    
+    margin-bottom: 1.5rem;
+    /* Space below */
+}
+
+/* CONFIRMATION SUMMARY: Booking details in confirmation */
+.confirmation-summary {
+    background: var(--shsu-white);
+    /* White background */
+    
+    border-radius: 8px;
+    /* Rounded corners */
+    
+    padding: 1.5rem;
+    /* Space inside */
+    
+    text-align: left;
+    /* Left-aligned text */
+    
+    border: 1px solid var(--shsu-gray-border);
+    /* Light border */
+}
+
+.confirmation-summary h4 {
+    color: var(--shsu-blue);
+    /* Blue heading */
+    
+    font-size: 1.1rem;
+    /* Heading size */
+    
+    margin-bottom: 1rem;
+    /* Space below */
+}
+
+.confirmation-summary .summary-item {
+    display: flex;
+    justify-content: space-between;
+    /* Label on left, value on right */
+    
+    align-items: center;
+    /* Vertically centers */
+    
+    padding: 0.5rem 0;
+    /* Vertical padding */
+    
+    border-bottom: 1px solid var(--shsu-gray-border);
+    /* Bottom border */
+}
+
+.confirmation-summary .summary-item:last-child {
+    border-bottom: none;
+    /* No border on last item */
+}
+
+/* CONFIRMATION ACTIONS: Buttons in confirmation */
+.confirmation-actions {
+    display: flex;
+    /* Flexbox for button layout */
+    
+    gap: 1rem;
+    /* Space between buttons */
+    
+    justify-content: center;
+    /* Centers buttons */
+    
+    flex-wrap: wrap;
+    /* Wraps on small screens */
+}
+
+/* CHANGE BUTTON: Go back and choose different tutor */
+.change-btn {
+    padding: 0.9rem 2rem;
+    /* Space inside */
+    
+    background-color: var(--shsu-white);
+    /* White background */
+    
+    color: var(--shsu-blue);
+    /* Blue text */
+    
+    border: 2px solid var(--shsu-blue);
+    /* Blue border */
+    
+    border-radius: 8px;
+    /* Rounded corners */
+    
+    font-size: 1rem;
+    /* Normal text size */
+    
+    font-weight: 600;
+    /* Semi-bold */
+    
+    cursor: pointer;
+    /* Hand cursor */
+    
+    transition: all 0.3s ease;
+    /* Smooth transitions */
+    
+    font-family: inherit;
+    /* Uses same font as page */
+}
+
+.change-btn:hover {
+    background-color: var(--shsu-blue);
+    /* Blue background on hover */
+    
+    color: var(--shsu-white);
+    /* White text on hover */
+    
+    transform: translateY(-2px);
+    /* Lifts button up */
+    
+    box-shadow: 0 4px 8px rgba(0, 0, 139, 0.2);
+    /* Blue shadow */
+}
+
+.change-btn:active {
+    transform: translateY(0);
+    /* Returns to normal position when clicked */
+}
+
+/* CONFIRM BUTTON: Final confirmation button */
+.confirm-btn {
+    padding: 0.9rem 2rem;
+    /* Space inside */
+    
+    background: linear-gradient(135deg, var(--shsu-orange) 0%, var(--shsu-orange-dark) 100%);
+    /* Orange gradient */
+    
+    color: var(--shsu-white);
+    /* White text */
+    
+    border: none;
+    /* No border */
+    
+    border-radius: 8px;
+    /* Rounded corners */
+    
+    font-size: 1rem;
+    /* Normal text size */
+    
+    font-weight: 600;
+    /* Semi-bold */
+    
+    cursor: pointer;
+    /* Hand cursor */
+    
+    transition: all 0.3s ease;
+    /* Smooth transitions */
+    
+    font-family: inherit;
+    /* Uses same font as page */
+}
+
+.confirm-btn:hover {
+    transform: translateY(-2px);
+    /* Lifts button up */
+    
+    box-shadow: 0 6px 12px rgba(255, 81, 0, 0.3);
+    /* Orange shadow */
+}
+
+.confirm-btn:active {
+    transform: translateY(0);
+    /* Returns to normal position when clicked */
+}
+
+/* FOOTER: Bottom section */
+footer {
+    background: var(--shsu-gray-dark);
+    /* Dark gray background */
+    
+    color: var(--shsu-white);
+    /* White text */
+    
+    text-align: center;
+    /* Centers text */
+    
+    padding: 1.5rem;
+    /* Space inside */
+    
+    margin-top: auto;
+    /* Pushes to bottom */
+}
+
+/* MOBILE RESPONSIVE: Adjustments for smaller screens */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2rem;
+        /* Smaller heading on mobile */
+    }
+    
+    header p {
+        font-size: 1rem;
+        /* Smaller subtitle */
+    }
+    
+    #tutor-section {
+        padding: 1.5rem;
+        /* Less padding on mobile */
+    }
+    
+    main {
+        margin: 1.5rem auto;
+        /* Less margin on mobile */
+    }
+    
+    .step-indicator {
+        gap: 0.5rem;
+        /* Less space between steps on mobile */
+    }
+    
+    .step-divider {
+        width: 40px;
+        /* Shorter divider line on mobile */
+    }
+    
+    .step-number {
+        width: 40px;
+        height: 40px;
+        /* Smaller circles on mobile */
+        
+        font-size: 1rem;
+        /* Smaller numbers */
+    }
+    
+    .step-label {
+        font-size: 0.8rem;
+        /* Smaller labels on mobile */
+    }
+    
+    .tutor-list {
+        grid-template-columns: 1fr;
+        /* Single column on mobile */
+    }
+    
+    .confirmation-actions {
+        flex-direction: column;
+        /* Stacks buttons vertically on mobile */
+    }
+    
+    .change-btn,
+    .confirm-btn {
+        width: 100%;
+        /* Full width buttons on mobile */
+    }
+    
+    .booking-summary {
+        padding: 1rem;
+        /* Less padding on mobile */
+    }
+    
+    .summary-item {
+        flex-direction: column;
+        /* Stacks label above value on mobile */
+        
+        align-items: flex-start;
+        /* Left-aligns content */
+        
+        gap: 0.25rem;
+        /* Small gap between label and value */
+    }
+}
+
+/* FADE IN ANIMATION: Used for confirmation section */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        /* Starts invisible */
+        
+        transform: translateY(-10px);
+        /* Starts slightly higher */
+    }
+    to {
+        opacity: 1;
+        /* Ends fully visible */
+        
+        transform: translateY(0);
+        /* Ends in normal position */
+    }
+}

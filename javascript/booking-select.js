@@ -153,3 +153,247 @@ dateSelect.addEventListener('change', resetAvailabilityCheck);
 
 timeSelect.addEventListener('change', resetAvailabilityCheck);
 // When time dropdown changes, run resetAvailabilityCheck
+
+// CHECK TUTOR AVAILABILITY
+// This function checks if tutors are available for selected time
+// RIGHT NOW: Uses dummy data for testing UI
+// LATER: we'll replace this with PHP backend call to MySQL database
+
+// DUMMY DATA: Temporary fake tutor availability for testing
+// REPLACE THIS ENTIRE SECTION WITH OUR BACKEND CALL LATER
+const mockTutorAvailability = {
+    // Structure: "COURSE-DATE-TIME": number of tutors available
+    // Example: 3 tutors available for Software Engineering on Nov 5 at 14:00-15:00
+    
+    "COSC4319-2025-11-05-14:00-15:00": 3,
+    "COSC4319-2025-11-05-15:00-16:00": 2,
+    "COSC4319-2025-11-05-16:00-17:00": 1,
+    "COSC3319-2025-11-05-10:00-11:00": 2,
+    "COSC3319-2025-11-05-11:00-12:00": 1,
+    // Add more mock data as needed for testing
+};
+// This is just for testing - our PHP backend will return real availability
+
+// FUNCTION: Check if tutors are available (DUMMY VERSION)
+function checkTutorAvailability(course, date, time) {
+    // Creates a unique key from course, date, and time
+    const key = `${course}-${date}-${time}`;
+    // Example: "COSC4319-2025-11-05-14:00-15:00"
+    
+    // Check if this key exists in our mock data
+    const tutorCount = mockTutorAvailability[key];
+    // Returns number of tutors, or undefined if key doesn't exist
+    
+    // Return result object
+    return {
+        available: tutorCount > 0,
+        // True if tutors exist, false if undefined or 0
+        
+        tutorCount: tutorCount || 0
+        // Returns the count, or 0 if undefined
+    };
+}
+
+// *** BACKEND INTEGRATION POINT ***
+// When WE're ready to connect to your PHP backend, replace the function above with:
+/*
+async function checkTutorAvailability(course, date, time) {
+    try {
+        // Make API call to your PHP backend
+        const response = await fetch('api/check-availability.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                course: course,
+                date: date,
+                time: time
+            })
+        });
+        
+        // Parse JSON response from PHP
+        const data = await response.json();
+        
+        // Return result in same format
+        return {
+            available: data.available,
+            tutorCount: data.tutorCount
+        };
+        
+    } catch (error) {
+        console.error('Error checking availability:', error);
+        return {
+            available: false,
+            tutorCount: 0
+        };
+    }
+}
+*/
+
+// FUNCTION: Find alternative available times
+function findAlternativeTimes(course, date, selectedTime) {
+    // This function finds nearby times that have available tutors
+    // Searches 2 hours before and 2 hours after the selected time
+    
+    const alternatives = [];
+    // Array to store alternative time slots
+    
+    // Parse the selected time to get start hour
+    const selectedStartHour = parseInt(selectedTime.split(':')[0]);
+    // Example: "14:00-15:00" becomes 14
+    
+    // Check 2 hours before and 2 hours after
+    for (let hourOffset = -2; hourOffset <= 2; hourOffset++) {
+        // Loop from -2 to +2
+        
+        if (hourOffset === 0) continue;
+        // Skip the selected time itself
+        
+        const newHour = selectedStartHour + hourOffset;
+        // Calculate alternative hour
+        
+        if (newHour < 0 || newHour >= 24) continue;
+        // Skip if hour is outside 0-23 range
+        
+        // Format the new time slot
+        const startTime = String(newHour).padStart(2, '0') + ':00';
+        const endHour = (newHour + 1) % 24;
+        // Next hour, wraps around at 24
+        
+        const endTime = String(endHour).padStart(2, '0') + ':00';
+        const timeSlot = `${startTime}-${endTime}`;
+        // Example: "15:00-16:00"
+        
+        // Check if tutors available for this time
+        const result = checkTutorAvailability(course, date, timeSlot);
+        
+        if (result.available) {
+            // If tutors available, add to alternatives list
+            alternatives.push({
+                time: timeSlot,
+                tutorCount: result.tutorCount
+            });
+        }
+    }
+    
+    return alternatives;
+    // Returns array of alternative times with tutor counts
+}
+
+// FUNCTION: Format time for display (converts military to standard time)
+function formatTimeDisplay(timeSlot) {
+    // Converts "14:00-15:00" to "2:00 PM - 3:00 PM"
+    
+    const [start, end] = timeSlot.split('-');
+    // Splits into start and end times
+    
+    // Format start time
+    const startHour = parseInt(start.split(':')[0]);
+    const startFormatted = startHour === 0 ? '12:00 AM' :
+                          startHour < 12 ? `${startHour}:00 AM` :
+                          startHour === 12 ? '12:00 PM' :
+                          `${startHour - 12}:00 PM`;
+    
+    // Format end time
+    const endHour = parseInt(end.split(':')[0]);
+    const endFormatted = endHour === 0 ? '12:00 AM' :
+                        endHour < 12 ? `${endHour}:00 AM` :
+                        endHour === 12 ? '12:00 PM' :
+                        `${endHour - 12}:00 PM`;
+    
+    return `${start} - ${end} (${startFormatted} - ${endFormatted})`;
+    // Returns: "14:00 - 15:00 (2:00 PM - 3:00 PM)"
+}
+
+// EVENT LISTENER: Check Availability button click
+checkAvailabilityBtn.addEventListener('click', function() {
+    // This runs when user clicks "Check Availability" button
+    
+    // Get current form values
+    const course = courseSelect.value;
+    const date = dateSelect.value;
+    const time = timeSelect.value;
+    
+    // Check availability
+    const result = checkTutorAvailability(course, date, time);
+    
+    // Show the availability result section
+    availabilityResult.style.display = 'block';
+    
+    if (result.available) {
+        // TUTORS ARE AVAILABLE - Show success message
+        
+        availableMessage.style.display = 'flex';
+        // Shows green success message
+        
+        unavailableMessage.style.display = 'none';
+        // Hides warning message
+        
+        tutorCount.textContent = result.tutorCount;
+        // Updates the number of tutors available
+        
+        continueBtn.style.display = 'block';
+        // Shows the Continue button
+        
+    } else {
+        // NO TUTORS AVAILABLE - Show warning with alternatives
+        
+        availableMessage.style.display = 'none';
+        // Hides success message
+        
+        unavailableMessage.style.display = 'flex';
+        // Shows warning message
+        
+        unavailableTime.textContent = formatTimeDisplay(time);
+        // Shows the selected time that wasn't available
+        
+        continueBtn.style.display = 'none';
+        // Hides Continue button
+        
+        // Find alternative times
+        const alternatives = findAlternativeTimes(course, date, time);
+        
+        // Clear previous alternatives
+        alternativeTimes.innerHTML = '';
+        // Empties the container
+        
+        if (alternatives.length > 0) {
+            // If we found alternative times, create buttons for them
+            
+            alternatives.forEach(alt => {
+                // Loop through each alternative time
+                
+                const button = document.createElement('button');
+                // Creates a new button element
+                
+                button.className = 'alt-time-btn';
+                // Adds CSS class for styling
+                
+                button.textContent = `${formatTimeDisplay(alt.time)} (${alt.tutorCount} tutor${alt.tutorCount > 1 ? 's' : ''})`;
+                // Button text shows time and number of tutors
+                // Example: "15:00 - 16:00 (2:00 PM - 3:00 PM) (2 tutors)"
+                
+                button.onclick = function() {
+                    // When alternative time button is clicked
+                    
+                    timeSelect.value = alt.time;
+                    // Updates the time dropdown to this time
+                    
+                    // Automatically check availability for this new time
+                    checkAvailabilityBtn.click();
+                    // Simulates clicking the Check Availability button
+                };
+                
+                alternativeTimes.appendChild(button);
+                // Adds button to the container
+            });
+            
+        } else {
+            // No alternatives found
+            
+            alternativeTimes.innerHTML = '<p style="color: var(--shsu-gray-medium); font-style: italic;">No nearby times available. Please try a different date.</p>';
+            // Shows message suggesting to pick different date
+        }
+    }
+});

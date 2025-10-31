@@ -13,10 +13,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Makes page responsive on mobile devices -->
     
-    <title>Study Buddy Booking</title>
+    <title>Study Buddy - Book Appointment</title>
     <!-- Text that appears in browser tab -->
     
- <link rel="stylesheet" href="../css/Booking.css">
+    <link rel="stylesheet" href="/css/Booking.css">
     <!-- Links to external CSS file for styling -->
 </head>
 
@@ -28,87 +28,89 @@
         <h1>Study Buddy</h1>
         <!-- Main heading - largest text on page -->
         
-        <p>Sam Houston State University Tutoring System</p>
-        <!-- Subtitle/description text -->
+        <p>Book Your Tutoring Session</p>
+        <!-- Subtitle text -->
     </header>
 
-    <!-- MAIN CONTENT AREA: Where all the interactive elements live -->
+    <!-- MAIN CONTENT AREA: Booking form -->
     <main>
         
-        <!-- ROLE SELECTOR: User chooses between Tutee or Tutor -->
-        <div id="role-selector">
-            <!-- id="role-selector" gives this div a unique name for CSS and JavaScript -->
+        <!-- BOOKING SECTION: Form for students to book appointments -->
+        <div id="booking-section">
             
-            <h2>Select Your Role</h2>
+            <h2>Schedule an Appointment</h2>
             <!-- Section heading -->
             
-            <div class="button-container">
-                <!-- Container to hold buttons side by side -->
-                
-                <button class="role-btn" id="tutee-btn" onclick="showTuteeSection()">
-                    I'm a Tutee (Need Help)
-                </button>
-                <!-- Button for students seeking tutoring, onclick triggers JavaScript function -->
-                
-                <button class="role-btn" id="tutor-btn" onclick="showTutorSection()">
-                    I'm a Tutor (Offering Help)
-                </button>
-                <!-- Button for tutors offering help -->
-            </div>
-        </div>
-
-        <!-- TUTEE BOOKING SECTION: Form for students to book appointments -->
-        <div id="tutee-section" style="display: none;">
-            <!-- style="display: none;" hides this section initially, JavaScript will show it when needed -->
-            
-            <h2>Book an Appointment</h2>
-            <!-- Section heading for booking -->
+            <p class="instructions">Select a tutor, choose a day and time for your session.</p>
+            <!-- Instructions for user -->
             
             <form id="booking-form">
                 <!-- Form container - collects user input data -->
                 
                 <!-- TUTOR SELECTION -->
-                <label for="tutor-select">Choose a Tutor:</label>
-                <!-- Label describes what the dropdown is for, links to select element below -->
-                
-                <select id="tutor-select" required>
-                    <!-- Dropdown menu for selecting tutor, required means user must choose -->
+                <div class="form-group">
+                    <!-- form-group wraps label and input together -->
                     
-                    <option value="" disabled selected>-- Select a Tutor --</option>
-                    <!-- Default option, disabled means it can't be selected -->
+                    <label for="tutor-select">Choose a Tutor:</label>
+                    <!-- Label describes what the dropdown is for -->
                     
-                    <option value="tutor1">Dr. Smith - Mathematics</option>
-                    <option value="tutor2">Prof. Johnson - Computer Science</option>
-                    <option value="tutor3">Ms. Davis - English</option>
-                    <!-- List of available tutors - replace with real data later -->
-                </select>
+                    <select id="tutor-select" required>
+                        <!-- Dropdown menu for selecting tutor, required means user must choose -->
+                        
+                        <option value="" disabled selected>-- Select a Tutor --</option>
+                        <!-- Default option, disabled means it can't be selected -->
+                        
+                        <option value="tutor1">Dr. Smith - Mathematics</option>
+                        <option value="tutor2">Prof. Johnson - Computer Science</option>
+                        <option value="tutor3">Ms. Davis - English</option>
+                        <option value="tutor4">Mr. Wilson - Chemistry</option>
+                        <option value="tutor5">Dr. Brown - Physics</option>
+                        <!-- List of available tutors - replace with real data from backend later -->
+                    </select>
+                </div>
 
                 <!-- DAY SELECTION -->
-                <label for="day-select">Choose a Day:</label>
-                <!-- Label for day dropdown -->
-                
-                <select id="day-select" required>
-                    <!-- Dropdown for selecting appointment day -->
+                <div class="form-group">
                     
-                    <option value="" disabled selected>-- Select a Day --</option>
-                    <!-- Default option -->
+                    <label for="day-select">Choose a Day:</label>
+                    <!-- Label for day dropdown -->
                     
-                    <option value="monday">Monday</option>
-                    <option value="tuesday">Tuesday</option>
-                    <option value="wednesday">Wednesday</option>
-                    <option value="thursday">Thursday</option>
-                    <option value="friday">Friday</option>
-                    <option value="saturday">Saturday</option>
-                    <option value="sunday">Sunday</option>
-                    <!-- Days of the week -->
-                </select>
+                    <select id="day-select" required>
+                        <!-- Dropdown for selecting appointment day -->
+                        
+                        <option value="" disabled selected>-- Select a Day --</option>
+                        <!-- Default option -->
+                        
+                        <option value="monday">Monday</option>
+                        <option value="tuesday">Tuesday</option>
+                        <option value="wednesday">Wednesday</option>
+                        <option value="thursday">Thursday</option>
+                        <option value="friday">Friday</option>
+                        <!-- Weekdays only for tutoring sessions -->
+                    </select>
+                </div>
 
                 <!-- TIME SELECTION -->
-                <label for="time-select">Choose a Time:</label>
-                <!-- Label for time input -->
-                
-                <input type="time" id="time-select" required>
-                <!-- Time picker input - shows HH:MM format (military time) -->
+                <div class="form-group">
+                    
+                    <label for="time-select">Choose a Time:</label>
+                    <!-- Label for time input -->
+                    
+                    <input type="time" id="time-select" min="08:00" max="18:00" required>
+                    <!-- Time picker input - shows HH:MM format (military time) -->
+                    <!-- min="08:00" max="18:00" restricts to 8am-6pm -->
+                </div>
+
+                <!-- SUBJECT/NOTES FIELD -->
+                <div class="form-group">
+                    
+                    <label for="subject-input">Subject or Topic (Optional):</label>
+                    <!-- Label for text input -->
+                    
+                    <input type="text" id="subject-input" placeholder="e.g., Calculus Chapter 5, Essay Review">
+                    <!-- Text input for additional details -->
+                    <!-- placeholder shows example text that disappears when user types -->
+                </div>
 
                 <!-- SUBMIT BUTTON -->
                 <button type="submit" class="submit-btn">Confirm Appointment</button>
@@ -119,8 +121,14 @@
             <div id="confirmation-message" style="display: none;">
                 <!-- Hidden until booking is successful -->
                 
-                <p>Your appointment has been successfully booked!</p>
-                <!-- Success message -->
+                <div class="success-icon">✓</div>
+                <!-- Checkmark icon -->
+                
+                <h3>Appointment Confirmed!</h3>
+                <!-- Success heading -->
+                
+                <p id="appointment-details"></p>
+                <!-- This paragraph will be filled with booking details via JavaScript -->
                 
                 <button onclick="resetForm()" class="reset-btn">Book Another Appointment</button>
                 <!-- Button to reset form and book again -->
@@ -131,15 +139,13 @@
 
     <!-- FOOTER SECTION: Bottom of page -->
     <footer>
-        <p>&copy; 2025 Study Buddy | SHSU</p>
+        <p>&copy; 2025 Study Buddy | Sam Houston State University</p>
         <!-- Copyright info, &copy; displays © symbol -->
     </footer>
 
     <!-- JAVASCRIPT: Makes the page interactive -->
-    <script>
-        // JavaScript functions will go here in next step
-        // These make buttons clickable and forms functional
-    </script>
+    <script src="/js/booking.js"></script>
+    <!-- Links to external JavaScript file -->
 
 </body>
 </html>

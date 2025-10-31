@@ -500,3 +500,61 @@ checkAvailabilityBtn.addEventListener('click', function() {
         }
     }
 });
+
+// HANDLE FORM SUBMISSION AND NAVIGATE TO PAGE 2
+// When user clicks "Continue to Choose Tutor", save their selections and go to Page 2
+
+// EVENT LISTENER: Form submission (Continue button)
+selectionForm.addEventListener('submit', function(event) {
+    // This runs when user clicks "Continue to Choose Tutor →" button
+    
+    event.preventDefault();
+    // Prevents the default form submission behavior (page reload)
+    // We want to handle navigation ourselves
+    
+    // Get all form values
+    const selectedCourse = courseSelect.value;
+    // Example: "COSC4319"
+    
+    const selectedDate = dateSelect.value;
+    // Example: "2025-11-05"
+    
+    const selectedTime = timeSelect.value;
+    // Example: "14:00-15:00"
+    
+    // Get the tutor count from the success message
+    const selectedTutorCount = tutorCount.textContent;
+    // Example: "3"
+    
+    // Create an object with all booking information
+    const bookingData = {
+        course: selectedCourse,
+        date: selectedDate,
+        time: selectedTime,
+        tutorCount: selectedTutorCount
+    };
+    
+    // Save to browser's sessionStorage
+    // sessionStorage keeps data while browser is open, clears when browser closes
+    // localStorage would keep data permanently (even after closing browser)
+    sessionStorage.setItem('bookingData', JSON.stringify(bookingData));
+    // Converts object to JSON string and stores it
+    // JSON.stringify turns {course: "COSC4319"} into '{"course":"COSC4319"}'
+    
+    // Navigate to Page 2 (tutor selection page)
+    window.location.href = 'booking-confirm.html';
+    // Changes browser URL to Page 2
+    // You can change 'booking-confirm.html' to whatever you name Page 2
+});
+
+// *** DEBUGGING HELPER ***
+// This helps us see what data is being saved
+// Remove this section once everything is working
+console.log('Booking Select Page JavaScript Loaded Successfully');
+// Shows in browser console (F12) that file loaded
+
+// Optional: Log when data is saved
+selectionForm.addEventListener('submit', function() {
+    console.log('Booking data saved:', sessionStorage.getItem('bookingData'));
+    // Shows saved data in console for debugging
+});

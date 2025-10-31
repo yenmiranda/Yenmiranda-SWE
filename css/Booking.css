@@ -13,6 +13,9 @@
     --shsu-orange-dark: #CC4100;
     /* Darker orange for hover states */
     
+    --shsu-blue: #00008B;
+    /* Dark blue accent color */
+    
     --shsu-white: #FFFFFF;
     /* White */
     
@@ -118,8 +121,112 @@ main {
     /* Side padding for mobile */
 }
 
-/* BOOKING SECTION: Main form container */
-#booking-section {
+/* STEP INDICATOR: Progress tracker showing current step */
+.step-indicator {
+    display: flex;
+    /* Uses flexbox for horizontal layout */
+    
+    align-items: center;
+    /* Vertically centers items */
+    
+    justify-content: center;
+    /* Horizontally centers items */
+    
+    margin-bottom: 2.5rem;
+    /* Space below indicator */
+    
+    gap: 1rem;
+    /* Space between steps */
+}
+
+/* STEP: Individual step in indicator */
+.step {
+    display: flex;
+    flex-direction: column;
+    /* Stacks number above label */
+    
+    align-items: center;
+    /* Centers content */
+    
+    gap: 0.5rem;
+    /* Space between number and label */
+}
+
+/* STEP NUMBER: Circular number badge */
+.step-number {
+    width: 45px;
+    height: 45px;
+    /* Makes a square */
+    
+    border-radius: 50%;
+    /* Makes it circular */
+    
+    background-color: var(--shsu-gray-border);
+    /* Light gray background for inactive steps */
+    
+    color: var(--shsu-gray-medium);
+    /* Gray text for inactive steps */
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Centers the number inside circle */
+    
+    font-size: 1.2rem;
+    /* Number size */
+    
+    font-weight: 700;
+    /* Bold */
+    
+    transition: all 0.3s ease;
+    /* Smooth transitions */
+}
+
+/* ACTIVE STEP NUMBER: Current step styling */
+.step.active .step-number {
+    background: linear-gradient(135deg, var(--shsu-orange) 0%, var(--shsu-orange-dark) 100%);
+    /* Orange gradient for active step */
+    
+    color: var(--shsu-white);
+    /* White text */
+    
+    box-shadow: 0 4px 8px rgba(255, 81, 0, 0.3);
+    /* Orange shadow */
+}
+
+/* STEP LABEL: Text below number */
+.step-label {
+    font-size: 0.9rem;
+    /* Smaller text */
+    
+    color: var(--shsu-gray-medium);
+    /* Gray for inactive */
+    
+    font-weight: 500;
+    /* Medium weight */
+}
+
+/* ACTIVE STEP LABEL: Current step text */
+.step.active .step-label {
+    color: var(--shsu-orange);
+    /* Orange text for active */
+    
+    font-weight: 600;
+    /* Semi-bold */
+}
+
+/* STEP DIVIDER: Line between steps */
+.step-divider {
+    width: 60px;
+    height: 2px;
+    /* Thin horizontal line */
+    
+    background-color: var(--shsu-gray-border);
+    /* Light gray line */
+}
+
+/* SELECTION SECTION: Main form container */
+#selection-section {
     background: var(--shsu-white);
     /* White background */
     
@@ -133,37 +240,22 @@ main {
     /* Shadow for card effect */
 }
 
-#booking-section h2 {
-    color: var(--shsu-orange);
-    /* Orange heading */
+#selection-section h2 {
+    color: var(--shsu-blue);
+    /* Blue heading */
     
-    margin-bottom: 0.5rem;
+    margin-bottom: 2rem;
     /* Space below heading */
     
-    font-size: 2rem;
+    font-size: 1.8rem;
     /* Large size */
     
     text-align: center;
     /* Centered */
 }
 
-/* INSTRUCTIONS: Helpful text below heading */
-.instructions {
-    text-align: center;
-    /* Centered text */
-    
-    color: var(--shsu-gray-medium);
-    /* Medium gray color */
-    
-    margin-bottom: 2rem;
-    /* Space below */
-    
-    font-size: 1rem;
-    /* Normal size */
-}
-
-/* FORM: Booking form layout */
-#booking-form {
+/* FORM: Selection form layout */
+#selection-form {
     display: flex;
     flex-direction: column;
     /* Stacks form elements vertically */
@@ -228,69 +320,23 @@ select {
 }
 
 select:hover {
-    border-color: var(--shsu-orange);
-    /* Orange border on hover */
+    border-color: var(--shsu-blue);
+    /* Blue border on hover */
 }
 
 select:focus {
     outline: none;
     /* Removes default outline */
     
-    border-color: var(--shsu-orange);
-    /* Orange border when clicked */
+    border-color: var(--shsu-blue);
+    /* Blue border when clicked */
     
-    box-shadow: 0 0 0 3px rgba(255, 81, 0, 0.1);
-    /* Subtle orange glow */
+    box-shadow: 0 0 0 3px rgba(0, 0, 139, 0.1);
+    /* Subtle blue glow */
 }
 
-/* TEXT INPUT: For subject/topic field */
-input[type="text"] {
-    width: 100%;
-    /* Full width */
-    
-    padding: 0.9rem;
-    /* Space inside */
-    
-    font-size: 1rem;
-    /* Normal text size */
-    
-    border: 2px solid var(--shsu-gray-border);
-    /* Light gray border */
-    
-    border-radius: 8px;
-    /* Rounded corners */
-    
-    background-color: var(--shsu-white);
-    /* White background */
-    
-    color: var(--shsu-gray-dark);
-    /* Dark text */
-    
-    transition: all 0.3s ease;
-    /* Smooth transitions */
-    
-    font-family: inherit;
-    /* Uses same font as page */
-}
-
-input[type="text"]:hover {
-    border-color: var(--shsu-orange);
-    /* Orange border on hover */
-}
-
-input[type="text"]:focus {
-    outline: none;
-    /* Removes default outline */
-    
-    border-color: var(--shsu-orange);
-    /* Orange border when clicked */
-    
-    box-shadow: 0 0 0 3px rgba(255, 81, 0, 0.1);
-    /* Subtle orange glow */
-}
-
-/* TIME INPUT: Time picker */
-input[type="time"] {
+/* DATE INPUT: Date picker */
+input[type="date"] {
     width: 100%;
     /* Full width */
     
@@ -322,24 +368,76 @@ input[type="time"] {
     /* Uses same font as page */
 }
 
-input[type="time"]:hover {
-    border-color: var(--shsu-orange);
-    /* Orange border on hover */
+input[type="date"]:hover {
+    border-color: var(--shsu-blue);
+    /* Blue border on hover */
 }
 
-input[type="time"]:focus {
+input[type="date"]:focus {
     outline: none;
     /* Removes default outline */
     
-    border-color: var(--shsu-orange);
-    /* Orange border when clicked */
+    border-color: var(--shsu-blue);
+    /* Blue border when clicked */
     
-    box-shadow: 0 0 0 3px rgba(255, 81, 0, 0.1);
-    /* Subtle orange glow */
+    box-shadow: 0 0 0 3px rgba(0, 0, 139, 0.1);
+    /* Subtle blue glow */
+}
+
+/* TEXTAREA: Multi-line text input for notes */
+textarea {
+    width: 100%;
+    /* Full width */
+    
+    padding: 0.9rem;
+    /* Space inside */
+    
+    font-size: 1rem;
+    /* Normal text size */
+    
+    border: 2px solid var(--shsu-gray-border);
+    /* Light gray border */
+    
+    border-radius: 8px;
+    /* Rounded corners */
+    
+    background-color: var(--shsu-white);
+    /* White background */
+    
+    color: var(--shsu-gray-dark);
+    /* Dark text */
+    
+    resize: vertical;
+    /* User can resize vertically only */
+    
+    transition: all 0.3s ease;
+    /* Smooth transitions */
+    
+    font-family: inherit;
+    /* Uses same font as page */
+    
+    line-height: 1.5;
+    /* Line spacing inside textarea */
+}
+
+textarea:hover {
+    border-color: var(--shsu-blue);
+    /* Blue border on hover */
+}
+
+textarea:focus {
+    outline: none;
+    /* Removes default outline */
+    
+    border-color: var(--shsu-blue);
+    /* Blue border when clicked */
+    
+    box-shadow: 0 0 0 3px rgba(0, 0, 139, 0.1);
+    /* Subtle blue glow */
 }
 
 /* PLACEHOLDER TEXT: Gray text inside empty inputs */
-input::placeholder {
+textarea::placeholder {
     color: var(--shsu-gray-medium);
     /* Medium gray */
     
@@ -347,7 +445,7 @@ input::placeholder {
     /* Slightly transparent */
 }
 
-/* SUBMIT BUTTON: Confirm appointment button */
+/* SUBMIT BUTTON: Main action button */
 .submit-btn {
     background: linear-gradient(135deg, var(--shsu-orange) 0%, var(--shsu-orange-dark) 100%);
     /* Orange gradient */
@@ -399,116 +497,6 @@ input::placeholder {
     /* Returns to normal position when clicked */
 }
 
-/* CONFIRMATION MESSAGE: Success message container */
-#confirmation-message {
-    background: var(--success-bg);
-    /* Light green background */
-    
-    border: 2px solid var(--success-green);
-    /* Green border */
-    
-    border-radius: 12px;
-    /* Rounded corners */
-    
-    padding: 2rem;
-    /* Space inside */
-    
-    margin-top: 2rem;
-    /* Space above */
-    
-    text-align: center;
-    /* Centers content */
-    
-    animation: slideIn 0.5s ease;
-    /* Slide-in animation */
-}
-
-/* SUCCESS ICON: Checkmark */
-.success-icon {
-    font-size: 4rem;
-    /* Very large */
-    
-    color: var(--success-green);
-    /* Green color */
-    
-    margin-bottom: 1rem;
-    /* Space below */
-    
-    font-weight: bold;
-    /* Bold */
-}
-
-#confirmation-message h3 {
-    color: var(--success-green);
-    /* Green heading */
-    
-    font-size: 1.5rem;
-    /* Large size */
-    
-    margin-bottom: 1rem;
-    /* Space below */
-}
-
-#confirmation-message p {
-    color: var(--shsu-gray-dark);
-    /* Dark gray text */
-    
-    font-size: 1.1rem;
-    /* Slightly larger */
-    
-    margin-bottom: 1.5rem;
-    /* Space below */
-    
-    line-height: 1.8;
-    /* Extra line spacing for readability */
-}
-
-/* RESET BUTTON: Book another appointment */
-.reset-btn {
-    background: var(--shsu-white);
-    /* White background */
-    
-    color: var(--shsu-orange);
-    /* Orange text */
-    
-    border: 2px solid var(--shsu-orange);
-    /* Orange border */
-    
-    padding: 0.9rem 2rem;
-    /* Space inside */
-    
-    font-size: 1rem;
-    /* Normal size */
-    
-    font-weight: 600;
-    /* Semi-bold */
-    
-    border-radius: 8px;
-    /* Rounded corners */
-    
-    cursor: pointer;
-    /* Hand cursor */
-    
-    transition: all 0.3s ease;
-    /* Smooth transitions */
-}
-
-.reset-btn:hover {
-    background: var(--shsu-orange);
-    /* Orange background on hover */
-    
-    color: var(--shsu-white);
-    /* White text on hover */
-    
-    transform: translateY(-2px);
-    /* Lifts button */
-}
-
-.reset-btn:active {
-    transform: translateY(0);
-    /* Returns to normal */
-}
-
 /* FOOTER: Bottom section */
 footer {
     background: var(--shsu-gray-dark);
@@ -527,24 +515,6 @@ footer {
     /* Pushes to bottom */
 }
 
-/* ANIMATION: Slide-in effect for confirmation message */
-@keyframes slideIn {
-    from {
-        opacity: 0;
-        /* Starts invisible */
-        
-        transform: translateY(-20px);
-        /* Starts 20px higher */
-    }
-    to {
-        opacity: 1;
-        /* Ends fully visible */
-        
-        transform: translateY(0);
-        /* Ends in normal position */
-    }
-}
-
 /* MOBILE RESPONSIVE: Adjustments for smaller screens */
 @media (max-width: 768px) {
     header h1 {
@@ -557,7 +527,7 @@ footer {
         /* Smaller subtitle */
     }
     
-    #booking-section {
+    #selection-section {
         padding: 1.5rem;
         /* Less padding on mobile */
     }
@@ -565,5 +535,29 @@ footer {
     main {
         margin: 1.5rem auto;
         /* Less margin on mobile */
+    }
+    
+    .step-indicator {
+        gap: 0.5rem;
+        /* Less space between steps on mobile */
+    }
+    
+    .step-divider {
+        width: 40px;
+        /* Shorter divider line on mobile */
+    }
+    
+    .step-number {
+        width: 40px;
+        height: 40px;
+        /* Smaller circles on mobile */
+        
+        font-size: 1rem;
+        /* Smaller numbers */
+    }
+    
+    .step-label {
+        font-size: 0.8rem;
+        /* Smaller labels on mobile */
     }
 }

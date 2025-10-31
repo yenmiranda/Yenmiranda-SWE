@@ -39,3 +39,49 @@ const alternativeTimes = document.getElementById('alternative-times');
 
 const selectionForm = document.getElementById('selection-form');
 // Gets the entire form
+
+// FUNCTION: Initialize date picker with today as minimum date
+function setupDatePicker() {
+    // Get today's date
+    const today = new Date();
+    // Creates a Date object with current date and time
+    
+    // Format today's date as YYYY-MM-DD (required format for date input)
+    const year = today.getFullYear();
+    // Gets the year (e.g., 2025)
+    
+    const month = String(today.getMonth() + 1).padStart(2, '0');
+    // Gets the month (0-11, so we add 1), then adds leading zero if needed
+    // Example: January = 0, so 0+1 = 1, padStart makes it "01"
+    
+    const day = String(today.getDate()).padStart(2, '0');
+    // Gets the day of month, adds leading zero if needed
+    // Example: 5th becomes "05"
+    
+    const todayFormatted = `${year}-${month}-${day}`;
+    // Combines into format: "2025-10-31"
+    
+    // Set the minimum date to today (can't select past dates)
+    dateSelect.min = todayFormatted;
+    // This prevents users from clicking on dates before today
+    
+    // Set the maximum date to 3 months from today (optional - prevents booking too far ahead)
+    const maxDate = new Date();
+    // Create another date object
+    
+    maxDate.setMonth(maxDate.getMonth() + 3);
+    // Add 3 months to today
+    
+    const maxYear = maxDate.getFullYear();
+    const maxMonth = String(maxDate.getMonth() + 1).padStart(2, '0');
+    const maxDay = String(maxDate.getDate()).padStart(2, '0');
+    const maxDateFormatted = `${maxYear}-${maxMonth}-${maxDay}`;
+    // Format max date same way
+    
+    dateSelect.max = maxDateFormatted;
+    // This prevents users from selecting dates more than 3 months away
+}
+
+// Call the function when page loads
+setupDatePicker();
+// Runs the function immediately to set up date restrictions

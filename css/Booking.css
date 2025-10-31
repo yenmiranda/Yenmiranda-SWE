@@ -484,6 +484,64 @@ textarea::placeholder {
     /* Space between letters */
 }
 
+/* CHECK AVAILABILITY BUTTON: Button to check if tutors available */
+.check-btn {
+    background-color: var(--shsu-blue);
+    /* Blue background */
+    
+    color: var(--shsu-white);
+    /* White text */
+    
+    border: none;
+    /* No border */
+    
+    padding: 1.1rem;
+    /* Space inside button */
+    
+    font-size: 1.1rem;
+    /* Slightly larger text */
+    
+    font-weight: 700;
+    /* Bold */
+    
+    border-radius: 8px;
+    /* Rounded corners */
+    
+    cursor: pointer;
+    /* Hand cursor */
+    
+    transition: all 0.3s ease;
+    /* Smooth transitions */
+    
+    margin-top: 1rem;
+    /* Extra space above */
+    
+    width: 100%;
+    /* Full width */
+    
+    text-transform: uppercase;
+    /* ALL CAPS */
+    
+    letter-spacing: 1px;
+    /* Space between letters */
+}
+
+.check-btn:hover {
+    background-color: #00006B;
+    /* Darker blue on hover */
+    
+    transform: translateY(-2px);
+    /* Lifts button up */
+    
+    box-shadow: 0 6px 12px rgba(0, 0, 139, 0.3);
+    /* Blue shadow */
+}
+
+.check-btn:active {
+    transform: translateY(0);
+    /* Returns to normal position when clicked */
+}
+
 .submit-btn:hover {
     transform: translateY(-2px);
     /* Lifts button up */

@@ -128,9 +128,17 @@
                     </select>
                 </div>
 
-                <!-- AVAILABILITY CHECK RESULT: Shows after user selects all 3 fields -->
+                <!-- CHECK AVAILABILITY BUTTON: Shows when all 3 fields filled -->
+                <button type="button" class="check-btn" id="check-availability-btn" style="display: none;">
+                    Check Availability
+                </button>
+                <!-- type="button" prevents form submission -->
+                <!-- Hidden until all 3 fields are filled -->
+                <!-- When clicked, checks if tutors are available -->
+
+                <!-- AVAILABILITY CHECK RESULT: Shows after clicking Check Availability -->
                 <div id="availability-result" style="display: none;">
-                    <!-- Hidden until all fields are filled -->
+                    <!-- Hidden until check availability button is clicked -->
                     
                     <!-- SUCCESS MESSAGE: Shows when tutors are available -->
                     <div id="available-message" class="availability-message success-message" style="display: none;">

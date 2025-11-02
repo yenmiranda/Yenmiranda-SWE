@@ -7,7 +7,7 @@
     font-family: "Poppins", serif;
 
 }
-
+/*Background to the page*/
 body {
     display: flex;
     justify-content: center;
@@ -16,17 +16,17 @@ body {
     background: linear-gradient(#e2e2e2, #ff5100);
     color: #333;
 }
-
+/*centering*/
 .container{
     margin: 0 15px;
 }
-
+/*Study Buddy on top of The form box*/
 h1 {
     font-size: 34px;
     text-align: center;
     margin-bottom: 20px;
 }
-
+/*properties for the Actual box*/
 .form-box {
     width: 100%;
     max-width: 450px;
@@ -40,13 +40,13 @@ h1 {
 .form-box.active {
     display: block;
 }
-
+/*Title inside the formbox*/
 h2 {
     font-size: 34px;
     text-align: center;
     margin-bottom: 20px;
 }
-
+/*Boxes to enter userdata*/
 input,
 Select {
     width: 100%;
@@ -59,7 +59,7 @@ Select {
     color: #333;
     margin-bottom: 20px;
 }
-
+/*Button*/
 button {
     width: 100%;
     padding: 12px;
@@ -73,22 +73,22 @@ button {
     margin-bottom: 20px;
     transition: 0.5s;
 }
-
+/*Darkens the box*/
 button:hover {
     background: #6884d3;
 }
-
+/*Centering the line under the bottom*/
 P {
     font-size: 14.5px;
     text-align: center;
     margin-bottom: 10px;
 }
-
+/*Giving color to the Login/Register word*/
 p a {
     color: #7494ec;
     text-decoration: none;
 }
-
-p a :hover {
+/*give a line when hovering over the login/Register*/
+p a:hover {
     text-decoration: underline;
 }

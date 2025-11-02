@@ -36,7 +36,7 @@ h1 {
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
     display: none;
 }
-
+/*makes this the default form, used with javascript*/
 .form-box.active {
     display: block;
 }
@@ -59,6 +59,7 @@ Select {
     color: #333;
     margin-bottom: 20px;
 }
+
 /*Button*/
 button {
     width: 100%;

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.2"
+    xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
+
+    <!-- Persistence Unit Name: Use this name when creating the EntityManagerFactory -->
+    <persistence-unit name="StudyBuddyPU" transaction-type="RESOURCE_LOCAL">
+        
+        <!-- Hibernate is the most common JPA provider -->
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+
+        <!-- List the entity classes you will map -->
+        <class>com.studybuddy.model.User</class>
+        <class>com.studybuddy.model.Student</class>
+        <class>com.studybuddy.model.Tutor</class>
+        <class>com.studybuddy.model.Classes</class>
+        <class>com.studybuddy.model.Avail</class>
+        <class>com.studybuddy.model.Booking</class>
+        
+        <properties>
+            <!-- 1. Database Connection Properties (You MUST edit these four lines) -->
+            <!-- EDIT HERE: Ensure this matches the driver you are using (e.g., com.mysql.cj.jdbc.Driver) -->
+            <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />
+            <!-- EDIT HERE: Change 'localhost:3306/studybuddy_db' to your actual database host, port, and name. -->
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/studybuddy_db?serverTimezone=UTC" />
+            <!-- EDIT HERE: Enter your database username -->
+            <property name="javax.persistence.jdbc.user" value="dbuser" />
+            <!-- EDIT HERE: Enter your database password -->
+            <property name="javax.persistence.jdbc.password" value="dbpassword" />
+
+            <!-- 2. Hibernate Specific Properties -->
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect" />
+            
+            <!-- Show SQL in console (useful for debugging) -->
+            <property name="hibernate.show_sql" value="true" />
+            <property name="hibernate.format_sql" value="true" />
+            
+            <!-- Auto-create or update the schema on startup (NEVER USE "create" IN PRODUCTION) -->
+            <!-- The 'update' value is safe for development but should be reviewed for production settings. -->
+            <property name="hibernate.hbm2ddl.auto" value="update" />
+        </properties>
+    </persistence-unit>
+</persistence>

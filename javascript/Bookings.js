@@ -62,3 +62,21 @@ document.addEventListener('DOMContentLoaded', (event) => { //waits for page load
         });
     }
 });
+
+// LOGOUT FUNCTIONALITY
+// Handles user logout - clears session data and redirects to login page
+
+// FUNCTION: Handle logout button click
+function handleLogout() {
+    // Clear all session data
+    sessionStorage.clear();
+    // Removes all saved booking data from browser session storage
+    
+    // Optional: Also clear localStorage if you're using it
+    // localStorage.clear();
+    
+    // Redirect to login page
+    window.location.href = 'login.html';
+    // Change 'login.html' to whatever your login page is called
+    // Could also be: 'index.html', 'signin.html', etc.
+}

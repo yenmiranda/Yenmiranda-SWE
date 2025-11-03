@@ -377,7 +377,7 @@ changeTutorBtn.addEventListener('click', function() {
 
 backBtn.addEventListener('click', function() {
     // Navigate back to Page 1
-    window.location.href = 'booking-select.html';
+    window.location.href = 'booking-confirm.html';
     // Changes browser URL back to Page 1
     // The booking data is still saved in sessionStorage
 });

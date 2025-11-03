@@ -568,9 +568,6 @@ function handleLogout() {
     sessionStorage.clear();
     // Removes all saved booking data from browser session storage
     
-    // Optional: Also clear localStorage if you're using it
-    // localStorage.clear();
-    
     // Redirect to login page
     window.location.href = 'LoginAndRegistration.html';
     // Change 'login.html' to whatever your login page is called

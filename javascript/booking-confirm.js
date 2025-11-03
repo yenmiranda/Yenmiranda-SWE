@@ -478,6 +478,6 @@ function handleLogout() {
     // localStorage.clear();
     
     // Redirect to login page
-    window.location.href = 'login.html';
+    window.location.href = 'LoginAndRegister.html';
     // Change 'login.html' to whatever your login page is called
 }

@@ -75,7 +75,7 @@ function loadBookingData() {
         alert('No booking data found. Please start from the session selection page.');
         // Shows alert to user
         
-        window.location.href = 'booking-select.html';
+        window.location.href = 'booking.html';
         // Redirects back to Page 1
         
         return null;
@@ -422,7 +422,7 @@ You will receive a confirmation email shortly.
     // Redirect to a success page or home page
     // For now, we'll go back to Page 1
     alert('Redirecting to session selection page...');
-    window.location.href = 'booking-select.html';
+    window.location.href = 'booking.html';
 });
 
 // STEP 15: INITIALIZE PAGE WHEN IT LOADS

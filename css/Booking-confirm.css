@@ -62,6 +62,8 @@ body {
 
 /* HEADER: Top banner */
 header {
+    position: relative;
+
     background: linear-gradient(135deg, var(--shsu-orange) 0%, var(--shsu-orange-dark) 100%);
     /* Orange gradient background */
     
@@ -844,6 +846,62 @@ footer {
     /* Pushes to bottom */
 }
 
+/* LOGOUT BUTTON: Button in header to log out */
+.logout-btn {
+    position: absolute;
+    /* Positions button relative to header */
+    
+    top: 1rem;
+    right: 1.5rem;
+    /* Places button in top-right corner of header */
+    
+    background-color: var(--shsu-white);
+    /* White background */
+    
+    color: var(--shsu-orange);
+    /* Orange text */
+    
+    border: 2px solid var(--shsu-white);
+    /* White border */
+    
+    padding: 0.6rem 1.2rem;
+    /* Space inside button */
+    
+    font-size: 0.95rem;
+    /* Slightly smaller text */
+    
+    font-weight: 600;
+    /* Semi-bold */
+    
+    border-radius: 6px;
+    /* Rounded corners */
+    
+    cursor: pointer;
+    /* Hand cursor */
+    
+    transition: all 0.3s ease;
+    /* Smooth transitions */
+}
+
+.logout-btn:hover {
+    background-color: var(--shsu-orange-dark);
+    /* Dark orange background on hover */
+    
+    color: var(--shsu-white);
+    /* White text on hover */
+    
+    border-color: var(--shsu-orange-dark);
+    /* Dark orange border */
+    
+    transform: translateY(-2px);
+    /* Lifts button slightly */
+}
+
+.logout-btn:active {
+    transform: translateY(0);
+    /* Returns to normal position when clicked */
+}
+
 /* MOBILE RESPONSIVE: Adjustments for smaller screens */
 @media (max-width: 768px) {
     header h1 {
@@ -922,6 +980,18 @@ footer {
         /* Small gap between label and value */
     }
 }
+
+.logout-btn {
+        top: 0.75rem;
+        right: 1rem;
+        /* Adjusts position on mobile */
+        
+        padding: 0.5rem 1rem;
+        /* Smaller padding on mobile */
+        
+        font-size: 0.85rem;
+        /* Smaller text on mobile */
+    }
 
 /* FADE IN ANIMATION: Used for confirmation section */
 @keyframes fadeIn {

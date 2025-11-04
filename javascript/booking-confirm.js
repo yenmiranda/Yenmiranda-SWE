@@ -75,7 +75,7 @@ function loadBookingData() {
         alert('No booking data found. Please start from the session selection page.');
         // Shows alert to user
         
-        window.location.href = 'booking-select.html';
+        window.location.href = 'Booking.html';
         // Redirects back to Page 1
         
         return null;
@@ -377,7 +377,7 @@ changeTutorBtn.addEventListener('click', function() {
 
 backBtn.addEventListener('click', function() {
     // Navigate back to Page 1
-    window.location.href = 'booking-select.html';
+    window.location.href = 'booking-confirm.html';
     // Changes browser URL back to Page 1
     // The booking data is still saved in sessionStorage
 });
@@ -422,7 +422,7 @@ You will receive a confirmation email shortly.
     // Redirect to a success page or home page
     // For now, we'll go back to Page 1
     alert('Redirecting to session selection page...');
-    window.location.href = 'booking-select.html';
+    window.location.href = 'Booking.html';
 });
 
 // STEP 15: INITIALIZE PAGE WHEN IT LOADS
@@ -464,3 +464,20 @@ console.log('Booking Tutor Selection JavaScript Loaded Successfully');
 
 // Log available tutors
 console.log('Sample tutors available:', tutors);
+
+// LOGOUT FUNCTIONALITY
+// Handles user logout - clears session data and redirects to login page
+
+// FUNCTION: Handle logout button click
+function handleLogout() {
+    // Clear all session data
+    sessionStorage.clear();
+    // Removes all saved booking data from browser session storage
+    
+    // Optional: Also clear localStorage if you're using it
+    // localStorage.clear();
+    
+    // Redirect to login page
+    window.location.href = 'LoginAndRegister.html';
+    // Change 'login.html' to whatever your login page is called
+}

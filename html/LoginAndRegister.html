@@ -9,7 +9,7 @@
 </head>
 
 <body>
-
+<!--Start of the Login form-->
     <div class = "container">
         <h1>Study Buddy</h1>
         <div class = "form-box active" id = "login-form">
@@ -21,10 +21,12 @@
                 <p>Register for an account! <a href = "#" onclick = "showForm('register-form')">Register</a></p>
             </form>
         </div>
-
+<!--Start of the registration form-->
         <div class = "form-box" id = "register-form">
             <form action = "">
                 <h2>Register</h2>
+                <input type = "FirstName" name = "FirstName" placeholder = "First Name" required>
+                <input type = "Surname" name = "Surname" placeholder = "Last Name" required>
                 <input type = "Sam ID" name = "Sam ID" placeholder = "Sam ID" required>
                 <input type = "password" name = "password" placeholder = "Password" required>
                 <select name = "Role" requiered>
@@ -38,7 +40,6 @@
         </div>
     </div>
     
-    <script src = "/javascript/LoginAndRegister.js"></script>
+    <script src = "../javascript/LoginAndRegister.js"></script>
 </body>
-
 </html>

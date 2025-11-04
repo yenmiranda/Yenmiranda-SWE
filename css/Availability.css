@@ -112,8 +112,9 @@ body {
 
 /* box wrapping the schedule */
 .availability-box {
-  width: 70%;
-  margin: 60px auto 0 auto; /* centers the box */
+  width: 90%;
+  max-width: 50%;
+  margin: 80px auto; /* centers the box */
   background: #ffffff;
   padding: 20px 30px;
   border-radius: 12px;

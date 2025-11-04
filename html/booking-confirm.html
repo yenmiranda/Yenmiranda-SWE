@@ -1,23 +1,23 @@
 <!DOCTYPE html>
-<!-- This tells the browser we're using HTML5 -->
+<!-- I'm telling the browser we're using HTML5 -->
 
 <html lang="en">
-<!-- Main container for entire webpage -->
+<!-- I'm creating the main container for entire webpage -->
 
 <head>
-    <!-- HEAD SECTION: Contains information about the page -->
+    <!-- HEAD SECTION: I'm including information about the page -->
     
     <meta charset="UTF-8">
-    <!-- Sets character encoding -->
+    <!-- I'm setting character encoding -->
     
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Makes page responsive on mobile -->
+    <!-- I'm making the page responsive on mobile -->
     
     <title>Study Buddy - Choose Tutor</title>
-    <!-- Browser tab title -->
+    <!-- I'm setting the browser tab title -->
     
     <link rel="stylesheet" href="../css/Booking-confirm.css">
-    <!-- Links to CSS file for styling -->
+    <!-- I'm linking to CSS file for styling -->
 </head>
 
 <body>
@@ -39,7 +39,7 @@
     <!-- MAIN CONTENT: Tutor selection -->
     <main>
         
-        <!-- STEP INDICATOR: Shows user where they are in booking process -->
+        <!-- STEP INDICATOR: I'm showing user where they are in booking process -->
         <div class="step-indicator">
             <div class="step completed">
                 <div class="step-number">✓</div>
@@ -51,12 +51,12 @@
                 <div class="step-label">Choose Tutor</div>
             </div>
         </div>
-        <!-- Step indicator shows we're on step 2 of 2, step 1 is complete -->
+        <!-- I'm showing that we're on step 2 of 2, step 1 is complete -->
 
         <!-- TUTOR SELECTION SECTION: Main content -->
         <div id="tutor-section">
             
-            <!-- BOOKING SUMMARY: Shows what user selected on Page 1 -->
+            <!-- BOOKING SUMMARY: I'm showing what user selected on Page 1 -->
             <div class="booking-summary">
                 <h3>Your Session Details</h3>
                 <!-- Summary heading -->
@@ -82,7 +82,7 @@
                         <span class="summary-value" id="summary-count">Loading...</span>
                     </div>
                 </div>
-                <!-- JavaScript will populate these values from sessionStorage -->
+                <!-- My JavaScript will populate these values from sessionStorage -->
                 
                 <button type="button" class="back-btn" id="back-btn">
                     ← Change Session Details
@@ -99,7 +99,7 @@
 
             <!-- TUTOR CARDS CONTAINER -->
             <div id="tutor-list" class="tutor-list">
-                <!-- Tutor cards will be dynamically inserted here by JavaScript -->
+                <!-- I'll dynamically insert tutor cards here with JavaScript -->
                 
                 <!-- LOADING MESSAGE: Shows while JavaScript loads tutors -->
                 <div class="loading-message">
@@ -163,7 +163,7 @@
 
     <!-- JAVASCRIPT: Makes page interactive -->
     <script src="../javascript/booking-confirm.js"></script>
-    <!-- Links to JavaScript file for this page -->
+    <!-- I'm linking to JavaScript file for this page -->
 
 </body>
 </html>

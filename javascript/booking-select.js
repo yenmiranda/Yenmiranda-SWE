@@ -570,6 +570,4 @@ function handleLogout() {
     
     // Redirect to login page
     window.location.href = 'LoginAndRegister.html';
-    // Change 'login.html' to whatever your login page is called
-    // Could also be: 'index.html', 'signin.html', etc.
 }

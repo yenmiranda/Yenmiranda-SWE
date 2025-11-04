@@ -1,23 +1,23 @@
 <!DOCTYPE html>
-<!-- This tells the browser we're using HTML5 -->
+<!-- I'm telling the browser we're using HTML5 -->
 
 <html lang="en">
-<!-- Main container for entire webpage -->
+<!-- I'm creating the main container for entire webpage -->
 
 <head>
-    <!-- HEAD SECTION: Contains information about the page -->
+    <!-- HEAD SECTION: I'm including information about the page -->
     
     <meta charset="UTF-8">
-    <!-- Sets character encoding -->
+    <!-- I'm setting character encoding -->
     
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Makes page responsive on mobile -->
+    <!-- I'm making the page responsive on mobile -->
     
     <title>Study Buddy - Select Session</title>
-    <!-- Browser tab title -->
+    <!-- I'm setting the browser tab title -->
     
     <link rel="stylesheet" href="../css/Booking.css">
-    <!-- Links to CSS file for styling -->
+    <!-- I'm linking to CSS file for styling -->
 </head>
 
 <body>
@@ -36,10 +36,10 @@
         <!-- onclick calls handleLogout function when clicked -->
     </header>
 
-    <!-- MAIN CONTENT: Session selection form -->
+    <!-- MAIN CONTENT: I'm creating the session selection form -->
     <main>
         
-        <!-- STEP INDICATOR: Shows user where they are in booking process -->
+        <!-- STEP INDICATOR: I'm showing user where they are in booking process -->
         <div class="step-indicator">
             <div class="step active">
                 <div class="step-number">1</div>
@@ -51,7 +51,7 @@
                 <div class="step-label">Choose Tutor</div>
             </div>
         </div>
-        <!-- Step indicator shows we're on step 1 of 2 -->
+        <!-- I'm showing that we're on step 1 of 2 -->
 
         <!-- SELECTION SECTION: Main form for choosing session details -->
         <div id="selection-section">
@@ -60,23 +60,23 @@
             <!-- Section heading -->
             
             <form id="selection-form">
-                <!-- Form container -->
+                <!-- I'm creating the form container -->
                 
                 <!-- COURSE SELECTION -->
                 <div class="form-group">
                     
                     <label for="course-select">Select Course:</label>
-                    <!-- Label for course dropdown -->
+                    <!-- I'm creating a label for course dropdown -->
                     
                     <select id="course-select" required>
-                        <!-- Dropdown for course selection -->
+                        <!-- I'm creating a dropdown for course selection -->
                         
                         <option value="" disabled selected>-- Choose a Course --</option>
-                        <!-- Default placeholder option -->
+                        <!-- I'm setting the default placeholder option -->
                         
                         <option value="COSC4319">COSC 4319 - Software Engineering</option>
                         <option value="COSC3319">COSC 3319 - Data Structures and Algorithms</option>
-                        <!-- Available courses -->
+                        <!-- I'm listing available courses -->
                     </select>
                 </div>
 
@@ -84,24 +84,24 @@
                 <div class="form-group">
                     
                     <label for="date-select">Select Date:</label>
-                    <!-- Label for date input -->
+                    <!-- I'm creating a label for date input -->
                     
                     <input type="date" id="date-select" required>
-                    <!-- Date picker input - shows calendar -->
-                    <!-- JavaScript will set min date to today and restrict to weekdays -->
+                    <!-- I'm creating a date picker input - shows calendar -->
+                    <!-- My JavaScript will set min date to today and restrict to weekdays -->
                 </div>
 
                 <!-- TIME SLOT SELECTION -->
                 <div class="form-group">
                     
                     <label for="time-select">Select Time Slot (1-hour sessions):</label>
-                    <!-- Label for time dropdown -->
+                    <!-- I'm creating a label for time dropdown -->
                     
                     <select id="time-select" required>
-                        <!-- Dropdown for hourly time slots in military time -->
+                        <!-- I'm creating a dropdown for hourly time slots in military time -->
                         
                         <option value="" disabled selected>-- Choose a Time Slot --</option>
-                        <!-- Default placeholder -->
+                        <!-- I'm setting the default placeholder -->
                         
                         <!-- Military time format: 00:00 to 23:00 -->
                         <option value="00:00-01:00">00:00 - 01:00 (12:00 AM - 1:00 AM)</option>
@@ -128,7 +128,7 @@
                         <option value="21:00-22:00">21:00 - 22:00 (9:00 PM - 10:00 PM)</option>
                         <option value="22:00-23:00">22:00 - 23:00 (10:00 PM - 11:00 PM)</option>
                         <option value="23:00-00:00">23:00 - 00:00 (11:00 PM - 12:00 AM)</option>
-                        <!-- All 24 hours available -->
+                        <!-- I'm providing all 24 hours available -->
                     </select>
                 </div>
 
@@ -137,12 +137,12 @@
                     Check Availability
                 </button>
                 <!-- type="button" prevents form submission -->
-                <!-- Hidden until all 3 fields are filled -->
-                <!-- When clicked, checks if tutors are available -->
+                <!-- I'm hiding this until all 3 fields are filled -->
+                <!-- When clicked, this checks if tutors are available -->
 
                 <!-- AVAILABILITY CHECK RESULT: Shows after clicking Check Availability -->
                 <div id="availability-result" style="display: none;">
-                    <!-- Hidden until check availability button is clicked -->
+                    <!-- I'm hiding this until check availability button is clicked -->
                     
                     <!-- SUCCESS MESSAGE: Shows when tutors are available -->
                     <div id="available-message" class="availability-message success-message" style="display: none;">
@@ -152,7 +152,7 @@
                         <div class="message-content">
                             <h3>Tutors Available!</h3>
                             <p><span id="tutor-count"></span> tutor(s) available for your selected time.</p>
-                            <!-- Shows number of available tutors -->
+                            <!-- I'm showing number of available tutors -->
                         </div>
                     </div>
 
@@ -164,13 +164,13 @@
                         <div class="message-content">
                             <h3>No Tutors Available</h3>
                             <p>No tutors available for <strong><span id="unavailable-time"></span></strong></p>
-                            <!-- Shows the time they selected -->
+                            <!-- I'm showing the time they selected -->
                             
                             <p class="suggestion-text">Try these nearby available times:</p>
                             <!-- Suggestion text -->
                             
                             <div id="alternative-times" class="alternative-times-container">
-                                <!-- Alternative clickable time buttons will be inserted here by JavaScript -->
+                                <!-- I'll insert alternative clickable time buttons here with JavaScript -->
                             </div>
                         </div>
                     </div>
@@ -180,7 +180,7 @@
                 <button type="submit" class="submit-btn" id="continue-btn" style="display: none;">
                     Continue to Choose Tutor →
                 </button>
-                <!-- Hidden until availability is confirmed -->
+                <!-- I'm hiding this until availability is confirmed -->
             </form>
 
         </div>
@@ -195,7 +195,7 @@
 
     <!-- JAVASCRIPT: Makes page interactive -->
     <script src="../javascript/booking-select.js"></script>
-    <!-- Links to JavaScript file for this page -->
+    <!-- I'm linking to JavaScript file for this page -->
 
 </body>
 </html>

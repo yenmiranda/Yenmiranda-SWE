@@ -1,17 +1,17 @@
-/* BASIC RESET: Removes default browser styling */
+/* BASIC RESET: I'm removing default browser styling */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* COLOR PALETTE: SHSU colors plus complementary colors */
+/* COLOR PALETTE: I'm setting up SHSU colors plus complementary colors */
 :root {
     --shsu-orange: #FF5100;
     /* Primary SHSU orange */
     
     --shsu-orange-dark: #CC4100;
-    /* Darker orange for hover states */
+    /* I'm creating a darker orange for hover states */
     
     --shsu-blue: #00008B;
     /* Dark blue accent color */
@@ -20,954 +20,954 @@
     /* White */
     
     --shsu-gray-dark: #2C2C2C;
-    /* Dark gray for text */
+    /* I'm setting dark gray for text */
     
     --shsu-gray-medium: #6C6C6C;
-    /* Medium gray for secondary text */
+    /* I'm setting medium gray for secondary text */
     
     --shsu-gray-light: #F5F5F5;
-    /* Light gray for backgrounds */
+    /* I'm setting light gray for backgrounds */
     
     --shsu-gray-border: #DDDDDD;
     /* Border color */
     
     --success-green: #28A745;
-    /* Green for success messages */
+    /* I'm setting green for success messages */
     
     --success-bg: #D4EDDA;
     /* Light green background */
 }
 
-/* BODY: Overall page setup */
+/* BODY: I'm setting up overall page styling */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    /* Modern, clean font */
+    /* I'm using a modern, clean font */
     
     background: linear-gradient(135deg, #F5F5F5 0%, #E8E8E8 100%);
-    /* Subtle gradient background */
+    /* I'm creating a subtle gradient background */
     
     color: var(--shsu-gray-dark);
-    /* Default text color */
+    /* I'm setting default text color */
     
     line-height: 1.6;
-    /* Spacing between lines */
+    /* I'm adding spacing between lines */
     
     min-height: 100vh;
-    /* Full screen height minimum */
+    /* I'm ensuring full screen height minimum */
     
     display: flex;
     flex-direction: column;
-    /* Stacks header, main, footer vertically */
+    /* I'm stacking header, main, footer vertically */
 }
 
-/* HEADER: Top banner */
+/* HEADER: I'm styling the top banner */
 header {
     position: relative;
-    /* Allows logout button to position absolutely within header */
+    /* I'm allowing logout button to position absolutely within header */
     
     background: linear-gradient(135deg, var(--shsu-orange) 0%, var(--shsu-orange-dark) 100%);
-    /* Orange gradient background */
+    /* I'm creating an orange gradient background */
     
     color: var(--shsu-white);
-    /* White text */
+    /* I'm setting white text */
     
     text-align: center;
-    /* Centers content */
+    /* I'm centering content */
     
     padding: 2.5rem 1rem;
-    /* Space inside header */
+    /* I'm adding space inside header */
     
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    /* Shadow for depth */
+    /* I'm adding shadow for depth */
 }
 
 header h1 {
     font-size: 2.8rem;
-    /* Large heading */
+    /* I'm making a large heading */
     
     margin-bottom: 0.5rem;
-    /* Space below heading */
+    /* I'm adding space below heading */
     
     font-weight: 700;
-    /* Extra bold */
+    /* I'm making it extra bold */
     
     letter-spacing: 1px;
-    /* Slight spacing between letters */
+    /* I'm adding slight spacing between letters */
 }
 
 header p {
     font-size: 1.2rem;
-    /* Subtitle size */
+    /* I'm setting subtitle size */
     
     font-weight: 300;
-    /* Light weight */
+    /* I'm using light weight */
     
     opacity: 0.95;
-    /* Slightly transparent */
+    /* I'm making it slightly transparent */
 }
 
-/* MAIN: Central content area */
+/* MAIN: I'm styling the central content area */
 main {
     flex: 1;
-    /* Takes up available space */
+    /* I'm making it take up available space */
     
     max-width: 700px;
-    /* Limits width for readability */
+    /* I'm limiting width for readability */
     
     width: 100%;
-    /* Full width up to max */
+    /* I'm setting full width up to max */
     
     margin: 3rem auto;
-    /* Centers content with top/bottom spacing */
+    /* I'm centering content with top/bottom spacing */
     
     padding: 0 1.5rem;
-    /* Side padding for mobile */
+    /* I'm adding side padding for mobile */
 }
 
-/* STEP INDICATOR: Progress tracker showing current step */
+/* STEP INDICATOR: I'm creating a progress tracker showing current step */
 .step-indicator {
     display: flex;
-    /* Uses flexbox for horizontal layout */
+    /* I'm using flexbox for horizontal layout */
     
     align-items: center;
-    /* Vertically centers items */
+    /* I'm vertically centering items */
     
     justify-content: center;
-    /* Horizontally centers items */
+    /* I'm horizontally centering items */
     
     margin-bottom: 2.5rem;
-    /* Space below indicator */
+    /* I'm adding space below indicator */
     
     gap: 1rem;
-    /* Space between steps */
+    /* I'm adding space between steps */
 }
 
-/* STEP: Individual step in indicator */
+/* STEP: I'm styling individual step in indicator */
 .step {
     display: flex;
     flex-direction: column;
-    /* Stacks number above label */
+    /* I'm stacking number above label */
     
     align-items: center;
-    /* Centers content */
+    /* I'm centering content */
     
     gap: 0.5rem;
-    /* Space between number and label */
+    /* I'm adding space between number and label */
 }
 
-/* STEP NUMBER: Circular number badge */
+/* STEP NUMBER: I'm creating a circular number badge */
 .step-number {
     width: 45px;
     height: 45px;
-    /* Makes a square */
+    /* I'm making a square */
     
     border-radius: 50%;
-    /* Makes it circular */
+    /* I'm making it circular */
     
     background-color: var(--shsu-gray-border);
-    /* Light gray background for inactive steps */
+    /* I'm using light gray background for inactive steps */
     
     color: var(--shsu-gray-medium);
-    /* Gray text for inactive steps */
+    /* I'm using gray text for inactive steps */
     
     display: flex;
     align-items: center;
     justify-content: center;
-    /* Centers the number inside circle */
+    /* I'm centering the number inside circle */
     
     font-size: 1.2rem;
-    /* Number size */
+    /* I'm setting number size */
     
     font-weight: 700;
-    /* Bold */
+    /* I'm making it bold */
     
     transition: all 0.3s ease;
-    /* Smooth transitions */
+    /* I'm adding smooth transitions */
 }
 
-/* ACTIVE STEP NUMBER: Current step styling */
+/* ACTIVE STEP NUMBER: I'm styling the current step */
 .step.active .step-number {
     background: linear-gradient(135deg, var(--shsu-orange) 0%, var(--shsu-orange-dark) 100%);
-    /* Orange gradient for active step */
+    /* I'm using orange gradient for active step */
     
     color: var(--shsu-white);
-    /* White text */
+    /* I'm setting white text */
     
     box-shadow: 0 4px 8px rgba(255, 81, 0, 0.3);
-    /* Orange shadow */
+    /* I'm adding orange shadow */
 }
 
-/* STEP LABEL: Text below number */
+/* STEP LABEL: I'm styling text below number */
 .step-label {
     font-size: 0.9rem;
-    /* Smaller text */
+    /* I'm using smaller text */
     
     color: var(--shsu-gray-medium);
-    /* Gray for inactive */
+    /* I'm using gray for inactive */
     
     font-weight: 500;
-    /* Medium weight */
+    /* I'm using medium weight */
 }
 
-/* ACTIVE STEP LABEL: Current step text */
+/* ACTIVE STEP LABEL: I'm styling current step text */
 .step.active .step-label {
     color: var(--shsu-orange);
-    /* Orange text for active */
+    /* I'm using orange text for active */
     
     font-weight: 600;
-    /* Semi-bold */
+    /* I'm making it semi-bold */
 }
 
-/* STEP DIVIDER: Line between steps */
+/* STEP DIVIDER: I'm creating a line between steps */
 .step-divider {
     width: 60px;
     height: 2px;
-    /* Thin horizontal line */
+    /* I'm making a thin horizontal line */
     
     background-color: var(--shsu-gray-border);
-    /* Light gray line */
+    /* I'm using light gray line */
 }
 
-/* SELECTION SECTION: Main form container */
+/* SELECTION SECTION: I'm styling the main form container */
 #selection-section {
     background: var(--shsu-white);
-    /* White background */
+    /* I'm using white background */
     
     padding: 2.5rem;
-    /* Space inside container */
+    /* I'm adding space inside container */
     
     border-radius: 12px;
-    /* Rounded corners */
+    /* I'm adding rounded corners */
     
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-    /* Shadow for card effect */
+    /* I'm adding shadow for card effect */
 }
 
 #selection-section h2 {
     color: var(--shsu-blue);
-    /* Blue heading */
+    /* I'm using blue heading */
     
     margin-bottom: 2rem;
-    /* Space below heading */
+    /* I'm adding space below heading */
     
     font-size: 1.8rem;
-    /* Large size */
+    /* I'm using large size */
     
     text-align: center;
-    /* Centered */
+    /* I'm centering it */
 }
 
-/* FORM: Selection form layout */
+/* FORM: I'm setting up selection form layout */
 #selection-form {
     display: flex;
     flex-direction: column;
-    /* Stacks form elements vertically */
+    /* I'm stacking form elements vertically */
     
     gap: 1.5rem;
-    /* Space between each form group */
+    /* I'm adding space between each form group */
 }
 
-/* FORM GROUP: Wraps each label and input pair */
+/* FORM GROUP: I'm wrapping each label and input pair */
 .form-group {
     display: flex;
     flex-direction: column;
-    /* Stacks label above input */
+    /* I'm stacking label above input */
     
     gap: 0.5rem;
-    /* Small gap between label and input */
+    /* I'm adding small gap between label and input */
 }
 
-/* LABELS: Text above inputs */
+/* LABELS: I'm styling text above inputs */
 label {
     font-weight: 600;
-    /* Semi-bold */
+    /* I'm making it semi-bold */
     
     color: var(--shsu-gray-dark);
-    /* Dark gray */
+    /* I'm using dark gray */
     
     font-size: 1rem;
-    /* Normal size */
+    /* I'm using normal size */
 }
 
-/* DROPDOWNS: Select elements */
+/* DROPDOWNS: I'm styling select elements */
 select {
     width: 100%;
-    /* Full width */
+    /* I'm setting full width */
     
     padding: 0.9rem;
-    /* Space inside */
+    /* I'm adding space inside */
     
     font-size: 1rem;
-    /* Normal text size */
+    /* I'm using normal text size */
     
     border: 2px solid var(--shsu-gray-border);
-    /* Light gray border */
+    /* I'm adding light gray border */
     
     border-radius: 8px;
-    /* Rounded corners */
+    /* I'm adding rounded corners */
     
     background-color: var(--shsu-white);
-    /* White background */
+    /* I'm using white background */
     
     color: var(--shsu-gray-dark);
-    /* Dark text */
+    /* I'm using dark text */
     
     cursor: pointer;
-    /* Hand cursor */
+    /* I'm showing hand cursor */
     
     transition: all 0.3s ease;
-    /* Smooth transitions */
+    /* I'm adding smooth transitions */
     
     font-family: inherit;
-    /* Uses same font as page */
+    /* I'm using same font as page */
 }
 
 select:hover {
     border-color: var(--shsu-blue);
-    /* Blue border on hover */
+    /* I'm changing to blue border on hover */
 }
 
 select:focus {
     outline: none;
-    /* Removes default outline */
+    /* I'm removing default outline */
     
     border-color: var(--shsu-blue);
-    /* Blue border when clicked */
+    /* I'm using blue border when clicked */
     
     box-shadow: 0 0 0 3px rgba(0, 0, 139, 0.1);
-    /* Subtle blue glow */
+    /* I'm adding subtle blue glow */
 }
 
-/* DATE INPUT: Date picker */
+/* DATE INPUT: I'm styling the date picker */
 input[type="date"] {
     width: 100%;
-    /* Full width */
+    /* I'm setting full width */
     
     padding: 0.9rem;
-    /* Space inside */
+    /* I'm adding space inside */
     
     font-size: 1rem;
-    /* Normal text size */
+    /* I'm using normal text size */
     
     border: 2px solid var(--shsu-gray-border);
-    /* Light gray border */
+    /* I'm adding light gray border */
     
     border-radius: 8px;
-    /* Rounded corners */
+    /* I'm adding rounded corners */
     
     background-color: var(--shsu-white);
-    /* White background */
+    /* I'm using white background */
     
     color: var(--shsu-gray-dark);
-    /* Dark text */
+    /* I'm using dark text */
     
     cursor: pointer;
-    /* Hand cursor */
+    /* I'm showing hand cursor */
     
     transition: all 0.3s ease;
-    /* Smooth transitions */
+    /* I'm adding smooth transitions */
     
     font-family: inherit;
-    /* Uses same font as page */
+    /* I'm using same font as page */
 }
 
 input[type="date"]:hover {
     border-color: var(--shsu-blue);
-    /* Blue border on hover */
+    /* I'm changing to blue border on hover */
 }
 
 input[type="date"]:focus {
     outline: none;
-    /* Removes default outline */
+    /* I'm removing default outline */
     
     border-color: var(--shsu-blue);
-    /* Blue border when clicked */
+    /* I'm using blue border when clicked */
     
     box-shadow: 0 0 0 3px rgba(0, 0, 139, 0.1);
-    /* Subtle blue glow */
+    /* I'm adding subtle blue glow */
 }
 
-/* TEXTAREA: Multi-line text input for notes */
+/* TEXTAREA: I'm styling multi-line text input for notes */
 textarea {
     width: 100%;
-    /* Full width */
+    /* I'm setting full width */
     
     padding: 0.9rem;
-    /* Space inside */
+    /* I'm adding space inside */
     
     font-size: 1rem;
-    /* Normal text size */
+    /* I'm using normal text size */
     
     border: 2px solid var(--shsu-gray-border);
-    /* Light gray border */
+    /* I'm adding light gray border */
     
     border-radius: 8px;
-    /* Rounded corners */
+    /* I'm adding rounded corners */
     
     background-color: var(--shsu-white);
-    /* White background */
+    /* I'm using white background */
     
     color: var(--shsu-gray-dark);
-    /* Dark text */
+    /* I'm using dark text */
     
     resize: vertical;
-    /* User can resize vertically only */
+    /* I'm allowing user to resize vertically only */
     
     transition: all 0.3s ease;
-    /* Smooth transitions */
+    /* I'm adding smooth transitions */
     
     font-family: inherit;
-    /* Uses same font as page */
+    /* I'm using same font as page */
     
     line-height: 1.5;
-    /* Line spacing inside textarea */
+    /* I'm setting line spacing inside textarea */
 }
 
 textarea:hover {
     border-color: var(--shsu-blue);
-    /* Blue border on hover */
+    /* I'm changing to blue border on hover */
 }
 
 textarea:focus {
     outline: none;
-    /* Removes default outline */
+    /* I'm removing default outline */
     
     border-color: var(--shsu-blue);
-    /* Blue border when clicked */
+    /* I'm using blue border when clicked */
     
     box-shadow: 0 0 0 3px rgba(0, 0, 139, 0.1);
-    /* Subtle blue glow */
+    /* I'm adding subtle blue glow */
 }
 
-/* PLACEHOLDER TEXT: Gray text inside empty inputs */
+/* PLACEHOLDER TEXT: I'm styling gray text inside empty inputs */
 textarea::placeholder {
     color: var(--shsu-gray-medium);
-    /* Medium gray */
+    /* I'm using medium gray */
     
     opacity: 0.7;
-    /* Slightly transparent */
+    /* I'm making it slightly transparent */
 }
 
-/* SUBMIT BUTTON: Main action button */
+/* SUBMIT BUTTON: I'm styling the main action button */
 .submit-btn {
     background: linear-gradient(135deg, var(--shsu-orange) 0%, var(--shsu-orange-dark) 100%);
-    /* Orange gradient */
+    /* I'm using orange gradient */
     
     color: var(--shsu-white);
-    /* White text */
+    /* I'm using white text */
     
     border: none;
-    /* No border */
+    /* I'm removing border */
     
     padding: 1.1rem;
-    /* Space inside button */
+    /* I'm adding space inside button */
     
     font-size: 1.1rem;
-    /* Slightly larger text */
+    /* I'm using slightly larger text */
     
     font-weight: 700;
-    /* Bold */
+    /* I'm making it bold */
     
     border-radius: 8px;
-    /* Rounded corners */
+    /* I'm adding rounded corners */
     
     cursor: pointer;
-    /* Hand cursor */
+    /* I'm showing hand cursor */
     
     transition: all 0.3s ease;
-    /* Smooth transitions */
+    /* I'm adding smooth transitions */
     
     margin-top: 1rem;
-    /* Extra space above */
+    /* I'm adding extra space above */
     
     text-transform: uppercase;
-    /* ALL CAPS */
+    /* I'm making it ALL CAPS */
     
     letter-spacing: 1px;
-    /* Space between letters */
+    /* I'm adding space between letters */
 }
 
-/* CHECK AVAILABILITY BUTTON: Button to check if tutors available */
+/* CHECK AVAILABILITY BUTTON: I'm styling button to check if tutors available */
 .check-btn {
     background-color: var(--shsu-blue);
-    /* Blue background */
+    /* I'm using blue background */
     
     color: var(--shsu-white);
-    /* White text */
+    /* I'm using white text */
     
     border: none;
-    /* No border */
+    /* I'm removing border */
     
     padding: 1.1rem;
-    /* Space inside button */
+    /* I'm adding space inside button */
     
     font-size: 1.1rem;
-    /* Slightly larger text */
+    /* I'm using slightly larger text */
     
     font-weight: 700;
-    /* Bold */
+    /* I'm making it bold */
     
     border-radius: 8px;
-    /* Rounded corners */
+    /* I'm adding rounded corners */
     
     cursor: pointer;
-    /* Hand cursor */
+    /* I'm showing hand cursor */
     
     transition: all 0.3s ease;
-    /* Smooth transitions */
+    /* I'm adding smooth transitions */
     
     margin-top: 1rem;
-    /* Extra space above */
+    /* I'm adding extra space above */
     
     width: 100%;
-    /* Full width */
+    /* I'm setting full width */
     
     text-transform: uppercase;
-    /* ALL CAPS */
+    /* I'm making it ALL CAPS */
     
     letter-spacing: 1px;
-    /* Space between letters */
+    /* I'm adding space between letters */
 }
 
 .check-btn:hover {
     background-color: #00006B;
-    /* Darker blue on hover */
+    /* I'm using darker blue on hover */
     
     transform: translateY(-2px);
-    /* Lifts button up */
+    /* I'm lifting button up */
     
     box-shadow: 0 6px 12px rgba(0, 0, 139, 0.3);
-    /* Blue shadow */
+    /* I'm adding blue shadow */
 }
 
 .check-btn:active {
     transform: translateY(0);
-    /* Returns to normal position when clicked */
+    /* I'm returning to normal position when clicked */
 }
 
 .submit-btn:hover {
     transform: translateY(-2px);
-    /* Lifts button up */
+    /* I'm lifting button up */
     
     box-shadow: 0 6px 12px rgba(255, 81, 0, 0.3);
-    /* Orange shadow */
+    /* I'm adding orange shadow */
 }
 
 .submit-btn:active {
     transform: translateY(0);
-    /* Returns to normal position when clicked */
+    /* I'm returning to normal position when clicked */
 }
 
-/* FOOTER: Bottom section */
+/* FOOTER: I'm styling the bottom section */
 footer {
     background: var(--shsu-gray-dark);
-    /* Dark gray background */
+    /* I'm using dark gray background */
     
     color: var(--shsu-white);
-    /* White text */
+    /* I'm using white text */
     
     text-align: center;
-    /* Centers text */
+    /* I'm centering text */
     
     padding: 1.5rem;
-    /* Space inside */
+    /* I'm adding space inside */
     
     margin-top: auto;
-    /* Pushes to bottom */
+    /* I'm pushing to bottom */
 }
 
-/* LOGOUT BUTTON: Button in header to log out */
+/* LOGOUT BUTTON: I'm styling button in header to log out */
 .logout-btn {
     position: absolute;
-    /* Positions button relative to header */
+    /* I'm positioning button relative to header */
     
     top: 1rem;
     right: 1.5rem;
-    /* Places button in top-right corner of header */
+    /* I'm placing button in top-right corner of header */
     
     background-color: var(--shsu-white);
-    /* White background */
+    /* I'm using white background */
     
     color: var(--shsu-orange);
-    /* Orange text */
+    /* I'm using orange text */
     
     border: 2px solid var(--shsu-white);
-    /* White border */
+    /* I'm adding white border */
     
     padding: 0.6rem 1.2rem;
-    /* Space inside button */
+    /* I'm adding space inside button */
     
     font-size: 0.95rem;
-    /* Slightly smaller text */
+    /* I'm using slightly smaller text */
     
     font-weight: 600;
-    /* Semi-bold */
+    /* I'm making it semi-bold */
     
     border-radius: 6px;
-    /* Rounded corners */
+    /* I'm adding rounded corners */
     
     cursor: pointer;
-    /* Hand cursor */
+    /* I'm showing hand cursor */
     
     transition: all 0.3s ease;
-    /* Smooth transitions */
+    /* I'm adding smooth transitions */
 }
 
 .logout-btn:hover {
     background-color: var(--shsu-orange-dark);
-    /* Dark orange background on hover */
+    /* I'm using dark orange background on hover */
     
     color: var(--shsu-white);
-    /* White text on hover */
+    /* I'm using white text on hover */
     
     border-color: var(--shsu-orange-dark);
-    /* Dark orange border */
+    /* I'm using dark orange border */
     
     transform: translateY(-2px);
-    /* Lifts button slightly */
+    /* I'm lifting button slightly */
 }
 
 .logout-btn:active {
     transform: translateY(0);
-    /* Returns to normal position when clicked */
+    /* I'm returning to normal position when clicked */
 }
 
-/* MOBILE RESPONSIVE: Adjustments for smaller screens */
+/* MOBILE RESPONSIVE: I'm making adjustments for smaller screens */
 @media (max-width: 768px) {
     header h1 {
         font-size: 2rem;
-        /* Smaller heading on mobile */
+        /* I'm using smaller heading on mobile */
     }
     
     header p {
         font-size: 1rem;
-        /* Smaller subtitle */
+        /* I'm using smaller subtitle */
     }
     
     #selection-section {
         padding: 1.5rem;
-        /* Less padding on mobile */
+        /* I'm using less padding on mobile */
     }
     
     main {
         margin: 1.5rem auto;
-        /* Less margin on mobile */
+        /* I'm using less margin on mobile */
     }
     
     .step-indicator {
         gap: 0.5rem;
-        /* Less space between steps on mobile */
+        /* I'm using less space between steps on mobile */
     }
     
     .step-divider {
         width: 40px;
-        /* Shorter divider line on mobile */
+        /* I'm using shorter divider line on mobile */
     }
     
     .step-number {
         width: 40px;
         height: 40px;
-        /* Smaller circles on mobile */
+        /* I'm using smaller circles on mobile */
         
         font-size: 1rem;
-        /* Smaller numbers */
+        /* I'm using smaller numbers */
     }
     
     .step-label {
         font-size: 0.8rem;
-        /* Smaller labels on mobile */
+        /* I'm using smaller labels on mobile */
     }
     
     .availability-message {
         flex-direction: column;
-        /* Stacks icon above content on mobile */
+        /* I'm stacking icon above content on mobile */
         
         align-items: center;
-        /* Centers content */
+        /* I'm centering content */
         
         text-align: center;
-        /* Centers text */
+        /* I'm centering text */
     }
     
     .alternative-times-container {
         justify-content: center;
-        /* Centers buttons on mobile */
+        /* I'm centering buttons on mobile */
     }
     
     .alt-time-btn {
         font-size: 0.85rem;
-        /* Slightly smaller buttons on mobile */
+        /* I'm using slightly smaller buttons on mobile */
         
         padding: 0.6rem 1rem;
-        /* Less padding on mobile */
+        /* I'm using less padding on mobile */
     }
 }
 
 .logout-btn {
         top: 0.75rem;
         right: 1rem;
-        /* Adjusts position on mobile */
+        /* I'm adjusting position on mobile */
         
         padding: 0.5rem 1rem;
-        /* Smaller padding on mobile */
+        /* I'm using smaller padding on mobile */
         
         font-size: 0.85rem;
-        /* Smaller text on mobile */
+        /* I'm using smaller text on mobile */
     }
 
-/* AVAILABILITY RESULT: Container for availability messages */
+/* AVAILABILITY RESULT: I'm styling container for availability messages */
 #availability-result {
     margin-top: 1.5rem;
-    /* Space above availability section */
+    /* I'm adding space above availability section */
     
     animation: fadeIn 0.4s ease;
-    /* Fade-in animation when appearing */
+    /* I'm adding fade-in animation when appearing */
 }
 
-/* AVAILABILITY MESSAGE: Base styling for both success and warning messages */
+/* AVAILABILITY MESSAGE: I'm creating base styling for both success and warning messages */
 .availability-message {
     display: flex;
-    /* Uses flexbox for icon + content layout */
+    /* I'm using flexbox for icon + content layout */
     
     align-items: flex-start;
-    /* Aligns icon and content at top */
+    /* I'm aligning icon and content at top */
     
     gap: 1rem;
-    /* Space between icon and content */
+    /* I'm adding space between icon and content */
     
     padding: 1.5rem;
-    /* Space inside message box */
+    /* I'm adding space inside message box */
     
     border-radius: 10px;
-    /* Rounded corners */
+    /* I'm adding rounded corners */
     
     margin-bottom: 1rem;
-    /* Space below message */
+    /* I'm adding space below message */
 }
 
-/* MESSAGE ICON: Checkmark or warning icon */
+/* MESSAGE ICON: I'm styling checkmark or warning icon */
 .message-icon {
     font-size: 2.5rem;
-    /* Large icon size */
+    /* I'm using large icon size */
     
     flex-shrink: 0;
-    /* Prevents icon from shrinking */
+    /* I'm preventing icon from shrinking */
     
     line-height: 1;
-    /* Removes extra spacing around icon */
+    /* I'm removing extra spacing around icon */
 }
 
-/* MESSAGE CONTENT: Text area of message */
+/* MESSAGE CONTENT: I'm styling text area of message */
 .message-content {
     flex: 1;
-    /* Takes up remaining space */
+    /* I'm making it take up remaining space */
 }
 
 .message-content h3 {
     margin-bottom: 0.5rem;
-    /* Space below heading */
+    /* I'm adding space below heading */
     
     font-size: 1.3rem;
-    /* Heading size */
+    /* I'm setting heading size */
 }
 
 .message-content p {
     margin-bottom: 0.5rem;
-    /* Space below paragraphs */
+    /* I'm adding space below paragraphs */
     
     font-size: 1rem;
-    /* Normal text size */
+    /* I'm using normal text size */
     
     line-height: 1.6;
-    /* Line spacing */
+    /* I'm setting line spacing */
 }
 
-/* SUCCESS MESSAGE: Green styling for when tutors available */
+/* SUCCESS MESSAGE: I'm creating green styling for when tutors available */
 .success-message {
     background-color: var(--success-bg);
-    /* Light green background */
+    /* I'm using light green background */
     
     border: 2px solid var(--success-green);
-    /* Green border */
+    /* I'm adding green border */
 }
 
 .success-message .message-icon {
     color: var(--success-green);
-    /* Green checkmark */
+    /* I'm using green checkmark */
 }
 
 .success-message h3 {
     color: var(--success-green);
-    /* Green heading */
+    /* I'm using green heading */
 }
 
 .success-message p {
     color: var(--shsu-gray-dark);
-    /* Dark gray text */
+    /* I'm using dark gray text */
 }
 
-/* WARNING MESSAGE: Orange/yellow styling for no tutors available */
+/* WARNING MESSAGE: I'm creating orange/yellow styling for no tutors available */
 .warning-message {
     background-color: #FFF3CD;
-    /* Light yellow background */
+    /* I'm using light yellow background */
     
     border: 2px solid #FFC107;
-    /* Yellow/gold border */
+    /* I'm adding yellow/gold border */
 }
 
 .warning-message .message-icon {
     color: #FF8C00;
-    /* Orange warning icon */
+    /* I'm using orange warning icon */
 }
 
 .warning-message h3 {
     color: #856404;
-    /* Dark yellow/brown heading */
+    /* I'm using dark yellow/brown heading */
 }
 
 .warning-message p {
     color: var(--shsu-gray-dark);
-    /* Dark gray text */
+    /* I'm using dark gray text */
 }
 
-/* SUGGESTION TEXT: "Try these nearby times" text */
+/* SUGGESTION TEXT: I'm styling "Try these nearby times" text */
 .suggestion-text {
     font-weight: 600;
-    /* Semi-bold */
+    /* I'm making it semi-bold */
     
     color: var(--shsu-gray-dark);
-    /* Dark gray */
+    /* I'm using dark gray */
     
     margin-top: 1rem;
-    /* Extra space above */
+    /* I'm adding extra space above */
     
     margin-bottom: 0.75rem;
-    /* Space below */
+    /* I'm adding space below */
 }
 
-/* ALTERNATIVE TIMES CONTAINER: Holds clickable time buttons */
+/* ALTERNATIVE TIMES CONTAINER: I'm creating container for clickable time buttons */
 .alternative-times-container {
     display: flex;
-    /* Uses flexbox for button layout */
+    /* I'm using flexbox for button layout */
     
     flex-wrap: wrap;
-    /* Buttons wrap to next line if needed */
+    /* I'm allowing buttons to wrap to next line if needed */
     
     gap: 0.75rem;
-    /* Space between buttons */
+    /* I'm adding space between buttons */
     
     margin-top: 0.75rem;
-    /* Space above container */
+    /* I'm adding space above container */
 }
 
-/* ALTERNATIVE TIME BUTTON: Clickable time slot buttons */
+/* ALTERNATIVE TIME BUTTON: I'm styling clickable time slot buttons */
 .alt-time-btn {
     background-color: var(--shsu-white);
-    /* White background */
+    /* I'm using white background */
     
     color: var(--shsu-blue);
-    /* Blue text */
+    /* I'm using blue text */
     
     border: 2px solid var(--shsu-blue);
-    /* Blue border */
+    /* I'm adding blue border */
     
     padding: 0.7rem 1.2rem;
-    /* Space inside button */
+    /* I'm adding space inside button */
     
     font-size: 0.95rem;
-    /* Slightly smaller text */
+    /* I'm using slightly smaller text */
     
     font-weight: 600;
-    /* Semi-bold */
+    /* I'm making it semi-bold */
     
     border-radius: 6px;
-    /* Rounded corners */
+    /* I'm adding rounded corners */
     
     cursor: pointer;
-    /* Hand cursor */
+    /* I'm showing hand cursor */
     
     transition: all 0.3s ease;
-    /* Smooth transitions */
+    /* I'm adding smooth transitions */
     
     font-family: inherit;
-    /* Uses same font as page */
+    /* I'm using same font as page */
 }
 
 .alt-time-btn:hover {
     background-color: var(--shsu-blue);
-    /* Blue background on hover */
+    /* I'm using blue background on hover */
     
     color: var(--shsu-white);
-    /* White text on hover */
+    /* I'm using white text on hover */
     
     transform: translateY(-2px);
-    /* Lifts button up */
+    /* I'm lifting button up */
     
     box-shadow: 0 4px 8px rgba(0, 0, 139, 0.2);
-    /* Blue shadow */
+    /* I'm adding blue shadow */
 }
 
 .alt-time-btn:active {
     transform: translateY(0);
-    /* Returns to normal position when clicked */
+    /* I'm returning to normal position when clicked */
 }
 
-/* TUTOR COUNT BADGE: Shows number of tutors available */
+/* TUTOR COUNT BADGE: I'm styling number showing how many tutors are available */
 #tutor-count {
     font-weight: 700;
-    /* Bold */
+    /* I'm making it bold */
     
     color: var(--success-green);
-    /* Green color */
+    /* I'm using green color */
 }
 
-/* UNAVAILABLE TIME HIGHLIGHT: The time slot that wasn't available */
+/* UNAVAILABLE TIME HIGHLIGHT: I'm highlighting the time slot that wasn't available */
 #unavailable-time {
     color: var(--shsu-orange);
-    /* Orange to highlight */
+    /* I'm using orange to highlight */
     
     font-weight: 600;
-    /* Semi-bold */
+    /* I'm making it semi-bold */
 }
 
-/* CONTINUE BUTTON: Shows only when tutors available */
+/* CONTINUE BUTTON: I'm styling button that shows only when tutors available */
 #continue-btn {
     animation: slideUp 0.4s ease;
-    /* Slide-up animation when appearing */
+    /* I'm adding slide-up animation when appearing */
 }
 
-/* FADE IN ANIMATION: Used for availability result */
+/* FADE IN ANIMATION: I'm creating animation for availability result */
 @keyframes fadeIn {
     from {
         opacity: 0;
-        /* Starts invisible */
+        /* I'm starting invisible */
         
         transform: translateY(-10px);
-        /* Starts slightly higher */
+        /* I'm starting slightly higher */
     }
     to {
         opacity: 1;
-        /* Ends fully visible */
+        /* I'm ending fully visible */
         
         transform: translateY(0);
-        /* Ends in normal position */
+        /* I'm ending in normal position */
     }
 }
 
-/* SLIDE UP ANIMATION: Used for continue button */
+/* SLIDE UP ANIMATION: I'm creating animation for continue button */
 @keyframes slideUp {
     from {
         opacity: 0;
-        /* Starts invisible */
+        /* I'm starting invisible */
         
         transform: translateY(10px);
-        /* Starts slightly lower */
+        /* I'm starting slightly lower */
     }
     to {
         opacity: 1;
-        /* Ends fully visible */
+        /* I'm ending fully visible */
         
         transform: translateY(0);
-        /* Ends in normal position */
+        /* I'm ending in normal position */
     }
 }

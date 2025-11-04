@@ -1,87 +1,229 @@
-
+/* reset all default spacing */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
+/* COLOR PALETTE: SHSU colors plus complementary colors */
+:root {
+  --shsu-orange: #ff5100;
+  /* Primary SHSU orange */
 
-.container {
-    width: 100%;
-    height: 100%;
-    padding: 20px;     
+  --shsu-orange-dark: #cc4100;
+  /* Darker orange for hover states */
+
+  --shsu-blue: #00008b;
+  /* Dark blue accent color */
+
+  --shsu-white: #ffffff;
+  /* White */
+
+  --shsu-gray-dark: #2c2c2c;
+  /* Dark gray for text */
+
+  --shsu-gray-medium: #6c6c6c;
+  /* Medium gray for secondary text */
+
+  --shsu-gray-light: #f5f5f5;
+  /* Light gray for backgrounds */
+
+  --shsu-gray-border: #dddddd;
+  /* Border color */
+
+  --success-green: #28a745;
+  /* Green for success messages */
+
+  --success-bg: #d4edda;
+  /* Light green background */
 }
 
+/* BODY: Overall page setup */
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  /* Modern, clean font */
 
+  background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+  /* Subtle gradient background */
+
+  color: var(--shsu-gray-dark);
+  /* Default text color */
+
+  line-height: 1.6;
+  /* Spacing between lines */
+
+  min-height: 100vh;
+  /* Full screen height minimum */
+
+  display: flex;
+  flex-direction: column;
+  /* Stacks header, main, footer vertically */
+}
+
+/* header with name and logout */
 .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
+  background: linear-gradient(135deg, var(--shsu-orange) 0%, var(--shsu-orange-dark) 100%);
+    /* Orange gradient background */
+    
+    color: var(--shsu-white);
+    /* White text */
+    
+    text-align: center;
+    /* Centers content */
+    
+    padding: 2.5rem 1rem;
+    /* Space inside header */
+    
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* Shadow for depth */
 }
 
+/* main title */
+.header h1 {
+  font-size: 2.7rem;
+  font-weight: 700;
+  color: var(--shsu-white); /* fix: white text */
+  margin-bottom: 0.5rem;
+}
+
+/* subtitle under the title */
+.header p {
+  font-size: 1.2rem;
+  font-weight: 300;
+  opacity: 0.95;
+}
+
+/* logout button on top-right */
 .logout {
-    background: #ddd;
-    border: none;
-    padding: 6px 10px;
-    border-radius: 5px;
-    cursor: pointer;
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  background: #ddd;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
+/* hover for logout */
+.logout:hover {
+  background: #ccc;
+}
 
+/* box wrapping the schedule */
+.availability-box {
+  width: 70%;
+  margin: 60px auto 0 auto; /* centers the box */
+  background: #ffffff;
+  padding: 20px 30px;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* title of box */
+.availability-box h3 {
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+/* paragraph text */
+.availability-box p {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* schedule styles */
 .schedule {
-    margin-top: 10px;
+  margin-top: 10px;
 }
 
+/* each day row */
 .day {
-    border-bottom: 1px solid #ccc;
-    padding: 8px 0;
+  border-bottom: 1px solid #ccc;
+  padding: 8px 0;
 }
 
+/* day label text */
 .day label {
-    margin-left: 6px;
-    font-weight: 500;
+  margin-left: 6px;
+  font-weight: 500;
 }
 
+/* space between from days and times inside each day */
 .times {
-    margin-top: 8px; 
-    margin-left: 80px;
+  margin-top: 8px;
+  margin-left: 80px;
 }
 
+/* each time slot line */
 .slot {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
 }
 
+/* spacing for time input fields */
 .slot input[type="time"] {
-    margin: 0 5px;
+  margin: 0 5px;
+}
+
+/* dropdown for selecting start and end times */
+.time-select {
+  padding: 2px 4px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  margin: 0 5px;
+  font-size: 14px;
+}
+
+/* save schedule button */
+.save-button {
+  display: block;
+  margin: 20px auto 0 auto;
+  padding: 10px 20px;
+  background: blue;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
 }
 
 /* trash can */
 .del-btn {
-    background: none;
-    border: none;
-    cursor: pointer;
-    color: red;
-    font-size: 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: red;
+  font-size: 20px;
 }
 
+/* trash icon hover effect */
 .del-btn:hover {
-    color: darkred;
-    transform: scale(1.2);
+  color: darkred;
+  transform: scale(1.2);
 }
 
 /* add button */
 .add-btn {
-    background: #007bff;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    padding: 2px 8px;
-    cursor: pointer;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 2px 8px;
+  cursor: pointer;
 }
 
+/* hover for add button */
 .add-btn:hover {
-    background: #0056b3;
+  background: #0056b3;
+}
+
+/* FOOTER: Bottom section */
+footer {
+  background: var(--shsu-gray-dark);
+  color: var(--shsu-white);
+  text-align: center;
+  padding: 1.5rem;
+  margin-top: auto;
 }

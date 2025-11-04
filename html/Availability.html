@@ -1,70 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Availability Schedule</title>
-  <link rel="stylesheet" href="../css/Availability.css">
-  
-  <!-- for trash icon -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-</head>
-<body>
-  <div class="container">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Availability Schedule</title>
 
+    <!-- link to css file -->
+    <link rel="stylesheet" href="../css/Availability.css" />
 
+    <!-- for trash icon -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+  </head>
+
+  <body>
+    <!-- header with welcome message and logout button -->
     <div class="header">
-      <h2>Welcome Tutor Name</h2>
+      <h1>Study Buddy</h1>
+
+      <p>Availability Schedule</p>
+
       <button class="logout">Logout</button>
     </div>
 
-    <h3>Availability Schedule</h3>
+    <br>
+    
+    <!-- availability box with title and schedule -->
+    <div class="availability-box">
+      <h3>Set Up Your Schedule</h3>
 
-    <div class="schedule">
-      <div class="day">
-        <input type="checkbox" id="sunday">
-        <label for="sunday">Sunday</label>
-        <div class="times" id="sunday-times"></div>
-      </div>
+      <!-- all days of the week with checkboxes -->
+      <div class="schedule">
+        <!-- sunday section -->
+        <div class="day">
+          <input type="checkbox" id="sunday" />
+          <label for="sunday">Sunday</label>
+          <div class="times" id="sunday-times"></div>
+        </div>
 
-      <div class="day">
-        <input type="checkbox" id="monday">
-        <label for="monday">Monday</label>
-        <div class="times" id="monday-times"></div>
-      </div>
+        <!-- monday section -->
+        <div class="day">
+          <input type="checkbox" id="monday" />
+          <label for="monday">Monday</label>
+          <div class="times" id="monday-times"></div>
+        </div>
 
-      <div class="day">
-        <input type="checkbox" id="tuesday">
-        <label for="tuesday">Tuesday</label>
-        <div class="times" id="tuesday-times"></div>
-      </div>
+        <!-- tuesday section -->
+        <div class="day">
+          <input type="checkbox" id="tuesday" />
+          <label for="tuesday">Tuesday</label>
+          <div class="times" id="tuesday-times"></div>
+        </div>
 
-      <div class="day">
-        <input type="checkbox" id="wednesday">
-        <label for="wednesday">Wednesday</label>
-        <div class="times" id="wednesday-times"></div>
-      </div>
+        <!-- wednesday section -->
+        <div class="day">
+          <input type="checkbox" id="wednesday" />
+          <label for="wednesday">Wednesday</label>
+          <div class="times" id="wednesday-times"></div>
+        </div>
 
-      <div class="day">
-        <input type="checkbox" id="thursday">
-        <label for="thursday">Thursday</label>
-        <div class="times" id="thursday-times"></div>
-      </div>
+        <!-- thursday section -->
+        <div class="day">
+          <input type="checkbox" id="thursday" />
+          <label for="thursday">Thursday</label>
+          <div class="times" id="thursday-times"></div>
+        </div>
 
-      <div class="day">
-        <input type="checkbox" id="friday">
-        <label for="friday">Friday</label>
-        <div class="times" id="friday-times"></div>
-      </div>
+        <!-- friday section -->
+        <div class="day">
+          <input type="checkbox" id="friday" />
+          <label for="friday">Friday</label>
+          <div class="times" id="friday-times"></div>
+        </div>
 
-      <div class="day">
-        <input type="checkbox" id="saturday">
-        <label for="saturday">Saturday</label>
-        <div class="times" id="saturday-times"></div>
+        <!-- saturday section -->
+        <div class="day">
+          <input type="checkbox" id="saturday" />
+          <label for="saturday">Saturday</label>
+          <div class="times" id="saturday-times"></div>
+        </div>
+
+        <br />
+        <!-- line break for spacing -->
+
+        <button class="save-button">Save</button>
       </div>
+      <!-- end of schedule -->
+
     </div>
-  </div>
+    <!-- end of availability-box -->
 
-  <script src="../javascript/Availability.js"></script>
-</body>
+    <!-- link to javascript file -->
+    <script src="../javascript/Availability.js"></script>
+
+    <!-- FOOTER: Bottom of page -->
+    <footer>
+      <!-- Copyright info -->
+      <p>&copy; 2025 Study Buddy | Sam Houston State University</p>
+    </footer>
+  </body>
 </html>

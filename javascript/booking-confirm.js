@@ -406,7 +406,7 @@ Date: ${summaryDate.textContent}
 Time: ${formatTimeDisplay(bookingData.time)}
 Tutor: ${bookingData.tutorName}
 
-You will receive a confirmation email shortly.
+Booking Confirmation!
     `;
     
     alert(message);

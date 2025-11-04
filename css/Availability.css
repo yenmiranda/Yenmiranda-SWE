@@ -95,14 +95,44 @@ body {
 
 /* logout button on top-right */
 .logout {
-    background: #ddd;
-    border: none;
-    padding: 6px 10px;
-    border-radius: 5px;
-    cursor: pointer;
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  background: #ddd;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
+/* hover for logout */
+.logout:hover {
+  background: #ccc;
+}
 
+/* box wrapping the schedule */
+.availability-box {
+  width: 70%;
+  margin: 60px auto 0 auto; /* centers the box */
+  background: #ffffff;
+  padding: 20px 30px;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* title of box */
+.availability-box h3 {
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+/* paragraph text */
+.availability-box p {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* schedule styles */
 .schedule {
   margin-top: 10px;
 }

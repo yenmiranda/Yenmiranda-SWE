@@ -24,16 +24,52 @@ public class Bookings {
         this.sessionActive = true;
         this.BookingNO = 1000; // Starting booking number
     }
-    
-    public void CreateTable() {
-        // TODO: Initialize booking data structure
-        // Creates a table for new users
+
+    /**
+    * CreateTable() Method
+    * Purpose: Initializes the internal booking table for the week
+    * The method should fill the 'bookingRecords' list with time slots
+    * 
+    * Behavior
+    * Should clear any previous booking data
+    * Will loop through each day of the week
+    * Days will have hourly timeslots
+    * A unique booking number for each slot
+    * Slots should be available by default
+    * EX: MONDAY -> 
+    */
+    public void CreateTable() 
+    {
+        bookingRecords.clear();    //clear existing booking records  
+
+        //Initialize the parameters
+        int bookingNumber = 1000;    // Counter for the booking number
+        int starthour = 0;           // When the day for the appointment begins
+        int endHour = 24;            // End of the day for the appointment
+
+        // Populate booking tables
+        for (Day d : Day.values())
+        {
+            for (int hour = startHour; hour <endHour; hour++)
+            {
+                BookingRecord newslot = new BookingRecord( bookingNumber++, d, hour, 0, "Available");
+                bookingRecords.add(newSlot);
+            }
+        }
+        return bookingRecords.size(); // Should return the total count of confirmations
     }
-    
-    public void DisplayTable() {
-        // TODO: Format and display booking data
-        // Displays the table between the users
+    //Last edits made by Zeque. Will finish this later. 
+    public void DisplayTable() 
+    {
+        if (bookingRecords.isEmpty())    //If statements to check if the table is empty
+        {
+            return "No Bookings were found.";
+        }
+
+    StringBuilder table = new StringBuilder();
+    table.append(String.formate("%-10 %-12s %-12s %-12s %-10s\n", "BookNo", "Day", "Start", "End", "Status"));
     }
+
     
     public void UpdateTable() {
         // TODO: Implement data refresh logic
@@ -97,13 +133,45 @@ public class Bookings {
     public boolean isSessionActive() { return sessionActive; }
 
     // INTERNAL DATA CLASS
-    private class BookingRecord {
-        // TODO: Define booking record structure
-        private int bookingNumber;
-        private Day day;
-        private int hour;
-        private int minute;
-        private String status;
-        
+    /**
+    * Idea is to represent one individual booking slot
+    * Each record contains a unique booking number, day of the week, time of booking (hour and minute), and the current status
+    *
+    * The records should be stored inside the parent class
+    * Slots should be generated when the CreateTable() method runs.
+    */
+
+   private class BookingRecord
+    {
+        {
+            private int bookingNumber;    //Client's unique booking number
+            private Day day;              //Day of the apointment
+            private int hour;             //hour time of the appointment
+            private int minute            //minute time of the appointment
+            private String AptStatus      //Displays either booked or available?
+
+        }
+
+        public BookingRecord(int bookingNumber, Day day, int hour, int minute, String AptStatus)
+        {
+            this.bookingNumber = bookingNumber;
+            this.day = day;
+            this.hour = hour;
+            this.minute = minute;
+            this.AptStatus = status;
+        }
+
+        // It should return a string that is formatted for the booking record
+        // Example Output should be 1001 MONDAY 00:00 Booked
+
+        @Override
+        public String toString()
+        {
+            //%-10d : left-align integer in a 10-character wide space
+            //%-10s : left-align string in a 10-character wide space
+            //%02d : zero-pads the numbers to the 2 digits (example: 00)
+            return String.format("%10d %10s %02d:%02d %-10s",
+            bookingNumber, day, hour, minute, status);
+        }
     }
 }

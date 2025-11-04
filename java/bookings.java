@@ -1,177 +1,116 @@
 import java.util.*;
+import java.time.LocalDateTime;
+import java.sql.Timestamp;
 
 /**
- * BOOKINGS CLASS - DRAFT
- *  Backend - Booking Module
+ * BOOKINGS CLASS
+ * Backend - Booking Module
+ * Handles the creation and management of tutoring session bookings
  */
-public class Bookings {
-    private int BookingNO;          // Booking identifier
-    private int DisplayHour;        // Displays hour 
-    private int DisplayMinute;      // Displays minutes 
-    
-    public enum Day { 
-        MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY 
-    }
-    private Day DaysBook;           // Monday to Sunday
+public class bookings {
+    private int bookingNo;          // Booking identifier (auto-incrementing)
+    private int availId;            // Reference to Avail table
+    private String sRefNo;          // Student Reference Number
+    private String tRefNo;          // Tutor Reference Number
+    private String classNo;         // Course identifier
+    private LocalDateTime timeSlot; // Date and time of session
 
-    // INTERNAL DATA STRUCTURES 
-    private List<BookingRecord> bookingRecords;
-    private boolean sessionActive;
+    private boolean isBooked;        // Booking status flag
     
-    public Bookings() {
-        // Initialize internal data structures
-        this.bookingRecords = new ArrayList<>();
-        this.sessionActive = true;
-        this.BookingNO = 1000; // Starting booking number
+    // Constructor
+    public bookings(int availId, String sRefNo, String tRefNo, String classNo, LocalDateTime timeSlot) {
+        this.availId = availId;
+        this.sRefNo = sRefNo;
+        this.tRefNo = tRefNo;
+        this.classNo = classNo;
+        this.timeSlot = timeSlot;
+        this.isBooked = false;
+    }
+
+    // Getters and Setters
+    public int getBookingNo() { return bookingNo; }
+    public void setBookingNo(int bookingNo) { this.bookingNo = bookingNo; }
+
+    public int getAvailId() { return availId; }
+    public void setAvailId(int availId) { this.availId = availId; }
+
+    public String getSRefNo() { return sRefNo; }
+    public void setSRefNo(String sRefNo) { this.sRefNo = sRefNo; }
+
+    public String getTRefNo() { return tRefNo; }
+    public void setTRefNo(String tRefNo) { this.tRefNo = tRefNo; }
+
+    public String getClassNo() { return classNo; }
+    public void setClassNo(String classNo) { this.classNo = classNo; }
+
+    public LocalDateTime getTimeSlot() { return timeSlot; }
+    public void setTimeSlot(LocalDateTime timeSlot) { this.timeSlot = timeSlot; }
+
+    public boolean isBooked() { return isBooked; }
+    public void setBooked(boolean booked) { isBooked = booked; }
+
+    /**
+     * Validates if the requested booking time is within allowed hours
+     * @param requestedTime The time to validate
+     * @return true if the time is valid, false otherwise
+     */
+    public boolean validateBookingTime(LocalDateTime requestedTime) {
+        int hour = requestedTime.getHour();
+        // Allow bookings between 8 AM and 9 PM
+        return hour >= 8 && hour <= 21;
     }
 
     /**
-    * CreateTable() Method
-    * Purpose: Initializes the internal booking table for the week
-    * The method should fill the 'bookingRecords' list with time slots
-    * 
-    * Behavior
-    * Should clear any previous booking data
-    * Will loop through each day of the week
-    * Days will have hourly timeslots
-    * A unique booking number for each slot
-    * Slots should be available by default
-    * EX: MONDAY -> 
-    */
-    public void CreateTable() 
-    {
-        bookingRecords.clear();    //clear existing booking records  
-
-        //Initialize the parameters
-        int bookingNumber = 1000;    // Counter for the booking number
-        int starthour = 0;           // When the day for the appointment begins
-        int endHour = 24;            // End of the day for the appointment
-
-        // Populate booking tables
-        for (Day d : Day.values())
-        {
-            for (int hour = startHour; hour <endHour; hour++)
-            {
-                BookingRecord newslot = new BookingRecord( bookingNumber++, d, hour, 0, "Available");
-                bookingRecords.add(newSlot);
-            }
-        }
-        return bookingRecords.size(); // Should return the total count of confirmations
-    }
-    //Last edits made by Zeque. Will finish this later. 
-    public void DisplayTable() 
-    {
-        if (bookingRecords.isEmpty())    //If statements to check if the table is empty
-        {
-            return "No Bookings were found.";
-        }
-
-    StringBuilder table = new StringBuilder();
-    table.append(String.formate("%-10 %-12s %-12s %-12s %-10s\n", "BookNo", "Day", "Start", "End", "Status"));
+     * Checks if a time slot is available for booking
+     * @param availId The availability ID to check
+     * @param timeSlot The requested time slot
+     * @return true if the slot is available, false otherwise
+     */
+    public boolean isSlotAvailable(int availId, LocalDateTime timeSlot) {
+        // In a real implementation, this would check the database
+        // For now, we'll assume the slot is available if it's not already booked
+        return !isBooked;
     }
 
-    
-    public void UpdateTable() {
-        // TODO: Implement data refresh logic
-    }
-    
-    public void NotAvail() {
-        // TODO: Handle unavailable time slot logic
-        // Tutor cannot book an appointment and tutee cannot access
-    }
-    
-    public void LogOut() {
-        // TODO: Implement session cleanup
-        // End session
-    }
-    
-    public void ConfirmLogoutBook() {
-        // TODO: Add confirmation workflow
-        // User confirms logout
-    }
-    
-    public void EndSession() {
-        // TODO: Complete session termination
-        // Session is terminated
-    }
-    
-    public boolean validateBookingTime(int hour, int minute) {
-        // TODO: Implement time validation rules
-        // Business rules: operating hours, time slot intervals
-        return true;
-    }
-    
-    public boolean isSlotAvailable(Day day, int hour, int minute) {
-        // TODO: Implement availability checking logic
-        // Business rules: weekend availability, holiday rules, etc.
-        return true;
-    }
-    
-    public int createNewBooking(Day day, int hour, int minute) {
-        // TODO: Implement booking creation logic
-        // Business logic for creating new booking records
-        return -1; // Placeholder
-    }
-    
-    public String formatDisplayTime(int hour, int minute) {
-        // TODO: Implement time formatting logic
-        return ""; // Placeholder
-    }
-
-    public int getBookingNO() { return BookingNO; }
-    public void setBookingNO(int bookingNO) { BookingNO = bookingNO; }
-    
-    public int getDisplayHour() { return DisplayHour; }
-    public void setDisplayHour(int displayHour) { DisplayHour = displayHour; }
-    
-    public int getDisplayMinute() { return DisplayMinute; }
-    public void setDisplayMinute(int displayMinute) { DisplayMinute = displayMinute; }
-    
-    public Day getDaysBook() { return DaysBook; }
-    public void setDaysBook(Day daysBook) { DaysBook = daysBook; }
-    
-    public boolean isSessionActive() { return sessionActive; }
-
-    // INTERNAL DATA CLASS
     /**
-    * Idea is to represent one individual booking slot
-    * Each record contains a unique booking number, day of the week, time of booking (hour and minute), and the current status
-    *
-    * The records should be stored inside the parent class
-    * Slots should be generated when the CreateTable() method runs.
-    */
-
-   private class BookingRecord
-    {
-        {
-            private int bookingNumber;    //Client's unique booking number
-            private Day day;              //Day of the apointment
-            private int hour;             //hour time of the appointment
-            private int minute            //minute time of the appointment
-            private String AptStatus      //Displays either booked or available?
-
+     * Creates a new booking in the system
+     * @return true if booking was successful, false otherwise
+     */
+    public boolean createBooking() {
+        if (!validateBookingTime(timeSlot) || !isSlotAvailable(availId, timeSlot)) {
+            return false;
         }
 
-        public BookingRecord(int bookingNumber, Day day, int hour, int minute, String AptStatus)
-        {
-            this.bookingNumber = bookingNumber;
-            this.day = day;
-            this.hour = hour;
-            this.minute = minute;
-            this.AptStatus = status;
+        try {
+            // Set booking as confirmed
+            this.isBooked = true;
+            return true;
+        } catch (Exception e) {
+            System.err.println("Error creating booking: " + e.getMessage());
+            return false;
         }
+    }
 
-        // It should return a string that is formatted for the booking record
-        // Example Output should be 1001 MONDAY 00:00 Booked
+    /**
+     * Formats the booking time slot for display
+     * @return Formatted string representation of the booking time
+     */
+    public String formatBookingTime() {
+        return String.format("%s %02d:00-%02d:00", 
+            timeSlot.toLocalDate(),
+            timeSlot.getHour(),
+            timeSlot.getHour() + 1);
+    }
 
-        @Override
-        public String toString()
-        {
-            //%-10d : left-align integer in a 10-character wide space
-            //%-10s : left-align string in a 10-character wide space
-            //%02d : zero-pads the numbers to the 2 digits (example: 00)
-            return String.format("%10d %10s %02d:%02d %-10s",
-            bookingNumber, day, hour, minute, status);
-        }
+    /**
+     * Returns a string representation of the booking
+     * @return String containing booking details
+     */
+    @Override
+    public String toString() {
+        return String.format("Booking{id=%d, class=%s, time=%s, student=%s, tutor=%s}", 
+            bookingNo, classNo, formatBookingTime(), sRefNo, tRefNo);
     }
 }
+
+

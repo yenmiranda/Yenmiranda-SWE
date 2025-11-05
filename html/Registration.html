@@ -17,7 +17,12 @@
                 <input type = "number" name = "samID" placeholder = "Sam ID" required maxlength="6" pattern="\d{6}"><!--Sam Id tab-->
                 <!--password-->
                 <div class="password-container">
-                    <input type="password" id="password" name="password" placeholder="Password" required>
+                    <input type="password" id="password1" name="password1" placeholder="New Password" maxlength="15" required>
+                    <i class="fa-solid fa-eye"></i><!--eye for password-->
+                    <i class = "fa-solid fa-eye-slash hide"></i><!--eye slashed for password-->
+                </div>
+                <div class="confirm-password-container">
+                    <input type="password" id="password2" name="password2" placeholder="Confirm Password" required>
                     <i class="fa-solid fa-eye"></i><!--eye for password-->
                     <i class = "fa-solid fa-eye-slash hide"></i><!--eye slashed for password-->
                 </div>

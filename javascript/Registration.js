@@ -1,5 +1,5 @@
 // Select only the password input and icons
-let inputEl = document.querySelector("#password");
+let inputEl = document.querySelector("#password1");
 let showEl = document.querySelector(".fa-eye");
 let hideEl = document.querySelector(".fa-eye-slash");
 
@@ -17,8 +17,7 @@ hideEl.addEventListener("click", () => {
     showEl.classList.remove("hide");
 });
 
-//function to sropdowns
-// Wait until the page is fully loaded
+//function to drop-downs
 document.addEventListener("DOMContentLoaded", function() {
     const roleSelect = document.getElementById('roleSelect');
     const courseSelect = document.getElementById('courseSelect');
@@ -35,4 +34,18 @@ document.addEventListener("DOMContentLoaded", function() {
             courseSelect.value = ''; // clear selection
         }
     });
+});
+//validation of password,making sure they match
+const form = document.querySelector("form");
+const password1 = document.getElementById("password1");
+const password2 = document.getElementById("password2");
+
+form.addEventListener("submit", function(e) {
+    // Check if passwords match
+    if (password1.value !== password2.value) {
+        e.preventDefault(); // Prevent form submission
+        alert("Passwords do not match! Please try again.");
+        password2.focus(); // Focus on confirm password field
+        return false;
+    }
 });

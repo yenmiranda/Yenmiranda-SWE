@@ -3,28 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registration</title>
+    <title>Registration-page</title><!-- tab name -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"><!--used to reference the eye for the password-->
+    <link rel = "stylesheet" href = "../css/Registration.css">
 </head>
 <body>
-    <!--Login form-->
+    <!--Registration form-->
     <div class = "form-box" id = "register-form">
             <form action = "">
                 <h2>Register</h2>
-                <input type = "FirstName" name = "FirstName" placeholder = "First Name" required>
-                <input type = "Surname" name = "Surname" placeholder = "Last Name" required>
-                <input type = "Sam ID" name = "Sam ID" placeholder = "Sam ID" required>
-                <input type = "password" name = "password" placeholder = "Password" required>
-                <select name = "Role" requiered>
-                    <option value = "">--Select Role</option>
-                    <option value = "User" >User</option>
-                    <option value = "Admin" >Admin</option>
+                <input type = "firstName" name = "firstName" placeholder = "First Name" maxlength="15" required><!--firstname tab-->
+                <input type = "surname" name = "surname" placeholder = "Last Name" maxlength="15" required><!--lastname tab-->
+                <input type = "samID" name = "samID" placeholder = "Sam ID" required maxlength="6" pattern="\d{6}"><!--Sam Id tab-->
+                <div class="password-container">
+                    <input type="password" id="password" name="password" placeholder="Password" required>
+                    <i class="fa-solid fa-eye"></i>
+                    <i class = "fa-solid fa-eye-slash hide"></i>
+                </div>
+
+                <input type="password" name="security_key" placeholder="5 digit Security-key" maxlength="5" pattern="\d{5}" required>
+
+
+                <select name = "Role" required><!--drop down for role-->
+                    <option value = "">--Select Role</option><!--promt-->
+                    <option value = "Tutee" >User</option><!--tutee promt-->
+                    <option value = "Tutor" >Admin</option><!--Tutor promt-->
                 </select>
-                <button type = "submit" name = "register">Register</button>
-                <p>Login into account! <a href = "#" onclick = "showForm('login-form')">Login</a></p>
+
+                <select name = "Course" required><!--drop down for course-->
+                    <option value = "">--Select Course</option><!--promt-->
+                    <option value = "COSC 4319" >COSC 4319 - Software Engineering</option><!--course promt-->
+                    <option value = "COSC 3319" >COSC 3319 - Data Structures and Algorithms</option><!--course promt-->
+                </select>
+
+                <button type = "submit" name = "register">Register</button><!--button to register-->
+                <p>Already have an Account? <a href="Login.html">Login</a></p><!--reference to login page-->
             </form>
         </div>
     </div>
-    
-    <script src = "../javascript/LoginAndRegister.js"></script>
+    <script src = "../javascript/Registration.js"></script>
 </body>
 </html>

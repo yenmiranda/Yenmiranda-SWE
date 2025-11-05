@@ -96,24 +96,39 @@ body {
 /* logout button on top-right */
 .logout {
   position: absolute;
-  top: 15px;
-  right: 20px;
-  background: #ddd;
-  border: none;
-  padding: 10px 15px;
-  border-radius: 5px;
+  top: 1rem;
+  right: 1.5rem;
+  background-color: var(--shsu-white);
+  color: var(--shsu-orange);
+  border: 2px solid var(--shsu-white);
+  padding: 0.6rem 1.2rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border-radius: 6px;
   cursor: pointer;
+  transition: all 0.3s ease;
 }
 
 /* hover for logout */
 .logout:hover {
-  background: #ccc;
+  background-color: var(--shsu-orange-dark);
+    /* Dark orange background on hover */
+    
+    color: var(--shsu-white);
+    /* White text on hover */
+    
+    border-color: var(--shsu-orange-dark);
+    /* Dark orange border */
+    
+    transform: translateY(-2px);
+    /* Lifts button slightly */
 }
 
 /* box wrapping the schedule */
 .availability-box {
-  width: 70%;
-  margin: 60px auto 0 auto; /* centers the box */
+  width: 90%;
+  max-width: 50%;
+  margin: 80px auto; /* centers the box */
   background: #ffffff;
   padding: 20px 30px;
   border-radius: 12px;

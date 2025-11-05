@@ -14,10 +14,17 @@
                 <input type = "Surname" name = "Surname" placeholder = "Last Name" required>
                 <input type = "Sam ID" name = "Sam ID" placeholder = "Sam ID" required>
                 <input type = "password" name = "password" placeholder = "Password" required>
+                <input type = "security key" name = "security key" placeholder = "5 digit Security-key" required>
+
                 <select name = "Role" requiered>
                     <option value = "">--Select Role</option>
-                    <option value = "User" >User</option>
-                    <option value = "Admin" >Admin</option>
+                    <option value = "Tutee" >User</option>
+                    <option value = "Tutor" >Admin</option>
+                </select>
+                <select name = "Course" requiered>
+                    <option value = "">--Select Role</option>
+                    <option value = "COSC 4319" >COSC 4319 - Software Engineering</option>
+                    <option value = "COSC 3319" >COSC 3319 - Data Structures and Algorithms</option>
                 </select>
                 <button type = "submit" name = "register">Register</button>
                 <p>Login into account! <a href = "#" onclick = "showForm('login-form')">Login</a></p>

@@ -25,13 +25,13 @@
                 <input type="password" name="security_key" placeholder="5 digit Security-key" maxlength="5" pattern="\d{5}" required>
 
                 <!--drop down for role-->
-                <select name = "Role" required>
+                <select id = "roleSelect" name = "roleSelect" required>
                     <option value = "">--Select Role</option><!--promt-->
-                    <option value = "Tutee" >User</option><!--tutee promt-->
-                    <option value = "Tutor" >Admin</option><!--Tutor promt-->
+                    <option value = "tutee" >Tutee</option><!--tutee promt-->
+                    <option value = "tutor" >Tutor</option><!--Tutor promt-->
                 </select>
                 <!--drop down for course-->
-                <select name = "Course" required>
+                <select id = courseSelect name = "Course" required style = "display: none;">
                     <option value = "">--Select Course</option><!--promt-->
                     <option value = "COSC 4319" >COSC 4319 - Software Engineering</option><!--course promt-->
                     <option value = "COSC 3319" >COSC 3319 - Data Structures and Algorithms</option><!--course promt-->

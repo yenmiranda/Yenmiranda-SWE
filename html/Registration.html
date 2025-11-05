@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registration-page</title>
+    <title>Registration-page</title><!-- tab name -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"><!--used to reference the eye for the password-->
 </head>
 <body>
     <h1>Welcome to Study Buddy</h1><!--Study buddy title-->
@@ -11,24 +12,27 @@
     <div class = "form-box" id = "register-form">
             <form action = "">
                 <h2>Register</h2>
-                <input type = "FirstName" name = "FirstName" placeholder = "First Name" required>
-                <input type = "Surname" name = "Surname" placeholder = "Last Name" required>
-                <input type = "Sam ID" name = "Sam ID" placeholder = "Sam ID" required>
-                <input type = "password" name = "password" placeholder = "Password" required>
-                <input type = "security key" name = "security key" placeholder = "5 digit Security-key" required>
+                <input type = "firstName" name = "FirstName" placeholder = "First Name" maxlength="15" required><!--firstname tab-->
+                <input type = "surname" name = "Surname" placeholder = "Last Name" maxlength="15" required><!--lastname tab-->
+                <input type = "samID" name = "SamID" placeholder = "Sam ID" required maxlength="6" pattern="\d{6}"><!--Sam Id tab-->
+                <input type = "password" name = "Password" placeholder = "Password" required><!--Password tab-->
+                <i class="fa-solid fa-eye" id = "ShowPassword"></i><!--eye icon-->
+                <input type = "password" name = "security_key" placeholder = "5 digit Security-key" maxlength="5" pattern="\d{5}"><!--Security tab-->
 
-                <select name = "Role" requiered>
-                    <option value = "">--Select Role</option>
-                    <option value = "Tutee" >User</option>
-                    <option value = "Tutor" >Admin</option>
+                <select name = "Role" requiered><!--drop down for role-->
+                    <option value = "">--Select Role</option><!--promt-->
+                    <option value = "Tutee" >User</option><!--tutee promt-->
+                    <option value = "Tutor" >Admin</option><!--Tutor promt-->
                 </select>
-                <select name = "Course" requiered>
-                    <option value = "">--Select Role</option>
-                    <option value = "COSC 4319" >COSC 4319 - Software Engineering</option>
-                    <option value = "COSC 3319" >COSC 3319 - Data Structures and Algorithms</option>
+
+                <select name = "Course" requiered><!--drop down for course-->
+                    <option value = "">--Select Role</option><!--promt-->
+                    <option value = "COSC 4319" >COSC 4319 - Software Engineering</option><!--course promt-->
+                    <option value = "COSC 3319" >COSC 3319 - Data Structures and Algorithms</option><!--course promt-->
                 </select>
-                <button type = "submit" name = "register">Register</button>
-                <p>Already have an Account? <a href="Login.html">Login</a></p>
+
+                <button type = "submit" name = "register">Register</button><!--button to register-->
+                <p>Already have an Account? <a href="Login.html">Login</a></p><!--reference to login page-->
             </form>
         </div>
     </div>

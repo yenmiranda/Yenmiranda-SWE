@@ -12,25 +12,26 @@
     <div class = "form-box" id = "register-form">
             <form action = "">
                 <h2>Register</h2>
-                <input type = "firstName" name = "firstName" placeholder = "First Name" maxlength="15" required><!--firstname tab-->
-                <input type = "surname" name = "surname" placeholder = "Last Name" maxlength="15" required><!--lastname tab-->
-                <input type = "samID" name = "samID" placeholder = "Sam ID" required maxlength="6" pattern="\d{6}"><!--Sam Id tab-->
+                <input type = "text" name = "firstName" placeholder = "First Name" maxlength="15" required><!--firstname tab-->
+                <input type = "text" name = "surname" placeholder = "Last Name" maxlength="15" required><!--lastname tab-->
+                <input type = "number" name = "samID" placeholder = "Sam ID" required maxlength="6" pattern="\d{6}"><!--Sam Id tab-->
+                <!--password-->
                 <div class="password-container">
                     <input type="password" id="password" name="password" placeholder="Password" required>
-                    <i class="fa-solid fa-eye"></i>
-                    <i class = "fa-solid fa-eye-slash hide"></i>
+                    <i class="fa-solid fa-eye"></i><!--eye for password-->
+                    <i class = "fa-solid fa-eye-slash hide"></i><!--eye slashed for password-->
                 </div>
-
+                <!--security key-->
                 <input type="password" name="security_key" placeholder="5 digit Security-key" maxlength="5" pattern="\d{5}" required>
 
-
-                <select name = "Role" required><!--drop down for role-->
+                <!--drop down for role-->
+                <select name = "Role" required>
                     <option value = "">--Select Role</option><!--promt-->
                     <option value = "Tutee" >User</option><!--tutee promt-->
                     <option value = "Tutor" >Admin</option><!--Tutor promt-->
                 </select>
-
-                <select name = "Course" required><!--drop down for course-->
+                <!--drop down for course-->
+                <select name = "Course" required>
                     <option value = "">--Select Course</option><!--promt-->
                     <option value = "COSC 4319" >COSC 4319 - Software Engineering</option><!--course promt-->
                     <option value = "COSC 3319" >COSC 3319 - Data Structures and Algorithms</option><!--course promt-->
@@ -41,6 +42,6 @@
             </form>
         </div>
     </div>
-    <script src = "../javascript/Registration.js"></script>
+    <script src = "../javascript/Registration.js"></script><!--reference to javascript
 </body>
 </html>

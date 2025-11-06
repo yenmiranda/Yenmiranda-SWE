@@ -382,7 +382,7 @@ backBtn.addEventListener('click', function() {
     // The booking data is still saved in sessionStorage
 });
 
-// STEP 14: HANDLE "CONFIRM BOOKING" BUTTON
+// STEP 14: HANDLES "CONFIRM BOOKING" BUTTON
 // Final confirmation - I'm completing the booking
 
 confirmBookingBtn.addEventListener('click', function() {

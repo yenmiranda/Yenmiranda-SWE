@@ -13,8 +13,8 @@
   --shsu-orange-dark: #cc4100;
   /* Darker orange for hover states */
 
-  --shsu-blue: #00008b;
-  /* Dark blue accent color */
+  --shsu-blue: #0033cc;
+  /* Correct SHSU blue tone */
 
   --shsu-white: #ffffff;
   /* White */
@@ -199,7 +199,7 @@ body {
 
 /* hover for save button */
 .save-button:hover {
-  background: #000066;
+  background: #002080;
 }
 
 /* trash can */
@@ -239,8 +239,16 @@ body {
   user-select: none;
 }
 
-/* keeps edit/save clickable while schedule is grayed out */
+/* disable clicks inside grayed-out area */
+.grayed-out input,
+.grayed-out select,
 .grayed-out button {
+  pointer-events: none;
+}
+
+/* keeps edit and save clickable while schedule is grayed out */
+.grayed-out .edit-button,
+.grayed-out .save-button {
   pointer-events: auto;
   opacity: 1;
   filter: none;
@@ -286,7 +294,7 @@ body {
 
 /* title */
 .appointments-box h2 {
-  color: #00008b;
+  color: var(--shsu-blue);
   font-size: 1.6rem;
   margin-bottom: 1.8rem;
   font-weight: bold;
@@ -335,7 +343,7 @@ body {
   border-radius: 25px;
   font-weight: 600;
   cursor: pointer;
-  transition: 0.2
+  transition: 0.2s;
 }
 
 /* hover effect */

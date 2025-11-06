@@ -23,6 +23,15 @@
 <body>
     <!-- BODY SECTION: All visible content -->
     
+    <!-- FIXED ASIDE BUTTON: Links to upcoming appointments, stays fixed when scrolling -->
+    <aside class="appointments-aside">
+        <a href="#upcoming-appointments" class="appointments-btn">
+            <span class="btn-icon">📅</span>
+            <span class="btn-text">Upcoming Appointments</span>
+        </a>
+    </aside>
+    <!-- I'm creating a fixed button that always shows on screen -->
+    
     <!-- HEADER: Top banner -->
     <header>
         <h1>Study Buddy</h1>
@@ -186,6 +195,55 @@
         </div>
 
     </main>
+
+    <!-- UPCOMING APPOINTMENTS SECTION: Shows user's scheduled appointments -->
+    <section id="upcoming-appointments" class="appointments-section">
+        <div class="appointments-container">
+            <h2>Your Upcoming Appointments</h2>
+            
+            <div class="appointments-list">
+                <!-- APPOINTMENT CARD 1 -->
+                <div class="appointment-card">
+                    <div class="appointment-header">
+                        <span class="appointment-course">COSC 3319</span>
+                        <span class="appointment-date">Nov 15, 2025</span>
+                    </div>
+                    <div class="appointment-details">
+                        <p class="appointment-time"> 2:00 PM - 3:00 PM</p>
+                        <p class="appointment-tutor"> Tutor: Sarah Johnson</p>
+                        <p class="appointment-location"> Location: Library Room 204</p>
+                    </div>
+                </div>
+
+                <!-- APPOINTMENT CARD 2 -->
+                <div class="appointment-card">
+                    <div class="appointment-header">
+                        <span class="appointment-course">COSC 4319</span>
+                        <span class="appointment-date">Nov 18, 2025</span>
+                    </div>
+                    <div class="appointment-details">
+                        <p class="appointment-time"> 10:00 AM - 11:00 AM</p>
+                        <p class="appointment-tutor"> Tutor: Michael Chen</p>
+                        <p class="appointment-location"> Location: Online via Zoom</p>
+                    </div>
+                </div>
+
+                <!-- NO APPOINTMENTS MESSAGE (show when no appointments) -->
+                <!-- <div class="no-appointments">
+                    <p>You don't have any upcoming appointments yet.</p>
+                    <p>Book your first session above!</p>
+                </div> -->
+            </div>
+            
+            <!-- BACK TO TOP LINK -->
+            <div class="back-to-top-container">
+                <a href="#" class="back-to-top">
+                    <span class="top-arrow">↑</span>
+                    Back to Top
+                </a>
+            </div>
+        </div>
+    </section>
 
     <!-- FOOTER: Bottom of page -->
     <footer>

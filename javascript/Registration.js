@@ -52,3 +52,25 @@ form.addEventListener("submit", function(e) {
         return false;
     }
 });
+
+// Create a message element for live feedback
+const msg1 = document.createElement("p");
+msg1.style.fontSize = "12px";
+msg1.style.color = "red";
+msg1.style.marginTop = "5px";
+// Append it below password1 input
+password1.parentNode.appendChild(msg1);
+
+// Live validation for password strength
+password1.addEventListener("input", () => {
+    const value = password1.value;
+    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,15}$/;
+
+    if (!regex.test(value)) {
+        password1.style.borderColor = "red";
+        msg1.textContent = "Password must be 8-15 chars, include uppercase, lowercase, number & special char";
+    } else {
+        password1.style.borderColor = "green";
+        msg1.textContent = "";
+    }
+});

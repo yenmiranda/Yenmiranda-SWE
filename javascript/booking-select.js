@@ -266,7 +266,7 @@ timeSelect.addEventListener('change', resetAvailabilityCheck);
 // I'LL REPLACE THIS ENTIRE SECTION WITH MY BACKEND CALL LATER
 const mockTutorAvailability = {
     // Structure: "COURSE-DATE-TIME": number of tutors available
-    // Example: 3 tutors available for Software Engineering on Nov 5 at 14:00-15:00
+    // Example: 3 tutors available for Software Engineering on Nov 15 at 14:00-15:00
     
     "COSC4319-2025-11-15-14:00-15:00": 3,
     "COSC4319-2025-11-15-15:00-16:00": 2,
@@ -281,7 +281,7 @@ const mockTutorAvailability = {
 function checkTutorAvailability(course, date, time) {
     // I'm creating a unique key from course, date, and time
     const key = `${course}-${date}-${time}`;
-    // Example: "COSC4319-2025-11-05-14:00-15:00"
+    // Example: "COSC4319-2025-11-15-14:00-15:00"
     
     // I'm checking if this key exists in my mock data
     const tutorCount = mockTutorAvailability[key];

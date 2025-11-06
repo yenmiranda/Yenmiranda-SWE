@@ -268,11 +268,11 @@ const mockTutorAvailability = {
     // Structure: "COURSE-DATE-TIME": number of tutors available
     // Example: 3 tutors available for Software Engineering on Nov 5 at 14:00-15:00
     
-    "COSC4319-2025-11-05-14:00-15:00": 3,
-    "COSC4319-2025-11-05-15:00-16:00": 2,
-    "COSC4319-2025-11-05-16:00-17:00": 1,
-    "COSC3319-2025-11-05-10:00-11:00": 2,
-    "COSC3319-2025-11-05-11:00-12:00": 1,
+    "COSC4319-2025-11-15-14:00-15:00": 3,
+    "COSC4319-2025-11-15-15:00-16:00": 2,
+    "COSC4319-2025-11-15-16:00-17:00": 1,
+    "COSC3319-2025-11-15-10:00-11:00": 2,
+    "COSC3319-2025-11-15-11:00-12:00": 1,
     // I can add more mock data as needed for testing
 };
 // This is just for testing - my PHP backend will return real availability

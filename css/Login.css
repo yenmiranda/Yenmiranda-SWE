@@ -21,7 +21,14 @@ body {
 .container {
     margin: 0 15px;
 }
-
+/*formatting the title above the box"study buddy"*/
+/*Study Buddy on top of The form box*/
+h1 {
+    font-size: 34px;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #FFFFFF;
+}
 /* Form box */
 .form-box {
     width: 100%;

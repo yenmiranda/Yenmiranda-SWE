@@ -22,27 +22,29 @@ CREATE TABLE Users (
     
     FirstName VARCHAR(35) NOT NULL, 
     LastName VARCHAR(35) NOT NULL, 
-    PasswordHash VARCHAR(255) NOT NULL 
+    PasswordHash VARCHAR(255) NOT NULL,
+    SecurityKey VARCHAR(5) NOT NULL
+    
 );
 
 -- 3. Students Table
 -- Represents the 'is a' relationship where a User is a Student.
 -- Uses the RefNo as its primary key and foreign key to the Users table.
 CREATE TABLE Students (
-    SRefNo VARCHAR(60) PRIMARY KEY, -- StudentRefNo
+    StdRefNo VARCHAR(60) PRIMARY KEY, -- StudentRefNo
     
     -- Ensures this RefNo exists in the Users table
-    FOREIGN KEY (SRefNo) REFERENCES Users(RefNo)
+    FOREIGN KEY (StdRefNo) REFERENCES Users(RefNo)
 );
 
 -- 4. Tutors Table
 -- Represents the 'is a' relationship where a User is a Tutor.
 -- Also stores the ClassNo the tutor provides.
 CREATE TABLE Tutors (
-    TRefNo VARCHAR(60) PRIMARY KEY, -- TutorRefNo
+    TutorRefNo VARCHAR(60) PRIMARY KEY, -- TutorRefNo
     
     -- Ensures this RefNo exists in the Users table
-    FOREIGN KEY (TRefNo) REFERENCES Users(RefNo),
+    FOREIGN KEY (TutorRefNo) REFERENCES Users(RefNo),
     
     -- The specific class the tutor offers (from ERD)
     ClassNo VARCHAR(50) NOT NULL,
@@ -58,8 +60,8 @@ CREATE TABLE Avail (
     AvailID INT PRIMARY KEY AUTO_INCREMENT,
     
     -- Foreign Key linking to the Tutor who owns this slot
-    TRefNo VARCHAR(60) NOT NULL,
-    FOREIGN KEY (TRefNo) REFERENCES Tutors(TRefNo),
+    TutorRefNo VARCHAR(60) NOT NULL,
+    FOREIGN KEY (TutorRefNo) REFERENCES Tutors(TutorRefNo),
     
     -- The time and class for which the slot is offered
     TimeSlot DATETIME NOT NULL,
@@ -70,7 +72,7 @@ CREATE TABLE Avail (
     IsBooked BOOLEAN DEFAULT FALSE,
 
     -- Constraint to prevent the same tutor from setting the exact same slot twice
-    UNIQUE (TRefNo, TimeSlot, ClassNo)
+    UNIQUE (TutorRefNo, TimeSlot, ClassNo)
 );
 
 -- 6. Bookings Table
@@ -85,12 +87,12 @@ CREATE TABLE Bookings (
     FOREIGN KEY (AvailID) REFERENCES Avail(AvailID), 
     
     -- Student who made the booking (using RefNo as FK, as requested)
-    SRefNo VARCHAR(60) NOT NULL,
-    FOREIGN KEY (SRefNo) REFERENCES Students(SRefNo),
+    StdRefNo VARCHAR(60) NOT NULL,
+    FOREIGN KEY (StdRefNo) REFERENCES Students(StdRefNo),
 
     -- Redundant fields from Avail, captured here as a snapshot for quick reference:
-    TRefNo VARCHAR(60) NOT NULL,
-    FOREIGN KEY (TRefNo) REFERENCES Tutors(TRefNo),
+    TutorRefNo VARCHAR(60) NOT NULL,
+    FOREIGN KEY (TutorRefNo) REFERENCES Tutors(TutorRefNo),
     
     ClassNo VARCHAR(50) NOT NULL,
     TimeSlot DATETIME NOT NULL

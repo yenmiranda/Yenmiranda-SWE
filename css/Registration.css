@@ -1,43 +1,47 @@
-@import url('https://fonts.googleapis.com/css2?family=poppins:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap');
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: "Poppins", serif;
-
 }
-/*Background to the page*/
+
+/* Background */
 body {
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: linear-gradient(to top,#e2e2e2, #ff5100);
+    background: linear-gradient(to top, #e2e2e2, #ff5100);
     color: #333;
 }
-/*centering*/
-.container{
+
+/* Center wrapper */
+.container {
     margin: 0 15px;
 }
-/*properties for the Actual box*/
+
+/* Form box */
 .form-box {
     width: 100%;
     max-width: 450px;
     padding: 30px;
     background: #fff;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
-/*Title inside the formbox*/
+
+/* Title */
 h2 {
     font-size: 34px;
     text-align: center;
     margin-bottom: 20px;
 }
-/*Boxes to enter userdata*/
+
+/* Inputs */
 input,
-Select {
+select {
     width: 100%;
     padding: 12px;
     background: #eee;
@@ -48,26 +52,46 @@ Select {
     color: #333;
     margin-bottom: 20px;
 }
-/*formating the eyes by password*/
-i {
-font-size: 18px;
-margin-left: 10px;
-cursor: pointer;
+
+/*Position password eye inside input */
+.password-container,
+.confirm-password-container {
+    position: relative;
 }
 
-/*working with normal eye*/
-.fa-eye{
-color: lightgrey;
+.password-container input,
+.confirm-password-container input {
+    padding-right: 40px; /* space for eye icon */
 }
-/*working with slashed eye*/
-.fa-eye-slash{
+
+.password-container i,
+.confirm-password-container i {
+    position: absolute;
+    right: 12px;
+    top: 35%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+/* Icon styling */
+i {
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.fa-eye {
+    color: lightgrey;
+}
+
+.fa-eye-slash {
     color: #FF5100;
 }
-/*swithcing between eyes(hiding)*/
-.hide{
+
+.hide {
     display: none;
 }
-/*Button*/
+
+/* Button */
 button {
     width: 100%;
     padding: 12px;
@@ -81,22 +105,23 @@ button {
     margin-bottom: 20px;
     transition: 0.5s;
 }
-/*Darkens the box*/
+
 button:hover {
     background: #6884d3;
 }
-/*Centering the line under the bottom*/
-P {
+
+/* Footer text */
+p {
     font-size: 14.5px;
     text-align: center;
     margin-bottom: 10px;
 }
-/*Giving color to the Login/Register word*/
+
 p a {
     color: #7494ec;
     text-decoration: none;
 }
-/*give a line when hovering over the login/Register*/
+
 p a:hover {
     text-decoration: underline;
 }

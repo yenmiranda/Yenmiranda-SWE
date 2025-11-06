@@ -1,20 +1,23 @@
-// Select only the password input and icons
-let inputEl = document.querySelector("#password1");
-let showEl = document.querySelector(".fa-eye");
-let hideEl = document.querySelector(".fa-eye-slash");
+const passwordInputs = document.querySelectorAll("input[type='password']");
+const showIcons = document.querySelectorAll(".fa-eye");
+const hideIcons = document.querySelectorAll(".fa-eye-slash");
 
-// When clicking the "show" icon
-showEl.addEventListener("click", () => {
-    inputEl.type = "text";
-    hideEl.classList.remove("hide");
-    showEl.classList.add("hide");
+// show password
+showIcons.forEach((showIcon, index) => {
+    showIcon.addEventListener("click", () => {
+        passwordInputs[index].type = "text";
+        hideIcons[index].classList.remove("hide");
+        showIcon.classList.add("hide");
+    });
 });
 
-// When clicking the "hide" icon
-hideEl.addEventListener("click", () => {
-    inputEl.type = "password";
-    hideEl.classList.add("hide");
-    showEl.classList.remove("hide");
+// hide password
+hideIcons.forEach((hideIcon, index) => {
+    hideIcon.addEventListener("click", () => {
+        passwordInputs[index].type = "password";
+        showIcons[index].classList.remove("hide");
+        hideIcon.classList.add("hide");
+    });
 });
 
 //function to drop-downs

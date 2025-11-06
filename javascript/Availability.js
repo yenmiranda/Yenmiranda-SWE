@@ -1,4 +1,3 @@
-
 // loop through each day checkbox
 document.querySelectorAll('.day input[type="checkbox"]').forEach(box => {
   // waits for when a checkbox is checked or unchecked
@@ -122,3 +121,27 @@ function updateDisabledOptions(container) {
     }
   });
 }
+
+
+// get references to the schedule and buttons
+const schedule = document.querySelector('.schedule');
+const editBtn = document.querySelector('.edit-button');
+const saveBtn = document.querySelector('.save-button');
+
+// start with gray out 
+schedule.classList.add('grayed-out');
+saveBtn.style.display = 'none'; // hide save button initially
+
+// when user clicks Edit
+editBtn.addEventListener('click', () => {
+  schedule.classList.remove('grayed-out'); // make it editable
+  editBtn.style.display = 'none'; // hide edit
+  saveBtn.style.display = 'block'; // show save
+});
+
+// when user clicks Save
+saveBtn.addEventListener('click', () => {
+  schedule.classList.add('grayed-out'); // gray it out again
+  saveBtn.style.display = 'none'; // hide save
+  editBtn.style.display = 'block'; // show edit again
+});

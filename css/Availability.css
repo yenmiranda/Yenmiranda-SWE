@@ -63,26 +63,26 @@ body {
 /* header with name and logout */
 .header {
   background: linear-gradient(135deg, var(--shsu-orange) 0%, var(--shsu-orange-dark) 100%);
-    /* Orange gradient background */
-    
-    color: var(--shsu-white);
-    /* White text */
-    
-    text-align: center;
-    /* Centers content */
-    
-    padding: 2.5rem 1rem;
-    /* Space inside header */
-    
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    /* Shadow for depth */
+  /* Orange gradient background */
+  
+  color: var(--shsu-white);
+  /* White text */
+  
+  text-align: center;
+  /* Centers content */
+  
+  padding: 2.5rem 1rem;
+  /* Space inside header */
+  
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  /* Shadow for depth */
 }
 
 /* main title */
 .header h1 {
   font-size: 2.7rem;
   font-weight: 700;
-  color: var(--shsu-white); /* fix: white text */
+  color: var(--shsu-white);
   margin-bottom: 0.5rem;
 }
 
@@ -112,23 +112,16 @@ body {
 /* hover for logout */
 .logout:hover {
   background-color: var(--shsu-orange-dark);
-    /* Dark orange background on hover */
-    
-    color: var(--shsu-white);
-    /* White text on hover */
-    
-    border-color: var(--shsu-orange-dark);
-    /* Dark orange border */
-    
-    transform: translateY(-2px);
-    /* Lifts button slightly */
+  color: var(--shsu-white);
+  border-color: var(--shsu-orange-dark);
+  transform: translateY(-2px);
 }
 
 /* box wrapping the schedule */
 .availability-box {
   width: 90%;
   max-width: 50%;
-  margin: 80px auto; /* centers the box */
+  margin: 80px auto;
   background: #ffffff;
   padding: 20px 30px;
   border-radius: 12px;
@@ -196,12 +189,17 @@ body {
   display: block;
   margin: 20px auto 0 auto;
   padding: 10px 20px;
-  background: blue;
+  background: var(--shsu-blue);
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   font-size: 16px;
+}
+
+/* hover for save button */
+.save-button:hover {
+  background: #000066;
 }
 
 /* trash can */
@@ -232,6 +230,119 @@ body {
 /* hover for add button */
 .add-btn:hover {
   background: #0056b3;
+}
+
+/* gray-out effect when not editable */
+.grayed-out {
+  opacity: 0.6;
+  filter: grayscale(30%);
+  user-select: none;
+}
+
+/* keeps edit/save clickable while schedule is grayed out */
+.grayed-out button {
+  pointer-events: auto;
+  opacity: 1;
+  filter: none;
+}
+
+/* edit button styling */
+.edit-button {
+  display: block;
+  margin: 20px auto 0 auto;
+  padding: 10px 20px;
+  background: gray;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+/* hover for edit button */
+.edit-button:hover {
+  background: #555;
+}
+
+/* upcoming appointments section */
+.appointments-section {
+  background: transparent;
+  padding: 3rem 1rem;
+  display: flex;
+  justify-content: center;
+}
+
+/* white box container */
+.appointments-box {
+  background: #ffffff;
+  color: #000;
+  width: 80%;
+  max-width: 900px;
+  border-radius: 12px;
+  padding: 2rem 2rem 3rem 2rem;
+  text-align: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+}
+
+/* title */
+.appointments-box h2 {
+  color: #00008b;
+  font-size: 1.6rem;
+  margin-bottom: 1.8rem;
+  font-weight: bold;
+}
+
+/* flex layout for cards */
+.appointments {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+
+/* individual card */
+.appointment-card {
+  background: #f9f9f9;
+  color: #000;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  padding: 1rem 1.5rem;
+  width: 260px;
+  text-align: left;
+}
+
+/* course title */
+.appointment-card .course {
+  color: var(--shsu-orange);
+  font-weight: 700;
+  margin-bottom: 0.3rem;
+}
+
+/* date */
+.appointment-card .date {
+  color: #555;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+/* back to top button */
+.back-to-top {
+  background: var(--shsu-blue);
+  color: var(--shsu-white);
+  border: none;
+  padding: 10px 25px;
+  border-radius: 25px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2
+}
+
+/* hover effect */
+.back-to-top:hover {
+  background: var(--shsu-orange);
+  color: white;
+  transform: scale(1.05);
 }
 
 /* FOOTER: Bottom section */

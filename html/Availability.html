@@ -17,12 +17,13 @@
 
   <body>
     <!-- header with welcome message and logout button -->
-    <div class="header">
+    <div class="header" id="top">
       <h1>Study Buddy</h1>
 
       <p>Availability Schedule</p>
 
-      <button class="logout">Logout</button>
+      <button class="logout" onclick="window.location.href='LoginAndRegister.html'"> Logout </button>
+
     </div>
 
     <br>
@@ -85,12 +86,48 @@
         <br />
         <!-- line break for spacing -->
 
-        <button class="save-button">Save</button>
+        <button class="edit-button">Edit</button>
+        <button class="save-button" style="display: none;">Save</button>
       </div>
       <!-- end of schedule -->
 
     </div>
     <!-- end of availability-box -->
+
+
+<!-- upcoming appointments section -->
+<section class="appointments-section">
+  <div class="appointments-box">
+    <h2>Your Upcoming Appointments</h2>
+
+    <!-- placeholder data -->
+    <div class="appointments">
+      <div class="appointment-card">
+        <h3 class="course">COSC 3319</h3>
+        <p class="date">Nov 15, 2025</p>
+        <p>2:00 PM - 3:00 PM</p>
+        <p>Student: Ben Wilson</p>
+        <p>Location: AB1 210</p>
+      </div>
+
+      <div class="appointment-card">
+        <h3 class="course">COSC 4319</h3>
+        <p class="date">Nov 18, 2025</p>
+        <p>10:00 AM - 11:00 AM</p>
+        <p>Student: Jackie Chan</p>
+        <p>Location: AB1 210</p>
+      </div>
+    </div>
+
+    <button class="back-to-top" onclick="location.href='#top'"> Back to Top</button>
+
+  </div>
+</section>
+
+
+
+
+    
 
     <!-- link to javascript file -->
     <script src="../javascript/Availability.js"></script>

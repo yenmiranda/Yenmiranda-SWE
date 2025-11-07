@@ -68,7 +68,7 @@ password1.addEventListener("input", () => {
 
     if (!regex.test(value)) {
         password1.style.borderColor = "red";
-        msg1.textContent = "Password must be 8-15 chars, include uppercase, lowercase, number & special char";
+        msg1.textContent = "Password must be 8-25 chars, include uppercase, lowercase, number & special char";
     } else {
         password1.style.borderColor = "green";
         msg1.textContent = "";

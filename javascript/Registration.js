@@ -56,12 +56,10 @@ function valid(){
     else{
         message.innerHTML='Password Matched';
     }
-
-
 }//ends finction
 
 // Create a message element for live feedback
-const msg1 = document.createElement("p");
+const msg1 = document.createElement("password1");
 msg1.style.fontSize = "12px";
 msg1.style.color = "red";
 msg1.style.marginTop = "5px";
@@ -71,7 +69,7 @@ password1.parentNode.appendChild(msg1);
 // Live validation for password strength
 password1.addEventListener("input", () => {
     const value = password1.value;
-    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,15}$/;
+    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,25}$/;
 
     if (!regex.test(value)) {
         password1.style.borderColor = "red";

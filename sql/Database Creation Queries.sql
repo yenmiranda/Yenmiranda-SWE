@@ -22,7 +22,7 @@ CREATE TABLE Users (
     
     FirstName VARCHAR(35) NOT NULL, 
     LastName VARCHAR(35) NOT NULL, 
-    PasswordHash VARCHAR(255) NOT NULL,
+    PasswordHash VARCHAR(25) NOT NULL,
     SecurityKey VARCHAR(5) NOT NULL
     
 );

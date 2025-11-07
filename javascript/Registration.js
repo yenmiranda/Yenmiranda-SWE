@@ -38,23 +38,28 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 });
-//validation of password,making sure they match
-const form = document.querySelector("form");
-const password1 = document.getElementById("password1");
-const password2 = document.getElementById("password2");
+/*Validating matched passwords*/
+function valid(){
+    var password1 = document.getElementById('password1').value;
+    var password2 = document.getElementById('password2').value;
+    var message = document.getElementById('message');
 
-form.addEventListener("submit", function(e) {
-    // Check if passwords match
-    if (password1.value !== password2.value) {
-        e.preventDefault(); // Prevent form submission
-        alert("Passwords do not match! Please try again.");
-        password2.focus(); // Focus on confirm password field
-        return false;
+    if(password1 ==''){
+        message.innerHTML = 'Please Enter Password';
     }
-});
+    else if(password2 ==''){
+        message.innerHTML='Please Enter Confirm-password';
+    }
+    else if (password1 != password2){
+        message.innerHTML='Password does not match';
+    }
+    else{
+        message.innerHTML='Password Matched';
+    }
+}//ends finction
 
 // Create a message element for live feedback
-const msg1 = document.createElement("p");
+const msg1 = document.createElement("password1");
 msg1.style.fontSize = "12px";
 msg1.style.color = "red";
 msg1.style.marginTop = "5px";
@@ -64,11 +69,11 @@ password1.parentNode.appendChild(msg1);
 // Live validation for password strength
 password1.addEventListener("input", () => {
     const value = password1.value;
-    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,15}$/;
+    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,25}$/;
 
     if (!regex.test(value)) {
         password1.style.borderColor = "red";
-        msg1.textContent = "Password must be 8-15 chars, include uppercase, lowercase, number & special char";
+        msg1.textContent = "Password must be 8-25 chars, include uppercase, lowercase, number & special char";
     } else {
         password1.style.borderColor = "green";
         msg1.textContent = "";

@@ -5,37 +5,37 @@
   box-sizing: border-box;
 }
 
-/* COLOR PALETTE: SHSU colors plus complementary colors */
+/* COLOR PALETTE: I'm setting up SHSU colors plus complementary colors */
 :root {
-  --shsu-orange: #ff5100;
-  /* Primary SHSU orange */
-
-  --shsu-orange-dark: #cc4100;
-  /* Darker orange for hover states */
-
-  --shsu-blue: #0033cc;
-  /* Correct SHSU blue tone */
-
-  --shsu-white: #ffffff;
-  /* White */
-
-  --shsu-gray-dark: #2c2c2c;
-  /* Dark gray for text */
-
-  --shsu-gray-medium: #6c6c6c;
-  /* Medium gray for secondary text */
-
-  --shsu-gray-light: #f5f5f5;
-  /* Light gray for backgrounds */
-
-  --shsu-gray-border: #dddddd;
-  /* Border color */
-
-  --success-green: #28a745;
-  /* Green for success messages */
-
-  --success-bg: #d4edda;
-  /* Light green background */
+    --shsu-orange: #FF5100;
+    /* Primary SHSU orange */
+    
+    --shsu-orange-dark: #CC4100;
+    /* I'm creating a darker orange for hover states */
+    
+    --shsu-blue: #00008B;
+    /* Dark blue accent color */
+    
+    --shsu-white: #FFFFFF;
+    /* White */
+    
+    --shsu-gray-dark: #2C2C2C;
+    /* I'm setting dark gray for text */
+    
+    --shsu-gray-medium: #6C6C6C;
+    /* I'm setting medium gray for secondary text */
+    
+    --shsu-gray-light: #F5F5F5;
+    /* I'm setting light gray for backgrounds */
+    
+    --shsu-gray-border: #DDDDDD;
+    /* Border color */
+    
+    --success-green: #28A745;
+    /* I'm setting green for success messages */
+    
+    --success-bg: #D4EDDA;
+    /* Light green background */
 }
 
 /* BODY: Overall page setup */
@@ -109,12 +109,18 @@ body {
   transition: all 0.3s ease;
 }
 
-/* hover for logout */
 .logout:hover {
-  background-color: var(--shsu-orange-dark);
-  color: var(--shsu-white);
-  border-color: var(--shsu-orange-dark);
-  transform: translateY(-2px);
+    background-color: transparent;
+    /* I'm making background transparent on hover */
+    
+    color: var(--shsu-white);
+    /* I'm changing text to white */
+    
+    border-color: var(--shsu-white);
+    /* I'm keeping white border */
+    
+    transform: translateY(-2px);
+    /* I'm lifting button up */
 }
 
 /* box wrapping the schedule */
@@ -272,68 +278,211 @@ body {
   background: #555;
 }
 
-/* upcoming appointments section */
+/* UPCOMING APPOINTMENTS SECTION: I'm creating section for appointments at bottom */
 .appointments-section {
-  background: transparent;
-  padding: 3rem 1rem;
-  display: flex;
-  justify-content: center;
+    background: linear-gradient(135deg, var(--shsu-blue) 0%, #000070 100%);
+    /* I'm using blue gradient background */
+    
+    color: var(--shsu-white);
+    /* I'm using white text */
+    
+    padding: 4rem 1.5rem 3rem;
+    /* I'm adding space inside section */
 }
 
-/* white box container */
-.appointments-box {
-  background: #ffffff;
-  color: #000;
-  width: 80%;
-  max-width: 900px;
-  border-radius: 12px;
-  padding: 2rem 2rem 3rem 2rem;
-  text-align: center;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+.appointments-container {
+    max-width: 900px;
+    /* I'm limiting width for readability */
+    
+    margin: 0 auto;
+    /* I'm centering container */
 }
 
-/* title */
-.appointments-box h2 {
-  color: var(--shsu-blue);
-  font-size: 1.6rem;
-  margin-bottom: 1.8rem;
-  font-weight: bold;
+.appointments-section h2 {
+    text-align: center;
+    /* I'm centering heading */
+    
+    font-size: 2.2rem;
+    /* I'm using large heading */
+    
+    margin-bottom: 2.5rem;
+    /* I'm adding space below heading */
+    
+    color: var(--shsu-white);
+    /* I'm using white text */
 }
 
-/* flex layout for cards */
-.appointments {
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
-  flex-wrap: wrap;
-  margin-bottom: 2rem;
+/* APPOINTMENTS LIST: I'm creating container for appointment cards */
+.appointments-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    /* I'm creating responsive grid that adapts to screen size */
+    
+    gap: 1.5rem;
+    /* I'm adding space between cards */
+    
+    margin-bottom: 3rem;
+    /* I'm adding space below list */
 }
 
-/* individual card */
+/* APPOINTMENT CARD: I'm styling individual appointment */
 .appointment-card {
-  background: #f9f9f9;
-  color: #000;
-  border-radius: 10px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  padding: 1rem 1.5rem;
-  width: 260px;
-  text-align: left;
+    background: var(--shsu-white);
+    /* I'm using white background */
+    
+    color: var(--shsu-gray-dark);
+    /* I'm using dark text */
+    
+    padding: 1.5rem;
+    /* I'm adding space inside card */
+    
+    border-radius: 10px;
+    /* I'm adding rounded corners */
+    
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    /* I'm adding shadow for depth */
+    
+    transition: all 0.3s ease;
+    /* I'm adding smooth transitions */
 }
 
-/* course title */
-.appointment-card .course {
-  color: var(--shsu-orange);
-  font-weight: 700;
-  margin-bottom: 0.3rem;
+.appointment-card:hover {
+    transform: translateY(-4px);
+    /* I'm lifting card on hover */
+    
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+    /* I'm making shadow larger on hover */
 }
 
-/* date */
-.appointment-card .date {
-  color: #555;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
+/* APPOINTMENT HEADER: I'm styling course and date at top of card */
+.appointment-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* I'm spacing course and date on opposite sides */
+    
+    margin-bottom: 1rem;
+    /* I'm adding space below header */
+    
+    padding-bottom: 1rem;
+    /* I'm adding space inside */
+    
+    border-bottom: 2px solid var(--shsu-gray-light);
+    /* I'm adding divider line */
 }
 
+.appointment-course {
+    font-weight: 700;
+    /* I'm making it bold */
+    
+    font-size: 1.1rem;
+    /* I'm using larger text */
+    
+    color: var(--shsu-orange);
+    /* I'm using orange for course code */
+}
+
+.appointment-date {
+    font-weight: 600;
+    /* I'm making it semi-bold */
+    
+    color: var(--shsu-blue);
+    /* I'm using blue for date */
+    
+    font-size: 0.95rem;
+    /* I'm using normal text size */
+}
+
+/* APPOINTMENT DETAILS: I'm styling time, tutor, location info */
+.appointment-details {
+    display: flex;
+    flex-direction: column;
+    /* I'm stacking details vertically */
+    
+    gap: 0.6rem;
+    /* I'm adding space between each detail */
+}
+
+.appointment-details p {
+    font-size: 0.95rem;
+    /* I'm using normal text size */
+    
+    line-height: 1.5;
+    /* I'm setting line spacing */
+    
+    color: var(--shsu-gray-dark);
+    /* I'm using dark gray text */
+}
+
+/* NO APPOINTMENTS MESSAGE: I'm styling message when no appointments exist */
+.no-appointments {
+    text-align: center;
+    /* I'm centering text */
+    
+    padding: 3rem;
+    /* I'm adding space inside */
+    
+    background: rgba(255, 255, 255, 0.1);
+    /* I'm using semi-transparent white */
+    
+    border-radius: 10px;
+    /* I'm adding rounded corners */
+    
+    border: 2px dashed rgba(255, 255, 255, 0.3);
+    /* I'm adding dashed border */
+}
+
+.no-appointments p {
+    font-size: 1.1rem;
+    /* I'm using larger text */
+    
+    margin-bottom: 0.5rem;
+    /* I'm adding space between paragraphs */
+}
+
+/* BACK TO TOP CONTAINER: I'm creating container for back to top link */
+.back-to-top-container {
+    text-align: center;
+    /* I'm centering link */
+    
+    margin-top: 2.5rem;
+    /* I'm adding space above */
+}
+
+/* BACK TO TOP LINK: I'm styling the link that takes you to top of page */
+.back-to-top {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    /* I'm adding space between arrow and text */
+    
+    color: var(--shsu-white);
+    /* I'm using white text */
+    
+    text-decoration: none;
+    /* I'm removing underline */
+    
+    font-size: 1.05rem;
+    /* I'm using slightly larger text */
+    
+    font-weight: 600;
+    /* I'm making it semi-bold */
+    
+    padding: 0.8rem 1.5rem;
+    /* I'm adding space inside */
+    
+    background: rgba(255, 255, 255, 0.1);
+    /* I'm using semi-transparent white background */
+    
+    border: 2px solid var(--shsu-white);
+    /* I'm adding white border */
+    
+    border-radius: 50px;
+    /* I'm making it pill-shaped */
+    
+    transition: all 0.3s ease;
+    /* I'm adding smooth transitions */
+}
 
 /* FIXED ASIDE BUTTON: I'm creating a button that stays on screen when scrolling */
 .appointments-aside {
@@ -400,34 +549,32 @@ body {
     /* I'm slightly pressing down when clicked */
 }
 
-.btn-icon {
-    font-size: 1.2rem;
-    /* I'm making icon larger */
-}
 
-.btn-text {
-    white-space: nowrap;
-    /* I'm preventing text from wrapping */
-}
-
-
-/* back to top button */
-.back-to-top {
-  background: var(--shsu-blue);
-  color: var(--shsu-white);
-  border: none;
-  padding: 10px 25px;
-  border-radius: 25px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: 0.2s;
-}
-
-/* hover effect */
 .back-to-top:hover {
-  background: var(--shsu-orange);
-  color: white;
-  transform: scale(1.05);
+    background: var(--shsu-white);
+    /* I'm changing to solid white on hover */
+    
+    color: var(--shsu-blue);
+    /* I'm changing text to blue on hover */
+    
+    transform: translateY(-3px);
+    /* I'm lifting link up */
+    
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.3);
+    /* I'm adding white shadow */
+}
+
+.back-to-top:active {
+    transform: translateY(-1px);
+    /* I'm slightly pressing down when clicked */
+}
+
+.top-arrow {
+    font-size: 1.3rem;
+    /* I'm making arrow larger */
+    
+    font-weight: bold;
+    /* I'm making it bold */
 }
 
 /* FOOTER: Bottom section */

@@ -20,9 +20,10 @@
                     <input type="password" id="password1" name="password1" placeholder="New Password" maxlength="25" minlength="8" required>
                     <i class="fa-solid fa-eye"></i><!--eye for password-->
                     <i class = "fa-solid fa-eye-slash hide"></i><!--eye slashed for password-->
+                    <p id = "message"></p>
                 </div>
                 <div class="confirm-password-container">
-                    <input type="password" id="password2" name="password2" placeholder="Confirm Password" minlength="8" maxlength="25" required>
+                    <input type="password" id="password2" name="password2" placeholder="Confirm Password" minlength="8" maxlength="25" onkeyup = "valid()" required>
                     <i class="fa-solid fa-eye"></i><!--eye for password-->
                     <i class = "fa-solid fa-eye-slash hide"></i><!--eye slashed for password-->
                 </div>
@@ -36,7 +37,7 @@
                     <option value = "tutor" >Tutor</option><!--Tutor promt-->
                 </select>
                 <!--drop down for course-->
-                <select id = courseSelect name = "Course" required style = "display: none;">
+                <select id = "courseSelect name" = "Course" required style = "display: none;">
                     <option value = "">--Select Course</option><!--promt-->
                     <option value = "COSC 4319" >COSC 4319 - Software Engineering</option><!--course promt-->
                     <option value = "COSC 3319" >COSC 3319 - Data Structures and Algorithms</option><!--course promt-->
@@ -47,6 +48,6 @@
             </form>
         </div>
     </div>
-    <script src = "../javascript/Registration.js"></script><!--reference to javascript
+    <script src = "../javascript/Registration.js"></script>
 </body>
 </html>

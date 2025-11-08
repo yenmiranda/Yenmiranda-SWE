@@ -1,15 +1,25 @@
-//Base file for running server using node.js
-
-//requried constants, packages, and files
+require('dotenv').config();
 const express = require('express');
-const db = require('./db'); 
-const bcrypt = require('bcrypt'); //passowrd hash
-const cors = require('cors'); 
+const mysql = require('mysql2');
+const fs = require('fs');
+const path = require('path');
 
-const app = express(); //declares application
-const PORT = 3000; //port used
-const saltRounds = 10; //salting
+const app = express();
+const port = 3000;
 
+const caPath = path.resolve(__dirname, 'certs/global-bundle.pem');
+
+const pool = mysql.createPool({
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_DATABASE,
+    port: process.env.DB_PORT,
+    ssl: {
+        ca: fs.readFileSync(caPath),
+        rejectUnauthorized: ture
+    }
+}).promise();
 
 app.use(express.json());
 app.use(cors()); 

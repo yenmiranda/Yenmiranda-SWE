@@ -1,15 +1,25 @@
 require('dotenv').config();
 const express = require('express');
-const mysql = require('mysql2');
+const mysql = require('mysql2/promise');
 const fs = require('fs');
 const path = require('path');
 
 const app = express();
 const port = 3000;
 
-const caPath = path.resolve(__dirname, 'certs/global-bundle.pem');
+//const caPath = path.resolve(__dirname, 'certs/global-bundle.pem'); <- surprise tool that will help us later
 
-const pool = mysql.createPool({
+const pool = mysql.createPool({ //params for database access. I'd recommend using xampp with apache and mysql to get phpmyadmin but MySQL Workbench works too
+    host: 'localhost',       
+    user: 'root',           
+    password: '',            
+    database: 'study_buddy_db',
+    port: 3306
+});
+
+module.exports = pool;
+
+/*const pool = mysql.createPool({
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
@@ -19,7 +29,7 @@ const pool = mysql.createPool({
         ca: fs.readFileSync(caPath),
         rejectUnauthorized: ture
     }
-}).promise();
+}).promise();*/
 
 app.use(express.json());
 app.use(cors()); 

@@ -14,12 +14,10 @@ class User {
     // clickRegister: adds a new user to the database
     async clickRegister(password, securityKey) {
         try {
-            let roleValue;
-            if (this.role === 'Tutor') {
-                roleValue = 1;
-            } else {
-                roleValue = 0;
-            }
+            let roleValue = (this.role === 'Tutor') ? 1 : 0;
+
+            const refNo = '${this.samID}-{roleValue}';
+            this.refID = refNo;
 
             const sql = `
                 INSERT INTO Users (SamID, Role, FirstName, LastName, PasswordHash, SecurityKey)
@@ -27,6 +25,7 @@ class User {
             `;
 
             await db.execute(sql, [
+                refNo,
                 this.samID,
                 roleValue,
                 this.firstName,

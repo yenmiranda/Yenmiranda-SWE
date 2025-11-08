@@ -60,67 +60,66 @@ body {
   /* Stacks header, main, footer vertically */
 }
 
-/* header with name and logout */
-.header {
+/* HEADER with name and logout */
+header {
   background: linear-gradient(135deg, var(--shsu-orange) 0%, var(--shsu-orange-dark) 100%);
   /* Orange gradient background */
-  
+
   color: var(--shsu-white);
   /* White text */
-  
+
   text-align: center;
   /* Centers content */
-  
+
   padding: 2.5rem 1rem;
   /* Space inside header */
-  
+
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   /* Shadow for depth */
 }
 
-/* main title */
-.header h1 {
+/* Main title */
+header h1 {
   font-size: 2.7rem;
   font-weight: 700;
   color: var(--shsu-white);
   margin-bottom: 0.5rem;
 }
 
-/* subtitle under the title */
-.header p {
+/* Subtitle under the title */
+header p {
   font-size: 1.2rem;
   font-weight: 300;
   opacity: 0.95;
 }
 
+
 /* logout button on top-right */
 .logout {
-  position: absolute;
-  top: 1rem;
-  right: 1.5rem;
-  background-color: var(--shsu-white);
-  color: var(--shsu-orange);
-  border: 2px solid var(--shsu-white);
-  padding: 0.6rem 1.2rem;
-  font-size: 0.95rem;
-  font-weight: 600;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: all 0.3s ease;
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+    padding: 0.6rem 1.3rem;
+    font-size: 0.95rem;    
+    font-weight: 600;    
+    color: var(--shsu-orange);    
+    background-color: var(--shsu-white);    
+    border: 2px solid var(--shsu-white);    
+    border-radius: 6px;    
+    cursor: pointer;
+    transition: all 0.3s ease;    
+    font-family: inherit;
 }
 
 .logout:hover {
-    background-color: transparent;
-    /* I'm making background transparent on hover */
-    
+    background-color: transparent;    
     color: var(--shsu-white);
-    /* I'm changing text to white */
-    
-    border-color: var(--shsu-white);
-    /* I'm keeping white border */
-    
+    border-color: var(--shsu-white);    
     transform: translateY(-2px);
-    /* I'm lifting button up */
+}
+
+.logout:active {
+    transform: translateY(0);
 }
 
 /* box wrapping the schedule */
@@ -165,8 +164,8 @@ body {
 
 /* space between from days and times inside each day */
 .times {
-  margin-top: 8px;
-  margin-left: 80px;
+  margin-top: 5px;
+  margin-left: 30px;
 }
 
 /* each time slot line */
@@ -183,11 +182,28 @@ body {
 
 /* dropdown for selecting start and end times */
 .time-select {
-  padding: 2px 4px;
-  border-radius: 4px;
-  border: 1px solid #ccc;
-  margin: 0 5px;
+  padding: 4px 6px;
+  border-radius: 6px;
+  border: 1.5px solid var(--shsu-gray-border);
+  background-color: var(--shsu-white);
   font-size: 14px;
+  color: var(--shsu-gray-dark);
+  width: 280px; /* increased so full text fits */
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+  outline: none;
+  appearance: auto; /* keeps default arrow */
+  margin-right: 10px; /* space between dropdown and trash icon */
+}
+
+/* orange border on hover */
+.time-select:hover {
+  border-color: var(--shsu-orange);
+}
+
+/* orange border and glow on focus */
+.time-select:focus {
+  border-color: var(--shsu-orange);
+  box-shadow: 0 0 4px rgba(255, 81, 0, 0.4);
 }
 
 /* save schedule button */
@@ -252,6 +268,17 @@ body {
   pointer-events: none;
 }
 
+/* disable clicks on labels too when grayed out */
+.grayed-out label {
+  pointer-events: none;
+}
+
+/* hide add and trash icons when grayed out */
+.grayed-out .add-btn,
+.grayed-out .del-btn {
+  display: none;
+}
+
 /* keeps edit and save clickable while schedule is grayed out */
 .grayed-out .edit-button,
 .grayed-out .save-button {
@@ -259,6 +286,7 @@ body {
   opacity: 1;
   filter: none;
 }
+
 
 /* edit button styling */
 .edit-button {

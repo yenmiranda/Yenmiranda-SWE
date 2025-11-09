@@ -1,68 +1,104 @@
-//Base file for running server using node.js
-
-//requried constants, packages, and files
+require('dotenv').config();
 const express = require('express');
-const db = require('./db'); 
-const bcrypt = require('bcrypt'); //passowrd hash
-const cors = require('cors'); 
+const mysql = require('mysql2/promise');
+const cors = require('cors');
+const db = require('./db')
+//const fs = require('fs'); later connection package
+//const path = require('path'); later connection package
+const saltRounds = 10;
 
-const app = express(); //declares application
-const PORT = 3000; //port used
-const saltRounds = 10; //salting
+const User = require('./models/User');
+const Tutor = require('./models/Tutor');
+const Tutee = require('./models/Tutee');
 
+const app = express();
+const port = 3000;
+
+//const caPath = path.resolve(__dirname, 'certs/global-bundle.pem'); <- surprise tool that will help us later
 
 app.use(express.json());
 app.use(cors()); 
-app.post('/api/register', async (req, res) => { //register logic
-    const { "Sam ID": samId, password, Role: role } = req.body;
 
-    if (!samId || !password || !role) {
+app.post('/api/register', async (req, res) => {
+ 
+    const { firstName, surname, samID, password, securityKey, role, course } = req.body;
+
+    if (!firstName || !surname || !samID || !password || !securityKey || !role) {
         return res.status(400).json({ success: false, message: "All fields are required." });
+    }
+    
+    if (role === 'Tutor' && !course) {
+        return res.status(400).json({ success: false, message: "Tutors must select a course." });
     }
 
     try {
-        const hashedPassword = await bcrypt.hash(password, saltRounds); //password hash
+        const hashedPassword = await bcrypt.hash(password, saltRounds);
 
-        const insertSql = "INSERT INTO users (sam_id, hashed_password, role) VALUES (?, ?, ?)";
-        await db.execute(insertSql, [samId, hashedPassword, role]);
+        const user = new User(firstName, surname, samID, role);
+        
+        const success = await user.clickRegister(hashedPassword, securityKey);
 
-        res.json({ success: true, message: "Registration successful!" });
+        if (success) {
+            
+            let subTableSql = '';
+            let subTableParams = [];
 
-    } catch (error) { //reg error
+            if (role === 'Tutor') {
+                subTableSql = 'INSERT INTO Tutors (TutorRefNo, ClassNo) VALUES (?, ?)';
+                subTableParams = [user.refID, course];
+            } else {
+                subTableSql = 'INSERT INTO Students (StdRefNo) VALUES (?)';
+                subTableParams = [user.refID];
+            }
+
+            await db.execute(subTableSql, subTableParams);
+
+            res.status(201).json({ success: true, message: "Registration successful!" });
+        } else {
+            res.status(500).json({ success: false, message: "User registration failed." });
+        }
+
+    } catch (error) {
         console.error("Registration error:", error);
-
+        
         if (error.code === 'ER_DUP_ENTRY') {
             return res.status(400).json({ success: false, message: "This Sam ID is already registered." });
         }
+        
         res.status(500).json({ success: false, message: "A server error occurred during registration." });
     }
 });
 
-app.post('/api/login', async (req, res) => { //login logic
-    const { "Sam ID": samId, password } = req.body;
+app.post('/api/login', async (req, res) => {
+    const { samID, password } = req.body;
 
-    if (!samId || !password) {
+    if (!samID || !password) {
         return res.status(400).json({ success: false, message: "Sam ID and password are required." });
     }
 
     try {
-        const findUserSql = "SELECT * FROM users WHERE sam_id = ?";
-        const [users] = await db.execute(findUserSql, [samId]);
+        const user = new User(null, null, samID, null);
 
-        if (users.length === 0) {
+        const sql = 'SELECT * FROM Users WHERE SamID = ?';
+        const [rows] = await db.execute(sql, [samID]);
+
+        if (rows.length === 0) {
             return res.status(401).json({ success: false, message: "Invalid credentials." });
         }
 
-        const user = users[0];
-
-        const isMatch = await bcrypt.compare(password, user.hashed_password);
+        const dbUser = rows[0];
+        
+        const isMatch = await bcrypt.compare(password, dbUser.PasswordHash);
 
         if (isMatch) {
-
             res.json({ 
                 success: true, 
                 message: "Login successful!",
-                role: user.role
+                user: {
+                    refNo: dbUser.RefNo,
+                    firstName: dbUser.FirstName,
+                    role: dbUser.Role === 1 ? 'Tutor' : 'Tutee'
+                }
             });
         } else {
             res.status(401).json({ success: false, message: "Invalid credentials." });
@@ -70,40 +106,91 @@ app.post('/api/login', async (req, res) => { //login logic
 
     } catch (error) {
         console.error("Login error:", error);
-        res.status(500).json({ success: false, message: "A server error occurred during login." });
+        res.status(500).json({ success: false, message: "A server error occurred." });
     }
 });
 
 
-app.post('/api/book-appointment', async (req, res) => { //book appointment extra logic
-    
-    const { tutor, day, time } = req.body;
-    
+aapp.post('/api/availability/check', async (req, res) => {
+    const { course, date, time } = req.body; 
+
+    const startTime = time.split('-')[0];
+    const fullDateTime = `${date} ${startTime}:00`;
+
     try {
-        const checkSql = "SELECT * FROM bookings WHERE tutor_id = ? AND booking_day = ? AND booking_time = ?";
-        const [existingBookings] = await db.execute(checkSql, [tutor, day, time]);
-
-        if (existingBookings.length > 0) {
-            return res.json({ 
-                success: false, 
-                message: "This time slot is already booked. Please try another time." 
-            });
+        const sql = `
+            SELECT COUNT(DISTINCT TutorRefNo) as tutorCount 
+            FROM Avail
+            WHERE ClassNo = ? AND TimeSlot = ? AND IsBooked = false
+        `;
+        
+        const [rows] = await db.execute(sql, [course, fullDateTime]);
+        
+        const count = rows[0].tutorCount;
+        
+        if (count > 0) {
+            res.json({ available: true, tutorCount: count });
+        } else {
+            res.json({ available: false, tutorCount: 0 });
         }
+    } catch (error) {
+        console.error("Error checking availability:", error);
+        res.status(500).json({ success: false, message: "Server error." });
+    }
+});
 
-        const insertSql = "INSERT INTO bookings (tutor_id, booking_day, booking_time) VALUES (?, ?, ?)";
-        await db.execute(insertSql, [tutor, day, time]);
+app.post('/api/availability/tutors', async (req, res) => {
+    const { course, date, time } = req.body;
+    
+    const startTime = time.split('-')[0];
+    const fullDateTime = `${date} ${startTime}:00`;
 
-        res.json({ 
-            success: true, 
-            message: "Appointment confirmed!" 
-        });
+    try {
+        const sql = `
+            SELECT T.TutorRefNo, U.FirstName, U.LastName 
+            FROM Avail A
+            JOIN Tutors T ON A.TutorRefNo = T.TutorRefNo
+            JOIN Users U ON T.TutorRefNo = U.RefNo
+            WHERE A.ClassNo = ? AND A.TimeSlot = ? AND A.IsBooked = false
+        `;
+        const [tutors] = await db.execute(sql, [course, fullDateTime]);
+
+        const availableTutors = tutors.map(t => ({
+            id: t.TutorRefNo,
+            name: `${t.FirstName} ${t.LastName}`
+        }));
+        
+        res.json({ tutors: availableTutors });
 
     } catch (error) {
-        console.error("Database error:", error);
-        res.status(500).json({ 
-            success: false, 
-            message: "A server error occurred. Please try again later." 
-        });
+        console.error("Error fetching tutors:", error);
+        res.status(500).json({ success: false, message: "Server error." });
+    }
+});
+
+app.post('/api/book', async (req, res) => {
+
+    const { course, time, date, tutorId, studentRefNo } = req.body;
+
+    if (!course || !time || !date || !tutorId || !studentRefNo) {
+        return res.status(400).json({ success: false, message: "Missing booking details." });
+    }
+
+    const tutee = new Tutee(null, null, null, studentRefNo);
+
+    try {
+        
+        const result = await tutee.bookSession(tutorId, course, date, time);
+        
+        if (result.success) {
+            res.json({ success: true, message: result.message });
+        } else {
+            const statusCode = result.message.includes("available") ? 409 : 500;
+            res.status(statusCode).json({ success: false, message: result.message });
+        }
+    } catch (error) {
+        console.error("Booking API error:", error);
+        res.status(500).json({ success: false, message: "A server error occurred." });
     }
 });
 

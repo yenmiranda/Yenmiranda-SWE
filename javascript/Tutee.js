@@ -8,17 +8,63 @@ class Tutee extends User {
 
     // bookSession: creates a new booking record
     async bookSession(availId, tutorRefNo, classNo, timeSlot) {
+        let connection;
         try {
+
+            const startTime = time.split('-')[0];
+            const fullDateTime = `${date} ${startTime}:00`;
+
+            connection = await db.getConnection(); 
+            await connection.beginTransaction();
+
+            const findAvailSql = `
+                SELECT AvailID 
+                FROM Avail 
+                WHERE TutorRefNo = ? 
+                  AND ClassNo = ? 
+                  AND TimeSlot = ? 
+                  AND IsBooked = false
+                FOR UPDATE
+            `;
+
+            const [rows] = await connection.execute(findAvailSql, [tutorRefNo, classNo, fullDateTime]);
+
+            if (rows.length === 0) {
+                await connection.rollback(); 
+                console.log("Booking failed: Slot not available for", classNo, fullDateTime);
+                return { success: false, message: "Sorry, this time slot is no longer available." };
+            }
+
+            const availId = rows[0].AvailID;
+
             const sql = `
                 INSERT INTO Bookings (AvailID, StdRefNo, TutorRefNo, ClassNo, TimeSlot)
                 VALUES (?, ?, ?, ?, ?)
             `;
+
+            await connection.execute(sql, [availId, this.refID, tutorRefNo, classNo, fullDateTime]);
+            
+            const updateAvailSql = 'UPDATE Avail SET IsBooked = true WHERE AvailID = ?';
+            await connection.execute(updateAvailSql, [availId]);
+
+            
             await db.execute(sql, [availId, this.refID, tutorRefNo, classNo, timeSlot]);
-            console.log("Booking created for", this.firstName, classNo, timeSlot);
-            return true;
+
+            await connection.commit();
+
+            console.log("Booking created by", this.firstName, "for", classNo, fullDateTime);
+            return { success: true, message: "Booking confirmed!" };
+
         } catch (err) {
-            console.error("Error in bookSession:", err.message);
-            return false;
+            if (connection) {
+                await connection.rollback();
+            }
+            console.error("Error in bookSession transaction:", err.message);
+            return { success: false, message: "A server error occurred during booking." };
+        } finally {
+            if (connection) {
+                connection.release();
+            }
         }
     }
 

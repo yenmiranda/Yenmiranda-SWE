@@ -7,14 +7,19 @@ class Tutor extends User {
     }
 
     // addAvailability: adds a new time slot
-    async addAvailability(classNo, timeSlot) {
+    async addAvailability(classNo, date, timeSlot) {
         try {
+
+            const startTime = timeSlot.split('-')[0];
+            const fullDateTime = `${date} ${startTime}:00`;
+
+
             const sql = `
                 INSERT INTO Avail (TutorRefNo, ClassNo, TimeSlot, IsBooked)
                 VALUES (?, ?, ?, false)
             `;
-            await db.execute(sql, [this.refID, classNo, timeSlot]);
-            console.log("Availability added:", classNo, timeSlot);
+            await db.execute(sql, [this.refID, classNo, fullDateTime]);
+            console.log("Availability added:", classNo, fullDateTime);
             return true;
         } catch (err) {
             console.error("Error in addAvailability:", err.message);

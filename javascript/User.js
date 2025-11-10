@@ -12,26 +12,26 @@ class User {
     }
 
     // clickRegister: adds a new user to the database
-    async clickRegister(password, securityKey) {
+    async clickRegister(hashedPassword, hashedSecurityKey) {
         try {
             let roleValue = (this.role === 'Tutor') ? 1 : 0;
 
-            const refNo = '${this.samID}-{roleValue}';
+            const refNo = `${this.samID}-${roleValue}`;
             this.refID = refNo;
 
             const sql = `
-                INSERT INTO Users (SamID, Role, FirstName, LastName, PasswordHash, SecurityKey)
-                VALUES (?, ?, ?, ?, ?, ?)
+                INSERT INTO Users (RefNo, SamID, Role, FirstName, LastName, PasswordHash, SecurityKey)
+                VALUES (?, ?, ?, ?, ?, ?, ?)
             `;
 
             await db.execute(sql, [
-                refNo,
-                this.samID,
-                roleValue,
-                this.firstName,
-                this.surName,
-                password,
-                securityKey
+                this.refID,         
+                this.samID,         
+                roleValue,          
+                this.firstName,     
+                this.surName,       
+                hashedPassword,     
+                hashedSecurityKey   
             ]);
 
             console.log("User registered:", this.firstName, this.role);
@@ -41,6 +41,7 @@ class User {
             return false;
         }
     }
+
 
     // clickLogin: checks credentials and sets login status
     async clickLogin(password) {

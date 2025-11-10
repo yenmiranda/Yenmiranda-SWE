@@ -59,7 +59,7 @@ function valid(){
 }//ends finction
 
 // Create a message element for live feedback
-const msg1 = document.createElement("password1");
+const msg1 = document.createElement("p");
 msg1.style.fontSize = "12px";
 msg1.style.color = "red";
 msg1.style.marginTop = "5px";

@@ -58,24 +58,20 @@ select {
 .password-container,
 .confirm-password-container {
     position: relative;
-    width: 100%;
 }
 
 .password-container input,
 .confirm-password-container input {
-    width: 100%;
     padding-right: 40px; /* space for eye icon */
 }
 
 .password-container i,
 .confirm-password-container i {
-    position: absolute;
-    right: 10px;
-    top: 50%;              
+   position: absolute;
+    right: 12px;
+    top: 35%;
     transform: translateY(-50%);
     cursor: pointer;
-    font-size: 18px;
-    line-height: 1;
 }
 
 
@@ -103,7 +99,7 @@ i {
     padding: 5px 20px;
     font-size: 18px;
     font-weight: 500;
-    text-align: left; /* optional */
+    text-align: left;
 }
 
 

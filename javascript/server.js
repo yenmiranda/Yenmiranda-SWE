@@ -36,9 +36,11 @@ app.post('/api/register', async (req, res) => {
     try {
         const hashedPassword = await bcrypt.hash(password, saltRounds);
 
+        const hashedSecurityKey = await bcrypt.hash(securityKey, saltRounds);
+
         const user = new User(firstName, surname, samID, role);
         
-        const success = await user.clickRegister(hashedPassword, securityKey);
+        const success = await user.clickRegister(hashedPassword, hashedSecurityKey);
 
         if (success) {
             

@@ -115,7 +115,7 @@ app.post('/api/login', async (req, res) => {
 });
 
 
-aapp.post('/api/availability/check', async (req, res) => {
+app.post('/api/availability/check', async (req, res) => {
     const { course, date, time } = req.body; 
 
     const startTime = time.split('-')[0];
@@ -198,6 +198,6 @@ app.post('/api/book', async (req, res) => {
     }
 });
 
-app.listen(PORT, () => {
-    console.log(`Study Buddy server running on http://localhost:${PORT}`);
+app.listen(port, () => {
+    console.log(`Study Buddy server running on http://localhost:${port}`);
 });

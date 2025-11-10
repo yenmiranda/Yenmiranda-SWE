@@ -70,11 +70,12 @@ select {
 .password-container i,
 .confirm-password-container i {
     position: absolute;
-    right: 12px;
+    right: 10px;
     top: 50%;              
     transform: translateY(-50%);
     cursor: pointer;
     font-size: 18px;
+    line-height: 1;
 }
 
 

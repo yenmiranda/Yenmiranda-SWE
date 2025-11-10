@@ -58,6 +58,8 @@ function valid() {
     }
 }
 
+
+
 //validates passwords to match
 const resetForm = document.querySelector("#resetpasswordBox form");
 if (resetForm) {

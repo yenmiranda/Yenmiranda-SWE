@@ -52,9 +52,11 @@ function valid(){
     }
     else if (password1 != password2){
         message.innerHTML='Password does not match';
+        message.style.color = 'red';
     }
     else{
         message.innerHTML='Password Matched';
+        message.style.color = 'green';
     }
 }//ends finction
 

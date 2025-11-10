@@ -29,7 +29,11 @@
                 </div>
                 <p id = "message"></p>
                 <!--security key-->
-                <input type="password" name="security_key" placeholder="5 digit Security-key" maxlength="5" pattern="\d{5}" required>
+                <div class="securityKey-container">
+                    <input type="password" name="security_key" placeholder="5 digit Security-key" maxlength="5" pattern="\d{5}" required>
+                    <i class="fa-solid fa-eye" id = "show3"></i><!--eye for password-->
+                    <i class = "fa-solid fa-eye-slash hide" id = "hide3"></i><!--eye slashed for password-->
+                </div>
 
                 <!--drop down for role-->
                 <select id = "roleSelect" name = "roleSelect" required>

@@ -55,17 +55,20 @@ select {
 }
 
 /*Position password eye inside input */
+.securityKey-container,
 .password-container,
 .confirm-password-container {
     position: relative;
     min-height: 60px;
 }
 
+.securityKey-container input,
 .password-container input,
 .confirm-password-container input {
     padding-right: 40px; /* space for eye icon */
 }
 
+.securityKey-container i,
 .password-container i,
 .confirm-password-container i {
    position: absolute;

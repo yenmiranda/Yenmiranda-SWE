@@ -22,7 +22,7 @@ CREATE TABLE Users (
     
     FirstName VARCHAR(35) NOT NULL, 
     LastName VARCHAR(35) NOT NULL, 
-    PasswordHash VARCHAR(25) NOT NULL,
+    PasswordHash VARCHAR(60) NOT NULL, --This HAS to be 60 characters long due to bcrypt
     SecurityKey VARCHAR(5) NOT NULL
     
 );

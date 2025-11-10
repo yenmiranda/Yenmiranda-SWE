@@ -3,8 +3,8 @@ const express = require('express');
 const mysql = require('mysql2/promise');
 const cors = require('cors');
 const db = require('./db')
-//const fs = require('fs'); later connection package
-//const path = require('path'); later connection package
+const fs = require('fs'); 
+const path = require('path'); 
 const saltRounds = 10;
 
 const User = require('./models/User');

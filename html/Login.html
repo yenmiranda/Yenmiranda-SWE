@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login-Page</title><!--tab name-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
     <link rel = "stylesheet" href = "../css/Login.css"><!--reference to css-->
 </head>
 <!--starts the login page-->
@@ -13,8 +14,12 @@
         <div class = "form-box" id = "login-from">
             <form action = "">
                 <h2>Login</h2><!--title "login"-->
-                <input type = "text" name = "samID" placeholder="Sam ID" requiered><!--email tab-->
-                <input type = "password" name = "password" placeholder="Password" requiered><!--Password tab-->
+                <input type = "text" name = "samID" placeholder="Sam ID" id = "samID" required><!--email tab-->
+                <div class="confirm-password-container">
+                <input type = "password" name = "password" placeholder="Password" required><!--Password tab-->
+                    <i class="fa-solid fa-eye" id="show"></i><!--eye for password-->
+                    <i class="fa-solid fa-eye-slash hide" id="hide"></i><!--eye slashed for password-->   
+                </div>
                 <button type = "submit" name = "Login">Login</button><!--login button-->
                 <p>Need an Account? <a href="Registration.html">Register</a></p><!--Very bottom registration promt, reference to Registration page-->
                 <p><a href="ForgotPassword.html">Forgot Password?</a></p><!--reference to login page-->
@@ -22,6 +27,6 @@
         </div>
     </div>
 
-    
+    <script src = "../javascript/Login.js"></script>
 </body>
 </html>

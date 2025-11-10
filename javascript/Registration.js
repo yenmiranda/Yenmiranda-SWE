@@ -90,11 +90,10 @@ const samInput = document.getElementById("samID");
 samInput.addEventListener("blur", () => {
     let value = samInput.value.trim();
 
-    // Remove non-digit characters
-    value = value.replace(/\D/g, "");
-
-    // Pad with leading zeros to 9 digits
-    value = value.padStart(9, "0");
-
-    samInput.value = value;
+    // Only process if user typed something
+    if (value !== "") {
+        value = value.replace(/\D/g, "");
+        value = value.padStart(9, "0");
+        samInput.value = value;
+    }
 });

@@ -1,4 +1,4 @@
-// ======= Password Eye Toggle =======
+// toggle between eye and eye-slash
 const passwordFields = [
     document.getElementById("securityKey"),
     document.getElementById("password1"),
@@ -17,7 +17,7 @@ const hideIcons = [
     document.getElementById("hide2")
 ];
 
-// Toggle password visibility
+// show/hide password
 showIcons.forEach((icon, i) => {
     icon.addEventListener("click", () => {
         passwordFields[i].type = "text";
@@ -34,14 +34,14 @@ hideIcons.forEach((icon, i) => {
     });
 });
 
-// ======= Switch Between Forgot & Reset Password Boxes =======
+//toggles between the forgot password and reset password
 const forgotBtn = document.querySelector("button[name='forgotPassword']");
 forgotBtn.addEventListener("click", () => {
     document.getElementById("forgotPasswordBox").style.display = "none";
     document.getElementById("resetpasswordBox").style.display = "block";
 });
 
-// ======= Password Match Validation =======
+//password validation
 function valid() {
     const pass1 = document.getElementById("password1").value;
     const pass2 = document.getElementById("password2").value;
@@ -58,7 +58,7 @@ function valid() {
     }
 }
 
-// Optional: Prevent form submission if passwords don't match
+//validates passwords to match
 const resetForm = document.querySelector("#resetpasswordBox form");
 if (resetForm) {
     resetForm.addEventListener("submit", (e) => {

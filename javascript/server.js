@@ -1,16 +1,17 @@
 require('dotenv').config();
 const express = require('express');
 const mysql = require('mysql2/promise');
-const bcrypt = require('bcryptjs');
+const bcrypt = require('bcrypt');
 const cors = require('cors');
 const db = require('./db')
 const fs = require('fs'); 
 const path = require('path'); 
 const saltRounds = 10;
 
-const User = require('./models/User');
-const Tutor = require('./models/Tutor');
-const Tutee = require('./models/Tutee');
+const User = require('./User');
+const Tutor = require('./Tutor');
+const Tutee = require('./Tutee');
+const Booking = require('./Booking');
 
 const app = express();
 const port = 3000;

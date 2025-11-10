@@ -1,5 +1,5 @@
 const User = require('./User');
-const db = require('../db');
+const db = require('./db');
 
 class Tutee extends User {
     constructor(firstName, surName, samID, refID = null) {

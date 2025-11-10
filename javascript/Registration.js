@@ -84,3 +84,17 @@ password1.addEventListener("input", () => {
         msg1.textContent = "";
     }
 });
+//adds padding of 0's for sam id
+const samInput = document.getElementById("samID");
+
+samInput.addEventListener("blur", () => {
+    let value = samInput.value.trim();
+
+    // Remove non-digit characters
+    value = value.replace(/\D/g, "");
+
+    // Pad with leading zeros to 9 digits
+    value = value.padStart(9, "0");
+
+    samInput.value = value;
+});

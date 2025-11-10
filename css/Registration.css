@@ -58,6 +58,7 @@ select {
 .password-container,
 .confirm-password-container {
     position: relative;
+    min-height: 60px;
 }
 
 .password-container input,
@@ -74,6 +75,10 @@ select {
     cursor: pointer;
 }
 
+.password-container p {
+    position: static;  /* make error message not affect icon positioning */
+    margin-top: 5px;
+}
 
 
 /* Icon styling */

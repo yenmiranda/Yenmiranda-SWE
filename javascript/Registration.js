@@ -58,13 +58,16 @@ function valid(){
     }
 }//ends finction
 
+const password1 = document.getElementById("password1");
+const password2 = document.getElementById("password2");
+
 // Create a message element for live feedback
 const msg1 = document.createElement("p");
 msg1.style.fontSize = "12px";
 msg1.style.color = "red";
 msg1.style.marginTop = "5px";
 // Append it below password1 input
-password1.parentNode.appendChild(msg1);
+document.getElementById("password1-error").appendChild(msg1);
 
 // Live validation for password strength
 password1.addEventListener("input", () => {

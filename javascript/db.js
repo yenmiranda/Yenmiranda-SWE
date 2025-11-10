@@ -1,12 +1,25 @@
-//helps server.js pull from db (params can be changed). This may become irrelevant
+const mysql = require('mysql2/promise');
 
-const mysql = require('mysql2/promise'); //requires MySQL
-
-const pool = mysql.createPool({ //params for database access. I'd recommend using xampp with apache and mysql to get phpmyadmin but MySQL Workbench works too
+const pool = mysql.createPool({
     host: 'localhost',       
     user: 'root',           
     password: '',            
-    database: 'study_buddy_db' 
+    database: 'study_buddy_db',
+    port: 3306
+    // will add SSL stuff later
 });
 
 module.exports = pool;
+
+//won't need this V----V just yet
+/*const pool = mysql.createPool({
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_DATABASE,
+    port: process.env.DB_PORT,
+    ssl: {
+        ca: fs.readFileSync(caPath),
+        rejectUnauthorized: ture
+    }
+}).promise();*/

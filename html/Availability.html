@@ -17,17 +17,15 @@
 
   <body>
     <!-- header with welcome message and logout button -->
-    <div class="header" id="top">
+    <header id="top">
       <h1>Study Buddy</h1>
-
       <p>Availability Schedule</p>
+      <button
+        class="logout" onclick="window.location.href='Login.html'">Logout</button>
+    </header>
 
-      <button class="logout" onclick="window.location.href='LoginAndRegister.html'"> Logout </button>
+    <br />
 
-    </div>
-
-    <br>
-    
     <!-- availability box with title and schedule -->
     <div class="availability-box">
       <h3>Set Up Your Schedule</h3>
@@ -87,49 +85,64 @@
         <!-- line break for spacing -->
 
         <button class="edit-button">Edit</button>
-        <button class="save-button" style="display: none;">Save</button>
+        <button class="save-button" style="display: none">Save</button>
       </div>
       <!-- end of schedule -->
-
     </div>
     <!-- end of availability-box -->
 
+    <section id="upcoming-appointments" class="appointments-section">
+      <div class="appointments-container">
+        <h2>Your Upcoming Appointments</h2>
 
-<!-- upcoming appointments section -->
-<section class="appointments-section" id="upcoming-appointments">
-  <div class="appointments-box">
-    <h2>Your Upcoming Appointments</h2>
+        <div class="appointments-list">
+          <!-- APPOINTMENT CARD 1 -->
+          <div class="appointment-card">
+            <div class="appointment-header">
+              <span class="appointment-course">COSC 3319</span>
+              <span class="appointment-date">Nov 15, 2025</span>
+            </div>
+            <div class="appointment-details">
+              <p class="appointment-time">2:00 PM - 3:00 PM</p>
+              <p class="appointment-tutor">Student: Sarah Johnson</p>
+            </div>
+          </div>
 
-    <!-- placeholder data -->
-    <div class="appointments">
-      <div class="appointment-card">
-        <h3 class="course">Class</h3>
-        <p class="date">Date</p>
-        <p>Time</p>
-        <p>Student: Name</p>
-        <p>Location: AB1 210</p>
+          <!-- APPOINTMENT CARD 2 -->
+          <div class="appointment-card">
+            <div class="appointment-header">
+              <span class="appointment-course">COSC 4319</span>
+              <span class="appointment-date">Nov 18, 2025</span>
+            </div>
+            <div class="appointment-details">
+              <p class="appointment-time">10:00 AM - 11:00 AM</p>
+              <p class="appointment-tutor">Student: Michael Chen</p>
+            </div>
+          </div>
+
+          <!-- NO APPOINTMENTS MESSAGE (show when no appointments) -->
+          <!-- <div class="no-appointments">
+                    <p>You don't have any upcoming appointments yet.</p>
+                    <p>Book your first session above!</p>
+                </div> -->
+        </div>
+
+        <!-- BACK TO TOP LINK -->
+        <div class="back-to-top-container">
+          <a href="#" class="back-to-top">
+            <span class="top-arrow">↑</span>
+            Back to Top
+          </a>
+        </div>
       </div>
+    </section>
 
-      <div class="appointment-card">
-        <h3 class="course">Class</h3>
-        <p class="date">Date</p>
-        <p>Time</p>
-        <p>Student: Name</p>
-        <p>Location: AB1 210</p>
-      </div>
-    </div>
-
-    <button class="back-to-top" onclick="location.href='#top'"> Back to Top</button>
-
-  </div>
-</section>
-
-   <!-- FIXED ASIDE BUTTON: Links to upcoming appointments, stays fixed when scrolling -->
+    <!-- FIXED ASIDE BUTTON: Links to upcoming appointments, stays fixed when scrolling -->
     <aside class="appointments-aside">
-        <a href="#upcoming-appointments" class="appointments-btn">
-            <span class="btn-icon">📅</span>
-            <span class="btn-text">Upcoming Appointments</span>
-        </a>
+      <a href="#upcoming-appointments" class="appointments-btn">
+        <span class="btn-icon">📅</span>
+        <span class="btn-text">Upcoming Appointments</span>
+      </a>
     </aside>
     <!-- I'm creating a fixed button that always shows on screen -->
 

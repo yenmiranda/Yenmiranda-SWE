@@ -1,15 +1,17 @@
 require('dotenv').config();
 const express = require('express');
 const mysql = require('mysql2/promise');
+const bcrypt = require('bcrypt');
 const cors = require('cors');
 const db = require('./db')
-//const fs = require('fs'); later connection package
-//const path = require('path'); later connection package
+const fs = require('fs'); 
+const path = require('path'); 
 const saltRounds = 10;
 
-const User = require('./models/User');
-const Tutor = require('./models/Tutor');
-const Tutee = require('./models/Tutee');
+const User = require('./User');
+const Tutor = require('./Tutor');
+const Tutee = require('./Tutee');
+const Booking = require('./Booking');
 
 const app = express();
 const port = 3000;
@@ -34,9 +36,11 @@ app.post('/api/register', async (req, res) => {
     try {
         const hashedPassword = await bcrypt.hash(password, saltRounds);
 
+        const hashedSecurityKey = await bcrypt.hash(securityKey, saltRounds);
+
         const user = new User(firstName, surname, samID, role);
         
-        const success = await user.clickRegister(hashedPassword, securityKey);
+        const success = await user.clickRegister(hashedPassword, hashedSecurityKey);
 
         if (success) {
             

@@ -34,12 +34,31 @@ hideIcons.forEach((icon, i) => {
     });
 });
 
-//toggles between the forgot password and reset password
+//toggles between the forgot password and reset password form-box
 const forgotBtn = document.querySelector("button[name='forgotPassword']");
 forgotBtn.addEventListener("click", () => {
-    document.getElementById("forgotPasswordBox").style.display = "none";
-    document.getElementById("resetpasswordBox").style.display = "block";
+    const samID = document.getElementById("samID").value.trim();
+    const securityKey = document.getElementById("securityKey").value.trim();
+    const errorMsg = document.getElementById("forgotError");
+
+    // dummy code
+    if (samID === "000123456" && securityKey === "12345") {
+        // Hide forgot box, show reset box
+        document.getElementById("forgotPasswordBox").style.display = "none";
+        document.getElementById("resetpasswordBox").style.display = "block";
+        if (errorMsg) errorMsg.style.display = "none";
+    } else {
+        // Stay on current form and show an error
+        if (errorMsg) {
+            errorMsg.textContent = "Invalid SAM ID or security key!";
+            errorMsg.style.color = "red";
+            errorMsg.style.display = "block";
+        } else {
+            alert("Invalid SAM ID or security key!");
+        }
+    }
 });
+
 
 //password validation
 function valid() {

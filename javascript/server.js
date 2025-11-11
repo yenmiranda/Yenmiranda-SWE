@@ -6,7 +6,8 @@ const cors = require('cors');
 const db = require('./db')
 const fs = require('fs'); 
 const path = require('path'); 
-const saltRounds = 10;
+const https = require('https');
+
 
 const User = require('./User');
 const Tutor = require('./Tutor');
@@ -15,8 +16,17 @@ const Booking = require('./Booking');
 
 const app = express();
 const port = 3000;
+const saltRounds = 10;
 
-//const caPath = path.resolve(__dirname, 'certs/global-bundle.pem'); <- surprise tool that will help us later
+const keyPath = path.resolve(__dirname, 'certs/key.pem');
+const certPath = path.resolve(__dirname, 'certs/cert.pem');
+
+const options = {
+    key: fs.readFileSync(keyPath),
+    cert: fs.readFileSync(certPath)
+};
+
+const httpsServer = https.createServer(options, app);
 
 app.use(express.json());
 app.use(cors()); 
@@ -198,6 +208,6 @@ app.post('/api/book', async (req, res) => {
     }
 });
 
-app.listen(port, () => {
-    console.log(`Study Buddy server running on http://localhost:${port}`);
+httpsServer.listen(port, () => {
+    console.log(`HTTPS server running on https://localhost:${port}`);
 });

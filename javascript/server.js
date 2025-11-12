@@ -44,45 +44,45 @@ app.get('/', (req, res) => {
 });
 
 app.post('/api/register', async (req, res) => {
- 
     const { firstName, surname, samID, password, securityKey, role, course } = req.body;
 
     if (!firstName || !surname || !samID || !password || !securityKey || !role) {
         return res.status(400).json({ success: false, message: "All fields are required." });
     }
-    
+
     if (role === 'Tutor' && !course) {
         return res.status(400).json({ success: false, message: "Tutors must select a course." });
     }
 
+    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,25}$/;
+    if (!regex.test(password)) {
+        return res.status(400).json({ 
+            success: false, 
+            message: "Password must be 8-25 chars, include uppercase, lowercase, number & special char" 
+        });
+    }
+    
     try {
         const hashedPassword = await bcrypt.hash(password, saltRounds);
-
         const hashedSecurityKey = await bcrypt.hash(securityKey, saltRounds);
 
         const user = new User(firstName, surname, samID, role);
         
-        const success = await user.clickRegister(hashedPassword, hashedSecurityKey);
+        await user.clickRegister(hashedPassword, hashedSecurityKey);
 
-        if (success) {
-            
-            let subTableSql = '';
-            let subTableParams = [];
+        let subTableSql = '';
+        let subTableParams = [];
 
-            if (role === 'Tutor') {
-                subTableSql = 'INSERT INTO Tutors (TutorRefNo, ClassNo) VALUES (?, ?)';
-                subTableParams = [user.refID, course];
-            } else {
-                subTableSql = 'INSERT INTO Students (StdRefNo) VALUES (?)';
-                subTableParams = [user.refID];
-            }
-
-            await db.execute(subTableSql, subTableParams);
-
-            res.status(201).json({ success: true, message: "Registration successful!" });
+        if (role === 'Tutor') {
+            subTableSql = 'INSERT INTO Tutors (TutorRefNo, ClassNo) VALUES (?, ?)';
+            subTableParams = [user.refID, course];
         } else {
-            res.status(500).json({ success: false, message: "User registration failed." });
+            subTableSql = 'INSERT INTO Students (StdRefNo) VALUES (?)';
+            subTableParams = [user.refID];
         }
+
+        await db.execute(subTableSql, subTableParams);
+        res.status(201).json({ success: true, message: "Registration successful!" });
 
     } catch (error) {
         console.error("Registration error:", error);
@@ -90,7 +90,7 @@ app.post('/api/register', async (req, res) => {
         if (error.code === 'ER_DUP_ENTRY') {
             return res.status(400).json({ success: false, message: "This Sam ID is already registered." });
         }
-        
+
         res.status(500).json({ success: false, message: "A server error occurred during registration." });
     }
 });
@@ -104,26 +104,17 @@ app.post('/api/login', async (req, res) => {
 
     try {
         const user = new User(null, null, samID, null);
-
-        const sql = 'SELECT * FROM Users WHERE SamID = ?';
-        const [rows] = await db.execute(sql, [samID]);
-
-        if (rows.length === 0) {
-            return res.status(401).json({ success: false, message: "Invalid credentials." });
-        }
-
-        const dbUser = rows[0];
         
-        const isMatch = await bcrypt.compare(password, dbUser.PasswordHash);
+        const loginSuccess = await user.clickLogin(password);
 
-        if (isMatch) {
+        if (loginSuccess) {
             res.json({ 
                 success: true, 
                 message: "Login successful!",
                 user: {
-                    refNo: dbUser.RefNo,
-                    firstName: dbUser.FirstName,
-                    role: dbUser.Role === 1 ? 'Tutor' : 'Tutee'
+                    refNo: user.refID,
+                    firstName: user.firstName,
+                    role: user.role
                 }
             });
         } else {

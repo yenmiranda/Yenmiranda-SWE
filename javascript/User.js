@@ -37,33 +37,40 @@ class User {
             console.log("User registered:", this.firstName, this.role);
             return true;
         } catch (err) {
-            console.error("Error in clickRegister:", err.message);
-            return false;
-        }
+        console.error("Error in clickRegister:", err.message);
+        throw err;
+    }
     }
 
-
-    // clickLogin: checks credentials and sets login status
     async clickLogin(password) {
         try {
-            const sql = 'SELECT * FROM Users WHERE SamID = ? AND PasswordHash = ?';
-            const [rows] = await db.execute(sql, [this.samID, password]);
+            const sql = 'SELECT * FROM Users WHERE SamID = ?';
+            const [rows] = await db.execute(sql, [this.samID]);
 
             if (rows.length === 0) {
-                console.log("Invalid login for SamID:", this.samID);
+                console.log("User not found for SamID:", this.samID);
                 return false;
             }
 
             const user = rows[0];
-            this.firstName = user.FirstName;
-            this.surName = user.LastName;
-            this.role = user.Role === 1 ? 'Tutor' : 'Tutee';
-            this.refID = user.RefNo;
-            this.loggedIn = true;
-            this.active = true;
+            
+            const isMatch = await bcrypt.compare(password, user.PasswordHash);
 
-            console.log("Login successful for:", this.firstName, this.role);
-            return true;
+            if (isMatch) {
+                this.firstName = user.FirstName;
+                this.surName = user.LastName;
+                this.role = user.Role === 1 ? 'Tutor' : 'Tutee';
+                this.refID = user.RefNo;
+                this.loggedIn = true;
+                this.active = true;
+
+                console.log("Login successful for:", this.firstName, this.role);
+                return true;
+            } else {
+                // Passwords do not match
+                console.log("Invalid password for SamID:", this.samID);
+                return false;
+            }
         } catch (err) {
             console.error("Error in clickLogin:", err.message);
             return false;

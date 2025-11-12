@@ -47,7 +47,6 @@ class Tutee extends User {
             const updateAvailSql = 'UPDATE Avail SET IsBooked = true WHERE AvailID = ?';
             await connection.execute(updateAvailSql, [availId]);
 
-            
             await db.execute(sql, [availId, this.refID, tutorRefNo, classNo, timeSlot]);
 
             await connection.commit();
@@ -87,7 +86,6 @@ class Tutee extends User {
         }
     }
 
-    // viewBooking: shows all bookings for this tutee
     async viewBooking() {
         try {
             const sql = `

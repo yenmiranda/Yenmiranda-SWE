@@ -111,9 +111,8 @@ registerForm.addEventListener("submit", async (event) => {
     const password2 = registerForm.elements.password2.value;
     const securityKey = registerForm.elements.security_key.value;
     const roleValue = registerForm.elements.roleSelect.value; 
-    const courseValue = registerForm.elements.Course.value;
+    const courseValue = document.getElementById('courseSelect').value;
 
-    
     if (password !== password2) {
         document.getElementById('message').innerHTML = 'Passwords do not match';
         document.getElementById('message').style.color = 'red';

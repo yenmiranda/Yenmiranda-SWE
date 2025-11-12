@@ -8,7 +8,6 @@ const fs = require('fs');
 const path = require('path'); 
 const https = require('https');
 
-
 const User = require('./User');
 const Tutor = require('./Tutor');
 const Tutee = require('./Tutee');
@@ -30,6 +29,16 @@ const httpsServer = https.createServer(options, app);
 
 app.use(express.json());
 app.use(cors()); 
+
+const cssPath = path.join(__dirname, '..', 'css');
+app.use(express.static(cssPath));
+
+const htmlPath = path.join(__dirname, '..', 'html');
+app.use(express.static(htmlPath));
+
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'html', 'Login.html'));
+});
 
 app.post('/api/register', async (req, res) => {
  
@@ -123,7 +132,6 @@ app.post('/api/login', async (req, res) => {
         res.status(500).json({ success: false, message: "A server error occurred." });
     }
 });
-
 
 app.post('/api/availability/check', async (req, res) => {
     const { course, date, time } = req.body; 

@@ -1,5 +1,4 @@
 # .gitignore
 .env
-certs
 cert.pem
 key.pem

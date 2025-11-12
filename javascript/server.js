@@ -36,6 +36,9 @@ app.use(express.static(cssPath));
 const htmlPath = path.join(__dirname, '..', 'html');
 app.use(express.static(htmlPath));
 
+const jsPath = path.join(__dirname, '..', 'javascript');
+app.use(express.static(jsPath));
+
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'html', 'Login.html'));
 });

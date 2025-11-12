@@ -36,29 +36,42 @@ hideIcons.forEach((icon, i) => {
 
 //toggles between the forgot password and reset password form-box
 const forgotBtn = document.querySelector("button[name='forgotPassword']");
-forgotBtn.addEventListener("click", () => {
+forgotBtn.addEventListener("click", async () => {
     const samID = document.getElementById("samID").value.trim();
     const securityKey = document.getElementById("securityKey").value.trim();
-    const errorMsg = document.getElementById("forgotError");
+    // Using alert as the errorMsg element isn't in the HTML
+    // const errorMsg = document.getElementById("forgotError"); 
 
-    // dummy code
-    if (samID === "000123456" && securityKey === "12345") {
-        // Hide forgot box, show reset box
-        document.getElementById("forgotPasswordBox").style.display = "none";
-        document.getElementById("resetpasswordBox").style.display = "block";
-        if (errorMsg) errorMsg.style.display = "none";
-    } else {
-        // Stay on current form and show an error
-        if (errorMsg) {
-            errorMsg.textContent = "Invalid SAM ID or security key!";
-            errorMsg.style.color = "red";
-            errorMsg.style.display = "block";
+    if (!samID || !securityKey) {
+        alert("Please enter both your SAM ID and Security Key.");
+        return;
+    }
+
+    try {
+        const response = await fetch('/api/verify-key', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ samID: samID, securityKey: securityKey })
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+            // Hide forgot box, show reset box
+            document.getElementById("forgotPasswordBox").style.display = "none";
+            document.getElementById("resetpasswordBox").style.display = "block";
         } else {
-            alert("Invalid SAM ID or security key!");
+            // Show server error message
+            alert(`Verification failed: ${result.message}`);
         }
+
+    } catch (error) {
+        console.error("Error during key verification:", error);
+        alert("A network error occurred. Please try again.");
     }
 });
-
 
 //password validation
 function valid() {
@@ -66,17 +79,30 @@ function valid() {
     const pass2 = document.getElementById("password2").value;
     const message = document.getElementById("message");
 
+    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,25}$/;
+    const strengthMessage = "Password must be 8-25 chars, include uppercase, lowercase, number & special char";
+
     if (pass1 === "" && pass2 === "") {
         message.textContent = "";
-    } else if (pass1 === pass2) {
-        message.style.color = "green";
-        message.textContent = "Passwords match";
-    } else {
+        return;
+    }
+
+    if (!regex.test(pass1)) {
         message.style.color = "red";
-        message.textContent = "Passwords do not match";
+        message.textContent = strengthMessage;
+    } else {
+        message.style.color = "green";
+
+        if (pass2 === "") {
+            message.textContent = "";
+        } else if (pass1 === pass2) {
+            message.textContent = "Passwords match";
+        } else {
+            message.style.color = "red";
+            message.textContent = "Passwords do not match";
+        }
     }
 }
-
 
 //adds padding of 0's for sam id
 const samInput = document.getElementById("samID");
@@ -104,3 +130,50 @@ if (resetForm) {
         }
     });
 }
+
+const resetBtn = document.querySelector("button[name='resetPassword']");
+const message = document.getElementById("message"); 
+
+resetBtn.addEventListener("click", async () => {
+    
+    const samID = document.getElementById("samID").value.trim(); 
+    const pass1 = document.getElementById("password1").value;
+    const pass2 = document.getElementById("password2").value;
+
+    if (pass1 !== pass2) {
+        message.textContent = "Passwords do not match";
+        message.style.color = "red";
+        return;
+    }
+    
+    try {
+        const response = await fetch('/api/reset-password', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                samID: samID,
+                newPassword: pass1,
+                confirmPassword: pass2
+            })
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+            // Success!
+            alert(result.message);
+            window.location.href = 'Login.html'; // Redirect to login page
+        } else {
+            // Failed (e.g., "Passwords do not match", "Password not strong enough")
+            message.textContent = result.message;
+            message.style.color = "red";
+        }
+
+    } catch (error) {
+        console.error("Error during password reset:", error);
+        message.textContent = "A network error occurred. Please try again.";
+        message.style.color = "red";
+    }
+});

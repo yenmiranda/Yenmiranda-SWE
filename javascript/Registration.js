@@ -97,3 +97,67 @@ samInput.addEventListener("blur", () => {
         samInput.value = value;
     }
 });
+
+const registerForm = document.querySelector("#register-form form");
+
+registerForm.addEventListener("submit", async (event) => {
+    
+    event.preventDefault();
+
+    const firstName = registerForm.elements.firstName.value;
+    const surname = registerForm.elements.surname.value;
+    const samID = registerForm.elements.samID.value;
+    const password = registerForm.elements.password1.value;
+    const password2 = registerForm.elements.password2.value;
+    const securityKey = registerForm.elements.security_key.value;
+    const roleValue = registerForm.elements.roleSelect.value; 
+    const courseValue = registerForm.elements.Course.value;
+
+    
+    if (password !== password2) {
+        document.getElementById('message').innerHTML = 'Passwords do not match';
+        document.getElementById('message').style.color = 'red';
+        return; 
+    }
+
+    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,25}$/;
+    if (!regex.test(password)) {
+        document.getElementById('password1-error').textContent = "Password must be 8-25 chars, include uppercase, lowercase, number & special char";
+        return; 
+    }
+
+    const roleToSend = (roleValue === 'tutor') ? 'Tutor' : 'Tutee';
+
+    const formData = {
+        firstName: firstName,
+        surname: surname,
+        samID: samID,
+        password: password,
+        securityKey: securityKey,
+        role: roleToSend,
+        course: courseValue || null
+    };
+
+    try {
+        const response = await fetch('/api/register', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData)
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+            alert("Registration successful! You will now be redirected to the login page.");
+            window.location.href = 'Login.html';
+        } else {
+            alert(`Registration failed: ${result.message}`);
+        }
+
+    } catch (error) {
+        console.error("Error during registration:", error);
+        alert("A network error occurred. Please try again.");
+    }
+});

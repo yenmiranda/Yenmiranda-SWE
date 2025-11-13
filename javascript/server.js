@@ -127,6 +127,78 @@ app.post('/api/login', async (req, res) => {
     }
 });
 
+app.post('/api/verify-key', async (req, res) => {
+    const { samID, securityKey } = req.body;
+
+    if (!samID || !securityKey) {
+        return res.status(400).json({ success: false, message: "Sam ID and Security Key are required." });
+    }
+
+    try {
+        // 1. Find the user by SamID
+        const sql = 'SELECT SecurityKey FROM Users WHERE SamID = ?';
+        const [rows] = await db.execute(sql, [samID]);
+
+        if (rows.length === 0) {
+            // Use a generic message for security to prevent enumeration of valid Sam IDs
+            return res.status(401).json({ success: false, message: "Verification failed. Invalid SAM ID or Security Key." });
+        }
+
+        const hashedSecurityKey = rows[0].SecurityKey;
+        
+        // 2. Compare the provided security key with the hashed one in the database
+        const isMatch = await bcrypt.compare(securityKey, hashedSecurityKey);
+
+        if (isMatch) {
+            // Security key is correct
+            res.json({ success: true, message: "Security key verified." });
+        } else {
+            // Use a generic message for security
+            res.status(401).json({ success: false, message: "Verification failed. Invalid SAM ID or Security Key." });
+        }
+
+    } catch (error) {
+        console.error("Verification error:", error);
+        res.status(500).json({ success: false, message: "A server error occurred." });
+    }
+});
+
+app.post('/api/reset-password', async (req, res) => {
+    const { samID, newPassword, confirmPassword } = req.body;
+    
+    // Check if passwords match (client-side validation is done, but server should re-check)
+    if (newPassword !== confirmPassword) {
+        return res.status(400).json({ success: false, message: "Passwords do not match." });
+    }
+    
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,25}$/;
+    if (!passwordRegex.test(newPassword)) {
+        return res.status(400).json({ 
+            success: false, 
+            message: "Password must be 8-25 chars, include uppercase, lowercase, number & special char" 
+        });
+    }
+
+    try {
+        // 1. Hash the new password
+        const newPasswordHash = await bcrypt.hash(newPassword, saltRounds);
+
+        // 2. Update the user's password in the database
+        const sql = 'UPDATE Users SET PasswordHash = ? WHERE SamID = ?';
+        const [result] = await db.execute(sql, [newPasswordHash, samID]);
+
+        if (result.affectedRows === 0) {
+            return res.status(404).json({ success: false, message: "User not found or password was not changed." });
+        }
+
+        res.json({ success: true, message: "Your password has been successfully reset!" });
+
+    } catch (error) {
+        console.error("Password reset error:", error);
+        res.status(500).json({ success: false, message: "A server error occurred during password reset." });
+    }
+});
+
 
 httpsServer.listen(port, () => {
     console.log(`HTTPS server running on https://localhost:${port}`);

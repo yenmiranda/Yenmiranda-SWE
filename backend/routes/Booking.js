@@ -1,4 +1,4 @@
-const db = require('./db');
+const db = require('../../frontend/javascript/db');
 
 class Booking {
     constructor(bookingNo = null, tutorRefNo = null, stdRefNo = null) {

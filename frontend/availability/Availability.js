@@ -1,15 +1,12 @@
-// loop through each day checkbox
 document.querySelectorAll('.day input[type="checkbox"]').forEach(box => {
-  // waits for when a checkbox is checked or unchecked
+
   box.addEventListener('change', function() {
     const timesDiv = document.getElementById(this.id + '-times');
-    timesDiv.innerHTML = ''; // clear old time slots
+    timesDiv.innerHTML = ''; 
 
-    // if box is checked show time slot options
     if (this.checked) {
-      addTimeSlot(timesDiv); // create first time slot
+      addTimeSlot(timesDiv);
 
-      // create + button to add more slots
       const addBtn = document.createElement('button');
       addBtn.textContent = '+';
       addBtn.classList.add('add-btn');
@@ -20,9 +17,8 @@ document.querySelectorAll('.day input[type="checkbox"]').forEach(box => {
 });
 
 
-// add a new time slot row under the selected day
 function addTimeSlot(container) {
-  const maxSlots = 24; // can't exceed 24 hours
+  const maxSlots = 24; 
   const currentSlots = container.querySelectorAll('.slot').length;
 
   if (currentSlots >= maxSlots) {
@@ -30,21 +26,18 @@ function addTimeSlot(container) {
     return;
   }
 
-  // create a new div element to hold the time slot
+  
   const slot = document.createElement('div');
   slot.classList.add('slot');
 
-  // create single dropdown for time slot
   const select = document.createElement('select');
   select.classList.add('time-select');
 
-  // create the placeholder for choose a time slot
   const placeholder = document.createElement('option');
   placeholder.textContent = '-- Choose a Time Slot --';
   placeholder.value = '';
   select.appendChild(placeholder);
 
-  // add all 24 hourly time slots in military with standard time
   const timeSlots = [
     ["00:00-01:00", "00:00 - 01:00 (12:00 AM - 1:00 AM)"],
     ["01:00-02:00", "01:00 - 02:00 (1:00 AM - 2:00 AM)"],
@@ -72,7 +65,6 @@ function addTimeSlot(container) {
     ["23:00-00:00", "23:00 - 00:00 (11:00 PM - 12:00 AM)"]
   ];
 
-  // loop through each time slot and add it as an option in the dropdown
   timeSlots.forEach(([value, text]) => {
     const option = document.createElement('option');
     option.value = value;
@@ -80,7 +72,6 @@ function addTimeSlot(container) {
     select.appendChild(option);
   });
 
-  // create delete trash button
   const del = document.createElement('button');
   del.classList.add('del-btn');
   del.innerHTML = '<i class="fa fa-trash" aria-hidden="true"></i>';
@@ -89,25 +80,20 @@ function addTimeSlot(container) {
     updateDisabledOptions(container);
   };
 
-  // when user selects a slot
   select.addEventListener('change', () => {
     updateDisabledOptions(container);
   });
 
-  // put everything together
   slot.appendChild(select);
   slot.appendChild(del);
 
-  // insert slot before + button
   const addBtn = container.querySelector('.add-btn');
   container.insertBefore(slot, addBtn);
 
-  // refresh gray-out states
   updateDisabledOptions(container);
 }
 
 
-// disables already chosen time slots for that day
 function updateDisabledOptions(container) {
   const selectedValues = Array.from(container.querySelectorAll('select'))
     .map(sel => sel.value)
@@ -115,7 +101,7 @@ function updateDisabledOptions(container) {
 
   container.querySelectorAll('select option').forEach(opt => {
     if (selectedValues.includes(opt.value)) {
-      opt.disabled = true; // gray out selected times
+      opt.disabled = true;
     } else {
       opt.disabled = false;
     }
@@ -123,25 +109,138 @@ function updateDisabledOptions(container) {
 }
 
 
-// get references to the schedule and buttons
 const schedule = document.querySelector('.schedule');
 const editBtn = document.querySelector('.edit-button');
 const saveBtn = document.querySelector('.save-button');
 
-// start with gray out 
 schedule.classList.add('grayed-out');
-saveBtn.style.display = 'none'; // hide save button initially
+saveBtn.style.display = 'none';
 
-// when user clicks Edit
 editBtn.addEventListener('click', () => {
-  schedule.classList.remove('grayed-out'); // make it editable
-  editBtn.style.display = 'none'; // hide edit
-  saveBtn.style.display = 'block'; // show save
+  schedule.classList.remove('grayed-out'); 
+  editBtn.style.display = 'none'; 
+  saveBtn.style.display = 'block'; 
 });
 
-// when user clicks Save
-saveBtn.addEventListener('click', () => {
-  schedule.classList.add('grayed-out'); // gray it out again
-  saveBtn.style.display = 'none'; // hide save
-  editBtn.style.display = 'block'; // show edit again
+saveBtn.addEventListener('click', async () => {
+  const availabilityData = [];
+  
+
+  const tutorRefNo = "000877048-1"; 
+  const classNo = "CS101"; 
+  
+  document.querySelectorAll('.day input[type="checkbox"]:checked').forEach(checkbox => {
+    const day = checkbox.id; 
+    const timesDiv = document.getElementById(day + '-times');
+    
+    timesDiv.querySelectorAll('select.time-select').forEach(select => {
+      if (select.value) {
+        availabilityData.push({
+          day: day,
+          timeSlot: select.value, 
+          tutorRefNo: tutorRefNo,
+          classNo: classNo
+        });
+      }
+    });
+  });
+
+  if (availabilityData.length === 0) {
+    alert('Please select at least one time slot before saving.');
+    return;
+  }
+
+  try {
+    const response = await fetch('http://localhost:3000/api/availability/create', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include', 
+      body: JSON.stringify(availabilityData)
+    });
+    
+    const result = await response.json();
+    
+    if (response.ok) {
+      alert('Availability saved successfully for the next 12 weeks!');
+      schedule.classList.add('grayed-out');
+      saveBtn.style.display = 'none';
+      editBtn.style.display = 'block';
+    } else {
+      alert('Error saving: ' + result.error);
+    }
+  } catch (error) {
+    console.error('Failed to save:', error);
+    alert('Failed to save availability. Please check your connection and try again.');
+  }
 });
+
+
+async function loadAvailability() {
+  const tutorRefNo = "000877048-1"; 
+  
+  try {
+    const response = await fetch(`http://localhost:3000/api/availability/mine?tutorRefNo=${tutorRefNo}`, {
+      credentials: 'include' 
+    });
+    
+    if (!response.ok) {
+      console.error('Failed to load availability');
+      return;
+    }
+    
+    const scheduleData = await response.json();
+    
+    if (scheduleData.length === 0) {
+      console.log('No existing availability found');
+      return;
+    }
+    
+    const slotsByDay = {};
+    scheduleData.forEach(item => {
+      if (!slotsByDay[item.day]) {
+        slotsByDay[item.day] = [];
+      }
+      slotsByDay[item.day].push(item.timeSlot);
+    });
+    
+    Object.keys(slotsByDay).forEach(day => {
+      const dayCheckbox = document.getElementById(day);
+      
+      if (!dayCheckbox) {
+        console.warn(`Checkbox for ${day} not found`);
+        return;
+      }
+      
+      dayCheckbox.checked = true;
+      
+      dayCheckbox.dispatchEvent(new Event('change'));
+      
+      setTimeout(() => {
+        const timesDiv = document.getElementById(day + '-times');
+        const timeSlots = slotsByDay[day];
+        
+        const firstSlot = timesDiv.querySelector('.slot');
+        if (firstSlot) {
+          timesDiv.removeChild(firstSlot);
+        }
+        
+        timeSlots.forEach(timeSlot => {
+          addTimeSlot(timesDiv);
+          
+          const selects = timesDiv.querySelectorAll('select.time-select');
+          const lastSelect = selects[selects.length - 1];
+          if (lastSelect) {
+            lastSelect.value = timeSlot;
+          }
+        });
+        
+        updateDisabledOptions(timesDiv);
+      }, 100);
+    });
+    
+  } catch (error) {
+    console.error('Failed to load availability:', error);
+  }
+}
+
+window.addEventListener('DOMContentLoaded', loadAvailability);

@@ -1,0 +1,21 @@
+{
+  "name": "study-buddy-availability",
+  "version": "1.0.0",
+  "description": "Study Buddy Availability System",
+  "main": "backend/app.js",
+  "type": "module",
+  "scripts": {
+    "start": "node backend/app.js",
+    "test": "node tests/test-availability.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2",
+    "cors": "^2.8.5",
+    "cookie-parser": "^1.4.6",
+    "mysql2": "^3.6.5",
+    "dotenv": "^16.3.1"
+  }
+}

@@ -1,0 +1,1012 @@
+/* BASIC RESET: I'm removing default browser styling */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* COLOR PALETTE: I'm setting up SHSU colors plus complementary colors */
+:root {
+    --shsu-orange: #FF5100;
+    /* Primary SHSU orange */
+    
+    --shsu-orange-dark: #CC4100;
+    /* I'm creating darker orange for hover states */
+    
+    --shsu-blue: #00008B;
+    /* Dark blue accent color */
+    
+    --shsu-white: #FFFFFF;
+    /* White */
+    
+    --shsu-gray-dark: #2C2C2C;
+    /* I'm setting dark gray for text */
+    
+    --shsu-gray-medium: #6C6C6C;
+    /* I'm setting medium gray for secondary text */
+    
+    --shsu-gray-light: #F5F5F5;
+    /* I'm setting light gray for backgrounds */
+    
+    --shsu-gray-border: #DDDDDD;
+    /* Border color */
+    
+    --success-green: #28A745;
+    /* I'm setting green for success messages */
+    
+    --success-bg: #D4EDDA;
+    /* Light green background */
+}
+
+/* BODY: I'm setting up overall page styling */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /* I'm using a modern, clean font */
+    
+    background: linear-gradient(135deg, #F5F5F5 0%, #E8E8E8 100%);
+    /* I'm creating a subtle gradient background */
+    
+    color: var(--shsu-gray-dark);
+    /* I'm setting default text color */
+    
+    line-height: 1.6;
+    /* I'm adding spacing between lines */
+    
+    min-height: 100vh;
+    /* I'm ensuring full screen height minimum */
+    
+    display: flex;
+    flex-direction: column;
+    /* I'm stacking header, main, footer vertically */
+}
+
+/* HEADER: I'm styling the top banner */
+header {
+    position: relative;
+
+    background: linear-gradient(135deg, var(--shsu-orange) 0%, var(--shsu-orange-dark) 100%);
+    /* I'm creating an orange gradient background */
+    
+    color: var(--shsu-white);
+    /* I'm setting white text */
+    
+    text-align: center;
+    /* I'm centering content */
+    
+    padding: 2.5rem 1rem;
+    /* I'm adding space inside header */
+    
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* I'm adding shadow for depth */
+}
+
+header h1 {
+    font-size: 2.8rem;
+    /* I'm making a large heading */
+    
+    margin-bottom: 0.5rem;
+    /* I'm adding space below heading */
+    
+    font-weight: 700;
+    /* I'm making it extra bold */
+    
+    letter-spacing: 1px;
+    /* I'm adding slight spacing between letters */
+}
+
+header p {
+    font-size: 1.2rem;
+    /* I'm setting subtitle size */
+    
+    font-weight: 300;
+    /* I'm using light weight */
+    
+    opacity: 0.95;
+    /* I'm making it slightly transparent */
+}
+
+/* MAIN: I'm styling the central content area */
+main {
+    flex: 1;
+    /* I'm making it take up available space */
+    
+    max-width: 900px;
+    /* I'm making it slightly wider than page 1 for tutor cards */
+    
+    width: 100%;
+    /* I'm setting full width up to max */
+    
+    margin: 3rem auto;
+    /* I'm centering content with top/bottom spacing */
+    
+    padding: 0 1.5rem;
+    /* I'm adding side padding for mobile */
+}
+
+/* STEP INDICATOR: I'm creating a progress tracker showing current step */
+.step-indicator {
+    display: flex;
+    /* I'm using flexbox for horizontal layout */
+    
+    align-items: center;
+    /* I'm vertically centering items */
+    
+    justify-content: center;
+    /* I'm horizontally centering items */
+    
+    margin-bottom: 2.5rem;
+    /* I'm adding space below indicator */
+    
+    gap: 1rem;
+    /* I'm adding space between steps */
+}
+
+/* STEP: I'm styling individual step in indicator */
+.step {
+    display: flex;
+    flex-direction: column;
+    /* I'm stacking number above label */
+    
+    align-items: center;
+    /* I'm centering content */
+    
+    gap: 0.5rem;
+    /* I'm adding space between number and label */
+}
+
+/* STEP NUMBER: I'm creating a circular number badge */
+.step-number {
+    width: 45px;
+    height: 45px;
+    /* I'm making a square */
+    
+    border-radius: 50%;
+    /* I'm making it circular */
+    
+    background-color: var(--shsu-gray-border);
+    /* I'm using light gray background for inactive steps */
+    
+    color: var(--shsu-gray-medium);
+    /* I'm using gray text for inactive steps */
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* I'm centering the number inside circle */
+    
+    font-size: 1.2rem;
+    /* I'm setting number size */
+    
+    font-weight: 700;
+    /* I'm making it bold */
+    
+    transition: all 0.3s ease;
+    /* I'm adding smooth transitions */
+}
+
+/* ACTIVE STEP NUMBER: I'm styling the current step */
+.step.active .step-number {
+    background: linear-gradient(135deg, var(--shsu-orange) 0%, var(--shsu-orange-dark) 100%);
+    /* I'm using orange gradient for active step */
+    
+    color: var(--shsu-white);
+    /* I'm setting white text */
+    
+    box-shadow: 0 4px 8px rgba(255, 81, 0, 0.3);
+    /* I'm adding orange shadow */
+}
+
+/* COMPLETED STEP NUMBER: I'm styling completed step with checkmark */
+.step.completed .step-number {
+    background: var(--success-green);
+    /* I'm using green background for completed step */
+    
+    color: var(--shsu-white);
+    /* I'm setting white checkmark */
+    
+    box-shadow: 0 4px 8px rgba(40, 167, 69, 0.3);
+    /* I'm adding green shadow */
+}
+
+/* STEP LABEL: I'm styling text below number */
+.step-label {
+    font-size: 0.9rem;
+    /* I'm using smaller text */
+    
+    color: var(--shsu-gray-medium);
+    /* I'm using gray for inactive */
+    
+    font-weight: 500;
+    /* I'm using medium weight */
+}
+
+/* ACTIVE STEP LABEL: I'm styling current step text */
+.step.active .step-label {
+    color: var(--shsu-orange);
+    /* I'm using orange text for active */
+    
+    font-weight: 600;
+    /* I'm making it semi-bold */
+}
+
+/* COMPLETED STEP LABEL: I'm styling completed step text */
+.step.completed .step-label {
+    color: var(--success-green);
+    /* I'm using green text for completed */
+    
+    font-weight: 600;
+    /* I'm making it semi-bold */
+}
+
+/* STEP DIVIDER: I'm creating a line between steps */
+.step-divider {
+    width: 60px;
+    height: 2px;
+    /* I'm making a thin horizontal line */
+    
+    background-color: var(--shsu-gray-border);
+    /* I'm using light gray line */
+}
+
+/* TUTOR SECTION: I'm styling the main container */
+#tutor-section {
+    background: var(--shsu-white);
+    /* I'm using white background */
+    
+    padding: 2.5rem;
+    /* I'm adding space inside container */
+    
+    border-radius: 12px;
+    /* I'm adding rounded corners */
+    
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    /* I'm adding shadow for card effect */
+}
+
+/* BOOKING SUMMARY: I'm showing session details from Page 1 */
+.booking-summary {
+    background: var(--shsu-gray-light);
+    /* I'm using light gray background */
+    
+    padding: 1.5rem;
+    /* I'm adding space inside */
+    
+    border-radius: 10px;
+    /* I'm adding rounded corners */
+    
+    margin-bottom: 2rem;
+    /* I'm adding space below */
+    
+    border: 2px solid var(--shsu-gray-border);
+    /* I'm adding border */
+}
+
+.booking-summary h3 {
+    color: var(--shsu-blue);
+    /* I'm using blue heading */
+    
+    font-size: 1.3rem;
+    /* I'm setting heading size */
+    
+    margin-bottom: 1rem;
+    /* I'm adding space below heading */
+}
+
+.summary-content {
+    display: flex;
+    flex-direction: column;
+    /* I'm stacking items vertically */
+    
+    gap: 0.75rem;
+    /* I'm adding space between items */
+    
+    margin-bottom: 1rem;
+    /* I'm adding space below content */
+}
+
+.summary-item {
+    display: flex;
+    /* I'm using flexbox for label and value */
+    
+    justify-content: space-between;
+    /* I'm placing label on left, value on right */
+    
+    align-items: center;
+    /* I'm vertically centering content */
+}
+
+.summary-label {
+    font-weight: 600;
+    /* I'm making it semi-bold */
+    
+    color: var(--shsu-gray-medium);
+    /* I'm using gray text */
+}
+
+.summary-value {
+    font-weight: 600;
+    /* I'm making it semi-bold */
+    
+    color: var(--shsu-gray-dark);
+    /* I'm using dark text */
+}
+
+/* BACK BUTTON: I'm styling button to return to Page 1 */
+.back-btn {
+    width: 100%;
+    /* I'm setting full width */
+    
+    padding: 0.8rem;
+    /* I'm adding space inside */
+    
+    background-color: var(--shsu-white);
+    /* I'm using white background */
+    
+    color: var(--shsu-blue);
+    /* I'm using blue text */
+    
+    border: 2px solid var(--shsu-blue);
+    /* I'm adding blue border */
+    
+    border-radius: 8px;
+    /* I'm adding rounded corners */
+    
+    font-size: 1rem;
+    /* I'm using normal text size */
+    
+    font-weight: 600;
+    /* I'm making it semi-bold */
+    
+    cursor: pointer;
+    /* I'm showing hand cursor */
+    
+    transition: all 0.3s ease;
+    /* I'm adding smooth transitions */
+    
+    font-family: inherit;
+    /* I'm using same font as page */
+}
+
+.back-btn:hover {
+    background-color: var(--shsu-blue);
+    /* I'm using blue background on hover */
+    
+    color: var(--shsu-white);
+    /* I'm using white text on hover */
+    
+    transform: translateY(-2px);
+    /* I'm lifting button up */
+    
+    box-shadow: 0 4px 8px rgba(0, 0, 139, 0.2);
+    /* I'm adding blue shadow */
+}
+
+.back-btn:active {
+    transform: translateY(0);
+    /* I'm returning to normal position when clicked */
+}
+
+/* TUTOR LIST HEADING */
+#tutor-section h2 {
+    color: var(--shsu-blue);
+    /* I'm using blue heading */
+    
+    margin-bottom: 0.5rem;
+    /* I'm adding space below heading */
+    
+    font-size: 1.8rem;
+    /* I'm using large size */
+    
+    text-align: center;
+    /* I'm centering it */
+}
+
+/* TUTOR INSTRUCTIONS: I'm styling helper text */
+.tutor-instructions {
+    text-align: center;
+    /* I'm centering it */
+    
+    color: var(--shsu-gray-medium);
+    /* I'm using gray text */
+    
+    margin-bottom: 2rem;
+    /* I'm adding space below */
+    
+    font-size: 1rem;
+    /* I'm using normal size */
+}
+
+/* TUTOR LIST: I'm creating container for tutor cards */
+.tutor-list {
+    display: grid;
+    /* I'm using CSS Grid for layout */
+    
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    /* I'm creating responsive columns that are at least 250px wide */
+    
+    gap: 1.5rem;
+    /* I'm adding space between cards */
+    
+    margin-bottom: 2rem;
+    /* I'm adding space below list */
+}
+
+/* LOADING MESSAGE: I'm showing this while tutors are loading */
+.loading-message {
+    grid-column: 1 / -1;
+    /* I'm spanning all columns */
+    
+    text-align: center;
+    /* I'm centering text */
+    
+    padding: 3rem;
+    /* I'm adding space inside */
+    
+    color: var(--shsu-gray-medium);
+    /* I'm using gray text */
+    
+    font-size: 1.1rem;
+    /* I'm using slightly larger text */
+}
+
+/* TUTOR CARD: I'm styling individual tutor card */
+.tutor-card {
+    background: var(--shsu-white);
+    /* I'm using white background */
+    
+    border: 2px solid var(--shsu-gray-border);
+    /* I'm adding light border */
+    
+    border-radius: 10px;
+    /* I'm adding rounded corners */
+    
+    padding: 1.5rem;
+    /* I'm adding space inside */
+    
+    text-align: center;
+    /* I'm centering content */
+    
+    cursor: pointer;
+    /* I'm showing hand cursor to indicate it's clickable */
+    
+    transition: all 0.3s ease;
+    /* I'm adding smooth transitions */
+    
+    display: flex;
+    flex-direction: column;
+    /* I'm stacking content vertically */
+    
+    align-items: center;
+    /* I'm centering content horizontally */
+    
+    gap: 1rem;
+    /* I'm adding space between elements */
+}
+
+.tutor-card:hover {
+    border-color: var(--shsu-orange);
+    /* I'm using orange border on hover */
+    
+    transform: translateY(-5px);
+    /* I'm lifting card up */
+    
+    box-shadow: 0 8px 16px rgba(255, 81, 0, 0.2);
+    /* I'm adding orange shadow */
+}
+
+.tutor-card.selected {
+    border-color: var(--shsu-orange);
+    /* I'm using orange border when selected */
+    
+    border-width: 3px;
+    /* I'm using thicker border */
+    
+    background: linear-gradient(135deg, rgba(255, 81, 0, 0.05) 0%, rgba(255, 81, 0, 0.1) 100%);
+    /* I'm adding light orange gradient background */
+    
+    box-shadow: 0 8px 16px rgba(255, 81, 0, 0.3);
+    /* I'm adding orange shadow */
+}
+
+/* TUTOR AVATAR: I'm creating circle with initial */
+.tutor-avatar {
+    width: 80px;
+    height: 80px;
+    /* I'm making a square */
+    
+    border-radius: 50%;
+    /* I'm making it circular */
+    
+    background: linear-gradient(135deg, var(--shsu-blue) 0%, var(--shsu-orange) 100%);
+    /* I'm using blue to orange gradient */
+    
+    color: var(--shsu-white);
+    /* I'm using white text */
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* I'm centering the initial */
+    
+    font-size: 2rem;
+    /* I'm using large initial */
+    
+    font-weight: 700;
+    /* I'm making it bold */
+    
+    margin-bottom: 0.5rem;
+    /* I'm adding space below avatar */
+}
+
+/* TUTOR NAME: I'm styling name of the tutor */
+.tutor-name {
+    font-size: 1.2rem;
+    /* I'm using slightly larger text */
+    
+    font-weight: 600;
+    /* I'm making it semi-bold */
+    
+    color: var(--shsu-gray-dark);
+    /* I'm using dark text */
+}
+
+/* SELECT BUTTON: I'm styling button on each tutor card */
+.select-tutor-btn {
+    width: 100%;
+    /* I'm setting full width */
+    
+    padding: 0.7rem;
+    /* I'm adding space inside */
+    
+    background: linear-gradient(135deg, var(--shsu-orange) 0%, var(--shsu-orange-dark) 100%);
+    /* I'm using orange gradient */
+    
+    color: var(--shsu-white);
+    /* I'm using white text */
+    
+    border: none;
+    /* I'm removing border */
+    
+    border-radius: 6px;
+    /* I'm adding rounded corners */
+    
+    font-size: 0.95rem;
+    /* I'm using slightly smaller text */
+    
+    font-weight: 600;
+    /* I'm making it semi-bold */
+    
+    cursor: pointer;
+    /* I'm showing hand cursor */
+    
+    transition: all 0.3s ease;
+    /* I'm adding smooth transitions */
+    
+    font-family: inherit;
+    /* I'm using same font as page */
+}
+
+.select-tutor-btn:hover {
+    transform: translateY(-2px);
+    /* I'm lifting button up */
+    
+    box-shadow: 0 4px 8px rgba(255, 81, 0, 0.3);
+    /* I'm adding orange shadow */
+}
+
+.select-tutor-btn:active {
+    transform: translateY(0);
+    /* I'm returning to normal position when clicked */
+}
+
+/* CONFIRMATION SECTION: I'm showing this after tutor is selected */
+#confirmation-section {
+    margin-top: 2rem;
+    /* I'm adding space above */
+    
+    animation: fadeIn 0.4s ease;
+    /* I'm adding fade-in animation */
+}
+
+/* CONFIRMATION CARD: I'm styling container for confirmation message */
+.confirmation-card {
+    background: var(--success-bg);
+    /* I'm using light green background */
+    
+    border: 2px solid var(--success-green);
+    /* I'm adding green border */
+    
+    border-radius: 10px;
+    /* I'm adding rounded corners */
+    
+    padding: 2rem;
+    /* I'm adding space inside */
+    
+    text-align: center;
+    /* I'm centering text */
+}
+
+/* CONFIRMATION ICON: I'm styling large checkmark */
+.confirmation-icon {
+    font-size: 3rem;
+    /* I'm using large icon */
+    
+    color: var(--success-green);
+    /* I'm using green color */
+    
+    margin-bottom: 1rem;
+    /* I'm adding space below */
+}
+
+.confirmation-card h3 {
+    color: var(--success-green);
+    /* I'm using green heading */
+    
+    font-size: 1.5rem;
+    /* I'm using large heading */
+    
+    margin-bottom: 1rem;
+    /* I'm adding space below */
+}
+
+/* CONFIRMATION DETAILS: I'm styling text content */
+.confirmation-details {
+    margin-bottom: 1.5rem;
+    /* I'm adding space below */
+}
+
+.confirmation-details p {
+    color: var(--shsu-gray-dark);
+    /* I'm using dark text */
+    
+    font-size: 1.1rem;
+    /* I'm using slightly larger text */
+    
+    margin-bottom: 1.5rem;
+    /* I'm adding space below */
+}
+
+/* CONFIRMATION SUMMARY: I'm styling booking details in confirmation */
+.confirmation-summary {
+    background: var(--shsu-white);
+    /* I'm using white background */
+    
+    border-radius: 8px;
+    /* I'm adding rounded corners */
+    
+    padding: 1.5rem;
+    /* I'm adding space inside */
+    
+    text-align: left;
+    /* I'm using left-aligned text */
+    
+    border: 1px solid var(--shsu-gray-border);
+    /* I'm adding light border */
+}
+
+.confirmation-summary h4 {
+    color: var(--shsu-blue);
+    /* I'm using blue heading */
+    
+    font-size: 1.1rem;
+    /* I'm setting heading size */
+    
+    margin-bottom: 1rem;
+    /* I'm adding space below */
+}
+
+.confirmation-summary .summary-item {
+    display: flex;
+    justify-content: space-between;
+    /* I'm placing label on left, value on right */
+    
+    align-items: center;
+    /* I'm vertically centering */
+    
+    padding: 0.5rem 0;
+    /* I'm adding vertical padding */
+    
+    border-bottom: 1px solid var(--shsu-gray-border);
+    /* I'm adding bottom border */
+}
+
+.confirmation-summary .summary-item:last-child {
+    border-bottom: none;
+    /* I'm removing border on last item */
+}
+
+/* CONFIRMATION ACTIONS: I'm styling buttons in confirmation */
+.confirmation-actions {
+    display: flex;
+    /* I'm using flexbox for button layout */
+    
+    gap: 1rem;
+    /* I'm adding space between buttons */
+    
+    justify-content: center;
+    /* I'm centering buttons */
+    
+    flex-wrap: wrap;
+    /* I'm wrapping on small screens */
+}
+
+/* CHANGE BUTTON: I'm styling button to go back and choose different tutor */
+.change-btn {
+    padding: 0.9rem 2rem;
+    /* I'm adding space inside */
+    
+    background-color: var(--shsu-white);
+    /* I'm using white background */
+    
+    color: var(--shsu-blue);
+    /* I'm using blue text */
+    
+    border: 2px solid var(--shsu-blue);
+    /* I'm adding blue border */
+    
+    border-radius: 8px;
+    /* I'm adding rounded corners */
+    
+    font-size: 1rem;
+    /* I'm using normal text size */
+    
+    font-weight: 600;
+    /* I'm making it semi-bold */
+    
+    cursor: pointer;
+    /* I'm showing hand cursor */
+    
+    transition: all 0.3s ease;
+    /* I'm adding smooth transitions */
+    
+    font-family: inherit;
+    /* I'm using same font as page */
+}
+
+.change-btn:hover {
+    background-color: var(--shsu-blue);
+    /* I'm using blue background on hover */
+    
+    color: var(--shsu-white);
+    /* I'm using white text on hover */
+    
+    transform: translateY(-2px);
+    /* I'm lifting button up */
+    
+    box-shadow: 0 4px 8px rgba(0, 0, 139, 0.2);
+    /* I'm adding blue shadow */
+}
+
+.change-btn:active {
+    transform: translateY(0);
+    /* I'm returning to normal position when clicked */
+}
+
+/* CONFIRM BUTTON: I'm styling final confirmation button */
+.confirm-btn {
+    padding: 0.9rem 2rem;
+    /* I'm adding space inside */
+    
+    background: linear-gradient(135deg, var(--shsu-orange) 0%, var(--shsu-orange-dark) 100%);
+    /* I'm using orange gradient */
+    
+    color: var(--shsu-white);
+    /* I'm using white text */
+    
+    border: none;
+    /* I'm removing border */
+    
+    border-radius: 8px;
+    /* I'm adding rounded corners */
+    
+    font-size: 1rem;
+    /* I'm using normal text size */
+    
+    font-weight: 600;
+    /* I'm making it semi-bold */
+    
+    cursor: pointer;
+    /* I'm showing hand cursor */
+    
+    transition: all 0.3s ease;
+    /* I'm adding smooth transitions */
+    
+    font-family: inherit;
+    /* I'm using same font as page */
+}
+
+.confirm-btn:hover {
+    transform: translateY(-2px);
+    /* I'm lifting button up */
+    
+    box-shadow: 0 6px 12px rgba(255, 81, 0, 0.3);
+    /* I'm adding orange shadow */
+}
+
+.confirm-btn:active {
+    transform: translateY(0);
+    /* I'm returning to normal position when clicked */
+}
+
+/* FOOTER: I'm styling the bottom section */
+footer {
+    background: var(--shsu-gray-dark);
+    /* I'm using dark gray background */
+    
+    color: var(--shsu-white);
+    /* I'm using white text */
+    
+    text-align: center;
+    /* I'm centering text */
+    
+    padding: 1.5rem;
+    /* I'm adding space inside */
+    
+    margin-top: auto;
+    /* I'm pushing to bottom */
+}
+
+/* LOGOUT BUTTON: I'm styling button in header to log out */
+.logout-btn {
+    position: absolute;
+    /* I'm positioning button relative to header */
+    
+    top: 1rem;
+    right: 1.5rem;
+    /* I'm placing button in top-right corner of header */
+    
+    background-color: var(--shsu-white);
+    /* I'm using white background */
+    
+    color: var(--shsu-orange);
+    /* I'm using orange text */
+    
+    border: 2px solid var(--shsu-white);
+    /* I'm adding white border */
+    
+    padding: 0.6rem 1.2rem;
+    /* I'm adding space inside button */
+    
+    font-size: 0.95rem;
+    /* I'm using slightly smaller text */
+    
+    font-weight: 600;
+    /* I'm making it semi-bold */
+    
+    border-radius: 6px;
+    /* I'm adding rounded corners */
+    
+    cursor: pointer;
+    /* I'm showing hand cursor */
+    
+    transition: all 0.3s ease;
+    /* I'm adding smooth transitions */
+}
+
+.logout-btn:hover {
+    background-color: var(--shsu-orange-dark);
+    /* I'm using dark orange background on hover */
+    
+    color: var(--shsu-white);
+    /* I'm using white text on hover */
+    
+    border-color: var(--shsu-orange-dark);
+    /* I'm using dark orange border */
+    
+    transform: translateY(-2px);
+    /* I'm lifting button slightly */
+}
+
+.logout-btn:active {
+    transform: translateY(0);
+    /* I'm returning to normal position when clicked */
+}
+
+/* MOBILE RESPONSIVE: I'm making adjustments for smaller screens */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2rem;
+        /* I'm using smaller heading on mobile */
+    }
+    
+    header p {
+        font-size: 1rem;
+        /* I'm using smaller subtitle */
+    }
+    
+    #tutor-section {
+        padding: 1.5rem;
+        /* I'm using less padding on mobile */
+    }
+    
+    main {
+        margin: 1.5rem auto;
+        /* I'm using less margin on mobile */
+    }
+    
+    .step-indicator {
+        gap: 0.5rem;
+        /* I'm using less space between steps on mobile */
+    }
+    
+    .step-divider {
+        width: 40px;
+        /* I'm using shorter divider line on mobile */
+    }
+    
+    .step-number {
+        width: 40px;
+        height: 40px;
+        /* I'm using smaller circles on mobile */
+        
+        font-size: 1rem;
+        /* I'm using smaller numbers */
+    }
+    
+    .step-label {
+        font-size: 0.8rem;
+        /* I'm using smaller labels on mobile */
+    }
+    
+    .tutor-list {
+        grid-template-columns: 1fr;
+        /* I'm using single column on mobile */
+    }
+    
+    .confirmation-actions {
+        flex-direction: column;
+        /* I'm stacking buttons vertically on mobile */
+    }
+    
+    .change-btn,
+    .confirm-btn {
+        width: 100%;
+        /* I'm using full width buttons on mobile */
+    }
+    
+    .booking-summary {
+        padding: 1rem;
+        /* I'm using less padding on mobile */
+    }
+    
+    .summary-item {
+        flex-direction: column;
+        /* I'm stacking label above value on mobile */
+        
+        align-items: flex-start;
+        /* I'm left-aligning content */
+        
+        gap: 0.25rem;
+        /* I'm adding small gap between label and value */
+    }
+}
+
+.logout-btn {
+        top: 0.75rem;
+        right: 1rem;
+        /* I'm adjusting position on mobile */
+        
+        padding: 0.5rem 1rem;
+        /* I'm using smaller padding on mobile */
+        
+        font-size: 0.85rem;
+        /* I'm using smaller text on mobile */
+    }
+
+/* FADE IN ANIMATION: I'm creating animation for confirmation section */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        /* I'm starting invisible */
+        
+        transform: translateY(-10px);
+        /* I'm starting slightly higher */
+    }
+    to {
+        opacity: 1;
+        /* I'm ending fully visible */
+        
+        transform: translateY(0);
+        /* I'm ending in normal position */
+    }
+}

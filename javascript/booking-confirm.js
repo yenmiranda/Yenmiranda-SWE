@@ -478,5 +478,5 @@ function handleLogout() {
     // localStorage.clear();
     
     // I'm redirecting to login page
-    window.location.href = 'LoginAndRegister.html';
+    window.location.href = 'Login.html';
 }

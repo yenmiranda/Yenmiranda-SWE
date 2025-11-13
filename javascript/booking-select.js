@@ -569,5 +569,5 @@ function handleLogout() {
     // I'm removing all saved booking data from browser session storage
     
     // I'm redirecting to login page
-    window.location.href = 'LoginAndRegister.html';
+    window.location.href = 'Login.html';
 }

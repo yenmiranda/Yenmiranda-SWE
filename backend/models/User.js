@@ -14,7 +14,9 @@ class User {
     }
 
     //adds a new user to the database
-    async clickRegister(hashedPassword, hashedSecurityKey) {
+    async clickRegister(hashedPassword, hashedSecurityKey, connection) {
+        const dbClient = connection || db; 
+
         try {
             let roleValue = (this.role === 'Tutor') ? 1 : 0;
 
@@ -26,7 +28,7 @@ class User {
                 VALUES (?, ?, ?, ?, ?, ?, ?)
             `;
 
-            await db.execute(sql, [
+            await dbClient.execute(sql, [
                 this.refID,         
                 this.samID,         
                 roleValue,          

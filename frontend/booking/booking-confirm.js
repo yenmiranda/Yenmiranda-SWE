@@ -206,7 +206,6 @@ confirmBookingBtn.addEventListener('click', async function() {
         availId: finalBookingData.availId,
         tutorRefNo: finalBookingData.tutorRefNo,
         classNo: finalBookingData.classNo,
-        timeSlot: finalBookingData.timeSlot,
     };
 
     try {

@@ -1,4 +1,3 @@
-// Filename: frontend/login/Registration.js
 const passwordInputs = document.querySelectorAll("input[type='password']");
 const showIcons = document.querySelectorAll(".fa-eye");
 const hideIcons = document.querySelectorAll(".fa-eye-slash");
@@ -33,12 +32,12 @@ document.addEventListener("DOMContentLoaded", function() {
         } else {
             courseSelect.style.display = 'none';
             courseSelect.required = false;
-            courseSelect.value = ''; // clear selection
+            courseSelect.value = '';
         }
     });
 });
 
-/*Validating matched passwords*/
+//validate matching passwords
 function valid(){
     var password1 = document.getElementById('password1').value;
     var password2 = document.getElementById('password2').value;
@@ -93,6 +92,7 @@ samInput.addEventListener("blur", () => {
     }
 });
 
+//registration form - actual registration interactivity
 const registerForm = document.querySelector("#register-form form");
 registerForm.addEventListener("submit", async (event) => {
     event.preventDefault();
@@ -127,7 +127,6 @@ registerForm.addEventListener("submit", async (event) => {
     };
 
     try {
-        // Use relative path to API
         const response = await fetch('/api/auth/register', {
             method: 'POST',
             headers: {

@@ -1,9 +1,5 @@
-// Filename: frontend/availability/Availability.js
-
-// --- GLOBAL VARS ---
 let CURRENT_USER = null;
 
-// --- DAY/TIME SLOT LOGIC ---
 document.querySelectorAll('.day input[type="checkbox"]').forEach(box => {
   box.addEventListener('change', function() {
     const timesDiv = document.getElementById(this.id + '-times');
@@ -72,36 +68,36 @@ function updateDisabledOptions(container) {
   });
 }
 
-// --- EDIT/SAVE LOGIC ---
+//html elements
 const schedule = document.querySelector('.schedule');
 const editBtn = document.querySelector('.edit-button');
 const saveBtn = document.querySelector('.save-button');
 schedule.classList.add('grayed-out');
 saveBtn.style.display = 'none';
 
+//edit button functionality
 editBtn.addEventListener('click', () => {
   schedule.classList.remove('grayed-out'); 
   editBtn.style.display = 'none'; 
   saveBtn.style.display = 'block'; 
 });
 
-// --- SAVE AVAILABILITY (JWT ENABLED) ---
+//save button funtionality
 saveBtn.addEventListener('click', async () => {
     const availabilityData = [];
     
-    // User data is now in the token, but we check sessionStorage for UI data
     if (!CURRENT_USER) {
         alert("Error: Not logged in.");
         return;
     }
     
     document.querySelectorAll('.day input[type="checkbox"]:checked').forEach(checkbox => {
-        const day = checkbox.id; // 'monday', 'tuesday', etc.
+        const day = checkbox.id; 
         const timesDiv = document.getElementById(day + '-times');
         timesDiv.querySelectorAll('select.time-select').forEach(select => {
             if (select.value) {
                 availabilityData.push({
-                    day: day.charAt(0).toUpperCase() + day.slice(1), // Capitalize (e.g., "Monday")
+                    day: day.charAt(0).toUpperCase() + day.slice(1), 
                     timeSlot: select.value
                 });
             }
@@ -113,7 +109,7 @@ saveBtn.addEventListener('click', async () => {
     }
 
     try {
-        // Use relative path - JWT cookie will be sent automatically
+        
         const response = await fetch('/api/availability/create', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -136,15 +132,15 @@ saveBtn.addEventListener('click', async () => {
     }
 });
 
-// --- LOAD EXISTING AVAILABILITY (JWT ENABLED) ---
+//load availability
 async function loadAvailability() {
   try {
-    // Use relative path - JWT cookie is sent automatically
+    
     const response = await fetch(`/api/availability/mine`);
     
     if (!response.ok) {
         const err = await response.json();
-        if (response.status === 401) handleLogout(); // Token failed
+        if (response.status === 401) handleLogout(); 
         console.error('Failed to load availability:', err.message);
         return;
     }
@@ -154,7 +150,7 @@ async function loadAvailability() {
     
     const slotsByDay = {};
     scheduleData.forEach(item => {
-      const day = item.day.toLowerCase(); // 'monday'
+      const day = item.day.toLowerCase(); 
       if (!slotsByDay[day]) slotsByDay[day] = [];
       slotsByDay[day].push(item.timeSlot);
     });
@@ -190,13 +186,13 @@ async function loadAvailability() {
   }
 }
 
-// --- LOAD UPCOMING APPOINTMENTS (JWT ENABLED) ---
+//load appointments
 async function loadTutorAppointments() {
     const listContainer = document.querySelector('.appointments-list');
     listContainer.innerHTML = '<p>Loading appointments...</p>'; 
 
     try {
-        // Use relative path - JWT cookie is sent automatically
+        
         const response = await fetch(`/api/bookings/tutor`);
         if (!response.ok) {
             if (response.status === 401) handleLogout();
@@ -215,12 +211,11 @@ async function loadTutorAppointments() {
             return;
         }
 
-        listContainer.innerHTML = ''; // Clear loading
+        listContainer.innerHTML = ''; 
         appointments.forEach(appt => {
             const dt = new Date(appt.TimeSlot);
             const date = dt.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
             
-            // Calculate time range
             const startTime = dt.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true });
             const endDate = new Date(dt.getTime() + 60 * 60 * 1000); 
             const endTime = endDate.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true });
@@ -228,7 +223,7 @@ async function loadTutorAppointments() {
 
             const card = document.createElement('div');
             card.className = 'appointment-card';
-            // Add booking number to the card's dataset
+            
             card.dataset.bookingNo = appt.BookingNo;
 
             card.innerHTML = `
@@ -254,12 +249,11 @@ async function loadTutorAppointments() {
     }
 }
 
-// NEW FUNCTION to handle cancellation
+//cancel booking
 async function cancelBooking(bookingNo) {
     if (!confirm("Are you sure you want to cancel this student's booking?")) {
         return;
     }
-
     try {
         const response = await fetch(`/api/bookings/${bookingNo}`, {
             method: 'DELETE'
@@ -269,7 +263,7 @@ async function cancelBooking(bookingNo) {
 
         if (response.ok && result.success) {
             alert(result.message);
-            // Reload the appointments list
+            
             loadTutorAppointments(); 
         } else {
             alert(`Error: ${result.message}`);
@@ -280,7 +274,7 @@ async function cancelBooking(bookingNo) {
     }
 }
 
-// --- LOGOUT FUNCTION (JWT ENABLED) ---
+//handle logout
 async function handleLogout() {
     try {
         await fetch('/api/auth/logout', { method: 'POST' }); 
@@ -292,9 +286,9 @@ async function handleLogout() {
     }
 }
 
-// --- PAGE INITIALIZATION ---
+//page initialize
 window.addEventListener('DOMContentLoaded', () => {
-    // Get user data from session storage
+    
     const userData = sessionStorage.getItem('userData');
     if (!userData) {
         alert("You are not logged in.");
@@ -303,28 +297,24 @@ window.addEventListener('DOMContentLoaded', () => {
     }
     CURRENT_USER = JSON.parse(userData);
 
-    // Check if user is a Tutor
     if (CURRENT_USER.role !== 'Tutor') {
         alert("Access denied. This page is for tutors only.");
         window.location.href = 'Login.html';
         return;
     }
 
-    // Add logout functionality
     const logoutBtn = document.querySelector('.logout');
     if (logoutBtn) {
         logoutBtn.addEventListener('click', handleLogout);
     }
 
-    // Load the tutor's schedule
     loadAvailability();
     loadTutorAppointments();
 
-    // NEW EVENT LISTENER for the cancel buttons
     const apptListContainer = document.querySelector('.appointments-list');
     apptListContainer.addEventListener('click', function(event) {
         if (event.target.classList.contains('cancel-btn')) {
-            // Find the parent card and get its booking number
+            
             const card = event.target.closest('.appointment-card');
             const bookingNo = card.dataset.bookingNo;
             if (bookingNo) {

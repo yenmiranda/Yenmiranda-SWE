@@ -1,3 +1,5 @@
+//Booking Class
+
 import db from '../db.js';
 
 //constructor for booking

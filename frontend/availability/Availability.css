@@ -1,99 +1,59 @@
-/* reset all default spacing */
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* COLOR PALETTE: I'm setting up SHSU colors plus complementary colors */
 :root {
     --shsu-orange: #FF5100;
-    /* Primary SHSU orange */
-    
     --shsu-orange-dark: #CC4100;
-    /* I'm creating a darker orange for hover states */
-    
     --shsu-blue: #00008B;
-    /* Dark blue accent color */
-    
     --shsu-white: #FFFFFF;
-    /* White */
-    
     --shsu-gray-dark: #2C2C2C;
-    /* I'm setting dark gray for text */
-    
     --shsu-gray-medium: #6C6C6C;
-    /* I'm setting medium gray for secondary text */
-    
     --shsu-gray-light: #F5F5F5;
-    /* I'm setting light gray for backgrounds */
-    
     --shsu-gray-border: #DDDDDD;
-    /* Border color */
-    
     --success-green: #28A745;
-    /* I'm setting green for success messages */
-    
     --success-bg: #D4EDDA;
-    /* Light green background */
+    
 }
 
-/* BODY: Overall page setup */
 body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  /* Modern, clean font */
-
   background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
-  /* Subtle gradient background */
-
-  color: var(--shsu-gray-dark);
-  /* Default text color */
-
+  color: var(--shsu-gray-dark);  
   line-height: 1.6;
-  /* Spacing between lines */
-
   min-height: 100vh;
-  /* Full screen height minimum */
-
   display: flex;
   flex-direction: column;
-  /* Stacks header, main, footer vertically */
+  
 }
 
-/* HEADER with name and logout */
 header {
   background: linear-gradient(135deg, var(--shsu-orange) 0%, var(--shsu-orange-dark) 100%);
-  /* Orange gradient background */
-
   color: var(--shsu-white);
-  /* White text */
-
   text-align: center;
-  /* Centers content */
-
   padding: 2.5rem 1rem;
-  /* Space inside header */
-
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  /* Shadow for depth */
+  
 }
 
-/* Main title */
 header h1 {
   font-size: 2.7rem;
   font-weight: 700;
   color: var(--shsu-white);
   margin-bottom: 0.5rem;
+
 }
 
-/* Subtitle under the title */
 header p {
   font-size: 1.2rem;
   font-weight: 300;
   opacity: 0.95;
+  
 }
 
-/* logout button on top-right */
 .logout {
     position: absolute;
     top: 1rem;
@@ -121,7 +81,6 @@ header p {
     transform: translateY(0);
 }
 
-/* box wrapping the schedule */
 .availability-box {
   width: 90%;
   max-width: 50%;
@@ -132,54 +91,45 @@ header p {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-/* title of box */
 .availability-box h3 {
   text-align: center;
   margin-bottom: 15px;
 }
 
-/* paragraph text */
 .availability-box p {
   text-align: center;
   margin-bottom: 20px;
 }
 
-/* schedule styles */
 .schedule {
   margin-top: 10px;
 }
 
-/* each day row */
 .day {
   border-bottom: 1px solid #ccc;
   padding: 8px 0;
 }
 
-/* day label text */
 .day label {
   margin-left: 6px;
   font-weight: 500;
 }
 
-/* space between from days and times inside each day */
 .times {
   margin-top: 5px;
   margin-left: 30px;
 }
 
-/* each time slot line */
 .slot {
   display: flex;
   align-items: center;
   margin-bottom: 10px;
 }
 
-/* spacing for time input fields */
 .slot input[type="time"] {
   margin: 0 5px;
 }
 
-/* dropdown for selecting start and end times */
 .time-select {
   padding: 4px 6px;
   border-radius: 6px;
@@ -187,25 +137,22 @@ header p {
   background-color: var(--shsu-white);
   font-size: 14px;
   color: var(--shsu-gray-dark);
-  width: 280px; /* increased so full text fits */
+  width: 280px; 
   transition: border-color 0.25s ease, box-shadow 0.25s ease;
   outline: none;
-  appearance: auto; /* keeps default arrow */
-  margin-right: 10px; /* space between dropdown and trash icon */
+  appearance: auto; 
+  margin-right: 10px; 
 }
 
-/* orange border on hover */
 .time-select:hover {
   border-color: var(--shsu-orange);
 }
 
-/* orange border and glow on focus */
 .time-select:focus {
   border-color: var(--shsu-orange);
   box-shadow: 0 0 4px rgba(255, 81, 0, 0.4);
 }
 
-/* save schedule button */
 .save-button {
   display: block;
   margin: 20px auto 0 auto;
@@ -218,12 +165,10 @@ header p {
   font-size: 16px;
 }
 
-/* hover for save button */
 .save-button:hover {
   background: #002080;
 }
 
-/* trash can */
 .del-btn {
   background: none;
   border: none;
@@ -232,13 +177,11 @@ header p {
   font-size: 20px;
 }
 
-/* trash icon hover effect */
 .del-btn:hover {
   color: darkred;
   transform: scale(1.2);
 }
 
-/* add button */
 .add-btn {
   background: #007bff;
   color: white;
@@ -248,37 +191,31 @@ header p {
   cursor: pointer;
 }
 
-/* hover for add button */
 .add-btn:hover {
   background: #0056b3;
 }
 
-/* gray-out effect when not editable */
 .grayed-out {
   opacity: 0.6;
   filter: grayscale(30%);
   user-select: none;
 }
 
-/* disable clicks inside grayed-out area */
 .grayed-out input,
 .grayed-out select,
 .grayed-out button {
   pointer-events: none;
 }
 
-/* disable clicks on labels too when grayed out */
 .grayed-out label {
   pointer-events: none;
 }
 
-/* hide add and trash icons when grayed out */
 .grayed-out .add-btn,
 .grayed-out .del-btn {
   display: none;
 }
 
-/* keeps edit and save clickable while schedule is grayed out */
 .grayed-out .edit-button,
 .grayed-out .save-button {
   pointer-events: auto;
@@ -286,7 +223,6 @@ header p {
   filter: none;
 }
 
-/* edit button styling */
 .edit-button {
   display: block;
   margin: 20px auto 0 auto;
@@ -299,310 +235,185 @@ header p {
   font-size: 16px;
 }
 
-/* hover for edit button */
 .edit-button:hover {
   background: #555;
 }
 
-/* UPCOMING APPOINTMENTS SECTION: I'm creating section for appointments at bottom */
 .appointments-section {
     background: linear-gradient(135deg, var(--shsu-blue) 0%, #000070 100%);
-    /* I'm using blue gradient background */
-    
     color: var(--shsu-white);
-    /* I'm using white text */
-    
     padding: 4rem 1.5rem 3rem;
-    /* I'm adding space inside section */
+    
 }
 
 .appointments-container {
     max-width: 900px;
-    /* I'm limiting width for readability */
-    
     margin: 0 auto;
-    /* I'm centering container */
+    
 }
 
 .appointments-section h2 {
     text-align: center;
-    /* I'm centering heading */
-    
     font-size: 2.2rem;
-    /* I'm using large heading */
-    
     margin-bottom: 2.5rem;
-    /* I'm adding space below heading */
-    
     color: var(--shsu-white);
-    /* I'm using white text */
+    
 }
 
-/* APPOINTMENTS LIST: I'm creating container for appointment cards */
 .appointments-list {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    /* I'm creating responsive grid that adapts to screen size */
-    
     gap: 1.5rem;
-    /* I'm adding space between cards */
-    
     margin-bottom: 3rem;
-    /* I'm adding space below list */
+    
 }
 
-/* APPOINTMENT CARD: I'm styling individual appointment */
 .appointment-card {
     background: var(--shsu-white);
-    /* I'm using white background */
-    
     color: var(--shsu-gray-dark);
-    /* I'm using dark text */
-    
     padding: 1.5rem;
-    /* I'm adding space inside card */
-    
     border-radius: 10px;
-    /* I'm adding rounded corners */
-    
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    /* I'm adding shadow for depth */
-    
     transition: all 0.3s ease;
-    /* I'm adding smooth transitions */
+    
 }
 
 .appointment-card:hover {
     transform: translateY(-4px);
-    /* I'm lifting card on hover */
-    
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
-    /* I'm making shadow larger on hover */
+    
 }
 
-/* APPOINTMENT HEADER: I'm styling course and date at top of card */
 .appointment-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    /* I'm spacing course and date on opposite sides */
-    
     margin-bottom: 1rem;
-    /* I'm adding space below header */
-    
     padding-bottom: 1rem;
-    /* I'm adding space inside */
-    
     border-bottom: 2px solid var(--shsu-gray-light);
-    /* I'm adding divider line */
+    
 }
 
 .appointment-course {
     font-weight: 700;
-    /* I'm making it bold */
-    
     font-size: 1.1rem;
-    /* I'm using larger text */
-    
     color: var(--shsu-orange);
-    /* I'm using orange for course code */
+    
 }
 
 .appointment-date {
     font-weight: 600;
-    /* I'm making it semi-bold */
-    
     color: var(--shsu-blue);
-    /* I'm using blue for date */
-    
     font-size: 0.95rem;
-    /* I'm using normal text size */
+    
 }
 
-/* APPOINTMENT DETAILS: I'm styling time, tutor, location info */
 .appointment-details {
     display: flex;
     flex-direction: column;
-    /* I'm stacking details vertically */
-    
     gap: 0.6rem;
-    /* I'm adding space between each detail */
+    
 }
 
 .appointment-details p {
     font-size: 0.95rem;
-    /* I'm using normal text size */
-    
     line-height: 1.5;
-    /* I'm setting line spacing */
-    
     color: var(--shsu-gray-dark);
-    /* I'm using dark gray text */
+    
 }
 
-/* NO APPOINTMENTS MESSAGE: I'm styling message when no appointments exist */
 .no-appointments {
     text-align: center;
-    /* I'm centering text */
-    
     padding: 3rem;
-    /* I'm adding space inside */
-    
     background: rgba(255, 255, 255, 0.1);
-    /* I'm using semi-transparent white */
-    
     border-radius: 10px;
-    /* I'm adding rounded corners */
-    
     border: 2px dashed rgba(255, 255, 255, 0.3);
-    /* I'm adding dashed border */
+    
 }
 
 .no-appointments p {
     font-size: 1.1rem;
-    /* I'm using larger text */
-    
     margin-bottom: 0.5rem;
-    /* I'm adding space between paragraphs */
+    
 }
 
-/* BACK TO TOP CONTAINER: I'm creating container for back to top link */
 .back-to-top-container {
     text-align: center;
-    /* I'm centering link */
-    
     margin-top: 2.5rem;
-    /* I'm adding space above */
+    
 }
 
-/* BACK TO TOP LINK: I'm styling the link that takes you to top of page */
 .back-to-top {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    /* I'm adding space between arrow and text */
-    
     color: var(--shsu-white);
-    /* I'm using white text */
-    
     text-decoration: none;
-    /* I'm removing underline */
-    
     font-size: 1.05rem;
-    /* I'm using slightly larger text */
-    
     font-weight: 600;
-    /* I'm making it semi-bold */
-    
     padding: 0.8rem 1.5rem;
-    /* I'm adding space inside */
-    
     background: rgba(255, 255, 255, 0.1);
-    /* I'm using semi-transparent white background */
-    
     border: 2px solid var(--shsu-white);
-    /* I'm adding white border */
-    
     border-radius: 50px;
-    /* I'm making it pill-shaped */
-    
     transition: all 0.3s ease;
-    /* I'm adding smooth transitions */
+    
 }
 
-/* FIXED ASIDE BUTTON: I'm creating a button that stays on screen when scrolling */
 .appointments-aside {
     position: fixed;
-    /* I'm making it stay in place when scrolling */
-    
     right: 20px;
-    /* I'm positioning it 20px from right edge */
-    
     bottom: 100px;
-    /* I'm positioning it 100px from bottom */
-    
     z-index: 1000;
-    /* I'm making sure it appears above other content */
+    
 }
 
 .appointments-btn {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    /* I'm adding space between icon and text */
-    
     background: linear-gradient(135deg, var(--shsu-orange) 0%, var(--shsu-orange-dark) 100%);
-    /* I'm using orange gradient to match theme */
-    
     color: var(--shsu-white);
-    /* I'm using white text */
-    
     padding: 0.9rem 1.3rem;
-    /* I'm adding space inside button */
-    
     border-radius: 50px;
-    /* I'm making it pill-shaped */
-    
     text-decoration: none;
-    /* I'm removing underline from link */
-    
     font-weight: 600;
-    /* I'm making text semi-bold */
-    
     font-size: 0.95rem;
-    /* I'm setting text size */
-    
     box-shadow: 0 4px 12px rgba(255, 81, 0, 0.3);
-    /* I'm adding orange shadow for depth */
-    
     transition: all 0.3s ease;
-    /* I'm adding smooth transitions */
-    
     cursor: pointer;
-    /* I'm showing hand cursor */
+    
 }
 
 .appointments-btn:hover {
     transform: translateY(-3px);
-    /* I'm lifting button up on hover */
-    
     box-shadow: 0 6px 16px rgba(255, 81, 0, 0.4);
-    /* I'm making shadow larger on hover */
+    
 }
 
 .appointments-btn:active {
     transform: translateY(-1px);
-    /* I'm slightly pressing down when clicked */
+    
 }
 
 .back-to-top:hover {
     background: var(--shsu-white);
-    /* I'm changing to solid white on hover */
-    
     color: var(--shsu-blue);
-    /* I'm changing text to blue on hover */
-    
     transform: translateY(-3px);
-    /* I'm lifting link up */
-    
     box-shadow: 0 4px 12px rgba(255, 255, 255, 0.3);
-    /* I'm adding white shadow */
+    
 }
 
 .back-to-top:active {
     transform: translateY(-1px);
-    /* I'm slightly pressing down when clicked */
+    
 }
 
 .top-arrow {
     font-size: 1.3rem;
-    /* I'm making arrow larger */
-    
     font-weight: bold;
-    /* I'm making it bold */
+    
 }
 
-/* FOOTER: Bottom section */
 footer {
   background: var(--shsu-gray-dark);
   color: var(--shsu-white);
@@ -618,9 +429,8 @@ footer {
     text-align: right;
 }
 
-/* Cancel button styling */
 .cancel-btn {
-    background-color: #DC3545; /* A standard red */
+    background-color: #DC3545; 
     color: white;
     border: none;
     padding: 0.6rem 1.2rem;
@@ -633,7 +443,7 @@ footer {
 }
 
 .cancel-btn:hover {
-    background-color: #C82333; /* Darker red on hover */
+    background-color: #C82333; 
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(220, 53, 69, 0.3);
 }

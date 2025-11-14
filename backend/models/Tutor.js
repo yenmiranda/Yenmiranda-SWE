@@ -1,3 +1,5 @@
+//Tutor class
+
 import User from './User.js';
 import db from '../db.js';
 

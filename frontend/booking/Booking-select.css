@@ -801,3 +801,141 @@ footer p {
     box-shadow: 0 4px 8px rgba(220, 53, 69, 0.3);
 
 }
+
+/* VIEW ALL BUTTON - conditional visibility */
+.view-all-btn {
+    display: none; /* Hidden by default */
+    margin: 0 auto 2rem;
+    padding: 0.9rem 2rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--shsu-blue);
+    background: var(--shsu-white);
+    border: 2px solid var(--shsu-white);
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.view-all-btn.show {
+    display: block;
+}
+
+.view-all-btn:hover {
+    background: transparent;
+    color: var(--shsu-white);
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.3);
+}
+
+/* MODAL STYLES */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 1001;
+    animation: fadeIn 0.3s ease;
+}
+
+.modal-overlay.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+}
+
+.modal-content {
+    background: var(--shsu-white);
+    border-radius: 16px;
+    max-width: 800px;
+    width: 100%;
+    max-height: 85vh;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    animation: slideUp 0.3s ease;
+}
+
+.modal-header {
+    background: linear-gradient(135deg, var(--shsu-blue) 0%, #000070 100%);
+    color: var(--shsu-white);
+    padding: 1.5rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header h2 {
+    font-size: 1.8rem;
+    margin: 0;
+}
+
+.appointment-count {
+    font-size: 1rem;
+    opacity: 0.9;
+    font-weight: 400;
+}
+
+.modal-close {
+    background: none;
+    border: none;
+    color: var(--shsu-white);
+    font-size: 2rem;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.modal-close:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: rotate(90deg);
+}
+
+.modal-body {
+    padding: 2rem;
+    overflow-y: auto;
+    max-height: calc(85vh - 90px);
+}
+
+.modal-appointments-grid {
+    display: grid;
+    gap: 1.5rem;
+}
+
+.modal-appointment-card {
+    background: var(--shsu-gray-light);
+    padding: 1.5rem;
+    border-radius: 10px;
+    border-left: 4px solid var(--shsu-orange);
+    transition: all 0.3s ease;
+}
+
+.modal-appointment-card:hover {
+    transform: translateX(5px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Add these to your existing @keyframes if you don't have them */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

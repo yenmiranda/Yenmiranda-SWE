@@ -1,2 +1,0 @@
-# SWE
-Group Project

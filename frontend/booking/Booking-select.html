@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<!-- I'm telling the browser we're using HTML5 -->
+
+<html lang="en">
+<!-- I'm creating the main container for entire webpage -->
+
+<head>
+    <!-- HEAD SECTION: I'm including information about the page -->
+    
+    <meta charset="UTF-8">
+    <!-- I'm setting character encoding -->
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- I'm making the page responsive on mobile -->
+    
+    <title>Study Buddy - Select Session</title>
+    <!-- I'm setting the browser tab title -->
+    
+    <link rel="stylesheet" href="/Booking-select.css">
+    <!-- I'm linking to CSS file for styling -->
+</head>
+
+<body>
+    <!-- BODY SECTION: All visible content -->
+    
+    <!-- FIXED ASIDE BUTTON: Links to upcoming appointments, stays fixed when scrolling -->
+    <aside class="appointments-aside">
+        <a href="#upcoming-appointments" class="appointments-btn">
+            <span class="btn-icon">📅</span>
+            <span class="btn-text">Upcoming Appointments</span>
+        </a>
+    </aside>
+    <!-- I'm creating a fixed button that always shows on screen -->
+    
+    <!-- HEADER: Top banner -->
+    <header>
+        <h1>Study Buddy</h1>
+        <!-- Main heading -->
+        
+        <p>Select Your Tutoring Session</p>
+        <!-- Subtitle -->
+
+        <!-- LOGOUT BUTTON: Allows user to log out and return to login page -->
+        <button class="logout-btn">Logout</button>
+        <!-- onclick calls handleLogout function when clicked -->
+    </header>
+
+    <!-- MAIN CONTENT: I'm creating the session selection form -->
+    <main>
+        
+        <!-- STEP INDICATOR: I'm showing user where they are in booking process -->
+        <div class="step-indicator">
+            <div class="step active">
+                <div class="step-number">1</div>
+                <div class="step-label">Select Session</div>
+            </div>
+            <div class="step-divider"></div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <div class="step-label">Choose Tutor</div>
+            </div>
+        </div>
+        <!-- I'm showing that we're on step 1 of 2 -->
+
+        <!-- SELECTION SECTION: Main form for choosing session details -->
+        <div id="selection-section">
+            
+            <h2>What do you need help with?</h2>
+            <!-- Section heading -->
+            
+            <form id="selection-form">
+                <!-- I'm creating the form container -->
+                
+                <!-- COURSE SELECTION -->
+                <div class="form-group">
+                    
+                    <label for="course-select">Select Course:</label>
+                    <!-- I'm creating a label for course dropdown -->
+                    
+                    <select id="course-select" required>
+                        <!-- I'm creating a dropdown for course selection -->
+                        
+                        <option value="" disabled selected>-- Choose a Course --</option>
+                        <!-- I'm setting the default placeholder option -->
+                        
+                        <option value="COSC 4319">COSC 4319 - Software Engineering</option>
+                        <option value="COSC 3319">COSC 3319 - Data Structures and Algorithms</option>
+                        <!-- I'm listing available courses -->
+                    </select>
+                </div>
+
+                <!-- DATE SELECTION -->
+                <div class="form-group">
+                    
+                    <label for="date-select">Select Date:</label>
+                    <!-- I'm creating a label for date input -->
+                    
+                    <input type="date" id="date-select" required>
+                    <!-- I'm creating a date picker input - shows calendar -->
+                    <!-- My JavaScript will set min date to today and restrict to weekdays -->
+                </div>
+
+                <!-- TIME SLOT SELECTION -->
+                <div class="form-group">
+                    
+                    <label for="time-select">Select Time Slot (1-hour sessions):</label>
+                    <!-- I'm creating a label for time dropdown -->
+                    
+                    <select id="time-select" required>
+                        <!-- I'm creating a dropdown for hourly time slots in military time -->
+                        
+                        <option value="" disabled selected>-- Choose a Time Slot --</option>
+                        <!-- I'm setting the default placeholder -->
+                        
+                        <!-- Military time format: 00:00 to 23:00 -->
+                        <option value="00:00-01:00">00:00 - 01:00 (12:00 AM - 1:00 AM)</option>
+                        <option value="01:00-02:00">01:00 - 02:00 (1:00 AM - 2:00 AM)</option>
+                        <option value="02:00-03:00">02:00 - 03:00 (2:00 AM - 3:00 AM)</option>
+                        <option value="03:00-04:00">03:00 - 04:00 (3:00 AM - 4:00 AM)</option>
+                        <option value="04:00-05:00">04:00 - 05:00 (4:00 AM - 5:00 AM)</option>
+                        <option value="05:00-06:00">05:00 - 06:00 (5:00 AM - 6:00 AM)</option>
+                        <option value="06:00-07:00">06:00 - 07:00 (6:00 AM - 7:00 AM)</option>
+                        <option value="07:00-08:00">07:00 - 08:00 (7:00 AM - 8:00 AM)</option>
+                        <option value="08:00-09:00">08:00 - 09:00 (8:00 AM - 9:00 AM)</option>
+                        <option value="09:00-10:00">09:00 - 10:00 (9:00 AM - 10:00 AM)</option>
+                        <option value="10:00-11:00">10:00 - 11:00 (10:00 AM - 11:00 AM)</option>
+                        <option value="11:00-12:00">11:00 - 12:00 (11:00 AM - 12:00 PM)</option>
+                        <option value="12:00-13:00">12:00 - 13:00 (12:00 PM - 1:00 PM)</option>
+                        <option value="13:00-14:00">13:00 - 14:00 (1:00 PM - 2:00 PM)</option>
+                        <option value="14:00-15:00">14:00 - 15:00 (2:00 PM - 3:00 PM)</option>
+                        <option value="15:00-16:00">15:00 - 16:00 (3:00 PM - 4:00 PM)</option>
+                        <option value="16:00-17:00">16:00 - 17:00 (4:00 PM - 5:00 PM)</option>
+                        <option value="17:00-18:00">17:00 - 18:00 (5:00 PM - 6:00 PM)</option>
+                        <option value="18:00-19:00">18:00 - 19:00 (6:00 PM - 7:00 PM)</option>
+                        <option value="19:00-20:00">19:00 - 20:00 (7:00 PM - 8:00 PM)</option>
+                        <option value="20:00-21:00">20:00 - 21:00 (8:00 PM - 9:00 PM)</option>
+                        <option value="21:00-22:00">21:00 - 22:00 (9:00 PM - 10:00 PM)</option>
+                        <option value="22:00-23:00">22:00 - 23:00 (10:00 PM - 11:00 PM)</option>
+                        <option value="23:00-00:00">23:00 - 00:00 (11:00 PM - 12:00 AM)</option>
+                        <!-- I'm providing all 24 hours available -->
+                    </select>
+                </div>
+
+                <!-- CHECK AVAILABILITY BUTTON: Shows when all 3 fields filled -->
+                <button type="button" class="check-btn" id="check-availability-btn" style="display: none;">
+                    Check Availability
+                </button>
+                <!-- type="button" prevents form submission -->
+                <!-- I'm hiding this until all 3 fields are filled -->
+                <!-- When clicked, this checks if tutors are available -->
+
+                <!-- AVAILABILITY CHECK RESULT: Shows after clicking Check Availability -->
+                <div id="availability-result" style="display: none;">
+                    <!-- I'm hiding this until check availability button is clicked -->
+                    
+                    <!-- SUCCESS MESSAGE: Shows when tutors are available -->
+                    <div id="available-message" class="availability-message success-message" style="display: none;">
+                        <div class="message-icon">✓</div>
+                        <!-- Checkmark icon -->
+                        
+                        <div class="message-content">
+                            <h3>Tutors Available!</h3>
+                            <p><span id="tutor-count"></span> tutor(s) available for your selected time.</p>
+                            <!-- I'm showing number of available tutors -->
+                        </div>
+                    </div>
+
+                    <!-- UNAVAILABLE MESSAGE: Shows when no tutors available -->
+                    <div id="unavailable-message" class="availability-message warning-message" style="display: none;">
+                        <div class="message-icon">⚠️</div>
+                        <!-- Warning icon -->
+                        
+                        <div class="message-content">
+                            <h3>No Tutors Available</h3>
+                            <p>No tutors available for <strong><span id="unavailable-time"></span></strong></p>
+                            <!-- I'm showing the time they selected -->
+                            
+                            <p class="suggestion-text">Try these nearby available times:</p>
+                            <!-- Suggestion text -->
+                            
+                            <div id="alternative-times" class="alternative-times-container">
+                                <!-- I'll insert alternative clickable time buttons here with JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CONTINUE BUTTON: Only shows when tutors are available -->
+                <button type="submit" class="submit-btn" id="continue-btn" style="display: none;">
+                    Continue to Choose Tutor →
+                </button>
+                <!-- I'm hiding this until availability is confirmed -->
+            </form>
+
+        </div>
+
+    </main>
+
+    <!-- UPCOMING APPOINTMENTS SECTION: Shows user's scheduled appointments -->
+    <section id="upcoming-appointments" class="appointments-section">
+        <div class="appointments-container">
+            
+            <h2>Your Upcoming Appointments</h2>
+
+            <div class="appointments-list">
+                <div class="no-appointments">
+                    <p>You don't have any upcoming appointments yet.</p>
+                    <p>Book your first session above!</p>
+                </div>
+            </div> <div class="back-to-top-container">
+                <a href="#" class="back-to-top">
+                    <span class="top-arrow">↑</span>
+                    Back to Top
+                </a>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- FOOTER: Bottom of page -->
+    <footer>
+        <p>&copy; 2025 Study Buddy | Sam Houston State University</p>
+        <!-- Copyright info -->
+    </footer>
+
+    <!-- JAVASCRIPT: Makes page interactive -->
+    <script src="/booking-select.js"></script>
+    <!-- I'm linking to JavaScript file for this page -->
+
+</body>
+</html>

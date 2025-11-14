@@ -60,7 +60,7 @@ router.post("/create", protect, async (req, res) => {
   } catch (error) {
     await conn.rollback();
     console.error(error);
-    res.status(400).json({ error: e.message || "Failed to save availability" });
+    res.status(400).json({ error: error.message || "Failed to save availability" });
   } finally {
     conn.release();
   }
@@ -112,10 +112,16 @@ router.get("/mine", protect, async (req, res) => {
     rows.forEach(row => {
       const dt = new Date(row.TimeSlot);
       const day = days[dt.getDay()];
-      const startTime = dt.toTimeString().slice(0,5); 
+      const startTime = dt.toTimeString().slice(0,5);
       
       const startHour = parseInt(startTime.split(':')[0]);
-      const endHour = String(startHour + 1).padStart(2, '0');
+      
+      let endHour;
+      if (startHour === 23) {
+        endHour = '00';
+      } else {
+        endHour = String(startHour + 1).padStart(2, '0');
+      }
       const timeSlot = `${startTime}-${endHour}:00`;
 
       const key = `${day}-${timeSlot}`;

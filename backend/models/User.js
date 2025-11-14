@@ -39,7 +39,7 @@ class User {
             console.log("User registered:", this.firstName, this.role);
             return true;
         } catch (error) {
-            console.error("Error in clickRegister:", err.message);
+            console.error("Error in clickRegister:", error.message);
             throw error; 
         }
     }

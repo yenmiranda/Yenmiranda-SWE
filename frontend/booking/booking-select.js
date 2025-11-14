@@ -349,3 +349,77 @@ window.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
+// MODAL FUNCTIONALITY
+function updateViewAllButton(totalAppointments) {
+    const viewAllBtn = document.getElementById('viewAllBtn');
+    const totalCount = document.getElementById('totalCount');
+    
+    if (totalAppointments > 2) {
+        viewAllBtn.classList.add('show');
+        viewAllBtn.style.display = 'block';
+        totalCount.textContent = totalAppointments;
+    } else {
+        viewAllBtn.classList.remove('show');
+        viewAllBtn.style.display = 'none';
+    }
+}
+
+function openModal() {
+    // Populate modal with all appointments here
+    // You'll need to fetch/get your appointments data and render them
+    renderModalAppointments();
+    
+    document.getElementById('appointmentsModal').classList.add('active');
+    document.body.style.overflow = 'hidden'; // Prevent background scrolling
+}
+
+function closeModal() {
+    document.getElementById('appointmentsModal').classList.remove('active');
+    document.body.style.overflow = ''; // Restore scrolling
+}
+
+function closeModalOutside(event) {
+    if (event.target === event.currentTarget) {
+        closeModal();
+    }
+}
+
+function renderModalAppointments() {
+    const modalList = document.getElementById('modalAppointmentsList');
+    const modalCount = document.getElementById('modalCount');
+    
+    // TODO: Get your appointments from your backend/API
+    // For now, this is a placeholder - you'll replace with your actual data fetching
+    const appointments = []; // Your appointments array
+    
+    modalCount.textContent = appointments.length;
+    modalList.innerHTML = '';
+    
+    appointments.forEach(apt => {
+        const card = document.createElement('div');
+        card.className = 'modal-appointment-card';
+        card.innerHTML = `
+            <div class="appointment-header">
+                <div class="appointment-course">${apt.course}</div>
+                <div class="appointment-date">${apt.date}</div>
+            </div>
+            <div class="appointment-details">
+                <p><strong>Time:</strong> ${apt.time}</p>
+                <p><strong>Tutor:</strong> ${apt.tutor}</p>
+                <p><strong>Location:</strong> ${apt.location}</p>
+            </div>
+            <div class="appointment-actions">
+                <button class="cancel-btn" onclick="cancelAppointment(${apt.id})">Cancel Appointment</button>
+            </div>
+        `;
+        modalList.appendChild(card);
+    });
+}
+
+// Close modal with Escape key
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+        closeModal();
+    }
+});

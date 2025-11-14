@@ -139,6 +139,11 @@
                     Back to Top
                 </a>
             </div>
+
+                <button class="view-all-btn" id="viewAllBtn" onclick="openModal()" style="display: none;">
+                View All <span id="totalCount"></span> Appointments →
+                </button>
+
         </div>
     </section>
     
@@ -146,7 +151,24 @@
         <p>&copy; 2025 Study Buddy | Sam Houston State University</p>
      </footer>
 
-     <script src="/booking-select.js"></script>
+     <script src="../booking-select.js"></script>
     
+     <div class="modal-overlay" id="appointmentsModal" onclick="closeModalOutside(event)">
+    <div class="modal-content" onclick="event.stopPropagation()">
+        <div class="modal-header">
+            <div>
+                <h2>All Your Appointments</h2>
+                <div class="appointment-count"><span id="modalCount"></span> upcoming sessions</div>
+            </div>
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+        </div>
+        <div class="modal-body">
+            <div class="modal-appointments-grid" id="modalAppointmentsList">
+                <!-- Appointments will be inserted here via JavaScript -->
+            </div>
+        </div>
+    </div>
+</div>
+
 </body>
 </html>

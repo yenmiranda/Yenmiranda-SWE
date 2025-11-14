@@ -366,8 +366,7 @@ function updateViewAllButton(totalAppointments) {
 }
 
 function openModal() {
-    // Populate modal with all appointments here
-    // You'll need to fetch/get your appointments data and render them
+
     renderModalAppointments();
     
     document.getElementById('appointmentsModal').classList.add('active');
@@ -389,9 +388,7 @@ function renderModalAppointments() {
     const modalList = document.getElementById('modalAppointmentsList');
     const modalCount = document.getElementById('modalCount');
     
-    // TODO: Get your appointments from your backend/API
-    // For now, this is a placeholder - you'll replace with your actual data fetching
-    const appointments = []; // Your appointments array
+    const appointments = []; 
     
     modalCount.textContent = appointments.length;
     modalList.innerHTML = '';

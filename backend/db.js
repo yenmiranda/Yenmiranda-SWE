@@ -20,8 +20,8 @@ pool.getConnection()
       console.log("Database connected successfully!"); 
       c.release(); 
   })
-  .catch(err => {
-    console.error("Database connection failed:", err.message);
+  .catch(error => {
+    console.error("Database connection failed:", error.message);
   });
 
 export default pool;

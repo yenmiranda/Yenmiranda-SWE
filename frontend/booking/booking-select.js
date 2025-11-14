@@ -133,8 +133,8 @@ function findAlternativeTimes(selectedTime) {
     const selectedStartHour = parseInt(selectedTime.split(':')[0]);
 
     DAY_AVAILABILITY.forEach(slot => {
-        const slotTime = new Date(slot.TimeSlot); // Removed + 'Z' bug
-        const slotStartHour = slotTime.getHours(); // Use getHours() for local
+        const slotTime = new Date(slot.TimeSlot);
+        const slotStartHour = slotTime.getHours();
         
         if (slotStartHour !== selectedStartHour && Math.abs(slotStartHour - selectedStartHour) <= 2) {
             const timeSlotValue = `${String(slotStartHour).padStart(2, '0')}:00-${String(slotStartHour + 1).padStart(2, '0')}:00`;
@@ -178,7 +178,6 @@ async function loadStudentAppointments() {
             const dt = new Date(appt.TimeSlot);
             const date = dt.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
             
-            // Calculate time range
             const startTime = dt.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true });
             const endDate = new Date(dt.getTime() + 60 * 60 * 1000); 
             const endTime = endDate.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true });
@@ -186,7 +185,6 @@ async function loadStudentAppointments() {
 
             const card = document.createElement('div');
             card.className = 'appointment-card';
-            // Add booking number to the card's dataset
             card.dataset.bookingNo = appt.BookingNo; 
             
             card.innerHTML = `
@@ -212,7 +210,7 @@ async function loadStudentAppointments() {
     }
 }
 
-// NEW FUNCTION to handle cancellation
+//booking cancellation 
 async function cancelBooking(bookingNo) {
     if (!confirm("Are you sure you want to cancel this booking?")) {
         return;
@@ -255,7 +253,6 @@ checkAvailabilityBtn.addEventListener('click', async () => {
 
     const selectedStartHour = parseInt(time.split(':')[0]);
     
-    // Fixed the timezone/date parsing bug here
     const availableTutorsForSlot = DAY_AVAILABILITY.filter(slot => {
         const slotTime = new Date(slot.TimeSlot);
         return slotTime.getHours() === selectedStartHour;

@@ -1,19 +1,19 @@
-// Filename: models/User.js
+
 import db from '../db.js';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcrypt';//for hashing
 
 class User {
     constructor(firstName, surName, samID, role, refID = null) {
         this.firstName = firstName;
         this.surName = surName;
         this.samID = samID;
-        this.role = role;   // "Tutor" or "Tutee"
+        this.role = role;   
         this.refID = refID;
         this.loggedIn = false;
         this.active = false;
     }
 
-    // clickRegister: adds a new user to the database
+    //adds a new user to the database
     async clickRegister(hashedPassword, hashedSecurityKey) {
         try {
             let roleValue = (this.role === 'Tutor') ? 1 : 0;
@@ -38,13 +38,13 @@ class User {
 
             console.log("User registered:", this.firstName, this.role);
             return true;
-        } catch (err) {
+        } catch (error) {
             console.error("Error in clickRegister:", err.message);
-            throw err; // Re-throw error for the route to catch
+            throw error; 
         }
     }
 
-    // clickLogin: checks credentials and sets login status
+    //checks credentials and sets login status
     async clickLogin(password) {
         try {
             const sql = 'SELECT * FROM Users WHERE SamID = ?';
@@ -57,7 +57,7 @@ class User {
 
             const user = rows[0];
             
-            // Securely compare password with hashed password
+            //securely compare password with hashed password
             const isMatch = await bcrypt.compare(password, user.PasswordHash);
 
             if (isMatch) {
@@ -74,13 +74,13 @@ class User {
                 console.log("Invalid password for SamID:", this.samID);
                 return false;
             }
-        } catch (err) {
-            console.error("Error in clickLogin:", err.message);
+        } catch (error) {
+            console.error("Error in clickLogin:", error.message);
             return false;
         }
     }
 
-    // logOut: marks user as logged out
+    //marks user as logged out
     logOut() {
         this.loggedIn = false;
         this.active = false;

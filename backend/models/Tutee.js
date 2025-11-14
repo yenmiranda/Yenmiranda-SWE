@@ -1,4 +1,3 @@
-// Filename: models/Tutee.js
 import User from './User.js';
 import db from '../db.js';
 
@@ -7,20 +6,13 @@ class Tutee extends User {
         super(firstName, surName, samID, 'Tutee', refID);
     }
 
-    // bookSession: creates a new booking record
+    //creates a new booking record
     async bookSession(availId, tutorRefNo, classNo, timeSlot) {
         let connection;
         try {
-            // BUG FIX: The original code used 'date' and 'time' which
-            // were not defined. We should use the 'timeSlot' argument.
-            // The 'timeSlot' from the frontend should be the full YYYY-MM-DD HH:MM:SS
-            // or equivalent datetime string.
-            // For this to work, the 'timeSlot' parameter must be the full datetime string.
-
             connection = await db.getConnection(); 
             await connection.beginTransaction();
 
-            // Find the specific availability slot and lock it
             const findAvailSql = `
                 SELECT AvailID 
                 FROM Avail 
@@ -36,14 +28,12 @@ class Tutee extends User {
                 return { success: false, message: "Sorry, this time slot is no longer available." };
             }
 
-            // Create the new booking
             const insertBookingSql = `
                 INSERT INTO Bookings (AvailID, StdRefNo, TutorRefNo, ClassNo, TimeSlot)
                 VALUES (?, ?, ?, ?, ?)
             `;
             await connection.execute(insertBookingSql, [availId, this.refID, tutorRefNo, classNo, timeSlot]);
             
-            // Mark the availability slot as booked
             const updateAvailSql = 'UPDATE Avail SET IsBooked = true WHERE AvailID = ?';
             await connection.execute(updateAvailSql, [availId]);
 
@@ -65,7 +55,7 @@ class Tutee extends User {
         }
     }
 
-    // viewBooking: shows all bookings for this tutee
+    //shows all bookings for this tutee
     async viewBooking() {
         try {
             const sql = `

@@ -1,5 +1,6 @@
 import db from '../db.js';
 
+//constructor for booking
 class Booking {
     constructor(bookingNo = null, tutorRefNo = null, stdRefNo = null) {
         this.bookingNo = bookingNo;
@@ -13,6 +14,7 @@ class Booking {
         this.tutorName = null;
     }
 
+    //loads details
     async loadDetails() {
         try {
             if (!this.bookingNo) return false;
@@ -38,16 +40,16 @@ class Booking {
             this.studentName = `${b.StudentFirstName} ${b.StudentLastName}`;
             this.tutorName = `${b.TutorFirstName} ${b.TutorLastName}`;
             return true;
-        } catch (err) {
-            console.error("Error in loadDetails:", err.message);
+        } catch (error) {
+            console.error("Error in loadDetails:", error.message);
             return false;
         }
     }
 
+    //gets appointments for tutor
     async getTutorAppointments() {
         try {
             if (!this.tutorRefNo) return [];
-            // ADDED B.BookingNo to the SELECT statement here
             const sql = `
                 SELECT B.BookingNo, B.TimeSlot, B.ClassNo, C.ClassName,
                     U.FirstName AS StudentFirstName, U.LastName AS StudentLastName
@@ -60,12 +62,13 @@ class Booking {
             `;
             const [rows] = await db.execute(sql, [this.tutorRefNo]);
             return rows;
-        } catch (err) {
-            console.error("Error in getTutorAppointments:", err.message);
+        } catch (error) {
+            console.error("Error in getTutorAppointments:", error.message);
             return [];
         }
     }
 
+    //gets appointments for students
     async getStudentBookings() {
         try {
             if (!this.stdRefNo) return [];
@@ -81,12 +84,13 @@ class Booking {
             `;
             const [rows] = await db.execute(sql, [this.stdRefNo]);
             return rows;
-        } catch (err) {
-            console.error("Error in getStudentBookings:", err.message);
+        } catch (error) {
+            console.error("Error in getStudentBookings:", error.message);
             return [];
         }
     }
 
+    //cancels bookings
     async cancelBooking() {
         let connection;
         try {
@@ -114,9 +118,9 @@ class Booking {
             await connection.commit();
             return { success: true, message: "Booking canceled successfully." };
 
-        } catch (err) {
+        } catch (error) {
             if (connection) await connection.rollback();
-            console.error("Error in cancelBooking transaction:", err.message);
+            console.error("Error in cancelBooking transaction:", error.message);
             return { success: false, message: "A server error occurred." };
         } finally {
             if (connection) connection.release();

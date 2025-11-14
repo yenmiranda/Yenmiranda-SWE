@@ -1,45 +1,21 @@
 <!DOCTYPE html>
-<!-- I'm telling the browser we're using HTML5 -->
-
 <html lang="en">
-<!-- I'm creating the main container for entire webpage -->
-
 <head>
-    <!-- HEAD SECTION: I'm including information about the page -->
-    
     <meta charset="UTF-8">
-    <!-- I'm setting character encoding -->
-    
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- I'm making the page responsive on mobile -->
-    
     <title>Study Buddy - Choose Tutor</title>
-    <!-- I'm setting the browser tab title -->
-    
     <link rel="stylesheet" href="/Booking-confirm.css">
-    <!-- I'm linking to CSS file for styling -->
 </head>
-
 <body>
-    <!-- BODY SECTION: All visible content -->
-    
-    <!-- HEADER: Top banner -->
+
     <header>
-        <h1>Study Buddy</h1>
-        <!-- Main heading -->
-        
+        <h1>Study Buddy</h1>        
         <p>Choose Your Tutor</p>
-        <!-- Subtitle -->
-        
-        <!-- LOGOUT BUTTON: Allows user to log out and return to login page -->
         <button class="logout-btn">Logout</button>
-        <!-- onclick calls handleLogout function when clicked -->
     </header>
 
-    <!-- MAIN CONTENT: Tutor selection -->
     <main>
-        
-        <!-- STEP INDICATOR: I'm showing user where they are in booking process -->
+            
         <div class="step-indicator">
             <div class="step completed">
                 <div class="step-number">✓</div>
@@ -51,65 +27,40 @@
                 <div class="step-label">Choose Tutor</div>
             </div>
         </div>
-        <!-- I'm showing that we're on step 2 of 2, step 1 is complete -->
-
-        <!-- TUTOR SELECTION SECTION: Main content -->
-        <div id="tutor-section">
-            
-            <!-- BOOKING SUMMARY: I'm showing what user selected on Page 1 -->
+    
+        <div id="tutor-section">        
             <div class="booking-summary">
                 <h3>Your Session Details</h3>
-                <!-- Summary heading -->
-                
                 <div class="summary-content">
                     <div class="summary-item">
                         <span class="summary-label">Course:</span>
                         <span class="summary-value" id="summary-course">Loading...</span>
                     </div>
-                    
                     <div class="summary-item">
                         <span class="summary-label">Date:</span>
                         <span class="summary-value" id="summary-date">Loading...</span>
                     </div>
-                    
                     <div class="summary-item">
                         <span class="summary-label">Time:</span>
                         <span class="summary-value" id="summary-time">Loading...</span>
                     </div>
-                    
                     <div class="summary-item">
                         <span class="summary-label">Available Tutors:</span>
                         <span class="summary-value" id="summary-count">Loading...</span>
                     </div>
                 </div>
-                <!-- My JavaScript will populate these values from sessionStorage -->
-                
                 <button type="button" class="back-btn" id="back-btn">
                     ← Change Session Details
                 </button>
-                <!-- Button to go back to Page 1 -->
             </div>
-
-            <!-- TUTOR LIST HEADING -->
             <h2>Available Tutors</h2>
-            <!-- Section heading -->
-            
             <p class="tutor-instructions">Select a tutor to continue with your booking.</p>
-            <!-- Instructions for user -->
-
-            <!-- TUTOR CARDS CONTAINER -->
             <div id="tutor-list" class="tutor-list">
-                <!-- I'll dynamically insert tutor cards here with JavaScript -->
-                
-                <!-- LOADING MESSAGE: Shows while JavaScript loads tutors -->
-                <div class="loading-message">
+                 <div class="loading-message">
                     <p>Loading available tutors...</p>
                 </div>
             </div>
-
-            <!-- CONFIRMATION SECTION: Shows after tutor is selected -->
             <div id="confirmation-section" style="display: none;">
-                
                 <div class="confirmation-card">
                     <div class="confirmation-icon">✓</div>
                     
@@ -148,22 +99,14 @@
                         </button>
                     </div>
                 </div>
-                
             </div>
-
         </div>
-
     </main>
 
-    <!-- FOOTER: Bottom of page -->
     <footer>
         <p>&copy; 2025 Study Buddy | Sam Houston State University</p>
-        <!-- Copyright info -->
+        
     </footer>
-
-    <!-- JAVASCRIPT: Makes page interactive -->
-    <script src="/booking-confirm.js"></script>
-    <!-- I'm linking to JavaScript file for this page -->
-
+  <script src="/booking-confirm.js"></script>
 </body>
 </html>

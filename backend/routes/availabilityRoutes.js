@@ -4,6 +4,7 @@ import { protect } from '../middleware/authMiddleware.js';
 
 const router = Router();
 
+//create availability
 router.post("/create", protect, async (req, res) => {
   const items = Array.isArray(req.body) ? req.body : [req.body];
   const days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
@@ -56,15 +57,16 @@ router.post("/create", protect, async (req, res) => {
 
     await conn.commit();
     res.status(201).json({ ok: true, message: "Availability saved for 12 weeks" });
-  } catch (e) {
+  } catch (error) {
     await conn.rollback();
-    console.error(e);
+    console.error(error);
     res.status(400).json({ error: e.message || "Failed to save availability" });
   } finally {
     conn.release();
   }
 });
 
+//check for open slots
 router.get("/open", async (req, res) => {
   const classNo = req.query.classNo || req.query.course || req.query.selectedCourse;
   const date    = req.query.date || req.query.selectedDate;
@@ -81,12 +83,13 @@ router.get("/open", async (req, res) => {
       [classNo, date]
     );
     res.json(rows);
-  } catch (e) {
-    console.error(e);
+  } catch (error) {
+    console.error(error);
     res.status(500).json({ error: "Error fetching open slots" });
   }
 });
 
+//fetches availability of tutor
 router.get("/mine", protect, async (req, res) => {
 
   const { refNo: tutorRefNo } = req.user; 
@@ -137,8 +140,8 @@ router.get("/mine", protect, async (req, res) => {
     }));
 
     res.json(schedule);
-  } catch (e) {
-    console.error(e);
+  } catch (error) {
+    console.error(error);
     res.status(500).json({ error: "Error fetching your availability" });
   }
 });

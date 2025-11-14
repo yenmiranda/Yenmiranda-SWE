@@ -1,4 +1,3 @@
-// Filename: models/Tutor.js
 import User from './User.js';
 import db from '../db.js';
 
@@ -7,6 +6,7 @@ class Tutor extends User {
         super(firstName, surName, samID, 'Tutor', refID);
     }
     
+    //sets weekly schedule and assists with date estimation
     async setWeeklyAvailability(items, classNo) {
         const conn = await db.getConnection();
         const days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
@@ -14,14 +14,12 @@ class Tutor extends User {
         try {
             await conn.beginTransaction();
 
-            // 1. Delete all future, unbooked slots for this tutor
             await conn.query(
                 `DELETE FROM Avail 
                  WHERE TutorRefNo=? AND IsBooked=FALSE AND TimeSlot >= NOW()`,
                 [this.refID]
             );
 
-            // 2. Loop through the new items (e.g., { day: "Monday", timeSlot: "09:00-10:00" })
             for (const item of items) {
                 const { day, timeSlot } = item;
                 if (!day || !timeSlot) continue;
@@ -33,7 +31,6 @@ class Tutor extends User {
                 const add = (want - today.getDay() + 7) % 7;
                 const startHH = timeSlot.split("-")[0];
 
-                // 3. Create 12 weekly instances of this slot
                 for (let week = 0; week < 12; week++) {
                     const dt = new Date(today);
                     dt.setDate(today.getDate() + add + (week * 7));
@@ -55,10 +52,10 @@ class Tutor extends User {
 
             await conn.commit();
             return { success: true, message: "Availability saved for 12 weeks" };
-        } catch (e) {
+        } catch (error) {
             await conn.rollback();
             console.error(e);
-            throw e; // Re-throw error to be caught by the route
+            throw error;
         } finally {
             conn.release();
         }
@@ -77,8 +74,8 @@ class Tutor extends User {
             await db.execute(sql, [this.refID, classNo, fullDateTime]);
             console.log("Availability added:", classNo, fullDateTime);
             return true;
-        } catch (err) {
-            console.error("Error in addAvailability:", err.message);
+        } catch (error) {
+            console.error("Error in addAvailability:", error.message);
             return false;
         }
     }
@@ -96,8 +93,8 @@ class Tutor extends User {
                 console.log("No availability found to remove");
                 return false;
             }
-        } catch (err) {
-            console.error("Error in removeAvailability:", err.message);
+        } catch (error) {
+            console.error("Error in removeAvailability:", error.message);
             return false;
         }
     }
@@ -114,8 +111,8 @@ class Tutor extends User {
             const [rows] = await db.execute(sql, [this.refID]);
             console.log("Availability for", this.firstName, rows);
             return rows;
-        } catch (err) {
-            console.error("Error in viewBooking:", err.message);
+        } catch (error) {
+            console.error("Error in viewBooking:", error.message);
             return [];
         }
     }

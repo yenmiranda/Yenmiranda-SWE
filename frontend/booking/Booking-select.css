@@ -1,1266 +1,775 @@
-/* BASIC RESET: I'm removing default browser styling */
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* COLOR PALETTE: I'm setting up SHSU colors plus complementary colors */
 :root {
     --shsu-orange: #FF5100;
-    /* Primary SHSU orange */
-    
     --shsu-orange-dark: #CC4100;
-    /* I'm creating a darker orange for hover states */
-    
     --shsu-blue: #00008B;
-    /* Dark blue accent color */
-    
     --shsu-white: #FFFFFF;
-    /* White */
-    
     --shsu-gray-dark: #2C2C2C;
-    /* I'm setting dark gray for text */
-    
     --shsu-gray-medium: #6C6C6C;
-    /* I'm setting medium gray for secondary text */
-    
     --shsu-gray-light: #F5F5F5;
-    /* I'm setting light gray for backgrounds */
-    
     --shsu-gray-border: #DDDDDD;
-    /* Border color */
-    
     --success-green: #28A745;
-    /* I'm setting green for success messages */
-    
     --success-bg: #D4EDDA;
-    /* Light green background */
 }
 
-/* BODY: I'm setting up overall page styling */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    /* I'm using a modern, clean font */
-    
     background: linear-gradient(135deg, #F5F5F5 0%, #E8E8E8 100%);
-    /* I'm creating a subtle gradient background */
-    
     color: var(--shsu-gray-dark);
-    /* I'm setting default text color */
-    
     line-height: 1.6;
-    /* I'm adding spacing between lines */
-    
     min-height: 100vh;
-    /* I'm ensuring full screen height minimum */
-    
     display: flex;
     flex-direction: column;
-    /* I'm stacking header, main, footer vertically */
+    
 }
 
-/* FIXED ASIDE BUTTON: I'm creating a button that stays on screen when scrolling */
 .appointments-aside {
     position: fixed;
-    /* I'm making it stay in place when scrolling */
-    
     right: 20px;
-    /* I'm positioning it 20px from right edge */
-    
     bottom: 100px;
-    /* I'm positioning it 100px from bottom */
-    
     z-index: 1000;
-    /* I'm making sure it appears above other content */
+    
 }
 
 .appointments-btn {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    /* I'm adding space between icon and text */
-    
     background: linear-gradient(135deg, var(--shsu-orange) 0%, var(--shsu-orange-dark) 100%);
-    /* I'm using orange gradient to match theme */
-    
     color: var(--shsu-white);
-    /* I'm using white text */
-    
     padding: 0.9rem 1.3rem;
-    /* I'm adding space inside button */
-    
     border-radius: 50px;
-    /* I'm making it pill-shaped */
-    
     text-decoration: none;
-    /* I'm removing underline from link */
-    
     font-weight: 600;
-    /* I'm making text semi-bold */
-    
     font-size: 0.95rem;
-    /* I'm setting text size */
-    
     box-shadow: 0 4px 12px rgba(255, 81, 0, 0.3);
-    /* I'm adding orange shadow for depth */
-    
     transition: all 0.3s ease;
-    /* I'm adding smooth transitions */
-    
     cursor: pointer;
-    /* I'm showing hand cursor */
+    
 }
 
 .appointments-btn:hover {
     transform: translateY(-3px);
-    /* I'm lifting button up on hover */
-    
     box-shadow: 0 6px 16px rgba(255, 81, 0, 0.4);
-    /* I'm making shadow larger on hover */
+    
 }
 
 .appointments-btn:active {
     transform: translateY(-1px);
-    /* I'm slightly pressing down when clicked */
+
 }
 
 .btn-icon {
     font-size: 1.2rem;
-    /* I'm making icon larger */
+    
 }
 
 .btn-text {
     white-space: nowrap;
-    /* I'm preventing text from wrapping */
+    
 }
 
-/* HEADER: I'm styling the top banner */
 header {
     position: relative;
-    /* I'm allowing logout button to position absolutely within header */
-    
     background: linear-gradient(135deg, var(--shsu-orange) 0%, var(--shsu-orange-dark) 100%);
-    /* I'm creating an orange gradient background */
-    
     color: var(--shsu-white);
-    /* I'm setting white text */
-    
     text-align: center;
-    /* I'm centering content */
-    
     padding: 2.5rem 1rem;
-    /* I'm adding space inside header */
-    
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    /* I'm adding shadow for depth */
+    
 }
 
 header h1 {
     font-size: 2.8rem;
-    /* I'm making a large heading */
-    
     margin-bottom: 0.5rem;
-    /* I'm adding space below heading */
-    
     font-weight: 700;
-    /* I'm making it extra bold */
-    
     letter-spacing: 1px;
-    /* I'm adding slight spacing between letters */
+    
 }
 
 header p {
     font-size: 1.2rem;
-    /* I'm setting subtitle size */
-    
     font-weight: 300;
-    /* I'm using light weight */
-    
     opacity: 0.95;
-    /* I'm making it slightly transparent */
+    
 }
 
-/* MAIN: I'm styling the central content area */
 main {
     flex: 1;
-    /* I'm making it take up available space */
-    
     max-width: 700px;
-    /* I'm limiting width for readability */
-    
     width: 100%;
-    /* I'm setting full width up to max */
-    
     margin: 3rem auto;
-    /* I'm centering content with top/bottom spacing */
-    
     padding: 0 1.5rem;
-    /* I'm adding side padding for mobile */
+    
 }
 
-/* STEP INDICATOR: I'm creating a progress tracker showing current step */
 .step-indicator {
     display: flex;
-    /* I'm using flexbox for horizontal layout */
-    
     align-items: center;
-    /* I'm vertically centering items */
-    
     justify-content: center;
-    /* I'm horizontally centering items */
-    
     margin-bottom: 2.5rem;
-    /* I'm adding space below indicator */
-    
     gap: 1rem;
-    /* I'm adding space between steps */
+    
 }
 
-/* STEP: I'm styling individual step in indicator */
 .step {
     display: flex;
     flex-direction: column;
-    /* I'm stacking number above label */
-    
     align-items: center;
-    /* I'm centering content */
-    
     gap: 0.5rem;
-    /* I'm adding space between number and label */
+    
 }
 
-/* STEP NUMBER: I'm creating a circular number badge */
 .step-number {
     width: 45px;
     height: 45px;
-    /* I'm making a square */
-    
     border-radius: 50%;
-    /* I'm making it circular */
-    
     background-color: var(--shsu-gray-border);
-    /* I'm using light gray background for inactive steps */
-    
     color: var(--shsu-gray-medium);
-    /* I'm using gray text for inactive steps */
-    
     display: flex;
     align-items: center;
     justify-content: center;
-    /* I'm centering the number inside circle */
-    
     font-size: 1.2rem;
-    /* I'm setting number size */
-    
     font-weight: 700;
-    /* I'm making it bold */
-    
     transition: all 0.3s ease;
-    /* I'm adding smooth transitions */
+    
 }
 
-/* ACTIVE STEP NUMBER: I'm styling the current step */
 .step.active .step-number {
     background: linear-gradient(135deg, var(--shsu-orange) 0%, var(--shsu-orange-dark) 100%);
-    /* I'm using orange gradient for active step */
-    
     color: var(--shsu-white);
-    /* I'm setting white text */
-    
     box-shadow: 0 4px 8px rgba(255, 81, 0, 0.3);
-    /* I'm adding orange shadow */
+    
 }
 
-/* STEP LABEL: I'm styling text below number */
 .step-label {
     font-size: 0.9rem;
-    /* I'm using smaller text */
-    
     color: var(--shsu-gray-medium);
-    /* I'm using gray for inactive */
-    
     font-weight: 500;
-    /* I'm using medium weight */
+    
 }
 
-/* ACTIVE STEP LABEL: I'm styling current step text */
 .step.active .step-label {
     color: var(--shsu-orange);
-    /* I'm using orange text for active */
-    
     font-weight: 600;
-    /* I'm making it semi-bold */
+    
 }
 
-/* STEP DIVIDER: I'm creating a line between steps */
 .step-divider {
     width: 60px;
     height: 2px;
-    /* I'm making a thin horizontal line */
-    
     background-color: var(--shsu-gray-border);
-    /* I'm using light gray line */
+    
 }
 
-/* SELECTION SECTION: I'm styling the main form container */
 #selection-section {
     background: var(--shsu-white);
-    /* I'm using white background */
-    
     padding: 2.5rem;
-    /* I'm adding space inside container */
-    
     border-radius: 12px;
-    /* I'm adding rounded corners */
-    
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-    /* I'm adding shadow for card effect */
+    
 }
 
 #selection-section h2 {
     color: var(--shsu-blue);
-    /* I'm using blue heading */
-    
     margin-bottom: 2rem;
-    /* I'm adding space below heading */
-    
     font-size: 1.8rem;
-    /* I'm using large size */
-    
     text-align: center;
-    /* I'm centering it */
+    
 }
 
-/* FORM: I'm setting up selection form layout */
 #selection-form {
     display: flex;
     flex-direction: column;
-    /* I'm stacking form elements vertically */
-    
     gap: 1.5rem;
-    /* I'm adding space between each form group */
+    
 }
 
-/* FORM GROUP: I'm wrapping each label and input pair */
 .form-group {
     display: flex;
     flex-direction: column;
-    /* I'm stacking label above input */
-    
     gap: 0.5rem;
-    /* I'm adding small gap between label and input */
+    
 }
 
-/* LABELS: I'm styling text above inputs */
 label {
     font-weight: 600;
-    /* I'm making it semi-bold */
-    
     color: var(--shsu-gray-dark);
-    /* I'm using dark gray */
-    
     font-size: 1rem;
-    /* I'm using normal size */
+    
 }
 
-/* DROPDOWNS: I'm styling select elements */
 select {
     width: 100%;
-    /* I'm setting full width */
-    
     padding: 0.9rem;
-    /* I'm adding space inside */
-    
     font-size: 1rem;
-    /* I'm using normal text size */
-    
     border: 2px solid var(--shsu-gray-border);
-    /* I'm adding light gray border */
-    
     border-radius: 8px;
-    /* I'm adding rounded corners */
-    
     background-color: var(--shsu-white);
-    /* I'm using white background */
-    
     color: var(--shsu-gray-dark);
-    /* I'm using dark text */
-    
     cursor: pointer;
-    /* I'm showing hand cursor */
-    
     transition: all 0.3s ease;
-    /* I'm adding smooth transitions */
-    
     font-family: inherit;
-    /* I'm using same font as page */
+    
 }
 
 select:hover {
     border-color: var(--shsu-orange);
-    /* I'm changing border to orange on hover */
+    
 }
 
 select:focus {
     outline: none;
-    /* I'm removing default outline */
-    
     border-color: var(--shsu-orange);
-    /* I'm highlighting with orange border */
-    
     box-shadow: 0 0 0 3px rgba(255, 81, 0, 0.1);
-    /* I'm adding orange glow */
+    
 }
 
-/* DATE INPUT: I'm styling the calendar picker */
 input[type="date"] {
     width: 100%;
-    /* I'm setting full width */
-    
     padding: 0.9rem;
-    /* I'm adding space inside */
-    
     font-size: 1rem;
-    /* I'm using normal text size */
-    
     border: 2px solid var(--shsu-gray-border);
-    /* I'm adding light gray border */
-    
     border-radius: 8px;
-    /* I'm adding rounded corners */
-    
     background-color: var(--shsu-white);
-    /* I'm using white background */
-    
     color: var(--shsu-gray-dark);
-    /* I'm using dark text */
-    
     cursor: pointer;
-    /* I'm showing hand cursor */
-    
     transition: all 0.3s ease;
-    /* I'm adding smooth transitions */
-    
     font-family: inherit;
-    /* I'm using same font as page */
+    
 }
 
 input[type="date"]:hover {
     border-color: var(--shsu-orange);
-    /* I'm changing border to orange on hover */
+    
 }
 
 input[type="date"]:focus {
     outline: none;
-    /* I'm removing default outline */
-    
     border-color: var(--shsu-orange);
-    /* I'm highlighting with orange border */
-    
     box-shadow: 0 0 0 3px rgba(255, 81, 0, 0.1);
-    /* I'm adding orange glow */
+    
 }
 
-/* CHECK AVAILABILITY BUTTON: I'm styling the button that appears when form is complete */
 .check-btn {
     width: 100%;
-    /* I'm making it full width */
-    
     padding: 1rem;
-    /* I'm adding space inside */
-    
     font-size: 1.1rem;
-    /* I'm using slightly larger text */
-    
     font-weight: 600;
-    /* I'm making it semi-bold */
-    
     color: var(--shsu-white);
-    /* I'm using white text */
-    
     background: linear-gradient(135deg, var(--shsu-blue) 0%, #000070 100%);
-    /* I'm using blue gradient */
-    
     border: none;
-    /* I'm removing default border */
-    
     border-radius: 8px;
-    /* I'm adding rounded corners */
-    
     cursor: pointer;
-    /* I'm showing hand cursor */
-    
     transition: all 0.3s ease;
-    /* I'm adding smooth transitions */
-    
     margin-top: 0.5rem;
-    /* I'm adding space above button */
-    
     font-family: inherit;
-    /* I'm using same font as page */
+    
 }
 
 .check-btn:hover {
     transform: translateY(-2px);
-    /* I'm lifting button up */
     
     box-shadow: 0 6px 12px rgba(0, 0, 139, 0.3);
-    /* I'm adding blue shadow */
+    
 }
 
 .check-btn:active {
     transform: translateY(0);
-    /* I'm returning to normal position when clicked */
+    
 }
 
-/* SUBMIT/CONTINUE BUTTON: I'm styling the button that takes you to next page */
 .submit-btn {
     width: 100%;
-    /* I'm making it full width */
-    
     padding: 1.1rem;
-    /* I'm adding more space inside than check button */
-    
     font-size: 1.1rem;
-    /* I'm using slightly larger text */
-    
     font-weight: 600;
-    /* I'm making it semi-bold */
-    
     color: var(--shsu-white);
-    /* I'm using white text */
-    
     background: linear-gradient(135deg, var(--shsu-orange) 0%, var(--shsu-orange-dark) 100%);
-    /* I'm using orange gradient for primary action */
-    
     border: none;
-    /* I'm removing default border */
-    
     border-radius: 8px;
-    /* I'm adding rounded corners */
-    
     cursor: pointer;
-    /* I'm showing hand cursor */
-    
     transition: all 0.3s ease;
-    /* I'm adding smooth transitions */
-    
     margin-top: 1rem;
-    /* I'm adding more space above this important button */
-    
     font-family: inherit;
-    /* I'm using same font as page */
+    
 }
 
 .submit-btn:hover {
     transform: translateY(-2px);
-    /* I'm lifting button up */
-    
     box-shadow: 0 6px 12px rgba(255, 81, 0, 0.4);
-    /* I'm adding orange shadow */
+    
 }
 
 .submit-btn:active {
     transform: translateY(0);
-    /* I'm returning to normal position when clicked */
+
 }
 
-/* LOGOUT BUTTON: I'm creating the logout button in the header */
 .logout-btn {
     position: absolute;
-    /* I'm positioning it absolutely within header */
-    
     top: 1rem;
     right: 1.5rem;
-    /* I'm placing it in top-right corner */
-    
     padding: 0.6rem 1.3rem;
-    /* I'm adding space inside */
-    
     font-size: 0.95rem;
-    /* I'm using normal text size */
-    
     font-weight: 600;
-    /* I'm making it semi-bold */
-    
     color: var(--shsu-orange);
-    /* I'm using orange text */
-    
     background-color: var(--shsu-white);
-    /* I'm using white background */
-    
     border: 2px solid var(--shsu-white);
-    /* I'm adding white border */
-    
     border-radius: 6px;
-    /* I'm adding rounded corners */
-    
     cursor: pointer;
-    /* I'm showing hand cursor */
-    
     transition: all 0.3s ease;
-    /* I'm adding smooth transitions */
-    
     font-family: inherit;
-    /* I'm using same font as page */
+    
 }
 
 .logout-btn:hover {
     background-color: transparent;
-    /* I'm making background transparent on hover */
-    
     color: var(--shsu-white);
-    /* I'm changing text to white */
-    
     border-color: var(--shsu-white);
-    /* I'm keeping white border */
-    
     transform: translateY(-2px);
-    /* I'm lifting button up */
+    
 }
 
 .logout-btn:active {
     transform: translateY(0);
-    /* I'm returning to normal position when clicked */
+    
 }
 
-/* FOOTER: I'm styling the bottom of page */
 footer {
     background-color: var(--shsu-gray-dark);
-    /* I'm using dark gray background */
-    
     color: var(--shsu-white);
-    /* I'm using white text */
-    
     text-align: center;
-    /* I'm centering text */
-    
     padding: 1.5rem 1rem;
-    /* I'm adding space inside */
-    
     margin-top: auto;
-    /* I'm pushing it to bottom of page */
+    
 }
 
 footer p {
     font-size: 0.95rem;
-    /* I'm using slightly smaller text */
-    
     opacity: 0.9;
-    /* I'm making it slightly transparent */
+    
 }
 
-/* UPCOMING APPOINTMENTS SECTION: I'm creating section for appointments at bottom */
 .appointments-section {
     background: linear-gradient(135deg, var(--shsu-blue) 0%, #000070 100%);
-    /* I'm using blue gradient background */
-    
     color: var(--shsu-white);
-    /* I'm using white text */
-    
     padding: 4rem 1.5rem 3rem;
-    /* I'm adding space inside section */
+    
 }
 
 .appointments-container {
     max-width: 900px;
-    /* I'm limiting width for readability */
-    
     margin: 0 auto;
-    /* I'm centering container */
+    
 }
 
 .appointments-section h2 {
     text-align: center;
-    /* I'm centering heading */
-    
     font-size: 2.2rem;
-    /* I'm using large heading */
-    
     margin-bottom: 2.5rem;
-    /* I'm adding space below heading */
-    
     color: var(--shsu-white);
-    /* I'm using white text */
+    
 }
 
-/* APPOINTMENTS LIST: I'm creating container for appointment cards */
 .appointments-list {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    /* I'm creating responsive grid that adapts to screen size */
-    
     gap: 1.5rem;
-    /* I'm adding space between cards */
-    
     margin-bottom: 3rem;
-    /* I'm adding space below list */
+    
 }
 
-/* APPOINTMENT CARD: I'm styling individual appointment */
 .appointment-card {
     background: var(--shsu-white);
-    /* I'm using white background */
-    
     color: var(--shsu-gray-dark);
-    /* I'm using dark text */
-    
     padding: 1.5rem;
-    /* I'm adding space inside card */
-    
     border-radius: 10px;
-    /* I'm adding rounded corners */
-    
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    /* I'm adding shadow for depth */
-    
     transition: all 0.3s ease;
-    /* I'm adding smooth transitions */
+    
 }
 
 .appointment-card:hover {
     transform: translateY(-4px);
-    /* I'm lifting card on hover */
-    
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
-    /* I'm making shadow larger on hover */
+    
 }
 
-/* APPOINTMENT HEADER: I'm styling course and date at top of card */
 .appointment-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    /* I'm spacing course and date on opposite sides */
-    
     margin-bottom: 1rem;
-    /* I'm adding space below header */
-    
     padding-bottom: 1rem;
-    /* I'm adding space inside */
-    
     border-bottom: 2px solid var(--shsu-gray-light);
-    /* I'm adding divider line */
+    
 }
 
 .appointment-course {
     font-weight: 700;
-    /* I'm making it bold */
-    
     font-size: 1.1rem;
-    /* I'm using larger text */
-    
     color: var(--shsu-orange);
-    /* I'm using orange for course code */
+    
 }
 
 .appointment-date {
     font-weight: 600;
-    /* I'm making it semi-bold */
-    
     color: var(--shsu-blue);
-    /* I'm using blue for date */
-    
     font-size: 0.95rem;
-    /* I'm using normal text size */
+    
 }
 
-/* APPOINTMENT DETAILS: I'm styling time, tutor, location info */
 .appointment-details {
     display: flex;
     flex-direction: column;
-    /* I'm stacking details vertically */
-    
     gap: 0.6rem;
-    /* I'm adding space between each detail */
+    
 }
 
 .appointment-details p {
     font-size: 0.95rem;
-    /* I'm using normal text size */
-    
     line-height: 1.5;
-    /* I'm setting line spacing */
-    
     color: var(--shsu-gray-dark);
-    /* I'm using dark gray text */
+    
 }
 
-/* NO APPOINTMENTS MESSAGE: I'm styling message when no appointments exist */
 .no-appointments {
     text-align: center;
-    /* I'm centering text */
-    
     padding: 3rem;
-    /* I'm adding space inside */
-    
     background: rgba(255, 255, 255, 0.1);
-    /* I'm using semi-transparent white */
-    
     border-radius: 10px;
-    /* I'm adding rounded corners */
-    
     border: 2px dashed rgba(255, 255, 255, 0.3);
-    /* I'm adding dashed border */
+    
 }
 
 .no-appointments p {
     font-size: 1.1rem;
-    /* I'm using larger text */
-    
     margin-bottom: 0.5rem;
-    /* I'm adding space between paragraphs */
+    
 }
 
-/* BACK TO TOP CONTAINER: I'm creating container for back to top link */
 .back-to-top-container {
     text-align: center;
-    /* I'm centering link */
-    
     margin-top: 2.5rem;
-    /* I'm adding space above */
+    
 }
 
-/* BACK TO TOP LINK: I'm styling the link that takes you to top of page */
 .back-to-top {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    /* I'm adding space between arrow and text */
-    
     color: var(--shsu-white);
-    /* I'm using white text */
-    
     text-decoration: none;
-    /* I'm removing underline */
-    
     font-size: 1.05rem;
-    /* I'm using slightly larger text */
-    
     font-weight: 600;
-    /* I'm making it semi-bold */
-    
     padding: 0.8rem 1.5rem;
-    /* I'm adding space inside */
-    
     background: rgba(255, 255, 255, 0.1);
-    /* I'm using semi-transparent white background */
-    
     border: 2px solid var(--shsu-white);
-    /* I'm adding white border */
-    
     border-radius: 50px;
-    /* I'm making it pill-shaped */
-    
     transition: all 0.3s ease;
-    /* I'm adding smooth transitions */
+    
 }
 
 .back-to-top:hover {
     background: var(--shsu-white);
-    /* I'm changing to solid white on hover */
-    
     color: var(--shsu-blue);
-    /* I'm changing text to blue on hover */
-    
     transform: translateY(-3px);
-    /* I'm lifting link up */
-    
     box-shadow: 0 4px 12px rgba(255, 255, 255, 0.3);
-    /* I'm adding white shadow */
+    
 }
 
 .back-to-top:active {
     transform: translateY(-1px);
-    /* I'm slightly pressing down when clicked */
+    
 }
 
 .top-arrow {
     font-size: 1.3rem;
-    /* I'm making arrow larger */
-    
     font-weight: bold;
-    /* I'm making it bold */
+    
 }
 
-/* MOBILE RESPONSIVE: I'm adjusting layout for phones */
 @media (max-width: 768px) {
-    /* FIXED ASIDE BUTTON: I'm adjusting position for mobile */
+    
     .appointments-aside {
         right: 10px;
-        /* I'm moving closer to edge on mobile */
-        
         bottom: 80px;
-        /* I'm adjusting bottom position */
+        
     }
     
     .appointments-btn {
         padding: 0.7rem 1rem;
-        /* I'm using less padding on mobile */
-        
         font-size: 0.85rem;
-        /* I'm using smaller text */
+        
     }
     
     .btn-text {
         display: none;
-        /* I'm hiding text on mobile, showing only icon */
+        
     }
     
     .btn-icon {
         font-size: 1.4rem;
-        /* I'm making icon bigger since text is hidden */
+        
     }
     
     header h1 {
         font-size: 2rem;
-        /* I'm using smaller heading on mobile */
+        
     }
     
     header p {
         font-size: 1rem;
-        /* I'm using smaller subtitle on mobile */
+        
     }
     
     main {
         margin: 2rem auto;
-        /* I'm using less margin on mobile */
+        
     }
     
     .step-indicator {
         gap: 0.5rem;
-        /* I'm using less space between steps on mobile */
+        
     }
     
     .step-divider {
         width: 40px;
-        /* I'm using shorter divider line on mobile */
+        
     }
     
     .step-number {
         width: 40px;
         height: 40px;
-        /* I'm using smaller circles on mobile */
-        
         font-size: 1rem;
-        /* I'm using smaller numbers */
+        
     }
     
     .step-label {
         font-size: 0.8rem;
-        /* I'm using smaller labels on mobile */
+        
     }
     
     .availability-message {
         flex-direction: column;
-        /* I'm stacking icon above content on mobile */
-        
         align-items: center;
-        /* I'm centering content */
-        
         text-align: center;
-        /* I'm centering text */
+        
     }
     
     .alternative-times-container {
         justify-content: center;
-        /* I'm centering buttons on mobile */
+        
     }
     
     .alt-time-btn {
         font-size: 0.85rem;
-        /* I'm using slightly smaller buttons on mobile */
-        
         padding: 0.6rem 1rem;
-        /* I'm using less padding on mobile */
+        
     }
     
     .logout-btn {
         top: 0.75rem;
         right: 1rem;
-        /* I'm adjusting position on mobile */
-        
         padding: 0.5rem 1rem;
-        /* I'm using smaller padding on mobile */
-        
         font-size: 0.85rem;
-        /* I'm using smaller text on mobile */
+        
     }
     
     .appointments-section {
         padding: 3rem 1rem 2rem;
-        /* I'm using less padding on mobile */
+        
     }
     
     .appointments-section h2 {
         font-size: 1.8rem;
-        /* I'm using smaller heading on mobile */
+        
     }
     
     .appointments-list {
         grid-template-columns: 1fr;
-        /* I'm using single column on mobile */
-        
         gap: 1rem;
-        /* I'm using less gap on mobile */
+        
     }
 }
 
-/* AVAILABILITY RESULT: I'm styling container for availability messages */
 #availability-result {
     margin-top: 1.5rem;
-    /* I'm adding space above availability section */
-    
     animation: fadeIn 0.4s ease;
-    /* I'm adding fade-in animation when appearing */
+    
 }
 
-/* AVAILABILITY MESSAGE: I'm creating base styling for both success and warning messages */
 .availability-message {
     display: flex;
-    /* I'm using flexbox for icon + content layout */
-    
     align-items: flex-start;
-    /* I'm aligning icon and content at top */
-    
     gap: 1rem;
-    /* I'm adding space between icon and content */
-    
     padding: 1.5rem;
-    /* I'm adding space inside message box */
-    
     border-radius: 10px;
-    /* I'm adding rounded corners */
-    
     margin-bottom: 1rem;
-    /* I'm adding space below message */
+    
 }
 
-/* MESSAGE ICON: I'm styling checkmark or warning icon */
 .message-icon {
     font-size: 2.5rem;
-    /* I'm using large icon size */
-    
     flex-shrink: 0;
-    /* I'm preventing icon from shrinking */
-    
     line-height: 1;
-    /* I'm removing extra spacing around icon */
+    
 }
 
-/* MESSAGE CONTENT: I'm styling text area of message */
 .message-content {
     flex: 1;
-    /* I'm making it take up remaining space */
+    
 }
 
 .message-content h3 {
     margin-bottom: 0.5rem;
-    /* I'm adding space below heading */
-    
     font-size: 1.3rem;
-    /* I'm setting heading size */
+    
 }
 
 .message-content p {
     margin-bottom: 0.5rem;
-    /* I'm adding space below paragraphs */
-    
     font-size: 1rem;
-    /* I'm using normal text size */
-    
     line-height: 1.6;
-    /* I'm setting line spacing */
+    
 }
 
-/* SUCCESS MESSAGE: I'm creating green styling for when tutors available */
 .success-message {
     background-color: var(--success-bg);
-    /* I'm using light green background */
-    
     border: 2px solid var(--success-green);
-    /* I'm adding green border */
+    
 }
 
 .success-message .message-icon {
     color: var(--success-green);
-    /* I'm using green checkmark */
+    
 }
 
 .success-message h3 {
     color: var(--success-green);
-    /* I'm using green heading */
+    
 }
 
 .success-message p {
     color: var(--shsu-gray-dark);
-    /* I'm using dark gray text */
+    
 }
 
-/* WARNING MESSAGE: I'm creating orange/yellow styling for no tutors available */
 .warning-message {
     background-color: #FFF3CD;
-    /* I'm using light yellow background */
-    
     border: 2px solid #FFC107;
-    /* I'm adding yellow/gold border */
+    
 }
 
 .warning-message .message-icon {
     color: #FF8C00;
-    /* I'm using orange warning icon */
+    
 }
 
 .warning-message h3 {
     color: #856404;
-    /* I'm using dark yellow/brown heading */
+    
 }
 
 .warning-message p {
     color: var(--shsu-gray-dark);
-    /* I'm using dark gray text */
+    
 }
 
-/* SUGGESTION TEXT: I'm styling "Try these nearby times" text */
 .suggestion-text {
     font-weight: 600;
-    /* I'm making it semi-bold */
-    
     color: var(--shsu-gray-dark);
-    /* I'm using dark gray */
-    
     margin-top: 1rem;
-    /* I'm adding extra space above */
-    
     margin-bottom: 0.75rem;
-    /* I'm adding space below */
+    
 }
 
-/* ALTERNATIVE TIMES CONTAINER: I'm creating container for clickable time buttons */
 .alternative-times-container {
     display: flex;
-    /* I'm using flexbox for button layout */
-    
     flex-wrap: wrap;
-    /* I'm allowing buttons to wrap to next line if needed */
-    
     gap: 0.75rem;
-    /* I'm adding space between buttons */
-    
     margin-top: 0.75rem;
-    /* I'm adding space above container */
+    
 }
 
-/* ALTERNATIVE TIME BUTTON: I'm styling clickable time slot buttons */
 .alt-time-btn {
     background-color: var(--shsu-white);
-    /* I'm using white background */
-    
     color: var(--shsu-blue);
-    /* I'm using blue text */
-    
     border: 2px solid var(--shsu-blue);
-    /* I'm adding blue border */
-    
     padding: 0.7rem 1.2rem;
-    /* I'm adding space inside button */
-    
     font-size: 0.95rem;
-    /* I'm using slightly smaller text */
-    
     font-weight: 600;
-    /* I'm making it semi-bold */
-    
     border-radius: 6px;
-    /* I'm adding rounded corners */
-    
     cursor: pointer;
-    /* I'm showing hand cursor */
-    
     transition: all 0.3s ease;
-    /* I'm adding smooth transitions */
-    
     font-family: inherit;
-    /* I'm using same font as page */
+    
 }
 
 .alt-time-btn:hover {
     background-color: var(--shsu-blue);
-    /* I'm using blue background on hover */
-    
     color: var(--shsu-white);
-    /* I'm using white text on hover */
-    
     transform: translateY(-2px);
-    /* I'm lifting button up */
-    
     box-shadow: 0 4px 8px rgba(0, 0, 139, 0.2);
-    /* I'm adding blue shadow */
+    
 }
 
 .alt-time-btn:active {
     transform: translateY(0);
-    /* I'm returning to normal position when clicked */
+    
 }
 
-/* TUTOR COUNT BADGE: I'm styling number showing how many tutors are available */
 #tutor-count {
     font-weight: 700;
-    /* I'm making it bold */
-    
     color: var(--success-green);
-    /* I'm using green color */
+    
 }
 
-/* UNAVAILABLE TIME HIGHLIGHT: I'm highlighting the time slot that wasn't available */
 #unavailable-time {
     color: var(--shsu-orange);
-    /* I'm using orange to highlight */
-    
     font-weight: 600;
-    /* I'm making it semi-bold */
+    
 }
 
-/* CONTINUE BUTTON: I'm styling button that shows only when tutors available */
 #continue-btn {
     animation: slideUp 0.4s ease;
-    /* I'm adding slide-up animation when appearing */
+    
 }
 
-/* FADE IN ANIMATION: I'm creating animation for availability result */
 @keyframes fadeIn {
     from {
         opacity: 0;
-        /* I'm starting invisible */
         
         transform: translateY(-10px);
-        /* I'm starting slightly higher */
+        
     }
     to {
         opacity: 1;
-        /* I'm ending fully visible */
         
         transform: translateY(0);
-        /* I'm ending in normal position */
+        
     }
 }
 
-/* SLIDE UP ANIMATION: I'm creating animation for continue button */
 @keyframes slideUp {
     from {
         opacity: 0;
-        /* I'm starting invisible */
         
         transform: translateY(10px);
-        /* I'm starting slightly lower */
+        
     }
     to {
         opacity: 1;
-        /* I'm ending fully visible */
         
         transform: translateY(0);
-        /* I'm ending in normal position */
+        
     }
 }
 
@@ -1269,11 +778,11 @@ footer p {
     padding-top: 1rem;
     border-top: 1px solid var(--shsu-gray-border);
     text-align: right;
+    
 }
 
-/* Cancel button styling */
 .cancel-btn {
-    background-color: #DC3545; /* A standard red */
+    background-color: #DC3545;
     color: white;
     border: none;
     padding: 0.6rem 1.2rem;
@@ -1283,10 +792,12 @@ footer p {
     cursor: pointer;
     transition: all 0.3s ease;
     font-family: inherit;
+
 }
 
 .cancel-btn:hover {
-    background-color: #C82333; /* Darker red on hover */
+    background-color: #C82333; 
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(220, 53, 69, 0.3);
+
 }

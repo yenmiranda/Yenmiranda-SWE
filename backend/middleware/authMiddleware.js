@@ -1,5 +1,8 @@
+//middleware for jwt tokens
+
 import jwt from 'jsonwebtoken';
 
+//exports a protect constant for jwt authentication allowing us to protect methods
 const protect = (req, res, next) => {
     const token = req.cookies.jwt;
 

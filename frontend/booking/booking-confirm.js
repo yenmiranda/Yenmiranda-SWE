@@ -1,10 +1,8 @@
-// Filename: frontend/booking/booking-confirm.js
-
-// --- GLOBAL VARS ---
+//global variables
 let CURRENT_USER = null;
 let BOOKING_DATA = null;
 
-// --- 1. GET HTML ELEMENTS ---
+//html elements
 const summaryCourse = document.getElementById('summary-course');
 const summaryDate = document.getElementById('summary-date');
 const summaryTime = document.getElementById('summary-time');
@@ -20,7 +18,7 @@ const confirmTutor = document.getElementById('confirm-tutor');
 const changeTutorBtn = document.getElementById('change-tutor-btn');
 const confirmBookingBtn = document.getElementById('confirm-booking-btn');
 
-// --- 2. LOAD & DISPLAY DATA FROM PAGE 1 ---
+//loads booking data
 function loadBookingData() {
     const bookingDataString = sessionStorage.getItem('bookingData');
     if (!bookingDataString) {
@@ -31,6 +29,7 @@ function loadBookingData() {
     return JSON.parse(bookingDataString);
 }
 
+//formats time for display
 function formatTimeDisplay(timeSlot) {
     const [start, end] = timeSlot.split('-');
     const startHour = parseInt(start.split(':')[0]);
@@ -48,6 +47,7 @@ function formatTimeDisplay(timeSlot) {
     return `${start} - ${end} (${startFormatted} - ${endFormatted})`;
 }
 
+// displays booking summary
 function displayBookingSummary(bookingData) {
     summaryCourse.textContent = bookingData.courseName || bookingData.course;
     const dateObj = new Date(bookingData.date + 'T00:00:00');
@@ -58,9 +58,7 @@ function displayBookingSummary(bookingData) {
     summaryCount.textContent = `${bookingData.tutorCount} tutor(s)`;
 }
 
-// --- 3. TUTOR LIST & SELECTION ---
-
-// Reads the actual tutor list from sessionStorage
+//gets the available tutors
 function getAvailableTutors() {
     const tutorDataString = sessionStorage.getItem('availableTutors');
     if (!tutorDataString) {
@@ -70,11 +68,12 @@ function getAvailableTutors() {
     return JSON.parse(tutorDataString);
 }
 
+//gets tutor intial
 function getTutorInitial(name) {
     return name.charAt(0).toUpperCase();
 }
 
-// Stores all the critical IDs needed for booking
+//creates tutor card
 function createTutorCard(tutorSlot) {
     const card = document.createElement('div');
     card.className = 'tutor-card';
@@ -84,7 +83,7 @@ function createTutorCard(tutorSlot) {
     card.dataset.tutorName = tutorName;
     card.dataset.availId = tutorSlot.AvailID;
     card.dataset.classNo = tutorSlot.ClassNo;
-    card.dataset.timeSlot = tutorSlot.TimeSlot; // The full ISO datetime
+    card.dataset.timeSlot = tutorSlot.TimeSlot; 
 
     card.innerHTML = `
         <div class="tutor-avatar">${getTutorInitial(tutorName)}</div>
@@ -102,6 +101,7 @@ function createTutorCard(tutorSlot) {
     return card;
 }
 
+//displays tutors
 function displayTutors(availableTutors) {
     tutorList.innerHTML = '';
     
@@ -118,6 +118,7 @@ function displayTutors(availableTutors) {
     attachTutorSelectListeners();
 }
 
+//
 function attachTutorSelectListeners() {
     document.querySelectorAll('.select-tutor-btn').forEach(button => {
         button.addEventListener('click', function(event) {
@@ -133,13 +134,13 @@ function attachTutorSelectListeners() {
     });
 }
 
-// Reads all data attributes from the selected card
+//selects tutors with data
 function selectTutor(tutorData) {
     BOOKING_DATA.tutorRefNo = tutorData.tutorId;
     BOOKING_DATA.tutorName = tutorData.tutorName;
     BOOKING_DATA.availId = tutorData.availId;
     BOOKING_DATA.classNo = tutorData.classNo;
-    BOOKING_DATA.timeSlot = tutorData.timeSlot; // The full datetime string
+    BOOKING_DATA.timeSlot = tutorData.timeSlot; 
     
     sessionStorage.setItem('bookingData', JSON.stringify(BOOKING_DATA));
     
@@ -155,7 +156,7 @@ function selectTutor(tutorData) {
     confirmationSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
 
-// --- 4. CONFIRMATION SECTION & BOOKING ---
+//shows confirmation
 function showConfirmation(bookingData) {
     selectedTutorName.textContent = bookingData.tutorName;
     confirmCourse.textContent = bookingData.courseName || bookingData.course;
@@ -166,6 +167,7 @@ function showConfirmation(bookingData) {
     confirmationSection.style.display = 'block';
 }
 
+//change tutor button functionality
 changeTutorBtn.addEventListener('click', function() {
     confirmationSection.style.display = 'none';
     document.querySelectorAll('.tutor-card').forEach(card => {
@@ -174,6 +176,7 @@ changeTutorBtn.addEventListener('click', function() {
     tutorList.scrollIntoView({ behavior: 'smooth', block: 'start' });
 });
 
+//back button functionality
 backBtn.addEventListener('click', function() {
     sessionStorage.removeItem('availableTutors');
     delete BOOKING_DATA.tutorRefNo;
@@ -185,14 +188,13 @@ backBtn.addEventListener('click', function() {
     window.location.href = 'Booking-select.html';
 });
 
-// FINAL STEP: Sends the booking to the database (JWT ENABLED)
+//confirmation button fucntionality
 confirmBookingBtn.addEventListener('click', async function() {
     this.disabled = true;
     this.textContent = 'Booking...';
 
     const finalBookingData = loadBookingData();
-    
-    // stdRefNo is no longer needed here, server gets it from token
+ 
     if (!finalBookingData || !finalBookingData.availId) {
         alert("Error: Booking details are incomplete.");
         this.disabled = false;
@@ -208,7 +210,7 @@ confirmBookingBtn.addEventListener('click', async function() {
     };
 
     try {
-        // Use relative path - JWT cookie is sent automatically
+        
         const response = await fetch('/api/bookings/create', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -235,7 +237,7 @@ confirmBookingBtn.addEventListener('click', async function() {
     }
 });
 
-// --- 5. LOGOUT & PAGE INIT ---
+//logout function
 async function handleLogout() {
     try {
         await fetch('/api/auth/logout', { method: 'POST' });
@@ -247,6 +249,7 @@ async function handleLogout() {
     }
 }
 
+//page initialization
 window.addEventListener('DOMContentLoaded', () => {
     const userData = sessionStorage.getItem('userData');
     if (!userData) {

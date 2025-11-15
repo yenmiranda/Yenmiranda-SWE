@@ -101,7 +101,7 @@ saveBtn.addEventListener('click', async () => {
         const day = checkbox.id; 
         const timesDiv = document.getElementById(day + '-times');
         timesDiv.querySelectorAll('select.time-select').forEach(select => {
-            if (select.value) {
+            if (select.value && !select.disabled) {
                 availabilityData.push({
                     day: day, 
                     timeSlot: select.value

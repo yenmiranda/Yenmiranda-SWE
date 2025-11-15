@@ -470,24 +470,23 @@ footer {
     position: absolute;
     top: 1rem;
     right: 1.5rem;
-    background-color: var(--shsu-white);
-    color: var(--shsu-orange);
-    border: 2px solid var(--shsu-white);
-    padding: 0.6rem 1.2rem;
+    padding: 0.6rem 1.3rem;
     font-size: 0.95rem;
     font-weight: 600;
+    color: var(--shsu-orange);
+    background-color: var(--shsu-white);
+    border: 2px solid var(--shsu-white);
     border-radius: 6px;
     cursor: pointer;
     transition: all 0.3s ease;
-    
+    font-family: inherit;
 }
 
 .logout-btn:hover {
-    background-color: var(--shsu-orange-dark);
+    background-color: transparent;
     color: var(--shsu-white);
-    border-color: var(--shsu-orange-dark);
+    border-color: var(--shsu-white);
     transform: translateY(-2px);
-    
 }
 
 .logout-btn:active {

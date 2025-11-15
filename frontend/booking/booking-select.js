@@ -87,7 +87,6 @@ function resetAvailabilityCheck() {
     continueBtn.style.display = 'none';
     availableMessage.style.display = 'none';
     unavailableMessage.style.display = 'none';
-    DAY_AVAILABILITY = []; 
     checkFormComplete();
 }
 
@@ -242,14 +241,20 @@ async function cancelBooking(bookingNo) {
     }
 }
 
-courseSelect.addEventListener('change', resetAvailabilityCheck);
+courseSelect.addEventListener('change', () => {
+    DAY_AVAILABILITY = [];
+    resetAvailabilityCheck();
+});
+
 dateSelect.addEventListener('change', () => {
     updateAvailableTimeSlots();
+    DAY_AVAILABILITY = [];
     resetAvailabilityCheck();
 });
 
 timeSelect.addEventListener('change', resetAvailabilityCheck);
 
+//checks availability for appointments
 checkAvailabilityBtn.addEventListener('click', async () => {
     const course = courseSelect.value;
     const date = dateSelect.value;
@@ -257,6 +262,11 @@ checkAvailabilityBtn.addEventListener('click', async () => {
 
     const success = await checkTutorAvailability(course, date);
     if (!success) return; 
+
+    if (DAY_AVAILABILITY.length === 0) {
+        const success = await checkTutorAvailability(course, date);
+        if (!success) return; 
+    }
 
     const selectedStartHour = parseInt(time.split(':')[0]);
     
@@ -290,7 +300,20 @@ checkAvailabilityBtn.addEventListener('click', async () => {
                 button.textContent = `${formatTimeDisplay(alt.time)} (${alt.tutorCount} tutor${alt.tutorCount > 1 ? 's' : ''})`;
                 button.onclick = () => {
                     timeSelect.value = alt.time;
-                    checkAvailabilityBtn.click();
+                    
+                    const altStartHour = parseInt(alt.time.split(':')[0]);
+                    const tutorsForAltSlot = DAY_AVAILABILITY.filter(slot => {
+                        const slotTime = new Date(slot.TimeSlot);
+                        return slotTime.getHours() === altStartHour;
+                    });
+
+                    availabilityResult.style.display = 'block';
+                    availableMessage.style.display = 'flex';
+                    unavailableMessage.style.display = 'none';
+                    tutorCount.textContent = tutorsForAltSlot.length;
+                    continueBtn.style.display = 'block';
+                    
+                    sessionStorage.setItem('availableTutors', JSON.stringify(tutorsForAltSlot));
                 };
                 alternativeTimes.appendChild(button);
             });
@@ -447,7 +470,6 @@ function renderModalAppointments() {
     });
 }
 
-//close modal with ESC key
 document.addEventListener('keydown', function(event) {
     if (event.key === 'Escape') {
         closeModal();

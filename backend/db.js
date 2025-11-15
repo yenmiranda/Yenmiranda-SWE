@@ -1,8 +1,12 @@
-//base imports
 import mysql from "mysql2/promise";
 import 'dotenv/config';
+import fs from 'fs'; 
+import path from 'path'; 
 
-//connection pool
+
+const caCertPath = path.resolve(__dirname, 'certs/ca-cert.pem');
+
+
 const pool = mysql.createPool({
     host: process.env.DB_HOST,       
     user: process.env.DB_USER,           
@@ -11,17 +15,10 @@ const pool = mysql.createPool({
     port: process.env.DB_PORT,
     waitForConnections: true,
     connectionLimit: 10,
-    queueLimit: 0
+    queueLimit: 0,
+    ssl: { 
+        ca: fs.readFileSync(caCertPath),
+        rejectUnauthorized: true 
+    }
 });
 
-//try connection or pass error
-pool.getConnection()
-  .then(c => { 
-      console.log("Database connected successfully!"); 
-      c.release(); 
-  })
-  .catch(error => {
-    console.error("Database connection failed:", error.message);
-  });
-
-export default pool;

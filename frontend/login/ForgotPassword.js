@@ -1,4 +1,5 @@
-// Filename: frontend/login/ForgotPassword.js
+//forgot password logic
+
 const passwordFields = [
     document.getElementById("securityKey"),
     document.getElementById("password1"),
@@ -34,6 +35,8 @@ hideIcons.forEach((icon, i) => {
 });
 
 const forgotBtn = document.querySelector("button[name='forgotPassword']");
+
+//runs forgot password button 
 forgotBtn.addEventListener("click", async () => {
     const samID = document.getElementById("samID").value.trim();
     const securityKey = document.getElementById("securityKey").value.trim();
@@ -43,8 +46,8 @@ forgotBtn.addEventListener("click", async () => {
         return;
     }
 
+    //api call
     try {
-        // Use relative path to API
         const response = await fetch('/api/auth/verify-key', {
             method: 'POST',
             headers: {
@@ -67,6 +70,7 @@ forgotBtn.addEventListener("click", async () => {
     }
 });
 
+//validation function
 function valid() {
     const pass1 = document.getElementById("password1").value;
     const pass2 = document.getElementById("password2").value;
@@ -90,7 +94,7 @@ function valid() {
         }
     }
 }
-// Attach validation to password fields
+
 document.getElementById("password1").addEventListener('keyup', valid);
 document.getElementById("password2").addEventListener('keyup', valid);
 
@@ -107,7 +111,7 @@ samInput.addEventListener("blur", () => {
 const resetBtn = document.querySelector("button[name='resetPassword']");
 const message = document.getElementById("message"); 
 resetBtn.addEventListener("click", async (event) => {
-    event.preventDefault(); // Prevent form submission
+    event.preventDefault();
     
     const samID = document.getElementById("samID").value.trim(); 
     const pass1 = document.getElementById("password1").value;
@@ -119,8 +123,9 @@ resetBtn.addEventListener("click", async (event) => {
         return;
     }
     
+    //api call
     try {
-        // Use relative path to API
+        
         const response = await fetch('/api/auth/reset-password', {
             method: 'POST',
             headers: {

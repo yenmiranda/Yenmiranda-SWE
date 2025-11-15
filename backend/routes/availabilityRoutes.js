@@ -1,6 +1,6 @@
-import { Router } from "express";
-import pool from "../db.js";
-import { protect } from '../middleware/authMiddleware.js'; 
+import { Router } from "express";//framework
+import pool from "../db.js";//database
+import { protect } from '../middleware/authMiddleware.js';//authentication for secure data
 
 const router = Router();
 

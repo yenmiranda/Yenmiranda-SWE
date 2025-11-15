@@ -1,12 +1,11 @@
-//necessary imports
-import { Router } from 'express';
-import Booking from '../models/Booking.js';
-import Tutee from '../models/Tutee.js'; 
-import { protect } from '../middleware/authMiddleware.js'; 
+import { Router } from 'express';//framework
+import Booking from '../models/Booking.js';//imports bookings
+import Tutee from '../models/Tutee.js';//imports Tutee
+import { protect } from '../middleware/authMiddleware.js'; //authentication for secure data
 
 const router = Router();
 
-//booking creation
+//booking creation backend
 router.post('/create', protect, async (req, res) => {
     const { availId, tutorRefNo, classNo } = req.body;
     const { refNo, role } = req.user; 
@@ -35,6 +34,7 @@ router.post('/create', protect, async (req, res) => {
     }
 });
 
+//only studnets can access and pull student appointments
 router.get('/student', protect, async (req, res) => {
     
     const { refNo, role } = req.user; 
@@ -53,6 +53,7 @@ router.get('/student', protect, async (req, res) => {
     }
 });
 
+//only tutors can access and pull tutor appointments
 router.get('/tutor', protect, async (req, res) => {
     const { refNo, role } = req.user; 
 
@@ -70,7 +71,7 @@ router.get('/tutor', protect, async (req, res) => {
     }
 });
 
-//booking deletion
+//booking cancellation backend
 router.delete('/:bookingNo', protect, async (req, res) => {
     const { bookingNo } = req.params;
     const { refNo: userRefNo } = req.user; 

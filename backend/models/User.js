@@ -1,5 +1,4 @@
-
-import db from '../db.js';
+import db from '../db.js';//database
 import bcrypt from 'bcrypt';//for hashing
 
 class User {
@@ -59,7 +58,6 @@ class User {
 
             const user = rows[0];
             
-            //securely compare password with hashed password
             const isMatch = await bcrypt.compare(password, user.PasswordHash);
 
             if (isMatch) {
@@ -80,13 +78,6 @@ class User {
             console.error("Error in clickLogin:", error.message);
             return false;
         }
-    }
-
-    //marks user as logged out
-    logOut() {
-        this.loggedIn = false;
-        this.active = false;
-        console.log("User logged out:", this.firstName);
     }
 }
 

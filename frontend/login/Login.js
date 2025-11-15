@@ -1,4 +1,5 @@
-// Filename: frontend/login/Login.js
+//login front end logic
+
 const samInput = document.getElementById("samID");
 
 samInput.addEventListener("blur", () => {
@@ -30,6 +31,7 @@ const loginForm = document.getElementById("login-form");
 const samIdInput = document.getElementById("samID");
 const loginError = document.getElementById("login-error");
 
+//runs login form
 loginForm.addEventListener('submit', async function(event) {
     event.preventDefault();
     loginError.style.display = 'none';
@@ -37,6 +39,7 @@ loginForm.addEventListener('submit', async function(event) {
     const samID = samIdInput.value;
     const password = passwordInput.value;
 
+    //api call
     try {
         const response = await fetch('/api/auth/login', {
             method: 'POST',

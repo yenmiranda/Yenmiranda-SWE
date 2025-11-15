@@ -35,7 +35,6 @@ class Tutee extends User {
             VALUES (?, ?, ?, ?, ?)
             `;
 
-
             await connection.execute(insertBookingSql, [availId, this.refID, tutorRefNo, classNo, correctTimeSlot]);
             
             const updateAvailSql = 'UPDATE Avail SET IsBooked = true WHERE AvailID = ?';
@@ -59,23 +58,6 @@ class Tutee extends User {
         }
     }
 
-    //shows all bookings for this tutee
-    async viewBooking() {
-        try {
-            const sql = `
-                SELECT BookingNo, ClassNo, TimeSlot, TutorRefNo
-                FROM Bookings
-                WHERE StdRefNo = ?
-                ORDER BY TimeSlot ASC
-            `;
-            const [rows] = await db.execute(sql, [this.refID]);
-            console.log("Bookings for", this.firstName, rows);
-            return rows;
-        } catch (err) {
-            console.error("Error in viewBooking:", err.message);
-            return [];
-        }
-    }
 }
 
 export default Tutee;

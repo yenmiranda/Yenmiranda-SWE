@@ -7,7 +7,7 @@ import fs from 'fs';
 import path from 'path';
 import https from 'https';
 import { fileURLToPath } from 'url';
-import { runBookingConflictWorker } from './workers/cleanupWorker.js';
+import { runCleanupWorker } from './workers/cleanupWorker.js';
 
 //imports for api
 import availabilityRoutes from './routes/availabilityRoutes.js';

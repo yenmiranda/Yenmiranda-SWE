@@ -802,10 +802,9 @@ footer p {
 
 }
 
-/* VIEW ALL BUTTON - conditional visibility */
 .view-all-btn {
-    display: none; /* Hidden by default */
-    margin: 0 auto 2rem;
+    display: none; 
+    margin: 2.5rem auto 2rem;
     padding: 0.9rem 2rem;
     font-size: 1rem;
     font-weight: 600;
@@ -828,7 +827,6 @@ footer p {
     box-shadow: 0 4px 12px rgba(255, 255, 255, 0.3);
 }
 
-/* MODAL STYLES */
 .modal-overlay {
     display: none;
     position: fixed;
@@ -923,7 +921,6 @@ footer p {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-/* Add these to your existing @keyframes if you don't have them */
 @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }

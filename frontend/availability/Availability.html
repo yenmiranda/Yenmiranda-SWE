@@ -4,11 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Availability Schedule</title>
-
-    <!-- link to css file - FIXED: Now points to same folder -->
     <link rel="stylesheet" href="/Availability.css" />
-
-    <!-- for trash icon -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
@@ -16,65 +12,47 @@
   </head>
 
   <body>
-    <!-- header with welcome message and logout button -->
     <header id="top">
       <h1>Study Buddy</h1>
       <p>Availability Schedule</p>
-      <button
-        class="logout" onclick="window.location.href='Login.html'">Logout</button>
+      <button class="logout" onclick="window.location.href='Login.html'">Logout</button>
     </header>
 
     <br />
 
-    <!-- availability box with title and schedule -->
     <div class="availability-box">
       <h3>Set Up Your Schedule</h3>
-
-      <!-- all days of the week with checkboxes -->
       <div class="schedule">
-        <!-- sunday section - FIXED: Capitalized IDs -->
         <div class="day">
           <input type="checkbox" id="Sunday" />
           <label for="Sunday">Sunday</label>
           <div class="times" id="Sunday-times"></div>
         </div>
-
-        <!-- monday section -->
         <div class="day">
           <input type="checkbox" id="Monday" />
           <label for="Monday">Monday</label>
           <div class="times" id="Monday-times"></div>
         </div>
-
-        <!-- tuesday section -->
         <div class="day">
           <input type="checkbox" id="Tuesday" />
           <label for="Tuesday">Tuesday</label>
           <div class="times" id="Tuesday-times"></div>
         </div>
-
-        <!-- wednesday section -->
         <div class="day">
           <input type="checkbox" id="Wednesday" />
           <label for="Wednesday">Wednesday</label>
           <div class="times" id="Wednesday-times"></div>
         </div>
-
-        <!-- thursday section -->
         <div class="day">
           <input type="checkbox" id="Thursday" />
           <label for="Thursday">Thursday</label>
           <div class="times" id="Thursday-times"></div>
         </div>
-
-        <!-- friday section -->
         <div class="day">
           <input type="checkbox" id="Friday" />
           <label for="Friday">Friday</label>
           <div class="times" id="Friday-times"></div>
         </div>
-
-        <!-- saturday section -->
         <div class="day">
           <input type="checkbox" id="Saturday" />
           <label for="Saturday">Saturday</label>
@@ -82,14 +60,10 @@
         </div>
 
         <br />
-        <!-- line break for spacing -->
-
         <button class="edit-button">Edit</button>
         <button class="save-button" style="display: none">Save</button>
       </div>
-      <!-- end of schedule -->
     </div>
-    <!-- end of availability-box -->
 
     <section id="upcoming-appointments" class="appointments-section">
       <div class="appointments-container">
@@ -102,17 +76,20 @@
               </div>
          </div>
 
-        <!-- BACK TO TOP LINK -->
         <div class="back-to-top-container">
           <a href="#" class="back-to-top">
             <span class="top-arrow">↑</span>
             Back to Top
           </a>
         </div>
+
+        <button id="viewAllBtn" class="view-all-btn" style="display: none;">
+            View All <span id="totalCount"></span> Appointments
+        </button>
+
       </div>
     </section>
 
-    <!-- FIXED ASIDE BUTTON: Links to upcoming appointments, stays fixed when scrolling -->
     <aside class="appointments-aside">
       <a href="#upcoming-appointments" class="appointments-btn">
         <span class="btn-icon">📅</span>
@@ -120,12 +97,25 @@
       </a>
     </aside>
 
-    <!-- link to javascript file - FIXED: Now points to same folder -->
+    <div class="modal-overlay" id="appointmentsModal" onclick="closeModalOutside(event)">
+      <div class="modal-content" onclick="event.stopPropagation()">
+          <div class="modal-header">
+              <div>
+                  <h2>All Your Appointments</h2>
+                  <div class="appointment-count"><span id="modalCount"></span> upcoming sessions</div>
+              </div>
+              <button class="modal-close" onclick="closeModal()">&times;</button>
+          </div>
+          <div class="modal-body">
+              <div class="modal-appointments-grid" id="modalAppointmentsList">
+                  </div>
+          </div>
+      </div>
+    </div>
+
     <script src="/Availability.js"></script>
 
-    <!-- FOOTER: Bottom of page -->
     <footer>
-      <!-- Copyright info -->
       <p>&copy; 2025 Study Buddy | Sam Houston State University</p>
     </footer>
   </body>

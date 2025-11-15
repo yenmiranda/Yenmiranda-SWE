@@ -61,7 +61,7 @@ class Tutor extends User {
         }
     }
 
-    // addAvailability: adds a new time slot
+    //adds a new time slot
     async addAvailability(classNo, date, timeSlot) {
         try {
             const startTime = timeSlot.split('-')[0];
@@ -80,7 +80,7 @@ class Tutor extends User {
         }
     }
 
-    // removeAvailability: deletes a time slot
+    //deletes a time slot
     async removeAvailability(availId) {
         try {
             const sql = 'DELETE FROM Avail WHERE AvailID = ? AND TutorRefNo = ?';
@@ -99,7 +99,7 @@ class Tutor extends User {
         }
     }
 
-    // viewBooking: shows tutor's availability schedule
+    //shows tutor's availability schedule
     async viewBooking() {
         try {
             const sql = `

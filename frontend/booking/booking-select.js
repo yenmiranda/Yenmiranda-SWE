@@ -1,5 +1,7 @@
+//global variables
 let CURRENT_USER = null;
 let DAY_AVAILABILITY = []; 
+let ALL_APPOINTMENTS = [];
 
 //html elements
 const courseSelect = document.getElementById('course-select');
@@ -89,7 +91,7 @@ function resetAvailabilityCheck() {
     checkFormComplete();
 }
 
-// fetches all open slots for a given course and date
+//fetches all open slots for a given course and date
 async function checkTutorAvailability(course, date) {
     try {
         const response = await fetch(`/api/availability/open?classNo=${course}&date=${date}`);
@@ -162,6 +164,9 @@ async function loadStudentAppointments() {
         }
 
         const appointments = await response.json();
+        
+        ALL_APPOINTMENTS = appointments;
+        updateViewAllButton(ALL_APPOINTMENTS.length);
 
         if (appointments.length === 0) {
             listContainer.innerHTML = `
@@ -174,7 +179,9 @@ async function loadStudentAppointments() {
         }
 
         listContainer.innerHTML = ''; 
-        appointments.forEach(appt => {
+        const appointmentsToShow = ALL_APPOINTMENTS.slice(0, 2);
+
+        appointmentsToShow.forEach(appt => {
             const dt = new Date(appt.TimeSlot);
             const date = dt.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
             
@@ -225,7 +232,6 @@ async function cancelBooking(bookingNo) {
 
         if (response.ok && result.success) {
             alert(result.message);
-            // Reload the appointments list
             loadStudentAppointments(); 
         } else {
             alert(`Error: ${result.message}`);
@@ -241,6 +247,7 @@ dateSelect.addEventListener('change', () => {
     updateAvailableTimeSlots();
     resetAvailabilityCheck();
 });
+
 timeSelect.addEventListener('change', resetAvailabilityCheck);
 
 checkAvailabilityBtn.addEventListener('click', async () => {
@@ -348,9 +355,21 @@ window.addEventListener('DOMContentLoaded', () => {
             }
         }
     });
+
+    const modalListContainer = document.getElementById('modalAppointmentsList');
+    modalListContainer.addEventListener('click', function(event) {
+        if (event.target.classList.contains('cancel-btn')) {
+            const card = event.target.closest('.modal-appointment-card');
+            const bookingNo = card.dataset.bookingNo;
+            if (bookingNo) {
+                closeModal();
+                cancelBooking(bookingNo);
+            }
+        }
+    });
 });
 
-// MODAL FUNCTIONALITY
+//modal functionality
 function updateViewAllButton(totalAppointments) {
     const viewAllBtn = document.getElementById('viewAllBtn');
     const totalCount = document.getElementById('totalCount');
@@ -366,16 +385,15 @@ function updateViewAllButton(totalAppointments) {
 }
 
 function openModal() {
-
     renderModalAppointments();
     
     document.getElementById('appointmentsModal').classList.add('active');
-    document.body.style.overflow = 'hidden'; // Prevent background scrolling
+    document.body.style.overflow = 'hidden';
 }
 
 function closeModal() {
     document.getElementById('appointmentsModal').classList.remove('active');
-    document.body.style.overflow = ''; // Restore scrolling
+    document.body.style.overflow = '';
 }
 
 function closeModalOutside(event) {
@@ -388,33 +406,48 @@ function renderModalAppointments() {
     const modalList = document.getElementById('modalAppointmentsList');
     const modalCount = document.getElementById('modalCount');
     
-    const appointments = []; 
+    const appointments = ALL_APPOINTMENTS; 
     
     modalCount.textContent = appointments.length;
     modalList.innerHTML = '';
     
-    appointments.forEach(apt => {
+    if (appointments.length === 0) {
+        modalList.innerHTML = '<p>No appointments found.</p>';
+        return;
+    }
+    
+    appointments.forEach(appt => {
         const card = document.createElement('div');
         card.className = 'modal-appointment-card';
+        card.dataset.bookingNo = appt.BookingNo; 
+
+        const dt = new Date(appt.TimeSlot);
+        const date = dt.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+        
+        const startTime = dt.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true });
+        const endDate = new Date(dt.getTime() + 60 * 60 * 1000); 
+        const endTime = endDate.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true });
+        const timeRange = `${startTime} - ${endTime}`;
+
         card.innerHTML = `
             <div class="appointment-header">
-                <div class="appointment-course">${apt.course}</div>
-                <div class="appointment-date">${apt.date}</div>
+                <span class="appointment-course">${appt.ClassName}</span>
+                <span class="appointment-date">${date}</span>
             </div>
             <div class="appointment-details">
-                <p><strong>Time:</strong> ${apt.time}</p>
-                <p><strong>Tutor:</strong> ${apt.tutor}</p>
-                <p><strong>Location:</strong> ${apt.location}</p>
+                <p class="appointment-time">${timeRange}</p>
+                <p class="appointment-tutor">Tutor: ${appt.TutorFirstName} ${appt.TutorLastName}</p>
+                <p class="appointment-location">Location: AB1 210</p>
             </div>
             <div class="appointment-actions">
-                <button class="cancel-btn" onclick="cancelAppointment(${apt.id})">Cancel Appointment</button>
+                <button class="cancel-btn">Cancel</button>
             </div>
         `;
         modalList.appendChild(card);
     });
 }
 
-// Close modal with Escape key
+//close modal with ESC key
 document.addEventListener('keydown', function(event) {
     if (event.key === 'Escape') {
         closeModal();

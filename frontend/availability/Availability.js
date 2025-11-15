@@ -1,4 +1,5 @@
 let CURRENT_USER = null;
+let ALL_APPOINTMENTS = []; 
 
 // --- DAY/TIME SLOT LOGIC ---
 document.querySelectorAll('.day input[type="checkbox"]').forEach(box => {
@@ -6,22 +7,15 @@ document.querySelectorAll('.day input[type="checkbox"]').forEach(box => {
     const timesDiv = document.getElementById(this.id + '-times');
     timesDiv.innerHTML = ''; 
     if (this.checked) {
-      // Don't add a slot here, loadAvailability will add them
-      // Or, if adding, make sure loadAvailability clears it
-      
-      // We still need the add button
       const addBtn = document.createElement('button');
       addBtn.textContent = '+';
       addBtn.classList.add('add-btn');
       addBtn.onclick = () => addTimeSlot(timesDiv);
       timesDiv.appendChild(addBtn);
 
-      // We'll add one new slot only if the checkbox is manually checked
-      // but loadAvailability will handle populating saved slots
       if (timesDiv.querySelectorAll('.slot').length === 0) {
            addTimeSlot(timesDiv);
       }
-
     }
   });
 });
@@ -67,7 +61,7 @@ function addTimeSlot(container) {
   select.addEventListener('change', () => updateDisabledOptions(container));
   slot.appendChild(select); slot.appendChild(del);
   const addBtn = container.querySelector('.add-btn');
-  container.insertBefore(slot, addBtn); // Insert before the add button
+  container.insertBefore(slot, addBtn);
   updateDisabledOptions(container);
 }
 
@@ -75,7 +69,6 @@ function updateDisabledOptions(container) {
   const selectedValues = Array.from(container.querySelectorAll('select'))
     .map(sel => sel.value).filter(v => v !== '');
   container.querySelectorAll('select option').forEach(opt => {
-    // Only disable if it's not the value of the current select
     const parentSelectValue = opt.closest('select').value;
     if (opt.value !== '' && opt.value !== parentSelectValue) {
         opt.disabled = selectedValues.includes(opt.value);
@@ -96,35 +89,28 @@ editBtn.addEventListener('click', () => {
   saveBtn.style.display = 'block'; 
 });
 
-// --- SAVE AVAILABILITY (JWT ENABLED) ---
 saveBtn.addEventListener('click', async () => {
     const availabilityData = [];
     
-    // User data is now in the token, but we check sessionStorage for UI data
     if (!CURRENT_USER) {
         alert("Error: Not logged in.");
         return;
     }
     
     document.querySelectorAll('.day input[type="checkbox"]:checked').forEach(checkbox => {
-        const day = checkbox.id; // 'Sunday', 'Monday', etc.
+        const day = checkbox.id; 
         const timesDiv = document.getElementById(day + '-times');
         timesDiv.querySelectorAll('select.time-select').forEach(select => {
             if (select.value) {
                 availabilityData.push({
-                    day: day, // Day is already capitalized
+                    day: day, 
                     timeSlot: select.value
                 });
             }
         });
     });
 
-    if (availabilityData.length === 0) {
-        alert("Saving... You are clearing all your available slots.");
-    }
-
     try {
-        // Use relative path - JWT cookie will be sent automatically
         const response = await fetch('/api/availability/create', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -138,7 +124,6 @@ saveBtn.addEventListener('click', async () => {
             schedule.classList.add('grayed-out');
             saveBtn.style.display = 'none';
             editBtn.style.display = 'block';
-            // Reload availability to show disabled booked slots
             loadAvailability();
         } else {
             alert('Error saving: ' + result.error);
@@ -149,65 +134,56 @@ saveBtn.addEventListener('click', async () => {
     }
 });
 
-// --- LOAD EXISTING AVAILABILITY (JWT ENABLED) ---
+//loads availability
 async function loadAvailability() {
   try {
-    // Use relative path - JWT cookie is sent automatically
     const response = await fetch(`/api/availability/mine`);
     
     if (!response.ok) {
+        if (response.status === 401) handleLogout(); 
         const err = await response.json();
-        if (response.status === 401) handleLogout(); // Token failed
         console.error('Failed to load availability:', err.message);
         return;
     }
     
-    const scheduleData = await response.json(); // This is now [{day, timeSlot, hasBookings}]
+    const scheduleData = await response.json();
     if (scheduleData.length === 0) return;
     
     const slotsByDay = {};
     
-    // --- FIX: Store the full item object ---
     scheduleData.forEach(item => {
-      const day = item.day.toLowerCase(); // 'monday'
+      const day = item.day.toLowerCase();
       if (!slotsByDay[day]) slotsByDay[day] = [];
-      slotsByDay[day].push(item); // Store the whole {day, timeSlot, hasBookings} object
+      slotsByDay[day].push(item); 
     });
     
     Object.keys(slotsByDay).forEach(day => {
-      const dayCheckbox = document.getElementById(day.charAt(0).toUpperCase() + day.slice(1)); // Capitalize e.g., "Monday"
+      const dayCheckbox = document.getElementById(day.charAt(0).toUpperCase() + day.slice(1));
       if (!dayCheckbox) return;
       
       dayCheckbox.checked = true;
-      // Dispatch change event to create the container and add button
       dayCheckbox.dispatchEvent(new Event('change')); 
       
       const timesDiv = document.getElementById(dayCheckbox.id + '-times');
-      const timeSlots = slotsByDay[day]; // This is an array of objects
+      const timeSlots = slotsByDay[day];
       
-      // Clear any placeholder slot added by the 'change' event
       const existingSlots = timesDiv.querySelectorAll('.slot');
       existingSlots.forEach(slot => timesDiv.removeChild(slot));
         
-      // --- FIX: Loop through items and use hasBookings flag ---
-      timeSlots.forEach(item => { // 'item' is {day, timeSlot, hasBookings}
-        addTimeSlot(timesDiv); // Add a new slot
-        
-        // Find the slot we just added (it's the one before the add button)
+      timeSlots.forEach(item => { 
+        addTimeSlot(timesDiv); 
         const addBtn = timesDiv.querySelector('.add-btn');
         const lastSlot = addBtn.previousElementSibling;
         
         if (lastSlot) {
           const lastSelect = lastSlot.querySelector('select.time-select');
           lastSelect.value = item.timeSlot;
-          
-          // If this slot has bookings, disable it and the delete button
           if (item.hasBookings) {
             lastSelect.disabled = true;
             const delBtn = lastSlot.querySelector('.del-btn');
             if (delBtn) {
               delBtn.disabled = true;
-              delBtn.style.opacity = '0.5'; // Visually gray it out
+              delBtn.style.opacity = '0.5';
             }
           }
         }
@@ -220,13 +196,90 @@ async function loadAvailability() {
   }
 }
 
-// --- LOAD UPCOMING APPOINTMENTS (JWT ENABLED) ---
+//modal functions
+function updateViewAllButton(totalAppointments) {
+    const viewAllBtn = document.getElementById('viewAllBtn');
+    const totalCount = document.getElementById('totalCount');
+    
+    if (!viewAllBtn || !totalCount) return;
+
+    if (totalAppointments > 2) {
+        viewAllBtn.classList.add('show');
+        viewAllBtn.style.display = 'block';
+        totalCount.textContent = totalAppointments;
+    } else {
+        viewAllBtn.classList.remove('show');
+        viewAllBtn.style.display = 'none';
+    }
+}
+
+function openModal() {
+    renderModalAppointments();
+    document.getElementById('appointmentsModal').classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+    document.getElementById('appointmentsModal').classList.remove('active');
+    document.body.style.overflow = '';
+}
+
+function closeModalOutside(event) {
+    if (event.target === document.getElementById('appointmentsModal')) {
+        closeModal();
+    }
+}
+
+function renderModalAppointments() {
+    const modalList = document.getElementById('modalAppointmentsList'); 
+    const modalCount = document.getElementById('modalCount');
+    
+    if (!modalList || !modalCount) return;
+
+    modalCount.textContent = ALL_APPOINTMENTS.length;
+    modalList.innerHTML = '';
+    
+    if (ALL_APPOINTMENTS.length === 0) {
+        modalList.innerHTML = '<p>No appointments found.</p>';
+        return;
+    }
+
+    ALL_APPOINTMENTS.forEach(appt => {
+        const dt = new Date(appt.TimeSlot);
+        const date = dt.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+        
+        const startTime = dt.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true });
+        const endDate = new Date(dt.getTime() + 60 * 60 * 1000); 
+        const endTime = endDate.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true });
+        const timeRange = `${startTime} - ${endTime}`;
+
+        const card = document.createElement('div');
+        card.className = 'modal-appointment-card';
+        card.dataset.bookingNo = appt.BookingNo;
+        card.innerHTML = `
+            <div class="appointment-header">
+                <span class="appointment-course">${appt.ClassName}</span>
+                <span class="appointment-date">${date}</span>
+            </div>
+            <div class="appointment-details">
+                <p class="appointment-time">${timeRange}</p>
+                <p class="appointment-student">Student: ${appt.StudentFirstName} ${appt.StudentLastName}</p>
+                <p class="appointment-location">Location: AB1 210</p>
+            </div>
+            <div class="appointment-actions">
+                <button class="cancel-btn">Cancel</button>
+            </div>
+        `;
+        modalList.appendChild(card);
+    });
+}
+
+// --- LOAD APPOINTMENTS ---
 async function loadTutorAppointments() {
     const listContainer = document.querySelector('.appointments-list');
     listContainer.innerHTML = '<p>Loading appointments...</p>'; 
 
     try {
-        // Use relative path - JWT cookie is sent automatically
         const response = await fetch(`/api/bookings/tutor`);
         if (!response.ok) {
             if (response.status === 401) handleLogout();
@@ -235,6 +288,9 @@ async function loadTutorAppointments() {
         }
 
         const appointments = await response.json();
+        
+        ALL_APPOINTMENTS = appointments;
+        updateViewAllButton(ALL_APPOINTMENTS.length);
 
         if (appointments.length === 0) {
             listContainer.innerHTML = `
@@ -245,12 +301,13 @@ async function loadTutorAppointments() {
             return;
         }
 
-        listContainer.innerHTML = ''; // Clear loading
-        appointments.forEach(appt => {
+        listContainer.innerHTML = ''; 
+        
+        const appointmentsToShow = ALL_APPOINTMENTS.slice(0, 2); 
+
+        appointmentsToShow.forEach(appt => {
             const dt = new Date(appt.TimeSlot);
             const date = dt.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-            
-            // Calculate time range
             const startTime = dt.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true });
             const endDate = new Date(dt.getTime() + 60 * 60 * 1000); 
             const endTime = endDate.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true });
@@ -258,7 +315,6 @@ async function loadTutorAppointments() {
 
             const card = document.createElement('div');
             card.className = 'appointment-card';
-            // Add booking number to the card's dataset
             card.dataset.bookingNo = appt.BookingNo;
 
             card.innerHTML = `
@@ -284,7 +340,6 @@ async function loadTutorAppointments() {
     }
 }
 
-// NEW FUNCTION to handle cancellation
 async function cancelBooking(bookingNo) {
     if (!confirm("Are you sure you want to cancel this student's booking?")) {
         return;
@@ -299,9 +354,8 @@ async function cancelBooking(bookingNo) {
 
         if (response.ok && result.success) {
             alert(result.message);
-            // Reload the appointments list and availability
             loadTutorAppointments(); 
-            loadAvailability(); // Reload schedule to re-enable the slot
+            loadAvailability(); 
         } else {
             alert(`Error: ${result.message}`);
         }
@@ -311,7 +365,6 @@ async function cancelBooking(bookingNo) {
     }
 }
 
-// --- LOGOUT FUNCTION (JWT ENABLED) ---
 async function handleLogout() {
     try {
         await fetch('/api/auth/logout', { method: 'POST' }); 
@@ -323,9 +376,8 @@ async function handleLogout() {
     }
 }
 
-// --- PAGE INITIALIZATION ---
+//initialization
 window.addEventListener('DOMContentLoaded', () => {
-    // Get user data from session storage
     const userData = sessionStorage.getItem('userData');
     if (!userData) {
         alert("You are not logged in.");
@@ -334,33 +386,56 @@ window.addEventListener('DOMContentLoaded', () => {
     }
     CURRENT_USER = JSON.parse(userData);
 
-    // Check if user is a Tutor
     if (CURRENT_USER.role !== 'Tutor') {
         alert("Access denied. This page is for tutors only.");
         window.location.href = 'Login.html';
         return;
     }
 
-    // Add logout functionality
     const logoutBtn = document.querySelector('.logout');
     if (logoutBtn) {
         logoutBtn.addEventListener('click', handleLogout);
     }
 
-    // Load the tutor's schedule
     loadAvailability();
     loadTutorAppointments();
 
-    // NEW EVENT LISTENER for the cancel buttons
+    const viewAllBtn = document.getElementById('viewAllBtn');
+    if (viewAllBtn) {
+        viewAllBtn.addEventListener('click', openModal);
+    }
+
     const apptListContainer = document.querySelector('.appointments-list');
-    apptListContainer.addEventListener('click', function(event) {
-        if (event.target.classList.contains('cancel-btn')) {
-            // Find the parent card and get its booking number
-            const card = event.target.closest('.appointment-card');
-            const bookingNo = card.dataset.bookingNo;
-            if (bookingNo) {
-                cancelBooking(bookingNo);
+    if (apptListContainer) {
+        apptListContainer.addEventListener('click', function(event) {
+            if (event.target.classList.contains('cancel-btn')) {
+                const card = event.target.closest('.appointment-card');
+                const bookingNo = card.dataset.bookingNo;
+                if (bookingNo) {
+                    cancelBooking(bookingNo);
+                }
             }
+        });
+    }
+
+    const modalListContainer = document.getElementById('modalAppointmentsList');
+    if (modalListContainer) {
+        modalListContainer.addEventListener('click', function(event) {
+            if (event.target.classList.contains('cancel-btn')) {
+                const card = event.target.closest('.modal-appointment-card');
+                const bookingNo = card.dataset.bookingNo;
+                if (bookingNo) {
+                    closeModal(); 
+                    cancelBooking(bookingNo); 
+                }
+            }
+        });
+    }
+
+    // Modal close with Escape key
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape') {
+            closeModal();
         }
     });
 });

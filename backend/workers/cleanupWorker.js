@@ -37,7 +37,7 @@ async function cleanupOldSlots(connection) {
 }
 
 //export for running the thread
-export async function runBookingConflictWorker() {
+export async function runCleanupWorker() {
   console.log('Starting booking conflict worker...');
   let connection;
   try {

@@ -16,7 +16,7 @@ class Tutee extends User {
             await connection.beginTransaction();
 
             const findAvailSql = `
-                SELECT AvailID 
+                SELECT TimeSlot 
                 FROM Avail 
                 WHERE AvailID = ? 
                   AND IsBooked = false
@@ -30,11 +30,15 @@ class Tutee extends User {
                 return { success: false, message: "Sorry, this time slot is no longer available." };
             }
 
+            const correctTimeSlot = rows[0].TimeSlot;
+
             const insertBookingSql = `
-                INSERT INTO Bookings (AvailID, StdRefNo, TutorRefNo, ClassNo, TimeSlot)
-                VALUES (?, ?, ?, ?, ?)
+            INSERT INTO Bookings (AvailID, StdRefNo, TutorRefNo, ClassNo, TimeSlot)
+            VALUES (?, ?, ?, ?, ?)
             `;
-            await connection.execute(insertBookingSql, [availId, this.refID, tutorRefNo, classNo, timeSlot]);
+
+
+            await connection.execute(insertBookingSql, [availId, this.refID, tutorRefNo, classNo, correctTimeSlot]);
             
             const updateAvailSql = 'UPDATE Avail SET IsBooked = true WHERE AvailID = ?';
             await connection.execute(updateAvailSql, [availId]);

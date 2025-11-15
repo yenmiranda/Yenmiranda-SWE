@@ -7,6 +7,7 @@ import fs from 'fs';
 import path from 'path';
 import https from 'https';
 import { fileURLToPath } from 'url';
+import { runBookingConflictWorker } from './workers/bookingConflictWorker.js';
 
 //imports for api
 import availabilityRoutes from './routes/availabilityRoutes.js';
@@ -55,4 +56,6 @@ app.get('/', (req, res) => { //base file for link
 
 httpsServer.listen(port, () => { //start server
     console.log(`HTTPS server running on https://localhost:${3000}`);
+    runBookingConflictWorker();//runs booking conflict worker
+    setInterval(runBookingConflictWorker, 360000)
 });

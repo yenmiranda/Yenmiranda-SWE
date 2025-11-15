@@ -10,21 +10,21 @@ const router = Router();
 
 //booking creation
 router.post('/create', protect, async (req, res) => {
-    const { availId, tutorRefNo, classNo, timeSlot } = req.body;
+    const { availId, tutorRefNo, classNo } = req.body;
     const { refNo, role } = req.user; 
 
     if (role !== 'Tutee') {
         return res.status(403).json({ success: false, message: "Only tutees can create bookings." });
     }
 
-    if (!availId || !tutorRefNo || !classNo || !timeSlot) {
+    if (!availId || !tutorRefNo || !classNo ) {
         return res.status(400).json({ success: false, message: "Missing booking details." });
     }
 
     try {
         
         const tutee = new Tutee(null, null, null, refNo); 
-        const result = await tutee.bookSession(availId, tutorRefNo, classNo, timeSlot);
+        const result = await tutee.bookSession(availId, tutorRefNo, classNo);
 
         if (result.success) {
             res.status(201).json(result);

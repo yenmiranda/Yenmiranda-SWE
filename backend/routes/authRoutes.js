@@ -28,12 +28,17 @@ router.post('/register', async (req, res) => {
             message: "Password must be 8-25 chars, include uppercase, lowercase, number & special char" 
         });
     }
-    
+
+    let connection; 
     try {
+        connection = await db.getConnection();
+        await connection.beginTransaction();
+
         const hashedPassword = await bcrypt.hash(password, saltRounds);
         const hashedSecurityKey = await bcrypt.hash(securityKey, saltRounds);
         const user = new User(firstName, surname, samID, role);
-        await user.clickRegister(hashedPassword, hashedSecurityKey);
+
+        await user.clickRegister(hashedPassword, hashedSecurityKey, connection);
 
         let subTableSql = '';
         let subTableParams = [];
@@ -46,15 +51,27 @@ router.post('/register', async (req, res) => {
             subTableParams = [user.refID];
         }
 
-        await db.execute(subTableSql, subTableParams);
+        await connection.execute(subTableSql, subTableParams);
+
+        await connection.commit();
+        
         res.status(201).json({ success: true, message: "Registration successful!" });
 
     } catch (error) {
+        if (connection) await connection.rollback();
+
         console.error("Registration error:", error);
+        
         if (error.code === 'ER_DUP_ENTRY') {
             return res.status(400).json({ success: false, message: "This Sam ID is already registered." });
         }
+        if (error.code === 'ER_NO_REFERENCED_ROW_2' || error.message.includes('FOREIGN KEY')) {
+            return res.status(400).json({ success: false, message: "The selected course is not valid. Registration was canceled." });
+        }
+        
         res.status(500).json({ success: false, message: "A server error occurred during registration." });
+    } finally {
+        if (connection) connection.release();
     }
 });
 

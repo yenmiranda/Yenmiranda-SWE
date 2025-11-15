@@ -6,55 +6,34 @@
 }
 
 :root {
-    --shsu-orange: #FF5100;
-    
-    --shsu-orange-dark: #CC4100;
-    
-    --shsu-blue: #00008B;
-    
-    --shsu-white: #FFFFFF;
-    
-    --shsu-gray-dark: #2C2C2C;
-    
-    --shsu-gray-medium: #6C6C6C;
-    
-    --shsu-gray-light: #F5F5F5;
-    
-    --shsu-gray-border: #DDDDDD;
-    
-    --success-green: #28A745;
-    
-    --success-bg: #D4EDDA;
-    
+  --shsu-orange: #FF5100;
+  --shsu-orange-dark: #CC4100;
+  --shsu-blue: #00008B;
+  --shsu-white: #FFFFFF;
+  --shsu-gray-dark: #2C2C2C;
+  --shsu-gray-medium: #6C6C6C;
+  --shsu-gray-light: #F5F5F5;
+  --shsu-gray-border: #DDDDDD;
+  --success-green: #28A745;
+  --success-bg: #D4EDDA;
 }
 
 body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  
   background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
-  
   color: var(--shsu-gray-dark);
-  
   line-height: 1.6;
-  
   min-height: 100vh;
-  
   display: flex;
   flex-direction: column;
-  
 }
 
 header {
   background: linear-gradient(135deg, var(--shsu-orange) 0%, var(--shsu-orange-dark) 100%);
-  
   color: var(--shsu-white);
-  
   text-align: center;
-  
   padding: 2.5rem 1rem;
-  
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  
 }
 
 header h1 {
@@ -71,30 +50,30 @@ header p {
 }
 
 .logout {
-    position: absolute;
-    top: 1rem;
-    right: 1.5rem;
-    padding: 0.6rem 1.3rem;
-    font-size: 0.95rem;    
-    font-weight: 600;    
-    color: var(--shsu-orange);    
-    background-color: var(--shsu-white);    
-    border: 2px solid var(--shsu-white);    
-    border-radius: 6px;    
-    cursor: pointer;
-    transition: all 0.3s ease;    
-    font-family: inherit;
+  position: absolute;
+  top: 1rem;
+  right: 1.5rem;
+  padding: 0.6rem 1.3rem;
+  font-size: 0.95rem;    
+  font-weight: 600;    
+  color: var(--shsu-orange);    
+  background-color: var(--shsu-white);    
+  border: 2px solid var(--shsu-white);    
+  border-radius: 6px;    
+  cursor: pointer;
+  transition: all 0.3s ease;    
+  font-family: inherit;
 }
 
 .logout:hover {
-    background-color: transparent;    
-    color: var(--shsu-white);
-    border-color: var(--shsu-white);    
-    transform: translateY(-2px);
+  background-color: transparent;    
+  color: var(--shsu-white);
+  border-color: var(--shsu-white);    
+  transform: translateY(-2px);
 }
 
 .logout:active {
-    transform: translateY(0);
+  transform: translateY(0);
 }
 
 .availability-box {
@@ -256,235 +235,158 @@ header p {
 }
 
 .appointments-section {
-    background: linear-gradient(135deg, var(--shsu-blue) 0%, #000070 100%);
-    
-    color: var(--shsu-white);
-    
-    padding: 4rem 1.5rem 3rem;
-    
+  background: linear-gradient(135deg, var(--shsu-blue) 0%, #000070 100%);
+  color: var(--shsu-white);
+  padding: 4rem 1.5rem 3rem;   
 }
 
 .appointments-container {
     max-width: 900px;
     
-    margin: 0 auto;
-    
+    margin: 0 auto; 
 }
 
 .appointments-section h2 {
-    text-align: center;
-    
-    font-size: 2.2rem;
-    
-    margin-bottom: 2.5rem;
-    
-    color: var(--shsu-white);
-    
+  text-align: center;
+  font-size: 2.2rem;
+  margin-bottom: 2.5rem;
+  color: var(--shsu-white);  
 }
 
 .appointments-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    
-    gap: 1.5rem;
-    
-    margin-bottom: 3rem;
-    
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 3rem;  
 }
 
 .appointment-card {
-    background: var(--shsu-white);
-    
-    color: var(--shsu-gray-dark);
-    
-    padding: 1.5rem;
-    
-    border-radius: 10px;
-    
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    
-    transition: all 0.3s ease;
-    
+  background: var(--shsu-white);
+  color: var(--shsu-gray-dark);
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;   
 }
 
 .appointment-card:hover {
-    transform: translateY(-4px);
-    
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
-    
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);   
 }
 
 .appointment-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    
-    margin-bottom: 1rem;
-    
-    padding-bottom: 1rem;
-    
-    border-bottom: 2px solid var(--shsu-gray-light);
-    
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid var(--shsu-gray-light);  
 }
 
 .appointment-course {
-    font-weight: 700;
-    
-    font-size: 1.1rem;
-    
-    color: var(--shsu-orange);
-    
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--shsu-orange);  
 }
 
 .appointment-date {
-    font-weight: 600;
-    
-    color: var(--shsu-blue);
-    
-    font-size: 0.95rem;
-    
+  font-weight: 600;
+  color: var(--shsu-blue);
+  font-size: 0.95rem;   
 }
 
 .appointment-details {
-    display: flex;
-    flex-direction: column;
-    
-    gap: 0.6rem;
-    
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;  
 }
 
 .appointment-details p {
-    font-size: 0.95rem;
-    
-    line-height: 1.5;
-    
-    color: var(--shsu-gray-dark);
-    
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--shsu-gray-dark);  
 }
 
 .no-appointments {
-    text-align: center;
-    
-    padding: 3rem;
-    
-    background: rgba(255, 255, 255, 0.1);
-    
-    border-radius: 10px;
-    
-    border: 2px dashed rgba(255, 255, 255, 0.3);
-    
+  text-align: center;
+  padding: 3rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  border: 2px dashed rgba(255, 255, 255, 0.3); 
 }
 
 .no-appointments p {
-    font-size: 1.1rem;
-    
-    margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
     
 }
 
 .back-to-top-container {
-    text-align: center;
-    
-    margin-top: 2.5rem;
-    
+  text-align: center;
+   margin-top: 2.5rem;  
 }
 
 .back-to-top {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    
-    color: var(--shsu-white);
-    
-    text-decoration: none;
-    
-    font-size: 1.05rem;
-    
-    font-weight: 600;
-    
-    padding: 0.8rem 1.5rem;
-    
-    background: rgba(255, 255, 255, 0.1);
-    
-    border: 2px solid var(--shsu-white);
-    
-    border-radius: 50px;
-    
-    transition: all 0.3s ease;
-    
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--shsu-white);
+  text-decoration: none;
+  font-size: 1.05rem;
+  font-weight: 600;
+  padding: 0.8rem 1.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid var(--shsu-white);
+  border-radius: 50px;
+  transition: all 0.3s ease;  
 }
 
 .appointments-aside {
-    position: fixed;
-    
-    right: 20px;
-    
-    bottom: 100px;
-    
-    z-index: 1000;
-    
+  position: fixed;
+  right: 20px;
+  bottom: 100px;
+  z-index: 1000;  
 }
 
 .appointments-btn {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    
-    background: linear-gradient(135deg, var(--shsu-orange) 0%, var(--shsu-orange-dark) 100%);
-    
-    color: var(--shsu-white);
-    
-    padding: 0.9rem 1.3rem;
-    
-    border-radius: 50px;
-    
-    text-decoration: none;
-    
-    font-weight: 600;
-    
-    font-size: 0.95rem;
-    
-    box-shadow: 0 4px 12px rgba(255, 81, 0, 0.3);
-    
-    transition: all 0.3s ease;
-    
-    cursor: pointer;
-    
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: linear-gradient(135deg, var(--shsu-orange) 0%, var(--shsu-orange-dark) 100%);
+  color: var(--shsu-white);
+  padding: 0.9rem 1.3rem;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  box-shadow: 0 4px 12px rgba(255, 81, 0, 0.3);
+  transition: all 0.3s ease;
+  cursor: pointer;  
 }
 
 .appointments-btn:hover {
-    transform: translateY(-3px);
-    
-    box-shadow: 0 6px 16px rgba(255, 81, 0, 0.4);
-    
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(255, 81, 0, 0.4); 
 }
 
 .appointments-btn:active {
-    transform: translateY(-1px);
-    
+  transform: translateY(-1px);
 }
 
 .back-to-top:hover {
-    background: var(--shsu-white);
-    
-    color: var(--shsu-blue);
-    
-    transform: translateY(-3px);
-    
-    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.3);
-    
+  background: var(--shsu-white);
+  color: var(--shsu-blue);
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.3); 
 }
 
 .back-to-top:active {
-    transform: translateY(-1px);
-    
+  transform: translateY(-1px);   
 }
 
 .top-arrow {
-    font-size: 1.3rem;
-    
-    font-weight: bold;
-    
+  font-size: 1.3rem;
+  font-weight: bold;
 }
 
 footer {

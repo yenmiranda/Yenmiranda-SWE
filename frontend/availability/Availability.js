@@ -1,7 +1,8 @@
+//global variables
 let CURRENT_USER = null;
 let ALL_APPOINTMENTS = []; 
 
-// --- DAY/TIME SLOT LOGIC ---
+//day-time logic
 document.querySelectorAll('.day input[type="checkbox"]').forEach(box => {
   box.addEventListener('change', function() {
     const timesDiv = document.getElementById(this.id + '-times');
@@ -20,6 +21,7 @@ document.querySelectorAll('.day input[type="checkbox"]').forEach(box => {
   });
 });
 
+//add time slot frontend
 function addTimeSlot(container) {
   const maxSlots = 24; 
   const currentSlots = container.querySelectorAll('.slot').length;
@@ -76,19 +78,20 @@ function updateDisabledOptions(container) {
   });
 }
 
-// --- EDIT/SAVE LOGIC ---
 const schedule = document.querySelector('.schedule');
 const editBtn = document.querySelector('.edit-button');
 const saveBtn = document.querySelector('.save-button');
 schedule.classList.add('grayed-out');
 saveBtn.style.display = 'none';
 
+//edit front end
 editBtn.addEventListener('click', () => {
   schedule.classList.remove('grayed-out'); 
   editBtn.style.display = 'none'; 
   saveBtn.style.display = 'block'; 
 });
 
+//save front end
 saveBtn.addEventListener('click', async () => {
     const availabilityData = [];
     
@@ -110,7 +113,7 @@ saveBtn.addEventListener('click', async () => {
         });
     });
 
-    try {
+    try {//api call
         const response = await fetch('/api/availability/create', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -136,7 +139,7 @@ saveBtn.addEventListener('click', async () => {
 
 //loads availability
 async function loadAvailability() {
-  try {
+  try {//api call
     const response = await fetch(`/api/availability/mine`);
     
     if (!response.ok) {
@@ -213,23 +216,27 @@ function updateViewAllButton(totalAppointments) {
     }
 }
 
+//modal functions
 function openModal() {
     renderModalAppointments();
     document.getElementById('appointmentsModal').classList.add('active');
     document.body.style.overflow = 'hidden';
 }
 
+//modal functions
 function closeModal() {
     document.getElementById('appointmentsModal').classList.remove('active');
     document.body.style.overflow = '';
 }
 
+//modal functions
 function closeModalOutside(event) {
     if (event.target === document.getElementById('appointmentsModal')) {
         closeModal();
     }
 }
 
+//modal functions
 function renderModalAppointments() {
     const modalList = document.getElementById('modalAppointmentsList'); 
     const modalCount = document.getElementById('modalCount');
@@ -274,12 +281,12 @@ function renderModalAppointments() {
     });
 }
 
-// --- LOAD APPOINTMENTS ---
+//load appointments to front end
 async function loadTutorAppointments() {
     const listContainer = document.querySelector('.appointments-list');
     listContainer.innerHTML = '<p>Loading appointments...</p>'; 
 
-    try {
+    try {//api call
         const response = await fetch(`/api/bookings/tutor`);
         if (!response.ok) {
             if (response.status === 401) handleLogout();
@@ -340,12 +347,13 @@ async function loadTutorAppointments() {
     }
 }
 
+//cancel appointment front end
 async function cancelBooking(bookingNo) {
     if (!confirm("Are you sure you want to cancel this student's booking?")) {
         return;
     }
 
-    try {
+    try {//api call
         const response = await fetch(`/api/bookings/${bookingNo}`, {
             method: 'DELETE'
         });
@@ -432,7 +440,7 @@ window.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Modal close with Escape key
+    // Modal close with ESC key
     document.addEventListener('keydown', function(event) {
         if (event.key === 'Escape') {
             closeModal();

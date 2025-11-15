@@ -1,4 +1,4 @@
-//
+//registration front end
 
 const passwordInputs = document.querySelectorAll("input[type='password']");
 const showIcons = document.querySelectorAll(".fa-eye");

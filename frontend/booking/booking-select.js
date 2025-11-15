@@ -111,6 +111,7 @@ async function checkTutorAvailability(course, date) {
     }
 }
 
+//format time
 function formatTimeDisplay(timeSlot) {
     const [start, end] = timeSlot.split('-');
     const startHour = parseInt(start.split(':')[0]);
@@ -241,11 +242,13 @@ async function cancelBooking(bookingNo) {
     }
 }
 
+//course select 
 courseSelect.addEventListener('change', () => {
     DAY_AVAILABILITY = [];
     resetAvailabilityCheck();
 });
 
+//date select
 dateSelect.addEventListener('change', () => {
     updateAvailableTimeSlots();
     DAY_AVAILABILITY = [];
@@ -407,6 +410,7 @@ function updateViewAllButton(totalAppointments) {
     }
 }
 
+//modal functionality
 function openModal() {
     renderModalAppointments();
     
@@ -414,17 +418,20 @@ function openModal() {
     document.body.style.overflow = 'hidden';
 }
 
+//modal functionality
 function closeModal() {
     document.getElementById('appointmentsModal').classList.remove('active');
     document.body.style.overflow = '';
 }
 
+//modal functionality
 function closeModalOutside(event) {
     if (event.target === event.currentTarget) {
         closeModal();
     }
 }
 
+//modal functionality
 function renderModalAppointments() {
     const modalList = document.getElementById('modalAppointmentsList');
     const modalCount = document.getElementById('modalCount');
@@ -470,6 +477,7 @@ function renderModalAppointments() {
     });
 }
 
+//modal functionality
 document.addEventListener('keydown', function(event) {
     if (event.key === 'Escape') {
         closeModal();

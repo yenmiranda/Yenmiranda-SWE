@@ -99,6 +99,8 @@ document.getElementById("password1").addEventListener('keyup', valid);
 document.getElementById("password2").addEventListener('keyup', valid);
 
 const samInput = document.getElementById("samID");
+
+//blur function
 samInput.addEventListener("blur", () => {
     let value = samInput.value.trim();
     if (value !== "") {
@@ -110,6 +112,8 @@ samInput.addEventListener("blur", () => {
 
 const resetBtn = document.querySelector("button[name='resetPassword']");
 const message = document.getElementById("message"); 
+
+//reset button 
 resetBtn.addEventListener("click", async (event) => {
     event.preventDefault();
     

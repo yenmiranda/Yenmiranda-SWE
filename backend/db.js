@@ -15,11 +15,19 @@ const pool = mysql.createPool({
     password: process.env.DB_PASSWORD,            
     database: process.env.DB_DATABASE,
     port: process.env.DB_PORT,
-    // ...
     ssl: { 
         ca: fs.readFileSync(caCertPath),
         rejectUnauthorized: true 
     }
 });
+
+pool.getConnection()
+  .then(c => { 
+      console.log("Database connected successfully (SSL)!");
+      c.release(); 
+  })
+  .catch(error => {
+    console.error("Database connection failed:", error.message);
+  });
 
 export default pool;

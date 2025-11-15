@@ -2,7 +2,6 @@
 
 import pool from '../db.js';
 
-
 //checks and clears all bookings which are booked but have no entry data
 async function fixAvailSlots(connection) {
   const [result] = await connection.execute(
@@ -26,7 +25,6 @@ async function fixMissingAvailFlags(connection) {
   );
   return result.affectedRows;
 }
-
 
 //deletes availability slots which have passed
 async function cleanupOldSlots(connection) {

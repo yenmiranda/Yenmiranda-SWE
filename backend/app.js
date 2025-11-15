@@ -50,11 +50,13 @@ app.use('/', express.static(path.join(frontendPath, 'login')));
 app.use('/', express.static(path.join(frontendPath, 'booking')));
 app.use('/', express.static(path.join(frontendPath, 'availability')));
 
-app.get('/', (req, res) => { //base file for link
+//base location
+app.get('/', (req, res) => {
     res.sendFile(path.join(frontendPath, 'login', 'Login.html'));
 });
 
-httpsServer.listen(port, () => { //start server
+//start server
+httpsServer.listen(port, () => { 
     console.log(`HTTPS server running on https://localhost:${3000}`);
     runBookingConflictWorker();//runs booking conflict worker
     setInterval(runBookingConflictWorker, 360000)

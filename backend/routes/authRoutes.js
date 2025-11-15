@@ -1,6 +1,3 @@
-//api calls for authentication
-
-//necessary imports
 import { Router } from 'express';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
@@ -10,8 +7,6 @@ import User from '../models/User.js';
 const router = Router();
 const saltRounds = 10;
 
-
-//registeration api
 router.post('/register', async (req, res) => {
     const { firstName, surname, samID, password, securityKey, role, course } = req.body;
 
@@ -75,7 +70,6 @@ router.post('/register', async (req, res) => {
     }
 });
 
-//login api
 router.post('/login', async (req, res) => {
     const { samID, password } = req.body;
     if (!samID || !password) {
@@ -132,7 +126,6 @@ router.post('/login', async (req, res) => {
     }
 });
 
-//logout api
 router.post('/logout', (req, res) => {
     res.cookie('jwt', '', {
         httpOnly: true,
@@ -143,7 +136,6 @@ router.post('/logout', (req, res) => {
     res.status(200).json({ success: true, message: 'Logged out successfully.' });
 });
 
-//verify security key api
 router.post('/verify-key', async (req, res) => {
     const { samID, securityKey } = req.body;
     if (!samID || !securityKey) {
@@ -173,7 +165,6 @@ router.post('/verify-key', async (req, res) => {
     }
 });
 
-//reset password api
 router.post('/reset-password', async (req, res) => {
     const { samID, newPassword, confirmPassword } = req.body;
     

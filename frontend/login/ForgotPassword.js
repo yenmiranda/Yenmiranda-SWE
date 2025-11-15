@@ -1,3 +1,4 @@
+// Filename: frontend/login/ForgotPassword.js
 const passwordFields = [
     document.getElementById("securityKey"),
     document.getElementById("password1"),
@@ -32,7 +33,6 @@ hideIcons.forEach((icon, i) => {
     });
 });
 
-//forgot button call 
 const forgotBtn = document.querySelector("button[name='forgotPassword']");
 forgotBtn.addEventListener("click", async () => {
     const samID = document.getElementById("samID").value.trim();
@@ -44,6 +44,7 @@ forgotBtn.addEventListener("click", async () => {
     }
 
     try {
+        // Use relative path to API
         const response = await fetch('/api/auth/verify-key', {
             method: 'POST',
             headers: {
@@ -66,7 +67,6 @@ forgotBtn.addEventListener("click", async () => {
     }
 });
 
-//password validation
 function valid() {
     const pass1 = document.getElementById("password1").value;
     const pass2 = document.getElementById("password2").value;
@@ -95,7 +95,6 @@ document.getElementById("password1").addEventListener('keyup', valid);
 document.getElementById("password2").addEventListener('keyup', valid);
 
 const samInput = document.getElementById("samID");
-//blur password
 samInput.addEventListener("blur", () => {
     let value = samInput.value.trim();
     if (value !== "") {
@@ -107,10 +106,8 @@ samInput.addEventListener("blur", () => {
 
 const resetBtn = document.querySelector("button[name='resetPassword']");
 const message = document.getElementById("message"); 
-
-//reset button functionality
 resetBtn.addEventListener("click", async (event) => {
-    event.preventDefault();
+    event.preventDefault(); // Prevent form submission
     
     const samID = document.getElementById("samID").value.trim(); 
     const pass1 = document.getElementById("password1").value;
@@ -123,7 +120,7 @@ resetBtn.addEventListener("click", async (event) => {
     }
     
     try {
-       
+        // Use relative path to API
         const response = await fetch('/api/auth/reset-password', {
             method: 'POST',
             headers: {

@@ -1,5 +1,3 @@
-//api calls for booking
-
 //necessary imports
 import { Router } from 'express';
 import Booking from '../models/Booking.js';

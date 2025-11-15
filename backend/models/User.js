@@ -1,4 +1,3 @@
-//User class
 
 import db from '../db.js';
 import bcrypt from 'bcrypt';//for hashing

@@ -1,5 +1,4 @@
-//base login logic
-
+// Filename: frontend/login/Login.js
 const samInput = document.getElementById("samID");
 
 samInput.addEventListener("blur", () => {
@@ -15,14 +14,12 @@ const passwordInput = document.querySelector("input[name='password']");
 const showIcon = document.getElementById("show");
 const hideIcon = document.getElementById("hide");
 
-//show/hide
 showIcon.addEventListener("click", () => {
     passwordInput.type = "text";
     showIcon.classList.add("hide");
     hideIcon.classList.remove("hide");
 });
 
-//show/hide
 hideIcon.addEventListener("click", () => {
     passwordInput.type = "password";
     hideIcon.classList.add("hide");
@@ -33,7 +30,6 @@ const loginForm = document.getElementById("login-form");
 const samIdInput = document.getElementById("samID");
 const loginError = document.getElementById("login-error");
 
-//login submission form
 loginForm.addEventListener('submit', async function(event) {
     event.preventDefault();
     loginError.style.display = 'none';

@@ -65,6 +65,7 @@ class User {
                 this.surName = user.LastName;
                 this.role = user.Role === 1 ? 'Tutor' : 'Tutee';
                 this.refID = user.RefNo;
+                this.sessionVersion = user.SessionVersion;
                 this.loggedIn = true;
                 this.active = true;
 

@@ -3,6 +3,7 @@ import bcrypt from 'bcrypt';//for hashing
 import jwt from 'jsonwebtoken';//for secure login
 import db from '../db.js';
 import User from '../models/User.js';//login logic import
+import { protect } from '../middleware/authMiddleware.js';
 
 const router = Router();
 const saltRounds = 10;
@@ -94,7 +95,8 @@ router.post('/login', async (req, res) => {
             const payload = {
                 refNo: user.refID,
                 role: user.role,
-                classNo: classNo 
+                classNo: classNo,
+                sessionVersion: user.sessionVersion
             };
 
             const token = jwt.sign(payload, process.env.JWT_SECRET, {
@@ -129,14 +131,25 @@ router.post('/login', async (req, res) => {
 });
 
 //logout api
-router.post('/logout', (req, res) => {
-    res.cookie('jwt', '', {
-        httpOnly: true,
-        secure: true,
-        sameSite: 'strict',
-        expires: new Date(0) 
-    });
-    res.status(200).json({ success: true, message: 'Logged out successfully.' });
+router.post('/logout', protect, async (req, res) => {
+    try {
+        await db.execute(
+            'UPDATE Users SET SessionVersion = SessionVersion + 1 WHERE RefNo = ?',
+            [req.user.refNo]
+        );
+        
+        res.cookie('jwt', '', {
+            httpOnly: true,
+            secure: true,
+            sameSite: 'strict',
+            expires: new Date(0) 
+        });
+        res.status(200).json({ success: true, message: 'Logged out successfully.' });
+
+    } catch (error) {
+        console.error("Logout error:", error);
+        res.status(500).json({ success: false, message: "A server error occurred during logout." });
+    }
 });
 
 //verification of security key api

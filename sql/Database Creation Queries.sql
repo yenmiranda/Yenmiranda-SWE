@@ -23,7 +23,8 @@ CREATE TABLE Users (
     FirstName VARCHAR(35) NOT NULL, 
     LastName VARCHAR(35) NOT NULL, 
     PasswordHash VARCHAR(60) NOT NULL,
-    SecurityKey VARCHAR(60) NOT NULL -- needs to be 60 for the hash
+    SecurityKey VARCHAR(60) NOT NULL, -- needs to be 60 for the hash
+    SessionVersion INT NOT NULL DEFAULT 0 -- session storage
     
 );
 
